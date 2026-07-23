@@ -1,0 +1,23 @@
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon
+._*
+
+# IDE / Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Claude local settings (personal preferences)
+.claude/settings.local.json
+
+# Build artifacts (one-time scripts)
+memory/**/build_*.py
+
+# Python cache
+__pycache__/
+*.pyc
