@@ -108,19 +108,30 @@ block and replace the bracketed cells. For platform-specific reading cues see
 
 For each qualified influencer:
 
+**Profile Link Rule**: Every influencer handle, channel name, or @mention MUST be wrapped as a clickable Markdown link pointing to their actual social media profile URL, following these platform-specific URL patterns:
+
+| Platform | URL Pattern | Example |
+|----------|-------------|---------|
+| YouTube | `https://youtube.com/@handle` | `[@TheStrollerMom](https://youtube.com/@TheStrollerMom)` |
+| Instagram | `https://instagram.com/handle` | `[@karrie_locher](https://instagram.com/karrie_locher)` |
+| TikTok | `https://tiktok.com/@handle` | `[@ilanawiles](https://tiktok.com/@ilanawiles)` |
+
+Apply this rule consistently in: the profile title, all tables, the Step 5 summary report, and any inline mentions of the influencer.
+
 ```markdown
 ---
 
-## Influencer #[X]: @[handle]
+## Influencer #[X]: [@handle]([profile_url])
 
 ### Basic Information
 
 | Attribute | Details |
 |-----------|---------|
 | **Name** | [name] |
-| **Handle** | @[handle] |
+| **Handle** | [@handle]([profile_url]) |
+| **Profile URL** | [full URL to their primary platform profile] |
 | **Platform** | [primary platform] |
-| **Other Platforms** | [other handles] |
+| **Other Platforms** | [other handles with links] |
 | **Location** | [city, country] |
 | **Language** | [primary language] |
 | **Niche** | [category] |
@@ -250,21 +261,21 @@ For each qualified influencer:
 
 | Rank | Handle | Platform | Followers | ER | Fit Score | Why |
 |------|--------|----------|-----------|----|-----------| ----|
-| 1 | @[handle] | [platform] | [count] | [%] | [X/25] | [brief reason] |
-| 2 | @[handle] | [platform] | [count] | [%] | [X/25] | [brief reason] |
-| 3 | @[handle] | [platform] | [count] | [%] | [X/25] | [brief reason] |
+| 1 | [@handle]([url]) | [platform] | [count] | [%] | [X/25] | [brief reason] |
+| 2 | [@handle]([url]) | [platform] | [count] | [%] | [X/25] | [brief reason] |
+| 3 | [@handle]([url]) | [platform] | [count] | [%] | [X/25] | [brief reason] |
 
 ### Tier 2: Strong Candidates
 
 | Handle | Platform | Followers | ER | Fit Score | Notes |
 |--------|----------|-----------|----|-----------| ------|
-| @[handle] | [platform] | [count] | [%] | [X/25] | [notes] |
+| [@handle]([url]) | [platform] | [count] | [%] | [X/25] | [notes] |
 
 ### Tier 3: Worth Considering
 
 | Handle | Platform | Followers | ER | Fit Score | Notes |
 |--------|----------|-----------|----|-----------| ------|
-| @[handle] | [platform] | [count] | [%] | [X/25] | [notes] |
+| [@handle]([url]) | [platform] | [count] | [%] | [X/25] | [notes] |
 
 ## Influencer Mix Recommendation
 

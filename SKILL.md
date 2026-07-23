@@ -36,6 +36,7 @@ based in [location], engagement above 4%, who have worked with brands like [bran
 - **Done when**:
   - A candidate pool exists with at least the requested count screened past follower, engagement, and brand-safety filters.
   - Each shortlisted influencer has a profile with metrics, audience read, and a preliminary fit score.
+  - Every influencer handle, channel name, or @mention in the report is a clickable Markdown link to their actual social media profile URL (see [references/templates.md §Step 4](references/templates.md) for per-platform URL patterns: `youtube.com/@handle`, `instagram.com/handle`, `tiktok.com/@handle`).
   - A tiered shortlist (must-reach / strong / consider) is compiled with next-step pointers.
   - The MD report is saved AND a bilingual HTML file (Chinese/English toggle) is generated alongside it.
 - **Primary next skill**: [fit-scorer](../fit-scorer/SKILL.md) — score and rank the discovered candidates with weighted criteria.
