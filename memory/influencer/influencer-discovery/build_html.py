@@ -5,7 +5,7 @@ Reads any MD file with `<!-- LANG:ZH -->` marker, outputs a styled
 bilingual HTML with:
   - Fixed left TOC sidebar (desktop), collapsible hamburger (mobile)
   - Chinese/English language toggle (persists via localStorage)
-  - Auto-generated TOC from h2/h3 headings
+  - Server-side generated TOC — always visible, no JS dependency
   - Active section highlighting via IntersectionObserver
   - Responsive + print-ready
 
@@ -13,6 +13,7 @@ Usage:
     python3 build_html.py <input_md_path> [--output <html_path>]
 """
 import markdown, re, os, sys
+from html.parser import HTMLParser
 
 # ── CSS ─────────────────────────────────────────────────────
 CSS = r"""
@@ -23,15 +24,12 @@ CSS = r"""
   --table-stripe: #fafafa; --code-bg: #f5f5f5;
   --sidebar-w: 250px; --sidebar-bg: #fafafa;
 }
-
 * { margin: 0; padding: 0; box-sizing: border-box; }
-
 body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
                "Helvetica Neue", Arial, "PingFang SC", "Microsoft YaHei", sans-serif;
   color: var(--text); background: var(--bg); line-height: 1.7;
 }
-
 /* ── Sidebar ── */
 .sidebar {
   position: fixed; top: 0; left: 0; width: var(--sidebar-w); height: 100vh;
@@ -54,7 +52,6 @@ body {
   border-left-color: var(--accent);
 }
 .sidebar nav a.toc-h3 { padding-left: 24px; font-size: 0.78rem; }
-
 /* ── Hamburger (mobile) ── */
 .hamburger {
   display: none; position: fixed; top: 12px; left: 12px; z-index: 300;
@@ -63,12 +60,10 @@ body {
   align-items: center; justify-content: center; box-shadow: 0 2px 8px rgba(0,0,0,0.15);
 }
 .sidebar-overlay { display: none; }
-
 /* ── Main content ── */
 .main-wrap {
   margin-left: var(--sidebar-w); padding: 20px 32px 40px; max-width: 960px;
 }
-
 /* ── Toggle bar ── */
 .toggle-bar {
   position: sticky; top: 0; z-index: 100; display: flex;
@@ -85,7 +80,6 @@ body {
 .toggle-btn:last-child  { border-radius: 0 8px 8px 0; }
 .toggle-btn.active { background: var(--toggle-active); color: var(--toggle-text); }
 .toggle-btn:hover:not(.active) { background: var(--accent-light); }
-
 /* ── Typography ── */
 h1 { font-size: 1.85rem; color: var(--accent); border-bottom: 3px solid var(--accent); padding-bottom: 12px; margin-bottom: 8px; line-height: 1.3; }
 h2 { font-size: 1.4rem; color: var(--accent); margin-top: 36px; margin-bottom: 14px; padding-bottom: 6px; border-bottom: 2px solid var(--border); }
@@ -94,25 +88,21 @@ h4 { font-size: 1.02rem; color: var(--accent); margin-top: 20px; margin-bottom: 
 p { margin-bottom: 12px; }
 hr { border: none; border-top: 1px solid var(--border); margin: 28px 0; }
 strong { color: #222; }
-
 table { width: 100%; border-collapse: collapse; margin: 14px 0 22px; font-size: 0.9rem; border-radius: 8px; overflow: hidden; box-shadow: 0 1px 4px rgba(0,0,0,0.06); }
 thead { background: var(--accent); }
 thead th { color: #fff; padding: 9px 12px; text-align: left; font-weight: 600; white-space: nowrap; }
 tbody td { padding: 8px 12px; border-bottom: 1px solid var(--border); vertical-align: top; }
 tbody tr:nth-child(even) { background: var(--table-stripe); }
 tbody tr:hover { background: var(--accent-light); }
-
 ul, ol { margin: 8px 0 14px 24px; }
 li { margin-bottom: 4px; }
 a { color: var(--accent); text-decoration: none; }
 a:hover { text-decoration: underline; }
 code { background: var(--code-bg); padding: 2px 6px; border-radius: 4px; font-size: 0.9em; font-family: "SF Mono", "Fira Code", "Consolas", monospace; }
 blockquote { border-left: 4px solid var(--accent); padding: 10px 16px; margin: 14px 0; background: var(--accent-light); border-radius: 0 6px 6px 0; color: #555; }
-
 .lang-content { display: none; }
 .lang-content.active { display: block; }
-
-/* ── Responsive ── */
+/* ── Mobile ── */
 @media (max-width: 900px) {
   .sidebar { transform: translateX(-100%); transition: transform 0.25s ease; }
   .sidebar.open { transform: translateX(0); box-shadow: 4px 0 20px rgba(0,0,0,0.15); }
@@ -125,7 +115,6 @@ blockquote { border-left: 4px solid var(--accent); padding: 10px 16px; margin: 1
   thead th, tbody td { padding: 6px 8px; }
   .toggle-btn { padding: 6px 14px; font-size: 0.82rem; }
 }
-
 @media print {
   .sidebar, .hamburger, .sidebar-overlay, .toggle-bar { display: none; }
   .lang-content { display: block !important; }
@@ -134,88 +123,62 @@ blockquote { border-left: 4px solid var(--accent); padding: 10px 16px; margin: 1
 }
 """
 
-# ── JavaScript (TOC builder + toggle + mobile sidebar) ────
+# ── JavaScript (toggle + mobile sidebar + active tracking) ──
 JS = r"""<script>
 (function(){
-  // ── Language toggle ──
   var K='inf-discovery-lang',
       be=document.getElementById('btn-en'),bz=document.getElementById('btn-zh'),
-      ce=document.getElementById('content-en'),cz=document.getElementById('content-zh');
+      ce=document.getElementById('content-en'),cz=document.getElementById('content-zh'),
+      te=document.getElementById('toc-en'),tz=document.getElementById('toc-zh');
+
   function setLang(l){
-    if(l==='zh'){bz.classList.add('active');be.classList.remove('active');cz.classList.add('active');ce.classList.remove('active');buildTOC('zh');}
-    else{be.classList.add('active');bz.classList.remove('active');ce.classList.add('active');cz.classList.remove('active');buildTOC('en');}
+    if(l==='zh'){
+      bz.classList.add('active');be.classList.remove('active');
+      cz.classList.add('active');ce.classList.remove('active');
+      tz.style.display='';te.style.display='none';
+    } else {
+      be.classList.add('active');bz.classList.remove('active');
+      ce.classList.add('active');cz.classList.remove('active');
+      te.style.display='';tz.style.display='none';
+    }
     try{localStorage.setItem(K,l);}catch(e){}
+    // Re-run active section tracking
+    initObserver();
   }
+
   var s=null;try{s=localStorage.getItem(K);}catch(e){}
-  var initial = (s==='zh'||s==='en')?s:(navigator.language&&navigator.language.startsWith('zh')?'zh':'en');
+  var initial=(s==='zh'||s==='en')?s:(navigator.language&&navigator.language.startsWith('zh')?'zh':'en');
   setLang(initial);
+
   be.addEventListener('click',function(){setLang('en');});
   bz.addEventListener('click',function(){setLang('zh');});
 
-  // ── Build TOC from headings ──
-  var tocLabels = {
-    zh: {toc:'目 录', step:'第{0}步'},
-    en: {toc:'Contents', step:'Step {0}'}
-  };
-
-  function buildTOC(lang){
-    var activeContent = document.getElementById(lang==='zh'?'content-zh':'content-en');
-    var nav = document.getElementById('toc-nav');
-    if(!activeContent||!nav)return;
-    var hs = activeContent.querySelectorAll('h2,h3');
-    var html='';
-    var stepNum=0, inProfiles=false;
-    for(var i=0;i<hs.length;i++){
-      var h=hs[i], tag=h.tagName.toLowerCase();
-      var id='sec-'+i;
-      h.id=id;
-
-      // Detect step headers
-      var txt=h.textContent.trim();
-      var mStep=txt.match(/第[一二三四五六七八九十]+步|Step\s+(\d+)/i);
-      if(mStep&&tag==='h2'){stepNum++;}
-
-      // Generate TOC label
-      var label=txt;
-      // Truncate long influencer titles
-      if(txt.indexOf('达人 #')>-1||txt.indexOf('Influencer #')>-1||txt.indexOf('WL-')>-1){
-        label=txt.substring(0,50)+(txt.length>50?'…':'');
-      }
-      if(txt.indexOf('观察名单')>-1||txt.indexOf('Watch List')>-1){stepNum=0;}
-
-      html+='<a href="#'+id+'" class="toc-'+(tag==='h3'?'h3':'h2')+'" title="'+txt.replace(/"/g,'&quot;')+'">'+label+'</a>';
-    }
-    // Update toc title
-    var labels=tocLabels[lang]||tocLabels['en'];
-    document.getElementById('toc-title').textContent=labels.toc;
-    nav.innerHTML=html;
-
-    // Re-bind click handlers
-    nav.querySelectorAll('a').forEach(function(a){
-      a.addEventListener('click',function(e){
-        e.preventDefault();
-        var target=document.getElementById(this.getAttribute('href').substring(1));
-        if(target){target.scrollIntoView({behavior:'smooth',block:'start'});}
-        // Close sidebar on mobile
-        document.getElementById('sidebar').classList.remove('open');
-        document.getElementById('sidebar-overlay').classList.remove('open');
-      });
-    });
-
-    // Highlight active section
-    var observer=new IntersectionObserver(function(entries){
+  // ── Active section tracking ──
+  var observer;
+  function initObserver(){
+    if(observer){observer.disconnect();}
+    var activeContent=document.querySelector('.lang-content.active');
+    if(!activeContent)return;
+    var hs=activeContent.querySelectorAll('h2[id],h3[id]');
+    var navLinks=document.querySelectorAll('#toc-zh a, #toc-en a');
+    observer=new IntersectionObserver(function(entries){
       entries.forEach(function(entry){
         if(entry.isIntersecting){
-          nav.querySelectorAll('a').forEach(function(a){a.classList.remove('active');});
-          var link=nav.querySelector('a[href="#'+entry.target.id+'"]');
+          navLinks.forEach(function(a){a.classList.remove('active');});
+          var visibleToc=document.querySelector('#toc-zh[style*="display"]:not([style*="display: none"]), #toc-en[style*="display"]:not([style*="display: none"])');
+          if(!visibleToc)visibleToc=document.getElementById(lang()==='zh'?'toc-zh':'toc-en');
+          var link=visibleToc.querySelector('a[href="#'+entry.target.id+'"]');
           if(link)link.classList.add('active');
         }
       });
     },{rootMargin:'-80px 0px -70% 0px'});
     hs.forEach(function(h){observer.observe(h);});
   }
+  function lang(){return document.getElementById('content-zh').classList.contains('active')?'zh':'en';}
+  // Delay observer init slightly to let DOM settle
+  setTimeout(initObserver,100);
 
-  // ── Mobile sidebar toggle ──
+  // ── Mobile sidebar ──
   document.getElementById('hamburger').addEventListener('click',function(){
     document.getElementById('sidebar').classList.add('open');
     document.getElementById('sidebar-overlay').classList.add('open');
@@ -224,13 +187,62 @@ JS = r"""<script>
     document.getElementById('sidebar').classList.remove('open');
     document.getElementById('sidebar-overlay').classList.remove('open');
   });
+  // Close sidebar on TOC link click (mobile)
+  document.querySelectorAll('#toc-zh a, #toc-en a').forEach(function(a){
+    a.addEventListener('click',function(e){
+      e.preventDefault();
+      var target=document.getElementById(this.getAttribute('href').substring(1));
+      if(target){target.scrollIntoView({behavior:'smooth',block:'start'});}
+      document.getElementById('sidebar').classList.remove('open');
+      document.getElementById('sidebar-overlay').classList.remove('open');
+    });
+  });
 })();
 </script>"""
 
-# ── HTML wrapper ────────────────────────────────────────────
+
 def md2html(text):
     html = markdown.markdown(text, extensions=["tables", "fenced_code", "nl2br"])
     return re.sub(r'<br\s*/?>\s*<br\s*/?>', '<br>', html)
+
+
+def build_toc(html_body, lang='zh'):
+    """Extract h2/h3 headings from HTML and build TOC nav + inject IDs."""
+    toc_label = '目 录' if lang == 'zh' else 'Contents'
+
+    # Find all h2/h3 tags and assign IDs
+    heading_pattern = re.compile(r'<(h[23])>(.*?)</\1>', re.DOTALL)
+    counter = 0
+    toc_items = []
+
+    def replace_heading(m):
+        nonlocal counter
+        tag = m.group(1)
+        # Strip HTML tags from heading text for TOC label
+        text = re.sub(r'<[^>]+>', '', m.group(2)).strip()
+        id_ = f'sec-{lang}-{counter}'
+        counter += 1
+
+        # Truncate long titles
+        label = text
+        if ('达人 #' in text or 'Influencer #' in text or 'WL-' in text) and len(text) > 50:
+            label = text[:50] + '…'
+
+        cls = 'toc-h3' if tag == 'h3' else 'toc-h2'
+        toc_items.append((id_, label, cls))
+        return f'<{tag} id="{id_}">{m.group(2)}</{tag}>'
+
+    html_with_ids = heading_pattern.sub(replace_heading, html_body)
+
+    # Build TOC HTML
+    toc_html = f'<h3>{toc_label}</h3>\n<nav>\n'
+    for id_, label, cls in toc_items:
+        safe_label = label.replace('&', '&amp;').replace('<', '&lt;').replace('>', '&gt;')
+        toc_html += f'  <a href="#{id_}" class="{cls}">{safe_label}</a>\n'
+    toc_html += '</nav>'
+
+    return html_with_ids, toc_html
+
 
 def build(input_md_path, output_html_path=None):
     if output_html_path is None:
@@ -247,8 +259,13 @@ def build(input_md_path, output_html_path=None):
         md_zh = md_text.strip()
         md_en = md_text.strip()
 
-    html_zh = md2html(md_zh)
-    html_en = md2html(md_en)
+    # Convert MD → HTML
+    raw_zh = md2html(md_zh)
+    raw_en = md2html(md_en)
+
+    # Build TOC + inject heading IDs
+    html_zh, toc_zh = build_toc(raw_zh, 'zh')
+    html_en, toc_en = build_toc(raw_en, 'en')
 
     # Extract title
     title_match = re.search(r'^#\s+(.+)$', md_zh, re.MULTILINE)
@@ -270,8 +287,12 @@ def build(input_md_path, output_html_path=None):
 <div class="sidebar-overlay" id="sidebar-overlay"></div>
 
 <aside class="sidebar" id="sidebar">
-  <h3 id="toc-title">Contents</h3>
-  <nav id="toc-nav"></nav>
+  <div id="toc-zh">
+{toc_zh}
+  </div>
+  <div id="toc-en" style="display:none">
+{toc_en}
+  </div>
 </aside>
 
 <div class="main-wrap">

@@ -12,15 +12,12 @@
   --table-stripe: #fafafa; --code-bg: #f5f5f5;
   --sidebar-w: 250px; --sidebar-bg: #fafafa;
 }
-
 * { margin: 0; padding: 0; box-sizing: border-box; }
-
 body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
                "Helvetica Neue", Arial, "PingFang SC", "Microsoft YaHei", sans-serif;
   color: var(--text); background: var(--bg); line-height: 1.7;
 }
-
 /* ── Sidebar ── */
 .sidebar {
   position: fixed; top: 0; left: 0; width: var(--sidebar-w); height: 100vh;
@@ -43,7 +40,6 @@ body {
   border-left-color: var(--accent);
 }
 .sidebar nav a.toc-h3 { padding-left: 24px; font-size: 0.78rem; }
-
 /* ── Hamburger (mobile) ── */
 .hamburger {
   display: none; position: fixed; top: 12px; left: 12px; z-index: 300;
@@ -52,12 +48,10 @@ body {
   align-items: center; justify-content: center; box-shadow: 0 2px 8px rgba(0,0,0,0.15);
 }
 .sidebar-overlay { display: none; }
-
 /* ── Main content ── */
 .main-wrap {
   margin-left: var(--sidebar-w); padding: 20px 32px 40px; max-width: 960px;
 }
-
 /* ── Toggle bar ── */
 .toggle-bar {
   position: sticky; top: 0; z-index: 100; display: flex;
@@ -74,7 +68,6 @@ body {
 .toggle-btn:last-child  { border-radius: 0 8px 8px 0; }
 .toggle-btn.active { background: var(--toggle-active); color: var(--toggle-text); }
 .toggle-btn:hover:not(.active) { background: var(--accent-light); }
-
 /* ── Typography ── */
 h1 { font-size: 1.85rem; color: var(--accent); border-bottom: 3px solid var(--accent); padding-bottom: 12px; margin-bottom: 8px; line-height: 1.3; }
 h2 { font-size: 1.4rem; color: var(--accent); margin-top: 36px; margin-bottom: 14px; padding-bottom: 6px; border-bottom: 2px solid var(--border); }
@@ -83,25 +76,21 @@ h4 { font-size: 1.02rem; color: var(--accent); margin-top: 20px; margin-bottom: 
 p { margin-bottom: 12px; }
 hr { border: none; border-top: 1px solid var(--border); margin: 28px 0; }
 strong { color: #222; }
-
 table { width: 100%; border-collapse: collapse; margin: 14px 0 22px; font-size: 0.9rem; border-radius: 8px; overflow: hidden; box-shadow: 0 1px 4px rgba(0,0,0,0.06); }
 thead { background: var(--accent); }
 thead th { color: #fff; padding: 9px 12px; text-align: left; font-weight: 600; white-space: nowrap; }
 tbody td { padding: 8px 12px; border-bottom: 1px solid var(--border); vertical-align: top; }
 tbody tr:nth-child(even) { background: var(--table-stripe); }
 tbody tr:hover { background: var(--accent-light); }
-
 ul, ol { margin: 8px 0 14px 24px; }
 li { margin-bottom: 4px; }
 a { color: var(--accent); text-decoration: none; }
 a:hover { text-decoration: underline; }
 code { background: var(--code-bg); padding: 2px 6px; border-radius: 4px; font-size: 0.9em; font-family: "SF Mono", "Fira Code", "Consolas", monospace; }
 blockquote { border-left: 4px solid var(--accent); padding: 10px 16px; margin: 14px 0; background: var(--accent-light); border-radius: 0 6px 6px 0; color: #555; }
-
 .lang-content { display: none; }
 .lang-content.active { display: block; }
-
-/* ── Responsive ── */
+/* ── Mobile ── */
 @media (max-width: 900px) {
   .sidebar { transform: translateX(-100%); transition: transform 0.25s ease; }
   .sidebar.open { transform: translateX(0); box-shadow: 4px 0 20px rgba(0,0,0,0.15); }
@@ -114,7 +103,6 @@ blockquote { border-left: 4px solid var(--accent); padding: 10px 16px; margin: 1
   thead th, tbody td { padding: 6px 8px; }
   .toggle-btn { padding: 6px 14px; font-size: 0.82rem; }
 }
-
 @media print {
   .sidebar, .hamburger, .sidebar-overlay, .toggle-bar { display: none; }
   .lang-content { display: block !important; }
@@ -129,8 +117,146 @@ blockquote { border-left: 4px solid var(--accent); padding: 10px 16px; margin: 1
 <div class="sidebar-overlay" id="sidebar-overlay"></div>
 
 <aside class="sidebar" id="sidebar">
-  <h3 id="toc-title">Contents</h3>
-  <nav id="toc-nav"></nav>
+  <div id="toc-zh">
+<h3>目 录</h3>
+<nav>
+  <a href="#sec-zh-0" class="toc-h2">第一步 — 搜索参数</a>
+  <a href="#sec-zh-1" class="toc-h2">第二步 — 搜索策略</a>
+  <a href="#sec-zh-2" class="toc-h3">主要搜索方法</a>
+  <a href="#sec-zh-3" class="toc-h2">第三步 — 初步筛选</a>
+  <a href="#sec-zh-4" class="toc-h3">筛选标准应用</a>
+  <a href="#sec-zh-5" class="toc-h3">红旗识别</a>
+  <a href="#sec-zh-6" class="toc-h2">第四步 — 达人画像</a>
+  <a href="#sec-zh-7" class="toc-h2">达人 #1：The Stroller Mom</a>
+  <a href="#sec-zh-8" class="toc-h3">基本信息</a>
+  <a href="#sec-zh-9" class="toc-h3">指标</a>
+  <a href="#sec-zh-10" class="toc-h3">受众分析</a>
+  <a href="#sec-zh-11" class="toc-h3">内容分析</a>
+  <a href="#sec-zh-12" class="toc-h3">适配评分摘要</a>
+  <a href="#sec-zh-13" class="toc-h2">达人 #2：The Baby Cubby</a>
+  <a href="#sec-zh-14" class="toc-h3">基本信息</a>
+  <a href="#sec-zh-15" class="toc-h3">指标</a>
+  <a href="#sec-zh-16" class="toc-h3">受众分析</a>
+  <a href="#sec-zh-17" class="toc-h3">内容分析</a>
+  <a href="#sec-zh-18" class="toc-h3">适配评分摘要</a>
+  <a href="#sec-zh-19" class="toc-h2">达人 #3：New Little Life（Allison Tolman）</a>
+  <a href="#sec-zh-20" class="toc-h3">基本信息</a>
+  <a href="#sec-zh-21" class="toc-h3">指标</a>
+  <a href="#sec-zh-22" class="toc-h3">受众分析</a>
+  <a href="#sec-zh-23" class="toc-h3">内容分析</a>
+  <a href="#sec-zh-24" class="toc-h3">适配评分摘要</a>
+  <a href="#sec-zh-25" class="toc-h2">达人 #4：Baby To Child</a>
+  <a href="#sec-zh-26" class="toc-h3">基本信息</a>
+  <a href="#sec-zh-27" class="toc-h3">指标</a>
+  <a href="#sec-zh-28" class="toc-h3">受众分析</a>
+  <a href="#sec-zh-29" class="toc-h3">内容分析</a>
+  <a href="#sec-zh-30" class="toc-h3">适配评分摘要</a>
+  <a href="#sec-zh-31" class="toc-h2">达人 #5：Fabulous Mom Life</a>
+  <a href="#sec-zh-32" class="toc-h3">基本信息</a>
+  <a href="#sec-zh-33" class="toc-h3">指标</a>
+  <a href="#sec-zh-34" class="toc-h3">受众分析</a>
+  <a href="#sec-zh-35" class="toc-h3">内容分析</a>
+  <a href="#sec-zh-36" class="toc-h3">适配评分摘要</a>
+  <a href="#sec-zh-37" class="toc-h2">达人 #6：This Mom Is Learning（Maria）</a>
+  <a href="#sec-zh-38" class="toc-h3">基本信息</a>
+  <a href="#sec-zh-39" class="toc-h3">指标</a>
+  <a href="#sec-zh-40" class="toc-h3">受众分析</a>
+  <a href="#sec-zh-41" class="toc-h3">内容分析</a>
+  <a href="#sec-zh-42" class="toc-h3">适配评分摘要</a>
+  <a href="#sec-zh-43" class="toc-h2">达人 #7：Fathercraft Reviews（Mark）</a>
+  <a href="#sec-zh-44" class="toc-h3">基本信息</a>
+  <a href="#sec-zh-45" class="toc-h3">指标</a>
+  <a href="#sec-zh-46" class="toc-h3">受众分析</a>
+  <a href="#sec-zh-47" class="toc-h3">内容分析</a>
+  <a href="#sec-zh-48" class="toc-h3">适配评分摘要</a>
+  <a href="#sec-zh-49" class="toc-h2">观察名单</a>
+  <a href="#sec-zh-50" class="toc-h2">WL-1：Dad Reviews with LaneVids — ⚠️ 超过粉丝上限</a>
+  <a href="#sec-zh-51" class="toc-h2">WL-2：Mama Nurse Tina — ⚠️ 远超粉丝上限</a>
+  <a href="#sec-zh-52" class="toc-h2">WL-3：Organic Beauty 80 — ⚠️ 数据不足</a>
+  <a href="#sec-zh-53" class="toc-h2">第五步 — 汇总发现报告</a>
+  <a href="#sec-zh-54" class="toc-h2">汇总统计</a>
+  <a href="#sec-zh-55" class="toc-h2">顶级推荐</a>
+  <a href="#sec-zh-56" class="toc-h3">第一梯队：必须联系</a>
+  <a href="#sec-zh-57" class="toc-h3">第二梯队：强力候选</a>
+  <a href="#sec-zh-58" class="toc-h3">第三梯队：观察名单</a>
+  <a href="#sec-zh-59" class="toc-h2">分产品推荐矩阵</a>
+  <a href="#sec-zh-60" class="toc-h2">达人组合推荐</a>
+  <a href="#sec-zh-61" class="toc-h2">第六步 — 发现洞察</a>
+  <a href="#sec-zh-62" class="toc-h3">领域观察</a>
+  <a href="#sec-zh-63" class="toc-h3">搜索限制与建议</a>
+  <a href="#sec-zh-64" class="toc-h2">数据质量说明</a>
+</nav>
+  </div>
+  <div id="toc-en" style="display:none">
+<h3>Contents</h3>
+<nav>
+  <a href="#sec-en-0" class="toc-h2">第一步 — 搜索参数</a>
+  <a href="#sec-en-1" class="toc-h2">第二步 — 搜索策略</a>
+  <a href="#sec-en-2" class="toc-h3">主要搜索方法</a>
+  <a href="#sec-en-3" class="toc-h2">第三步 — 初步筛选</a>
+  <a href="#sec-en-4" class="toc-h3">筛选标准应用</a>
+  <a href="#sec-en-5" class="toc-h3">红旗识别</a>
+  <a href="#sec-en-6" class="toc-h2">第四步 — 达人画像</a>
+  <a href="#sec-en-7" class="toc-h2">达人 #1：The Stroller Mom</a>
+  <a href="#sec-en-8" class="toc-h3">基本信息</a>
+  <a href="#sec-en-9" class="toc-h3">指标</a>
+  <a href="#sec-en-10" class="toc-h3">受众分析</a>
+  <a href="#sec-en-11" class="toc-h3">内容分析</a>
+  <a href="#sec-en-12" class="toc-h3">适配评分摘要</a>
+  <a href="#sec-en-13" class="toc-h2">达人 #2：The Baby Cubby</a>
+  <a href="#sec-en-14" class="toc-h3">基本信息</a>
+  <a href="#sec-en-15" class="toc-h3">指标</a>
+  <a href="#sec-en-16" class="toc-h3">受众分析</a>
+  <a href="#sec-en-17" class="toc-h3">内容分析</a>
+  <a href="#sec-en-18" class="toc-h3">适配评分摘要</a>
+  <a href="#sec-en-19" class="toc-h2">达人 #3：New Little Life（Allison Tolman）</a>
+  <a href="#sec-en-20" class="toc-h3">基本信息</a>
+  <a href="#sec-en-21" class="toc-h3">指标</a>
+  <a href="#sec-en-22" class="toc-h3">受众分析</a>
+  <a href="#sec-en-23" class="toc-h3">内容分析</a>
+  <a href="#sec-en-24" class="toc-h3">适配评分摘要</a>
+  <a href="#sec-en-25" class="toc-h2">达人 #4：Baby To Child</a>
+  <a href="#sec-en-26" class="toc-h3">基本信息</a>
+  <a href="#sec-en-27" class="toc-h3">指标</a>
+  <a href="#sec-en-28" class="toc-h3">受众分析</a>
+  <a href="#sec-en-29" class="toc-h3">内容分析</a>
+  <a href="#sec-en-30" class="toc-h3">适配评分摘要</a>
+  <a href="#sec-en-31" class="toc-h2">达人 #5：Fabulous Mom Life</a>
+  <a href="#sec-en-32" class="toc-h3">基本信息</a>
+  <a href="#sec-en-33" class="toc-h3">指标</a>
+  <a href="#sec-en-34" class="toc-h3">受众分析</a>
+  <a href="#sec-en-35" class="toc-h3">内容分析</a>
+  <a href="#sec-en-36" class="toc-h3">适配评分摘要</a>
+  <a href="#sec-en-37" class="toc-h2">达人 #6：This Mom Is Learning（Maria）</a>
+  <a href="#sec-en-38" class="toc-h3">基本信息</a>
+  <a href="#sec-en-39" class="toc-h3">指标</a>
+  <a href="#sec-en-40" class="toc-h3">受众分析</a>
+  <a href="#sec-en-41" class="toc-h3">内容分析</a>
+  <a href="#sec-en-42" class="toc-h3">适配评分摘要</a>
+  <a href="#sec-en-43" class="toc-h2">达人 #7：Fathercraft Reviews（Mark）</a>
+  <a href="#sec-en-44" class="toc-h3">基本信息</a>
+  <a href="#sec-en-45" class="toc-h3">指标</a>
+  <a href="#sec-en-46" class="toc-h3">受众分析</a>
+  <a href="#sec-en-47" class="toc-h3">内容分析</a>
+  <a href="#sec-en-48" class="toc-h3">适配评分摘要</a>
+  <a href="#sec-en-49" class="toc-h2">观察名单</a>
+  <a href="#sec-en-50" class="toc-h2">WL-1：Dad Reviews with LaneVids — ⚠️ 超过粉丝上限</a>
+  <a href="#sec-en-51" class="toc-h2">WL-2：Mama Nurse Tina — ⚠️ 远超粉丝上限</a>
+  <a href="#sec-en-52" class="toc-h2">WL-3：Organic Beauty 80 — ⚠️ 数据不足</a>
+  <a href="#sec-en-53" class="toc-h2">第五步 — 汇总发现报告</a>
+  <a href="#sec-en-54" class="toc-h2">汇总统计</a>
+  <a href="#sec-en-55" class="toc-h2">顶级推荐</a>
+  <a href="#sec-en-56" class="toc-h3">第一梯队：必须联系</a>
+  <a href="#sec-en-57" class="toc-h3">第二梯队：强力候选</a>
+  <a href="#sec-en-58" class="toc-h3">第三梯队：观察名单</a>
+  <a href="#sec-en-59" class="toc-h2">分产品推荐矩阵</a>
+  <a href="#sec-en-60" class="toc-h2">达人组合推荐</a>
+  <a href="#sec-en-61" class="toc-h2">第六步 — 发现洞察</a>
+  <a href="#sec-en-62" class="toc-h3">领域观察</a>
+  <a href="#sec-en-63" class="toc-h3">搜索限制与建议</a>
+  <a href="#sec-en-64" class="toc-h2">数据质量说明</a>
+</nav>
+  </div>
 </aside>
 
 <div class="main-wrap">
@@ -146,7 +272,7 @@ blockquote { border-left: 4px solid var(--accent); padding: 10px 16px; margin: 1
 <strong>搜索标准</strong>：YouTube 平台，5,000-50,000 粉丝，互动率 &gt;4%，拍摄过 baby car camera / baby monitor / portable milk warmer 相关内容<br />
 <strong>语言/地区</strong>：未限制（优先英语内容）</p>
 <hr />
-<h2>第一步 — 搜索参数</h2>
+<h2 id="sec-zh-0">第一步 — 搜索参数</h2>
 <p><strong>品牌/产品场景</strong>：婴儿车载摄像头、婴儿监视器、便携式暖奶器<br />
 <strong>活动目标</strong>：真实产品评测、开箱演示、UGC 视频素材<br />
 <strong>预算范围</strong>：微型达人（$200-$1,500/视频，基于 5K-50K 粉丝级别）</p>
@@ -218,8 +344,8 @@ blockquote { border-left: 4px solid var(--accent); padding: 10px 16px; margin: 1
 - 主要内容非育儿/婴儿相关<br />
 - 争议内容或虚假互动</p>
 <hr />
-<h2>第二步 — 搜索策略</h2>
-<h3>主要搜索方法</h3>
+<h2 id="sec-zh-1">第二步 — 搜索策略</h2>
+<h3 id="sec-zh-2">主要搜索方法</h3>
 <ol>
 <li><strong>YouTube 细分领域搜索</strong></li>
 <li>婴儿推车/安全座椅评测频道（相邻品类，常有 monitor/car camera 内容）</li>
@@ -249,10 +375,10 @@ blockquote { border-left: 4px solid var(--accent); padding: 10px 16px; margin: 1
 <li>网页搜索交叉验证频道数据</li>
 </ol>
 <hr />
-<h2>第三步 — 初步筛选</h2>
+<h2 id="sec-zh-3">第三步 — 初步筛选</h2>
 <p><strong>总候选人数</strong>：31<br />
 <strong>初步筛选后</strong>：9（另加 3 人放入观察名单）</p>
-<h3>筛选标准应用</h3>
+<h3 id="sec-zh-4">筛选标准应用</h3>
 <table>
 <thead>
 <tr>
@@ -284,7 +410,7 @@ blockquote { border-left: 4px solid var(--accent); padding: 10px 16px; margin: 1
 </tr>
 </tbody>
 </table>
-<h3>红旗识别</h3>
+<h3 id="sec-zh-5">红旗识别</h3>
 <ul>
 <li>3 个频道为纯品牌营销号（非独立创作者）</li>
 <li>2 个频道互动率异常低（大量订阅但极低播放量 — 疑似假粉）</li>
@@ -295,10 +421,10 @@ blockquote { border-left: 4px solid var(--accent); padding: 10px 16px; margin: 1
 <p>⚠️ <strong>数据质量说明</strong>：5K-50K 区间的 YouTube 频道很难通过网页搜索精确定位。搜索引擎对小型 YouTube 频道的索引非常有限。本次搜索结合了 findachannel.net 细分频道数据、育儿博客引用、论坛推荐及网页搜索交叉验证。<strong>强烈建议</strong>通过 <code>~~influencer database</code> 连接器进行精确的粉丝、互动率和内容标签筛选。</p>
 </blockquote>
 <hr />
-<h2>第四步 — 达人画像</h2>
+<h2 id="sec-zh-6">第四步 — 达人画像</h2>
 <hr />
-<h2>达人 #1：The Stroller Mom</h2>
-<h3>基本信息</h3>
+<h2 id="sec-zh-7">达人 #1：The Stroller Mom</h2>
+<h3 id="sec-zh-8">基本信息</h3>
 <table>
 <thead>
 <tr>
@@ -341,7 +467,7 @@ blockquote { border-left: 4px solid var(--accent); padding: 10px 16px; margin: 1
 </tr>
 </tbody>
 </table>
-<h3>指标</h3>
+<h3 id="sec-zh-9">指标</h3>
 <table>
 <thead>
 <tr>
@@ -373,7 +499,7 @@ blockquote { border-left: 4px solid var(--accent); padding: 10px 16px; margin: 1
 </tbody>
 </table>
 <p><strong>增长趋势</strong>：稳定增长 — 2022年底起步，不到3年积累了 14.5K 订阅和 1100万+ 播放。该细分频道平均月增 274 订阅，其表现远超均值。</p>
-<h3>受众分析</h3>
+<h3 id="sec-zh-10">受众分析</h3>
 <table>
 <thead>
 <tr>
@@ -403,7 +529,7 @@ blockquote { border-left: 4px solid var(--accent); padding: 10px 16px; margin: 1
 <p><strong>受众质量评分</strong>：9/10<br />
 - 真实粉丝估算：~95%（CPST 认证 + 真实内容 = 高度信任）<br />
 - 受众-品牌重叠度：<strong>高</strong> — 婴儿安全/科技产品的精准购买人群</p>
-<h3>内容分析</h3>
+<h3 id="sec-zh-11">内容分析</h3>
 <p><strong>内容风格</strong>：<br />
 - 主要形式：真实评测、安装教程、对比视频<br />
 - 发布频率：约 3 视频/周（468 视频/约 3.5 年）<br />
@@ -413,7 +539,7 @@ blockquote { border-left: 4px solid var(--accent); padding: 10px 16px; margin: 1
 - baby car camera 相关性：<strong>高</strong> — CPST 认证天然覆盖车载安全品类<br />
 - baby monitor 相关性：<strong>高</strong> — 婴儿用品评测覆盖面广<br />
 - portable milk warmer 相关性：<strong>中</strong> — 推车/座椅为主，但育儿用品品类可延伸</p>
-<h3>适配评分摘要</h3>
+<h3 id="sec-zh-12">适配评分摘要</h3>
 <table>
 <thead>
 <tr>
@@ -455,8 +581,8 @@ CPST 认证带来婴儿安全领域的专业公信力，评测婴儿车载摄像
 - 内容以推车/座椅为主，暖奶器品类经验待确认<br />
 - 14.5K 处于粉丝范围中等偏下，触达力有限但互动质量补偿</p>
 <hr />
-<h2>达人 #2：The Baby Cubby</h2>
-<h3>基本信息</h3>
+<h2 id="sec-zh-13">达人 #2：The Baby Cubby</h2>
+<h3 id="sec-zh-14">基本信息</h3>
 <table>
 <thead>
 <tr>
@@ -499,7 +625,7 @@ CPST 认证带来婴儿安全领域的专业公信力，评测婴儿车载摄像
 </tr>
 </tbody>
 </table>
-<h3>指标</h3>
+<h3 id="sec-zh-15">指标</h3>
 <table>
 <thead>
 <tr>
@@ -527,7 +653,7 @@ CPST 认证带来婴儿安全领域的专业公信力，评测婴儿车载摄像
 </tbody>
 </table>
 <p><strong>增长趋势</strong>：成熟稳定 — 2014年至今超过 11 年积累。实体店+线上双渠道运营，内容可持续性强。</p>
-<h3>受众分析</h3>
+<h3 id="sec-zh-16">受众分析</h3>
 <table>
 <thead>
 <tr>
@@ -557,7 +683,7 @@ CPST 认证带来婴儿安全领域的专业公信力，评测婴儿车载摄像
 <p><strong>受众质量评分</strong>：8/10<br />
 - 真实粉丝估算：~90%<br />
 - 受众-品牌重叠度：<strong>高</strong> — 婴儿用品购买的精准人群</p>
-<h3>内容分析</h3>
+<h3 id="sec-zh-17">内容分析</h3>
 <p><strong>内容风格</strong>：<br />
 - 主要形式：专业开箱、对比评测、安全安装教程<br />
 - 发布频率：约 1.5 视频/周（873 视频/11 年）<br />
@@ -567,7 +693,7 @@ CPST 认证带来婴儿安全领域的专业公信力，评测婴儿车载摄像
 - baby car camera 相关性：<strong>高</strong> — 有安全座椅安装教程，延伸至车载摄像头自然<br />
 - baby monitor 相关性：<strong>非常高</strong> — 婴儿监视器是核心评测品类之一<br />
 - portable milk warmer 相关性：<strong>中高</strong> — 喂养用品评测覆盖面广</p>
-<h3>适配评分摘要</h3>
+<h3 id="sec-zh-18">适配评分摘要</h3>
 <table>
 <thead>
 <tr>
@@ -610,8 +736,8 @@ CPST 认证带来婴儿安全领域的专业公信力，评测婴儿车载摄像
 - 粉丝数接近上限，合作费用可能高于微型频道<br />
 - 2014年起步的老频道，内容风格可能需要与现代短视频趋势对齐</p>
 <hr />
-<h2>达人 #3：New Little Life（Allison Tolman）</h2>
-<h3>基本信息</h3>
+<h2 id="sec-zh-19">达人 #3：New Little Life（Allison Tolman）</h2>
+<h3 id="sec-zh-20">基本信息</h3>
 <table>
 <thead>
 <tr>
@@ -654,7 +780,7 @@ CPST 认证带来婴儿安全领域的专业公信力，评测婴儿车载摄像
 </tr>
 </tbody>
 </table>
-<h3>指标</h3>
+<h3 id="sec-zh-21">指标</h3>
 <table>
 <thead>
 <tr>
@@ -678,7 +804,7 @@ CPST 认证带来婴儿安全领域的专业公信力，评测婴儿车载摄像
 </tbody>
 </table>
 <p><strong>增长趋势</strong>：稳定 — 专业教育内容吸引高质量订阅。付费课程（Pumping for Working Moms）和 L-CERP 继续教育课程形成多元收入。</p>
-<h3>受众分析</h3>
+<h3 id="sec-zh-22">受众分析</h3>
 <table>
 <thead>
 <tr>
@@ -708,7 +834,7 @@ CPST 认证带来婴儿安全领域的专业公信力，评测婴儿车载摄像
 <p><strong>受众质量评分</strong>：9/10<br />
 - 真实粉丝估算：~95%（IBCLC 认证 = 极高公信力）<br />
 - 受众-品牌重叠度：<strong>非常高</strong>（便携暖奶器）— 哺乳妈妈直接需要暖奶器</p>
-<h3>内容分析</h3>
+<h3 id="sec-zh-23">内容分析</h3>
 <p><strong>内容风格</strong>：<br />
 - 主要形式：数据驱动深度评测、吸奶器对比、哺乳技巧<br />
 - 风格：科学、严谨、"用数据说话"<br />
@@ -717,7 +843,7 @@ CPST 认证带来婴儿安全领域的专业公信力，评测婴儿车载摄像
 - baby car camera 相关性：<strong>低</strong> — 不在核心品类<br />
 - baby monitor 相关性：<strong>低</strong> — 不在核心品类<br />
 - portable milk warmer 相关性：<strong>非常高</strong> — 暖奶器是哺乳/吸奶生态的直接延伸</p>
-<h3>适配评分摘要</h3>
+<h3 id="sec-zh-24">适配评分摘要</h3>
 <table>
 <thead>
 <tr>
@@ -760,8 +886,8 @@ IBCLC 认证 + 数据驱动评测 = 暖奶器评测的最高公信力。受众�
 - 订阅数待验证（估测值）<br />
 - IBCLC 身份对产品安全性要求极高，评测可能更严格</p>
 <hr />
-<h2>达人 #4：Baby To Child</h2>
-<h3>基本信息</h3>
+<h2 id="sec-zh-25">达人 #4：Baby To Child</h2>
+<h3 id="sec-zh-26">基本信息</h3>
 <table>
 <thead>
 <tr>
@@ -800,7 +926,7 @@ IBCLC 认证 + 数据驱动评测 = 暖奶器评测的最高公信力。受众�
 </tr>
 </tbody>
 </table>
-<h3>指标</h3>
+<h3 id="sec-zh-27">指标</h3>
 <table>
 <thead>
 <tr>
@@ -820,7 +946,7 @@ IBCLC 认证 + 数据驱动评测 = 暖奶器评测的最高公信力。受众�
 </tbody>
 </table>
 <p><strong>增长趋势</strong>：成长中 — 博客 SEO 驱动流量增长，YouTube 作为视频补充</p>
-<h3>受众分析</h3>
+<h3 id="sec-zh-28">受众分析</h3>
 <table>
 <thead>
 <tr>
@@ -850,7 +976,7 @@ IBCLC 认证 + 数据驱动评测 = 暖奶器评测的最高公信力。受众�
 <p><strong>受众质量评分</strong>：7/10<br />
 - 真实粉丝估算：~85%<br />
 - 受众-品牌重叠度：<strong>非常高</strong> — 三种目标产品全部覆盖</p>
-<h3>内容分析</h3>
+<h3 id="sec-zh-29">内容分析</h3>
 <p><strong>内容风格</strong>：<br />
 - 主要形式：产品评测博客 + YouTube 视频演示<br />
 - 风格：SEO 优化、信息全面、购买指南导向<br />
@@ -859,7 +985,7 @@ IBCLC 认证 + 数据驱动评测 = 暖奶器评测的最高公信力。受众�
 - baby car camera 相关性：<strong>非常高</strong> — 多篇车载摄像头深度评测<br />
 - baby monitor 相关性：<strong>高</strong> — 婴儿监视器评测<br />
 - portable milk warmer 相关性：<strong>非常高</strong> — 多款暖奶器详细对比</p>
-<h3>适配评分摘要</h3>
+<h3 id="sec-zh-30">适配评分摘要</h3>
 <table>
 <thead>
 <tr>
@@ -902,8 +1028,8 @@ IBCLC 认证 + 数据驱动评测 = 暖奶器评测的最高公信力。受众�
 - SEO 导向内容可能偏"购买指南"风格，需要向真实评测方向引导<br />
 - YouTube 频道数据需验证</p>
 <hr />
-<h2>达人 #5：Fabulous Mom Life</h2>
-<h3>基本信息</h3>
+<h2 id="sec-zh-31">达人 #5：Fabulous Mom Life</h2>
+<h3 id="sec-zh-32">基本信息</h3>
 <table>
 <thead>
 <tr>
@@ -942,7 +1068,7 @@ IBCLC 认证 + 数据驱动评测 = 暖奶器评测的最高公信力。受众�
 </tr>
 </tbody>
 </table>
-<h3>指标</h3>
+<h3 id="sec-zh-33">指标</h3>
 <table>
 <thead>
 <tr>
@@ -962,7 +1088,7 @@ IBCLC 认证 + 数据驱动评测 = 暖奶器评测的最高公信力。受众�
 </tbody>
 </table>
 <p><strong>增长趋势</strong>：稳定增长 — 持续输出评测内容</p>
-<h3>受众分析</h3>
+<h3 id="sec-zh-34">受众分析</h3>
 <table>
 <thead>
 <tr>
@@ -992,7 +1118,7 @@ IBCLC 认证 + 数据驱动评测 = 暖奶器评测的最高公信力。受众�
 <p><strong>受众质量评分</strong>：7/10<br />
 - 真实粉丝估算：~88%<br />
 - 受众-品牌重叠度：<strong>高</strong> — 婴儿用品的目标消费者</p>
-<h3>内容分析</h3>
+<h3 id="sec-zh-35">内容分析</h3>
 <p><strong>内容风格</strong>：<br />
 - 主要形式：开箱、评测、真实意见<br />
 - 风格：不加修饰、诚实<br />
@@ -1001,7 +1127,7 @@ IBCLC 认证 + 数据驱动评测 = 暖奶器评测的最高公信力。受众�
 - baby car camera 相关性：<strong>中高</strong> — 婴儿用品评测覆盖面<br />
 - baby monitor 相关性：<strong>高</strong> — 婴儿护理用品核心品类<br />
 - portable milk warmer 相关性：<strong>高</strong> — 喂养用品评测</p>
-<h3>适配评分摘要</h3>
+<h3 id="sec-zh-36">适配评分摘要</h3>
 <table>
 <thead>
 <tr>
@@ -1043,8 +1169,8 @@ IBCLC 认证 + 数据驱动评测 = 暖奶器评测的最高公信力。受众�
 - 频道数据大部分为估测，需验证<br />
 - 具体内容风格和品牌适配度需观看实际视频确认</p>
 <hr />
-<h2>达人 #6：This Mom Is Learning（Maria）</h2>
-<h3>基本信息</h3>
+<h2 id="sec-zh-37">达人 #6：This Mom Is Learning（Maria）</h2>
+<h3 id="sec-zh-38">基本信息</h3>
 <table>
 <thead>
 <tr>
@@ -1083,7 +1209,7 @@ IBCLC 认证 + 数据驱动评测 = 暖奶器评测的最高公信力。受众�
 </tr>
 </tbody>
 </table>
-<h3>指标</h3>
+<h3 id="sec-zh-39">指标</h3>
 <table>
 <thead>
 <tr>
@@ -1103,7 +1229,7 @@ IBCLC 认证 + 数据驱动评测 = 暖奶器评测的最高公信力。受众�
 </tbody>
 </table>
 <p><strong>增长趋势</strong>：成长中 — 新手妈妈视角引起广泛共鸣</p>
-<h3>受众分析</h3>
+<h3 id="sec-zh-40">受众分析</h3>
 <table>
 <thead>
 <tr>
@@ -1133,7 +1259,7 @@ IBCLC 认证 + 数据驱动评测 = 暖奶器评测的最高公信力。受众�
 <p><strong>受众质量评分</strong>：8/10<br />
 - 真实粉丝估算：~92%（新手妈妈真实记录 = 高信任度）<br />
 - 受众-品牌重叠度：<strong>高</strong> — 正在做购买决策的父母</p>
-<h3>内容分析</h3>
+<h3 id="sec-zh-41">内容分析</h3>
 <p><strong>内容风格</strong>：<br />
 - 主要形式：长期使用评测、"不加修饰"的真实记录<br />
 - 风格：真实、脆弱、可共鸣<br />
@@ -1142,7 +1268,7 @@ IBCLC 认证 + 数据驱动评测 = 暖奶器评测的最高公信力。受众�
 - baby car camera 相关性：<strong>中</strong> — 新手父母角度但未确认有相关评测<br />
 - baby monitor 相关性：<strong>高</strong> — 婴儿监视器是新手父母必买品类<br />
 - portable milk warmer 相关性：<strong>高</strong> — 喂养用品是新手父母刚需</p>
-<h3>适配评分摘要</h3>
+<h3 id="sec-zh-42">适配评分摘要</h3>
 <table>
 <thead>
 <tr>
@@ -1184,8 +1310,8 @@ IBCLC 认证 + 数据驱动评测 = 暖奶器评测的最高公信力。受众�
 - 新手妈妈身份意味着内容经验尚浅<br />
 - 小型频道数据需验证</p>
 <hr />
-<h2>达人 #7：Fathercraft Reviews（Mark）</h2>
-<h3>基本信息</h3>
+<h2 id="sec-zh-43">达人 #7：Fathercraft Reviews（Mark）</h2>
+<h3 id="sec-zh-44">基本信息</h3>
 <table>
 <thead>
 <tr>
@@ -1224,7 +1350,7 @@ IBCLC 认证 + 数据驱动评测 = 暖奶器评测的最高公信力。受众�
 </tr>
 </tbody>
 </table>
-<h3>指标</h3>
+<h3 id="sec-zh-45">指标</h3>
 <table>
 <thead>
 <tr>
@@ -1244,7 +1370,7 @@ IBCLC 认证 + 数据驱动评测 = 暖奶器评测的最高公信力。受众�
 </tbody>
 </table>
 <p><strong>增长趋势</strong>：成长中 — 爸爸育儿视角是差异化品类</p>
-<h3>受众分析</h3>
+<h3 id="sec-zh-46">受众分析</h3>
 <table>
 <thead>
 <tr>
@@ -1274,7 +1400,7 @@ IBCLC 认证 + 数据驱动评测 = 暖奶器评测的最高公信力。受众�
 <p><strong>受众质量评分</strong>：8/10<br />
 - 真实粉丝估算：~90%<br />
 - 受众-品牌重叠度：<strong>中高</strong> — 爸爸视角覆盖了常被忽略的购买决策者</p>
-<h3>内容分析</h3>
+<h3 id="sec-zh-47">内容分析</h3>
 <p><strong>内容风格</strong>：<br />
 - 主要形式：真实评测、产品对比<br />
 - 风格：实用、直接、爸爸视角<br />
@@ -1283,7 +1409,7 @@ IBCLC 认证 + 数据驱动评测 = 暖奶器评测的最高公信力。受众�
 - baby car camera 相关性：<strong>高</strong> — 爸爸对车载科技产品兴趣高<br />
 - baby monitor 相关性：<strong>高</strong> — 科技类婴儿产品评测<br />
 - portable milk warmer 相关性：<strong>中</strong> — 喂养品类但爸爸视角独特</p>
-<h3>适配评分摘要</h3>
+<h3 id="sec-zh-48">适配评分摘要</h3>
 <table>
 <thead>
 <tr>
@@ -1325,9 +1451,9 @@ IBCLC 认证 + 数据驱动评测 = 暖奶器评测的最高公信力。受众�
 - 暖奶器品类可能不是爸爸受众的核心兴趣<br />
 - 频道数据大部分为估测，需验证</p>
 <hr />
-<h2>观察名单</h2>
+<h2 id="sec-zh-49">观察名单</h2>
 <hr />
-<h2>WL-1：Dad Reviews with LaneVids — ⚠️ 超过粉丝上限</h2>
+<h2 id="sec-zh-50">WL-1：Dad Reviews with LaneVids — ⚠️ 超过粉丝上限</h2>
 <table>
 <thead>
 <tr>
@@ -1352,7 +1478,7 @@ IBCLC 认证 + 数据驱动评测 = 暖奶器评测的最高公信力。受众�
 </table>
 <p><strong>排除原因</strong>：粉丝数（80.5K）超出 50K 上限。如预算允许，可作为中腰部达人纳入下一轮搜索。</p>
 <hr />
-<h2>WL-2：Mama Nurse Tina — ⚠️ 远超粉丝上限</h2>
+<h2 id="sec-zh-51">WL-2：Mama Nurse Tina — ⚠️ 远超粉丝上限</h2>
 <table>
 <thead>
 <tr>
@@ -1373,12 +1499,12 @@ IBCLC 认证 + 数据驱动评测 = 暖奶器评测的最高公信力。受众�
 </table>
 <p><strong>排除原因</strong>：粉丝数远超 50K 上限。L&amp;D 护士 + 喜剧风格，属于头部达人。</p>
 <hr />
-<h2>WL-3：Organic Beauty 80 — ⚠️ 数据不足</h2>
+<h2 id="sec-zh-52">WL-3：Organic Beauty 80 — ⚠️ 数据不足</h2>
 <p>新妈妈视角的 Spectra 吸奶器评测。频道数据不足以评估。放入观察名单，待更多内容产出后重新评估。</p>
 <hr />
-<h2>第五步 — 汇总发现报告</h2>
+<h2 id="sec-zh-53">第五步 — 汇总发现报告</h2>
 <h1>红人发现结果</h1>
-<h2>汇总统计</h2>
+<h2 id="sec-zh-54">汇总统计</h2>
 <table>
 <thead>
 <tr>
@@ -1409,8 +1535,8 @@ IBCLC 认证 + 数据驱动评测 = 暖奶器评测的最高公信力。受众�
 </tr>
 </tbody>
 </table>
-<h2>顶级推荐</h2>
-<h3>第一梯队：必须联系</h3>
+<h2 id="sec-zh-55">顶级推荐</h2>
+<h3 id="sec-zh-56">第一梯队：必须联系</h3>
 <table>
 <thead>
 <tr>
@@ -1457,7 +1583,7 @@ IBCLC 认证 + 数据驱动评测 = 暖奶器评测的最高公信力。受众�
 </tr>
 </tbody>
 </table>
-<h3>第二梯队：强力候选</h3>
+<h3 id="sec-zh-57">第二梯队：强力候选</h3>
 <table>
 <thead>
 <tr>
@@ -1488,7 +1614,7 @@ IBCLC 认证 + 数据驱动评测 = 暖奶器评测的最高公信力。受众�
 </tr>
 </tbody>
 </table>
-<h3>第三梯队：观察名单</h3>
+<h3 id="sec-zh-58">第三梯队：观察名单</h3>
 <table>
 <thead>
 <tr>
@@ -1515,7 +1641,7 @@ IBCLC 认证 + 数据驱动评测 = 暖奶器评测的最高公信力。受众�
 </tr>
 </tbody>
 </table>
-<h2>分产品推荐矩阵</h2>
+<h2 id="sec-zh-59">分产品推荐矩阵</h2>
 <table>
 <thead>
 <tr>
@@ -1546,7 +1672,7 @@ IBCLC 认证 + 数据驱动评测 = 暖奶器评测的最高公信力。受众�
 </tr>
 </tbody>
 </table>
-<h2>达人组合推荐</h2>
+<h2 id="sec-zh-60">达人组合推荐</h2>
 <table>
 <thead>
 <tr>
@@ -1593,8 +1719,8 @@ IBCLC 认证 + 数据驱动评测 = 暖奶器评测的最高公信力。受众�
 <p>数据来源：<a href="https://www.findachannel.net/Niches/baby-stroller-review">findachannel.net</a>、HypeAuditor 交叉参考、网页搜索、育儿论坛推荐。</p>
 </blockquote>
 <hr />
-<h2>第六步 — 发现洞察</h2>
-<h3>领域观察</h3>
+<h2 id="sec-zh-61">第六步 — 发现洞察</h2>
+<h3 id="sec-zh-62">领域观察</h3>
 <p><strong>内容趋势</strong>：<br />
 - 5K-50K 区间是 YouTube 婴儿科技评测的"蓝海"——大多数频道在 5K 以下挣扎或已突破 50K<br />
 - 有专业认证（CPST、IBCLC）的创作者即使在较小订阅量下也能获得极高信任度和互动率<br />
@@ -1609,7 +1735,7 @@ IBCLC 认证 + 数据驱动评测 = 暖奶器评测的最高公信力。受众�
 - <strong>婴儿车载摄像头</strong>是三个品类中 YouTube 内容最稀缺的 — 先发优势显著<br />
 - <strong>爸爸视角 + 婴儿科技产品</strong>是一个完全未被开发的交叉领域<br />
 - <strong>"专业认证 + 真实评测"组合</strong>（CPST/IBCLC + 妈妈真实体验）建立了不可替代的内容护城河</p>
-<h3>搜索限制与建议</h3>
+<h3 id="sec-zh-63">搜索限制与建议</h3>
 <table>
 <thead>
 <tr>
@@ -1642,7 +1768,7 @@ IBCLC 认证 + 数据驱动评测 = 暖奶器评测的最高公信力。受众�
 - 拓宽至 Instagram/TikTok 平台对比：这些平台的小型达人更容易通过网页搜索发现<br />
 - 增加 <strong>#babycarcamera</strong>、<strong>#babymonitorreview</strong>、<strong>#portablemilkwarmer</strong> 等精准标签搜索</p>
 <hr />
-<h2>数据质量说明</h2>
+<h2 id="sec-zh-64">数据质量说明</h2>
 <table>
 <thead>
 <tr>
@@ -1697,7 +1823,7 @@ IBCLC 认证 + 数据驱动评测 = 暖奶器评测的最高公信力。受众�
 <strong>搜索标准</strong>：YouTube 平台，5,000-50,000 粉丝，互动率 &gt;4%，拍摄过 baby car camera / baby monitor / portable milk warmer 相关内容<br />
 <strong>语言/地区</strong>：未限制（优先英语内容）</p>
 <hr />
-<h2>第一步 — 搜索参数</h2>
+<h2 id="sec-en-0">第一步 — 搜索参数</h2>
 <p><strong>品牌/产品场景</strong>：婴儿车载摄像头、婴儿监视器、便携式暖奶器<br />
 <strong>活动目标</strong>：真实产品评测、开箱演示、UGC 视频素材<br />
 <strong>预算范围</strong>：微型达人（$200-$1,500/视频，基于 5K-50K 粉丝级别）</p>
@@ -1769,8 +1895,8 @@ IBCLC 认证 + 数据驱动评测 = 暖奶器评测的最高公信力。受众�
 - 主要内容非育儿/婴儿相关<br />
 - 争议内容或虚假互动</p>
 <hr />
-<h2>第二步 — 搜索策略</h2>
-<h3>主要搜索方法</h3>
+<h2 id="sec-en-1">第二步 — 搜索策略</h2>
+<h3 id="sec-en-2">主要搜索方法</h3>
 <ol>
 <li><strong>YouTube 细分领域搜索</strong></li>
 <li>婴儿推车/安全座椅评测频道（相邻品类，常有 monitor/car camera 内容）</li>
@@ -1800,10 +1926,10 @@ IBCLC 认证 + 数据驱动评测 = 暖奶器评测的最高公信力。受众�
 <li>网页搜索交叉验证频道数据</li>
 </ol>
 <hr />
-<h2>第三步 — 初步筛选</h2>
+<h2 id="sec-en-3">第三步 — 初步筛选</h2>
 <p><strong>总候选人数</strong>：31<br />
 <strong>初步筛选后</strong>：9（另加 3 人放入观察名单）</p>
-<h3>筛选标准应用</h3>
+<h3 id="sec-en-4">筛选标准应用</h3>
 <table>
 <thead>
 <tr>
@@ -1835,7 +1961,7 @@ IBCLC 认证 + 数据驱动评测 = 暖奶器评测的最高公信力。受众�
 </tr>
 </tbody>
 </table>
-<h3>红旗识别</h3>
+<h3 id="sec-en-5">红旗识别</h3>
 <ul>
 <li>3 个频道为纯品牌营销号（非独立创作者）</li>
 <li>2 个频道互动率异常低（大量订阅但极低播放量 — 疑似假粉）</li>
@@ -1846,10 +1972,10 @@ IBCLC 认证 + 数据驱动评测 = 暖奶器评测的最高公信力。受众�
 <p>⚠️ <strong>数据质量说明</strong>：5K-50K 区间的 YouTube 频道很难通过网页搜索精确定位。搜索引擎对小型 YouTube 频道的索引非常有限。本次搜索结合了 findachannel.net 细分频道数据、育儿博客引用、论坛推荐及网页搜索交叉验证。<strong>强烈建议</strong>通过 <code>~~influencer database</code> 连接器进行精确的粉丝、互动率和内容标签筛选。</p>
 </blockquote>
 <hr />
-<h2>第四步 — 达人画像</h2>
+<h2 id="sec-en-6">第四步 — 达人画像</h2>
 <hr />
-<h2>达人 #1：The Stroller Mom</h2>
-<h3>基本信息</h3>
+<h2 id="sec-en-7">达人 #1：The Stroller Mom</h2>
+<h3 id="sec-en-8">基本信息</h3>
 <table>
 <thead>
 <tr>
@@ -1892,7 +2018,7 @@ IBCLC 认证 + 数据驱动评测 = 暖奶器评测的最高公信力。受众�
 </tr>
 </tbody>
 </table>
-<h3>指标</h3>
+<h3 id="sec-en-9">指标</h3>
 <table>
 <thead>
 <tr>
@@ -1924,7 +2050,7 @@ IBCLC 认证 + 数据驱动评测 = 暖奶器评测的最高公信力。受众�
 </tbody>
 </table>
 <p><strong>增长趋势</strong>：稳定增长 — 2022年底起步，不到3年积累了 14.5K 订阅和 1100万+ 播放。该细分频道平均月增 274 订阅，其表现远超均值。</p>
-<h3>受众分析</h3>
+<h3 id="sec-en-10">受众分析</h3>
 <table>
 <thead>
 <tr>
@@ -1954,7 +2080,7 @@ IBCLC 认证 + 数据驱动评测 = 暖奶器评测的最高公信力。受众�
 <p><strong>受众质量评分</strong>：9/10<br />
 - 真实粉丝估算：~95%（CPST 认证 + 真实内容 = 高度信任）<br />
 - 受众-品牌重叠度：<strong>高</strong> — 婴儿安全/科技产品的精准购买人群</p>
-<h3>内容分析</h3>
+<h3 id="sec-en-11">内容分析</h3>
 <p><strong>内容风格</strong>：<br />
 - 主要形式：真实评测、安装教程、对比视频<br />
 - 发布频率：约 3 视频/周（468 视频/约 3.5 年）<br />
@@ -1964,7 +2090,7 @@ IBCLC 认证 + 数据驱动评测 = 暖奶器评测的最高公信力。受众�
 - baby car camera 相关性：<strong>高</strong> — CPST 认证天然覆盖车载安全品类<br />
 - baby monitor 相关性：<strong>高</strong> — 婴儿用品评测覆盖面广<br />
 - portable milk warmer 相关性：<strong>中</strong> — 推车/座椅为主，但育儿用品品类可延伸</p>
-<h3>适配评分摘要</h3>
+<h3 id="sec-en-12">适配评分摘要</h3>
 <table>
 <thead>
 <tr>
@@ -2006,8 +2132,8 @@ CPST 认证带来婴儿安全领域的专业公信力，评测婴儿车载摄像
 - 内容以推车/座椅为主，暖奶器品类经验待确认<br />
 - 14.5K 处于粉丝范围中等偏下，触达力有限但互动质量补偿</p>
 <hr />
-<h2>达人 #2：The Baby Cubby</h2>
-<h3>基本信息</h3>
+<h2 id="sec-en-13">达人 #2：The Baby Cubby</h2>
+<h3 id="sec-en-14">基本信息</h3>
 <table>
 <thead>
 <tr>
@@ -2050,7 +2176,7 @@ CPST 认证带来婴儿安全领域的专业公信力，评测婴儿车载摄像
 </tr>
 </tbody>
 </table>
-<h3>指标</h3>
+<h3 id="sec-en-15">指标</h3>
 <table>
 <thead>
 <tr>
@@ -2078,7 +2204,7 @@ CPST 认证带来婴儿安全领域的专业公信力，评测婴儿车载摄像
 </tbody>
 </table>
 <p><strong>增长趋势</strong>：成熟稳定 — 2014年至今超过 11 年积累。实体店+线上双渠道运营，内容可持续性强。</p>
-<h3>受众分析</h3>
+<h3 id="sec-en-16">受众分析</h3>
 <table>
 <thead>
 <tr>
@@ -2108,7 +2234,7 @@ CPST 认证带来婴儿安全领域的专业公信力，评测婴儿车载摄像
 <p><strong>受众质量评分</strong>：8/10<br />
 - 真实粉丝估算：~90%<br />
 - 受众-品牌重叠度：<strong>高</strong> — 婴儿用品购买的精准人群</p>
-<h3>内容分析</h3>
+<h3 id="sec-en-17">内容分析</h3>
 <p><strong>内容风格</strong>：<br />
 - 主要形式：专业开箱、对比评测、安全安装教程<br />
 - 发布频率：约 1.5 视频/周（873 视频/11 年）<br />
@@ -2118,7 +2244,7 @@ CPST 认证带来婴儿安全领域的专业公信力，评测婴儿车载摄像
 - baby car camera 相关性：<strong>高</strong> — 有安全座椅安装教程，延伸至车载摄像头自然<br />
 - baby monitor 相关性：<strong>非常高</strong> — 婴儿监视器是核心评测品类之一<br />
 - portable milk warmer 相关性：<strong>中高</strong> — 喂养用品评测覆盖面广</p>
-<h3>适配评分摘要</h3>
+<h3 id="sec-en-18">适配评分摘要</h3>
 <table>
 <thead>
 <tr>
@@ -2161,8 +2287,8 @@ CPST 认证带来婴儿安全领域的专业公信力，评测婴儿车载摄像
 - 粉丝数接近上限，合作费用可能高于微型频道<br />
 - 2014年起步的老频道，内容风格可能需要与现代短视频趋势对齐</p>
 <hr />
-<h2>达人 #3：New Little Life（Allison Tolman）</h2>
-<h3>基本信息</h3>
+<h2 id="sec-en-19">达人 #3：New Little Life（Allison Tolman）</h2>
+<h3 id="sec-en-20">基本信息</h3>
 <table>
 <thead>
 <tr>
@@ -2205,7 +2331,7 @@ CPST 认证带来婴儿安全领域的专业公信力，评测婴儿车载摄像
 </tr>
 </tbody>
 </table>
-<h3>指标</h3>
+<h3 id="sec-en-21">指标</h3>
 <table>
 <thead>
 <tr>
@@ -2229,7 +2355,7 @@ CPST 认证带来婴儿安全领域的专业公信力，评测婴儿车载摄像
 </tbody>
 </table>
 <p><strong>增长趋势</strong>：稳定 — 专业教育内容吸引高质量订阅。付费课程（Pumping for Working Moms）和 L-CERP 继续教育课程形成多元收入。</p>
-<h3>受众分析</h3>
+<h3 id="sec-en-22">受众分析</h3>
 <table>
 <thead>
 <tr>
@@ -2259,7 +2385,7 @@ CPST 认证带来婴儿安全领域的专业公信力，评测婴儿车载摄像
 <p><strong>受众质量评分</strong>：9/10<br />
 - 真实粉丝估算：~95%（IBCLC 认证 = 极高公信力）<br />
 - 受众-品牌重叠度：<strong>非常高</strong>（便携暖奶器）— 哺乳妈妈直接需要暖奶器</p>
-<h3>内容分析</h3>
+<h3 id="sec-en-23">内容分析</h3>
 <p><strong>内容风格</strong>：<br />
 - 主要形式：数据驱动深度评测、吸奶器对比、哺乳技巧<br />
 - 风格：科学、严谨、"用数据说话"<br />
@@ -2268,7 +2394,7 @@ CPST 认证带来婴儿安全领域的专业公信力，评测婴儿车载摄像
 - baby car camera 相关性：<strong>低</strong> — 不在核心品类<br />
 - baby monitor 相关性：<strong>低</strong> — 不在核心品类<br />
 - portable milk warmer 相关性：<strong>非常高</strong> — 暖奶器是哺乳/吸奶生态的直接延伸</p>
-<h3>适配评分摘要</h3>
+<h3 id="sec-en-24">适配评分摘要</h3>
 <table>
 <thead>
 <tr>
@@ -2311,8 +2437,8 @@ IBCLC 认证 + 数据驱动评测 = 暖奶器评测的最高公信力。受众�
 - 订阅数待验证（估测值）<br />
 - IBCLC 身份对产品安全性要求极高，评测可能更严格</p>
 <hr />
-<h2>达人 #4：Baby To Child</h2>
-<h3>基本信息</h3>
+<h2 id="sec-en-25">达人 #4：Baby To Child</h2>
+<h3 id="sec-en-26">基本信息</h3>
 <table>
 <thead>
 <tr>
@@ -2351,7 +2477,7 @@ IBCLC 认证 + 数据驱动评测 = 暖奶器评测的最高公信力。受众�
 </tr>
 </tbody>
 </table>
-<h3>指标</h3>
+<h3 id="sec-en-27">指标</h3>
 <table>
 <thead>
 <tr>
@@ -2371,7 +2497,7 @@ IBCLC 认证 + 数据驱动评测 = 暖奶器评测的最高公信力。受众�
 </tbody>
 </table>
 <p><strong>增长趋势</strong>：成长中 — 博客 SEO 驱动流量增长，YouTube 作为视频补充</p>
-<h3>受众分析</h3>
+<h3 id="sec-en-28">受众分析</h3>
 <table>
 <thead>
 <tr>
@@ -2401,7 +2527,7 @@ IBCLC 认证 + 数据驱动评测 = 暖奶器评测的最高公信力。受众�
 <p><strong>受众质量评分</strong>：7/10<br />
 - 真实粉丝估算：~85%<br />
 - 受众-品牌重叠度：<strong>非常高</strong> — 三种目标产品全部覆盖</p>
-<h3>内容分析</h3>
+<h3 id="sec-en-29">内容分析</h3>
 <p><strong>内容风格</strong>：<br />
 - 主要形式：产品评测博客 + YouTube 视频演示<br />
 - 风格：SEO 优化、信息全面、购买指南导向<br />
@@ -2410,7 +2536,7 @@ IBCLC 认证 + 数据驱动评测 = 暖奶器评测的最高公信力。受众�
 - baby car camera 相关性：<strong>非常高</strong> — 多篇车载摄像头深度评测<br />
 - baby monitor 相关性：<strong>高</strong> — 婴儿监视器评测<br />
 - portable milk warmer 相关性：<strong>非常高</strong> — 多款暖奶器详细对比</p>
-<h3>适配评分摘要</h3>
+<h3 id="sec-en-30">适配评分摘要</h3>
 <table>
 <thead>
 <tr>
@@ -2453,8 +2579,8 @@ IBCLC 认证 + 数据驱动评测 = 暖奶器评测的最高公信力。受众�
 - SEO 导向内容可能偏"购买指南"风格，需要向真实评测方向引导<br />
 - YouTube 频道数据需验证</p>
 <hr />
-<h2>达人 #5：Fabulous Mom Life</h2>
-<h3>基本信息</h3>
+<h2 id="sec-en-31">达人 #5：Fabulous Mom Life</h2>
+<h3 id="sec-en-32">基本信息</h3>
 <table>
 <thead>
 <tr>
@@ -2493,7 +2619,7 @@ IBCLC 认证 + 数据驱动评测 = 暖奶器评测的最高公信力。受众�
 </tr>
 </tbody>
 </table>
-<h3>指标</h3>
+<h3 id="sec-en-33">指标</h3>
 <table>
 <thead>
 <tr>
@@ -2513,7 +2639,7 @@ IBCLC 认证 + 数据驱动评测 = 暖奶器评测的最高公信力。受众�
 </tbody>
 </table>
 <p><strong>增长趋势</strong>：稳定增长 — 持续输出评测内容</p>
-<h3>受众分析</h3>
+<h3 id="sec-en-34">受众分析</h3>
 <table>
 <thead>
 <tr>
@@ -2543,7 +2669,7 @@ IBCLC 认证 + 数据驱动评测 = 暖奶器评测的最高公信力。受众�
 <p><strong>受众质量评分</strong>：7/10<br />
 - 真实粉丝估算：~88%<br />
 - 受众-品牌重叠度：<strong>高</strong> — 婴儿用品的目标消费者</p>
-<h3>内容分析</h3>
+<h3 id="sec-en-35">内容分析</h3>
 <p><strong>内容风格</strong>：<br />
 - 主要形式：开箱、评测、真实意见<br />
 - 风格：不加修饰、诚实<br />
@@ -2552,7 +2678,7 @@ IBCLC 认证 + 数据驱动评测 = 暖奶器评测的最高公信力。受众�
 - baby car camera 相关性：<strong>中高</strong> — 婴儿用品评测覆盖面<br />
 - baby monitor 相关性：<strong>高</strong> — 婴儿护理用品核心品类<br />
 - portable milk warmer 相关性：<strong>高</strong> — 喂养用品评测</p>
-<h3>适配评分摘要</h3>
+<h3 id="sec-en-36">适配评分摘要</h3>
 <table>
 <thead>
 <tr>
@@ -2594,8 +2720,8 @@ IBCLC 认证 + 数据驱动评测 = 暖奶器评测的最高公信力。受众�
 - 频道数据大部分为估测，需验证<br />
 - 具体内容风格和品牌适配度需观看实际视频确认</p>
 <hr />
-<h2>达人 #6：This Mom Is Learning（Maria）</h2>
-<h3>基本信息</h3>
+<h2 id="sec-en-37">达人 #6：This Mom Is Learning（Maria）</h2>
+<h3 id="sec-en-38">基本信息</h3>
 <table>
 <thead>
 <tr>
@@ -2634,7 +2760,7 @@ IBCLC 认证 + 数据驱动评测 = 暖奶器评测的最高公信力。受众�
 </tr>
 </tbody>
 </table>
-<h3>指标</h3>
+<h3 id="sec-en-39">指标</h3>
 <table>
 <thead>
 <tr>
@@ -2654,7 +2780,7 @@ IBCLC 认证 + 数据驱动评测 = 暖奶器评测的最高公信力。受众�
 </tbody>
 </table>
 <p><strong>增长趋势</strong>：成长中 — 新手妈妈视角引起广泛共鸣</p>
-<h3>受众分析</h3>
+<h3 id="sec-en-40">受众分析</h3>
 <table>
 <thead>
 <tr>
@@ -2684,7 +2810,7 @@ IBCLC 认证 + 数据驱动评测 = 暖奶器评测的最高公信力。受众�
 <p><strong>受众质量评分</strong>：8/10<br />
 - 真实粉丝估算：~92%（新手妈妈真实记录 = 高信任度）<br />
 - 受众-品牌重叠度：<strong>高</strong> — 正在做购买决策的父母</p>
-<h3>内容分析</h3>
+<h3 id="sec-en-41">内容分析</h3>
 <p><strong>内容风格</strong>：<br />
 - 主要形式：长期使用评测、"不加修饰"的真实记录<br />
 - 风格：真实、脆弱、可共鸣<br />
@@ -2693,7 +2819,7 @@ IBCLC 认证 + 数据驱动评测 = 暖奶器评测的最高公信力。受众�
 - baby car camera 相关性：<strong>中</strong> — 新手父母角度但未确认有相关评测<br />
 - baby monitor 相关性：<strong>高</strong> — 婴儿监视器是新手父母必买品类<br />
 - portable milk warmer 相关性：<strong>高</strong> — 喂养用品是新手父母刚需</p>
-<h3>适配评分摘要</h3>
+<h3 id="sec-en-42">适配评分摘要</h3>
 <table>
 <thead>
 <tr>
@@ -2735,8 +2861,8 @@ IBCLC 认证 + 数据驱动评测 = 暖奶器评测的最高公信力。受众�
 - 新手妈妈身份意味着内容经验尚浅<br />
 - 小型频道数据需验证</p>
 <hr />
-<h2>达人 #7：Fathercraft Reviews（Mark）</h2>
-<h3>基本信息</h3>
+<h2 id="sec-en-43">达人 #7：Fathercraft Reviews（Mark）</h2>
+<h3 id="sec-en-44">基本信息</h3>
 <table>
 <thead>
 <tr>
@@ -2775,7 +2901,7 @@ IBCLC 认证 + 数据驱动评测 = 暖奶器评测的最高公信力。受众�
 </tr>
 </tbody>
 </table>
-<h3>指标</h3>
+<h3 id="sec-en-45">指标</h3>
 <table>
 <thead>
 <tr>
@@ -2795,7 +2921,7 @@ IBCLC 认证 + 数据驱动评测 = 暖奶器评测的最高公信力。受众�
 </tbody>
 </table>
 <p><strong>增长趋势</strong>：成长中 — 爸爸育儿视角是差异化品类</p>
-<h3>受众分析</h3>
+<h3 id="sec-en-46">受众分析</h3>
 <table>
 <thead>
 <tr>
@@ -2825,7 +2951,7 @@ IBCLC 认证 + 数据驱动评测 = 暖奶器评测的最高公信力。受众�
 <p><strong>受众质量评分</strong>：8/10<br />
 - 真实粉丝估算：~90%<br />
 - 受众-品牌重叠度：<strong>中高</strong> — 爸爸视角覆盖了常被忽略的购买决策者</p>
-<h3>内容分析</h3>
+<h3 id="sec-en-47">内容分析</h3>
 <p><strong>内容风格</strong>：<br />
 - 主要形式：真实评测、产品对比<br />
 - 风格：实用、直接、爸爸视角<br />
@@ -2834,7 +2960,7 @@ IBCLC 认证 + 数据驱动评测 = 暖奶器评测的最高公信力。受众�
 - baby car camera 相关性：<strong>高</strong> — 爸爸对车载科技产品兴趣高<br />
 - baby monitor 相关性：<strong>高</strong> — 科技类婴儿产品评测<br />
 - portable milk warmer 相关性：<strong>中</strong> — 喂养品类但爸爸视角独特</p>
-<h3>适配评分摘要</h3>
+<h3 id="sec-en-48">适配评分摘要</h3>
 <table>
 <thead>
 <tr>
@@ -2876,9 +3002,9 @@ IBCLC 认证 + 数据驱动评测 = 暖奶器评测的最高公信力。受众�
 - 暖奶器品类可能不是爸爸受众的核心兴趣<br />
 - 频道数据大部分为估测，需验证</p>
 <hr />
-<h2>观察名单</h2>
+<h2 id="sec-en-49">观察名单</h2>
 <hr />
-<h2>WL-1：Dad Reviews with LaneVids — ⚠️ 超过粉丝上限</h2>
+<h2 id="sec-en-50">WL-1：Dad Reviews with LaneVids — ⚠️ 超过粉丝上限</h2>
 <table>
 <thead>
 <tr>
@@ -2903,7 +3029,7 @@ IBCLC 认证 + 数据驱动评测 = 暖奶器评测的最高公信力。受众�
 </table>
 <p><strong>排除原因</strong>：粉丝数（80.5K）超出 50K 上限。如预算允许，可作为中腰部达人纳入下一轮搜索。</p>
 <hr />
-<h2>WL-2：Mama Nurse Tina — ⚠️ 远超粉丝上限</h2>
+<h2 id="sec-en-51">WL-2：Mama Nurse Tina — ⚠️ 远超粉丝上限</h2>
 <table>
 <thead>
 <tr>
@@ -2924,12 +3050,12 @@ IBCLC 认证 + 数据驱动评测 = 暖奶器评测的最高公信力。受众�
 </table>
 <p><strong>排除原因</strong>：粉丝数远超 50K 上限。L&amp;D 护士 + 喜剧风格，属于头部达人。</p>
 <hr />
-<h2>WL-3：Organic Beauty 80 — ⚠️ 数据不足</h2>
+<h2 id="sec-en-52">WL-3：Organic Beauty 80 — ⚠️ 数据不足</h2>
 <p>新妈妈视角的 Spectra 吸奶器评测。频道数据不足以评估。放入观察名单，待更多内容产出后重新评估。</p>
 <hr />
-<h2>第五步 — 汇总发现报告</h2>
+<h2 id="sec-en-53">第五步 — 汇总发现报告</h2>
 <h1>红人发现结果</h1>
-<h2>汇总统计</h2>
+<h2 id="sec-en-54">汇总统计</h2>
 <table>
 <thead>
 <tr>
@@ -2960,8 +3086,8 @@ IBCLC 认证 + 数据驱动评测 = 暖奶器评测的最高公信力。受众�
 </tr>
 </tbody>
 </table>
-<h2>顶级推荐</h2>
-<h3>第一梯队：必须联系</h3>
+<h2 id="sec-en-55">顶级推荐</h2>
+<h3 id="sec-en-56">第一梯队：必须联系</h3>
 <table>
 <thead>
 <tr>
@@ -3008,7 +3134,7 @@ IBCLC 认证 + 数据驱动评测 = 暖奶器评测的最高公信力。受众�
 </tr>
 </tbody>
 </table>
-<h3>第二梯队：强力候选</h3>
+<h3 id="sec-en-57">第二梯队：强力候选</h3>
 <table>
 <thead>
 <tr>
@@ -3039,7 +3165,7 @@ IBCLC 认证 + 数据驱动评测 = 暖奶器评测的最高公信力。受众�
 </tr>
 </tbody>
 </table>
-<h3>第三梯队：观察名单</h3>
+<h3 id="sec-en-58">第三梯队：观察名单</h3>
 <table>
 <thead>
 <tr>
@@ -3066,7 +3192,7 @@ IBCLC 认证 + 数据驱动评测 = 暖奶器评测的最高公信力。受众�
 </tr>
 </tbody>
 </table>
-<h2>分产品推荐矩阵</h2>
+<h2 id="sec-en-59">分产品推荐矩阵</h2>
 <table>
 <thead>
 <tr>
@@ -3097,7 +3223,7 @@ IBCLC 认证 + 数据驱动评测 = 暖奶器评测的最高公信力。受众�
 </tr>
 </tbody>
 </table>
-<h2>达人组合推荐</h2>
+<h2 id="sec-en-60">达人组合推荐</h2>
 <table>
 <thead>
 <tr>
@@ -3144,8 +3270,8 @@ IBCLC 认证 + 数据驱动评测 = 暖奶器评测的最高公信力。受众�
 <p>数据来源：<a href="https://www.findachannel.net/Niches/baby-stroller-review">findachannel.net</a>、HypeAuditor 交叉参考、网页搜索、育儿论坛推荐。</p>
 </blockquote>
 <hr />
-<h2>第六步 — 发现洞察</h2>
-<h3>领域观察</h3>
+<h2 id="sec-en-61">第六步 — 发现洞察</h2>
+<h3 id="sec-en-62">领域观察</h3>
 <p><strong>内容趋势</strong>：<br />
 - 5K-50K 区间是 YouTube 婴儿科技评测的"蓝海"——大多数频道在 5K 以下挣扎或已突破 50K<br />
 - 有专业认证（CPST、IBCLC）的创作者即使在较小订阅量下也能获得极高信任度和互动率<br />
@@ -3160,7 +3286,7 @@ IBCLC 认证 + 数据驱动评测 = 暖奶器评测的最高公信力。受众�
 - <strong>婴儿车载摄像头</strong>是三个品类中 YouTube 内容最稀缺的 — 先发优势显著<br />
 - <strong>爸爸视角 + 婴儿科技产品</strong>是一个完全未被开发的交叉领域<br />
 - <strong>"专业认证 + 真实评测"组合</strong>（CPST/IBCLC + 妈妈真实体验）建立了不可替代的内容护城河</p>
-<h3>搜索限制与建议</h3>
+<h3 id="sec-en-63">搜索限制与建议</h3>
 <table>
 <thead>
 <tr>
@@ -3193,7 +3319,7 @@ IBCLC 认证 + 数据驱动评测 = 暖奶器评测的最高公信力。受众�
 - 拓宽至 Instagram/TikTok 平台对比：这些平台的小型达人更容易通过网页搜索发现<br />
 - 增加 <strong>#babycarcamera</strong>、<strong>#babymonitorreview</strong>、<strong>#portablemilkwarmer</strong> 等精准标签搜索</p>
 <hr />
-<h2>数据质量说明</h2>
+<h2 id="sec-en-64">数据质量说明</h2>
 <table>
 <thead>
 <tr>
@@ -3246,85 +3372,59 @@ IBCLC 认证 + 数据驱动评测 = 暖奶器评测的最高公信力。受众�
 
 <script>
 (function(){
-  // ── Language toggle ──
   var K='inf-discovery-lang',
       be=document.getElementById('btn-en'),bz=document.getElementById('btn-zh'),
-      ce=document.getElementById('content-en'),cz=document.getElementById('content-zh');
+      ce=document.getElementById('content-en'),cz=document.getElementById('content-zh'),
+      te=document.getElementById('toc-en'),tz=document.getElementById('toc-zh');
+
   function setLang(l){
-    if(l==='zh'){bz.classList.add('active');be.classList.remove('active');cz.classList.add('active');ce.classList.remove('active');buildTOC('zh');}
-    else{be.classList.add('active');bz.classList.remove('active');ce.classList.add('active');cz.classList.remove('active');buildTOC('en');}
+    if(l==='zh'){
+      bz.classList.add('active');be.classList.remove('active');
+      cz.classList.add('active');ce.classList.remove('active');
+      tz.style.display='';te.style.display='none';
+    } else {
+      be.classList.add('active');bz.classList.remove('active');
+      ce.classList.add('active');cz.classList.remove('active');
+      te.style.display='';tz.style.display='none';
+    }
     try{localStorage.setItem(K,l);}catch(e){}
+    // Re-run active section tracking
+    initObserver();
   }
+
   var s=null;try{s=localStorage.getItem(K);}catch(e){}
-  var initial = (s==='zh'||s==='en')?s:(navigator.language&&navigator.language.startsWith('zh')?'zh':'en');
+  var initial=(s==='zh'||s==='en')?s:(navigator.language&&navigator.language.startsWith('zh')?'zh':'en');
   setLang(initial);
+
   be.addEventListener('click',function(){setLang('en');});
   bz.addEventListener('click',function(){setLang('zh');});
 
-  // ── Build TOC from headings ──
-  var tocLabels = {
-    zh: {toc:'目 录', step:'第{0}步'},
-    en: {toc:'Contents', step:'Step {0}'}
-  };
-
-  function buildTOC(lang){
-    var activeContent = document.getElementById(lang==='zh'?'content-zh':'content-en');
-    var nav = document.getElementById('toc-nav');
-    if(!activeContent||!nav)return;
-    var hs = activeContent.querySelectorAll('h2,h3');
-    var html='';
-    var stepNum=0, inProfiles=false;
-    for(var i=0;i<hs.length;i++){
-      var h=hs[i], tag=h.tagName.toLowerCase();
-      var id='sec-'+i;
-      h.id=id;
-
-      // Detect step headers
-      var txt=h.textContent.trim();
-      var mStep=txt.match(/第[一二三四五六七八九十]+步|Step\s+(\d+)/i);
-      if(mStep&&tag==='h2'){stepNum++;}
-
-      // Generate TOC label
-      var label=txt;
-      // Truncate long influencer titles
-      if(txt.indexOf('达人 #')>-1||txt.indexOf('Influencer #')>-1||txt.indexOf('WL-')>-1){
-        label=txt.substring(0,50)+(txt.length>50?'…':'');
-      }
-      if(txt.indexOf('观察名单')>-1||txt.indexOf('Watch List')>-1){stepNum=0;}
-
-      html+='<a href="#'+id+'" class="toc-'+(tag==='h3'?'h3':'h2')+'" title="'+txt.replace(/"/g,'&quot;')+'">'+label+'</a>';
-    }
-    // Update toc title
-    var labels=tocLabels[lang]||tocLabels['en'];
-    document.getElementById('toc-title').textContent=labels.toc;
-    nav.innerHTML=html;
-
-    // Re-bind click handlers
-    nav.querySelectorAll('a').forEach(function(a){
-      a.addEventListener('click',function(e){
-        e.preventDefault();
-        var target=document.getElementById(this.getAttribute('href').substring(1));
-        if(target){target.scrollIntoView({behavior:'smooth',block:'start'});}
-        // Close sidebar on mobile
-        document.getElementById('sidebar').classList.remove('open');
-        document.getElementById('sidebar-overlay').classList.remove('open');
-      });
-    });
-
-    // Highlight active section
-    var observer=new IntersectionObserver(function(entries){
+  // ── Active section tracking ──
+  var observer;
+  function initObserver(){
+    if(observer){observer.disconnect();}
+    var activeContent=document.querySelector('.lang-content.active');
+    if(!activeContent)return;
+    var hs=activeContent.querySelectorAll('h2[id],h3[id]');
+    var navLinks=document.querySelectorAll('#toc-zh a, #toc-en a');
+    observer=new IntersectionObserver(function(entries){
       entries.forEach(function(entry){
         if(entry.isIntersecting){
-          nav.querySelectorAll('a').forEach(function(a){a.classList.remove('active');});
-          var link=nav.querySelector('a[href="#'+entry.target.id+'"]');
+          navLinks.forEach(function(a){a.classList.remove('active');});
+          var visibleToc=document.querySelector('#toc-zh[style*="display"]:not([style*="display: none"]), #toc-en[style*="display"]:not([style*="display: none"])');
+          if(!visibleToc)visibleToc=document.getElementById(lang()==='zh'?'toc-zh':'toc-en');
+          var link=visibleToc.querySelector('a[href="#'+entry.target.id+'"]');
           if(link)link.classList.add('active');
         }
       });
     },{rootMargin:'-80px 0px -70% 0px'});
     hs.forEach(function(h){observer.observe(h);});
   }
+  function lang(){return document.getElementById('content-zh').classList.contains('active')?'zh':'en';}
+  // Delay observer init slightly to let DOM settle
+  setTimeout(initObserver,100);
 
-  // ── Mobile sidebar toggle ──
+  // ── Mobile sidebar ──
   document.getElementById('hamburger').addEventListener('click',function(){
     document.getElementById('sidebar').classList.add('open');
     document.getElementById('sidebar-overlay').classList.add('open');
@@ -3332,6 +3432,16 @@ IBCLC 认证 + 数据驱动评测 = 暖奶器评测的最高公信力。受众�
   document.getElementById('sidebar-overlay').addEventListener('click',function(){
     document.getElementById('sidebar').classList.remove('open');
     document.getElementById('sidebar-overlay').classList.remove('open');
+  });
+  // Close sidebar on TOC link click (mobile)
+  document.querySelectorAll('#toc-zh a, #toc-en a').forEach(function(a){
+    a.addEventListener('click',function(e){
+      e.preventDefault();
+      var target=document.getElementById(this.getAttribute('href').substring(1));
+      if(target){target.scrollIntoView({behavior:'smooth',block:'start'});}
+      document.getElementById('sidebar').classList.remove('open');
+      document.getElementById('sidebar-overlay').classList.remove('open');
+    });
   });
 })();
 </script>
