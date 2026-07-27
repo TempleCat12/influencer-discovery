@@ -1,32 +1,67 @@
-# HTML Output Template — Bilingual (Chinese/English)
+# HTML Output Template — Bilingual + TOC Sidebar
 
-Every influencer-discovery run produces an `.html` file alongside the `.md` report. The HTML must include a **Chinese/English language toggle button** so the reader can switch between languages.
+Every influencer-discovery run produces an `.html` file alongside the `.md` report. The HTML must include:
+
+1. A **left TOC sidebar** — auto-generated from h2/h3 headings, with active section highlighting
+2. A **Chinese/English language toggle button** — persists via localStorage
+
+The universal build script is at `memory/influencer/influencer-discovery/build_html.py`.
 
 ---
 
 ## Structure
 
-The HTML uses a **two-body** approach for clean language switching:
-
 ```
-┌─────────────────────────────────────────┐
-│  [🌐 English] [🌐 中文]   ← fixed toggle │
-├─────────────────────────────────────────┤
-│                                         │
-│  <div id="content-en">  or  <div id="content-zh">  │
-│       (visible based on toggle)          │
-│                                         │
-└─────────────────────────────────────────┘
+┌──────────┬─────────────────────────────────────────┐
+│          │  [中文] [English]   ← language toggle    │
+│  TOC     ├─────────────────────────────────────────┤
+│  sidebar │                                         │
+│          │  <div id="content-zh"> or <div id="content-en">  │
+│  ▸ Step 1│                                         │
+│  ▸ Step 2│       (visible based on toggle)          │
+│    #1     │                                         │
+│    #2     │                                         │
+│  ▸ Step 3│                                         │
+│  ...     │                                         │
+│          │                                         │
+└──────────┴─────────────────────────────────────────┘
 ```
 
-- `#content-en` — full English content
-- `#content-zh` — full Chinese content  
-- Both divs are present in the DOM; only one is visible at a time
-- Toggle state is saved to `localStorage` so the preference persists across page reloads
+### Desktop
+- Fixed left sidebar (~250px) with scrollable TOC links
+- Clicking any link smooth-scrolls to that section
+- Current section highlighted via IntersectionObserver
+
+### Mobile
+- Sidebar hidden by default, revealed via hamburger menu (☰)
+- Overlay backdrop; tap outside to close
 
 ---
 
-## Python Conversion Script
+## Usage
+
+```bash
+python3 build_html.py <input_md_path> [--output <html_path>]
+```
+
+The MD file must follow the `<!-- LANG:ZH -->` convention:
+- Everything **before** the marker = Chinese content
+- Everything **after** the marker = English content
+
+## Behavior
+
+| Feature | Detail |
+|---------|--------|
+| **TOC generation** | JavaScript auto-parses h2/h3 in the active language and builds navigation links |
+| **Active tracking** | IntersectionObserver highlights the currently visible section |
+| **Language toggle** | Switches content AND rebuilds TOC in the selected language |
+| **Mobile** | Hamburger menu; sidebar slides in from left with overlay |
+| **Print** | Sidebar and toggle hidden; both languages print |
+
+## See Also
+
+- [templates.md](templates.md) — MD report templates
+- [../SKILL.md](../SKILL.md) — main skill contract
 
 The script below:
 

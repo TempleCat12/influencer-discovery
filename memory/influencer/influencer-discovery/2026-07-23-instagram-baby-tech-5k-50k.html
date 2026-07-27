@@ -1,23 +1,64 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>红人发现：Instagram 婴儿科技 · 5K-50K / Instagram Baby Tech Discovery</title>
-  <style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>红人发现报告：Instagram 婴儿科技产品 · 5K-50K 粉丝 · 美国/加拿大 / Influencer Discovery: Instagram Baby Tech · 5K-50K · USA/Canada</title>
+<style>
 :root {
-  --bg: #ffffff; --text: #1a1a2e; --border: #e0e0e0;
-  --accent: #e65100; --accent-light: #fff3e0;
-  --toggle-bg: #f5f5f5; --toggle-active: #e65100; --toggle-text: #fff;
-  --tier1: #2e7d32; --table-stripe: #fafafa; --code-bg: #f5f5f5;
+  --bg: #ffffff; --text: #1a1a2e; --text-secondary: #555;
+  --border: #e0e0e0; --accent: #c2185b; --accent-light: #fce4ec;
+  --toggle-bg: #f5f5f5; --toggle-active: #c2185b; --toggle-text: #fff;
+  --table-stripe: #fafafa; --code-bg: #f5f5f5;
+  --sidebar-w: 250px; --sidebar-bg: #fafafa;
 }
+
 * { margin: 0; padding: 0; box-sizing: border-box; }
+
 body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
                "Helvetica Neue", Arial, "PingFang SC", "Microsoft YaHei", sans-serif;
   color: var(--text); background: var(--bg); line-height: 1.7;
-  padding: 20px 24px 40px; max-width: 960px; margin: 0 auto;
 }
+
+/* ── Sidebar ── */
+.sidebar {
+  position: fixed; top: 0; left: 0; width: var(--sidebar-w); height: 100vh;
+  background: var(--sidebar-bg); border-right: 1px solid var(--border);
+  overflow-y: auto; z-index: 200; padding: 20px 16px;
+}
+.sidebar h3 {
+  font-size: 0.85rem; color: var(--accent); text-transform: uppercase;
+  letter-spacing: 0.05em; margin-bottom: 12px; padding-bottom: 8px;
+  border-bottom: 2px solid var(--accent);
+}
+.sidebar nav a {
+  display: block; padding: 5px 10px; font-size: 0.82rem; color: var(--text-secondary);
+  text-decoration: none; border-radius: 4px; margin-bottom: 2px;
+  transition: all 0.15s ease; border-left: 3px solid transparent;
+}
+.sidebar nav a:hover { background: var(--accent-light); color: var(--accent); }
+.sidebar nav a.active {
+  background: var(--accent-light); color: var(--accent); font-weight: 600;
+  border-left-color: var(--accent);
+}
+.sidebar nav a.toc-h3 { padding-left: 24px; font-size: 0.78rem; }
+
+/* ── Hamburger (mobile) ── */
+.hamburger {
+  display: none; position: fixed; top: 12px; left: 12px; z-index: 300;
+  width: 40px; height: 40px; background: var(--accent); color: #fff;
+  border: none; border-radius: 8px; font-size: 1.3rem; cursor: pointer;
+  align-items: center; justify-content: center; box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
+.sidebar-overlay { display: none; }
+
+/* ── Main content ── */
+.main-wrap {
+  margin-left: var(--sidebar-w); padding: 20px 32px 40px; max-width: 960px;
+}
+
+/* ── Toggle bar ── */
 .toggle-bar {
   position: sticky; top: 0; z-index: 100; display: flex;
   justify-content: flex-end; gap: 0; padding: 10px 0 16px;
@@ -33,36 +74,72 @@ body {
 .toggle-btn:last-child  { border-radius: 0 8px 8px 0; }
 .toggle-btn.active { background: var(--toggle-active); color: var(--toggle-text); }
 .toggle-btn:hover:not(.active) { background: var(--accent-light); }
+
+/* ── Typography ── */
 h1 { font-size: 1.85rem; color: var(--accent); border-bottom: 3px solid var(--accent); padding-bottom: 12px; margin-bottom: 8px; line-height: 1.3; }
-h2 { font-size: 1.4rem; color: var(--accent); margin-top: 32px; margin-bottom: 14px; padding-bottom: 6px; border-bottom: 2px solid var(--border); }
-h3 { font-size: 1.15rem; color: #333; margin-top: 24px; margin-bottom: 10px; }
-h4 { font-size: 1.02rem; color: var(--accent); margin-top: 18px; margin-bottom: 8px; }
+h2 { font-size: 1.4rem; color: var(--accent); margin-top: 36px; margin-bottom: 14px; padding-bottom: 6px; border-bottom: 2px solid var(--border); }
+h3 { font-size: 1.15rem; color: #333; margin-top: 28px; margin-bottom: 10px; }
+h4 { font-size: 1.02rem; color: var(--accent); margin-top: 20px; margin-bottom: 8px; }
 p { margin-bottom: 12px; }
-hr { border: none; border-top: 1px solid var(--border); margin: 24px 0; }
+hr { border: none; border-top: 1px solid var(--border); margin: 28px 0; }
 strong { color: #222; }
+
 table { width: 100%; border-collapse: collapse; margin: 14px 0 22px; font-size: 0.9rem; border-radius: 8px; overflow: hidden; box-shadow: 0 1px 4px rgba(0,0,0,0.06); }
 thead { background: var(--accent); }
 thead th { color: #fff; padding: 9px 12px; text-align: left; font-weight: 600; white-space: nowrap; }
 tbody td { padding: 8px 12px; border-bottom: 1px solid var(--border); vertical-align: top; }
 tbody tr:nth-child(even) { background: var(--table-stripe); }
 tbody tr:hover { background: var(--accent-light); }
+
 ul, ol { margin: 8px 0 14px 24px; }
 li { margin-bottom: 4px; }
 a { color: var(--accent); text-decoration: none; }
 a:hover { text-decoration: underline; }
 code { background: var(--code-bg); padding: 2px 6px; border-radius: 4px; font-size: 0.9em; font-family: "SF Mono", "Fira Code", "Consolas", monospace; }
 blockquote { border-left: 4px solid var(--accent); padding: 10px 16px; margin: 14px 0; background: var(--accent-light); border-radius: 0 6px 6px 0; color: #555; }
+
 .lang-content { display: none; }
 .lang-content.active { display: block; }
-@media (max-width: 768px) { body { padding: 14px 10px; font-size: 0.88rem; } table { font-size: 0.76rem; } thead th, tbody td { padding: 6px 8px; } .toggle-btn { padding: 6px 14px; font-size: 0.8rem; } }
-@media print { .toggle-bar { display: none; } .lang-content { display: block !important; } body { padding: 16px; max-width: 100%; } table { box-shadow: none; } thead { background: #333; } }
+
+/* ── Responsive ── */
+@media (max-width: 900px) {
+  .sidebar { transform: translateX(-100%); transition: transform 0.25s ease; }
+  .sidebar.open { transform: translateX(0); box-shadow: 4px 0 20px rgba(0,0,0,0.15); }
+  .sidebar-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.3); z-index: 199; }
+  .sidebar-overlay.open { display: block; }
+  .hamburger { display: flex; }
+  .main-wrap { margin-left: 0; padding: 16px 12px 40px; }
+  body { font-size: 0.9rem; }
+  table { font-size: 0.78rem; }
+  thead th, tbody td { padding: 6px 8px; }
+  .toggle-btn { padding: 6px 14px; font-size: 0.82rem; }
+}
+
+@media print {
+  .sidebar, .hamburger, .sidebar-overlay, .toggle-bar { display: none; }
+  .lang-content { display: block !important; }
+  .main-wrap { margin-left: 0; padding: 16px; max-width: 100%; }
+  table { box-shadow: none; } thead { background: #333; }
+}
 </style>
 </head>
 <body>
+
+<button class="hamburger" id="hamburger" aria-label="Menu">&#9776;</button>
+<div class="sidebar-overlay" id="sidebar-overlay"></div>
+
+<aside class="sidebar" id="sidebar">
+  <h3 id="toc-title">Contents</h3>
+  <nav id="toc-nav"></nav>
+</aside>
+
+<div class="main-wrap">
+
 <div class="toggle-bar">
   <button class="toggle-btn active" id="btn-zh">中文</button>
   <button class="toggle-btn" id="btn-en">English</button>
 </div>
+
 <div class="lang-content active" id="content-zh">
 <h1>红人发现报告：Instagram 婴儿科技产品 · 5K-50K 粉丝 · 美国/加拿大</h1>
 <p><strong>搜索日期</strong>：2026-07-23<br />
@@ -1139,6 +1216,7 @@ IBCLC + 执业护士双重认证 = 暖奶器评测的最高公信力。受众精
 <hr />
 <p><em>报告按照 <a href="../SKILL.md">influencer-discovery SKILL.md</a> 工作流程生成。下一步 skill：<a href="../fit-scorer/SKILL.md">fit-scorer</a> 进行加权评分和最终排名。</em></p>
 </div>
+
 <div class="lang-content" id="content-en">
 <h1>Influencer Discovery: Instagram Baby Tech · 5K-50K · USA/Canada</h1>
 <p><strong>Search Date</strong>: 2026-07-23<br />
@@ -1291,8 +1369,100 @@ IBCLC + 执业护士双重认证 = 暖奶器评测的最高公信力。受众精
 <hr />
 <p><em>Report generated per <a href="../SKILL.md">influencer-discovery SKILL.md</a> workflow. Next skill: <a href="../fit-scorer/SKILL.md">fit-scorer</a>.</em></p>
 </div>
+
+</div>
+
 <script>
-(function(){var K='inf-discovery-lang',be=document.getElementById('btn-en'),bz=document.getElementById('btn-zh'),ce=document.getElementById('content-en'),cz=document.getElementById('content-zh');function set(l){if(l==='zh'){bz.classList.add('active');be.classList.remove('active');cz.classList.add('active');ce.classList.remove('active');}else{be.classList.add('active');bz.classList.remove('active');ce.classList.add('active');cz.classList.remove('active');}try{localStorage.setItem(K,l);}catch(e){}}var s=null;try{s=localStorage.getItem(K);}catch(e){}if(s==='zh'||s==='en'){set(s);}else if(navigator.language&&navigator.language.startsWith('zh')){set('zh');}else{set('en');}be.addEventListener('click',function(){set('en');});bz.addEventListener('click',function(){set('zh');});})();
+(function(){
+  // ── Language toggle ──
+  var K='inf-discovery-lang',
+      be=document.getElementById('btn-en'),bz=document.getElementById('btn-zh'),
+      ce=document.getElementById('content-en'),cz=document.getElementById('content-zh');
+  function setLang(l){
+    if(l==='zh'){bz.classList.add('active');be.classList.remove('active');cz.classList.add('active');ce.classList.remove('active');buildTOC('zh');}
+    else{be.classList.add('active');bz.classList.remove('active');ce.classList.add('active');cz.classList.remove('active');buildTOC('en');}
+    try{localStorage.setItem(K,l);}catch(e){}
+  }
+  var s=null;try{s=localStorage.getItem(K);}catch(e){}
+  var initial = (s==='zh'||s==='en')?s:(navigator.language&&navigator.language.startsWith('zh')?'zh':'en');
+  setLang(initial);
+  be.addEventListener('click',function(){setLang('en');});
+  bz.addEventListener('click',function(){setLang('zh');});
+
+  // ── Build TOC from headings ──
+  var tocLabels = {
+    zh: {toc:'目 录', step:'第{0}步'},
+    en: {toc:'Contents', step:'Step {0}'}
+  };
+
+  function buildTOC(lang){
+    var activeContent = document.getElementById(lang==='zh'?'content-zh':'content-en');
+    var nav = document.getElementById('toc-nav');
+    if(!activeContent||!nav)return;
+    var hs = activeContent.querySelectorAll('h2,h3');
+    var html='';
+    var stepNum=0, inProfiles=false;
+    for(var i=0;i<hs.length;i++){
+      var h=hs[i], tag=h.tagName.toLowerCase();
+      var id='sec-'+i;
+      h.id=id;
+
+      // Detect step headers
+      var txt=h.textContent.trim();
+      var mStep=txt.match(/第[一二三四五六七八九十]+步|Step\s+(\d+)/i);
+      if(mStep&&tag==='h2'){stepNum++;}
+
+      // Generate TOC label
+      var label=txt;
+      // Truncate long influencer titles
+      if(txt.indexOf('达人 #')>-1||txt.indexOf('Influencer #')>-1||txt.indexOf('WL-')>-1){
+        label=txt.substring(0,50)+(txt.length>50?'…':'');
+      }
+      if(txt.indexOf('观察名单')>-1||txt.indexOf('Watch List')>-1){stepNum=0;}
+
+      html+='<a href="#'+id+'" class="toc-'+(tag==='h3'?'h3':'h2')+'" title="'+txt.replace(/"/g,'&quot;')+'">'+label+'</a>';
+    }
+    // Update toc title
+    var labels=tocLabels[lang]||tocLabels['en'];
+    document.getElementById('toc-title').textContent=labels.toc;
+    nav.innerHTML=html;
+
+    // Re-bind click handlers
+    nav.querySelectorAll('a').forEach(function(a){
+      a.addEventListener('click',function(e){
+        e.preventDefault();
+        var target=document.getElementById(this.getAttribute('href').substring(1));
+        if(target){target.scrollIntoView({behavior:'smooth',block:'start'});}
+        // Close sidebar on mobile
+        document.getElementById('sidebar').classList.remove('open');
+        document.getElementById('sidebar-overlay').classList.remove('open');
+      });
+    });
+
+    // Highlight active section
+    var observer=new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if(entry.isIntersecting){
+          nav.querySelectorAll('a').forEach(function(a){a.classList.remove('active');});
+          var link=nav.querySelector('a[href="#'+entry.target.id+'"]');
+          if(link)link.classList.add('active');
+        }
+      });
+    },{rootMargin:'-80px 0px -70% 0px'});
+    hs.forEach(function(h){observer.observe(h);});
+  }
+
+  // ── Mobile sidebar toggle ──
+  document.getElementById('hamburger').addEventListener('click',function(){
+    document.getElementById('sidebar').classList.add('open');
+    document.getElementById('sidebar-overlay').classList.add('open');
+  });
+  document.getElementById('sidebar-overlay').addEventListener('click',function(){
+    document.getElementById('sidebar').classList.remove('open');
+    document.getElementById('sidebar-overlay').classList.remove('open');
+  });
+})();
 </script>
+
 </body>
 </html>

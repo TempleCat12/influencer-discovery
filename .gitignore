@@ -15,8 +15,9 @@ Icon
 # Claude local settings (personal preferences)
 .claude/settings.local.json
 
-# Build artifacts (one-time scripts)
-memory/**/build_*.py
+# Build artifacts (one-time scripts; universal build_html.py IS tracked)
+memory/**/build_bilingual.py
+memory/**/build_youtube_baby_tech.py
 
 # Python cache
 __pycache__/

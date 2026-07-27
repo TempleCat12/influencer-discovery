@@ -1,26 +1,16 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Influencer Discovery: Parenting · USA · Momcozy-Adjacent / 红人发现报告：育儿 · 美国 · Momcozy 相关品牌</title>
-  <style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Influencer Discovery: Parenting · USA · Momcozy-Adjacent / Influencer Discovery: Parenting · USA · Momcozy-Adjacent</title>
+<style>
 :root {
-  --bg: #ffffff;
-  --text: #1a1a2e;
-  --text-secondary: #555;
-  --border: #e0e0e0;
-  --accent: #c2185b;
-  --accent-light: #fce4ec;
-  --toggle-bg: #f5f5f5;
-  --toggle-active: #c2185b;
-  --toggle-text: #fff;
-  --tier1: #2e7d32;
-  --tier1-bg: #e8f5e9;
-  --tier2: #e65100;
-  --tier2-bg: #fff3e0;
-  --table-stripe: #fafafa;
-  --code-bg: #f5f5f5;
+  --bg: #ffffff; --text: #1a1a2e; --text-secondary: #555;
+  --border: #e0e0e0; --accent: #c2185b; --accent-light: #fce4ec;
+  --toggle-bg: #f5f5f5; --toggle-active: #c2185b; --toggle-text: #fff;
+  --table-stripe: #fafafa; --code-bg: #f5f5f5;
+  --sidebar-w: 250px; --sidebar-bg: #fafafa;
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -28,187 +18,129 @@
 body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
                "Helvetica Neue", Arial, "PingFang SC", "Microsoft YaHei", sans-serif;
-  color: var(--text);
-  background: var(--bg);
-  line-height: 1.7;
-  padding: 20px 24px 40px;
-  max-width: 960px;
-  margin: 0 auto;
+  color: var(--text); background: var(--bg); line-height: 1.7;
 }
 
-/* ── Language Toggle ── */
+/* ── Sidebar ── */
+.sidebar {
+  position: fixed; top: 0; left: 0; width: var(--sidebar-w); height: 100vh;
+  background: var(--sidebar-bg); border-right: 1px solid var(--border);
+  overflow-y: auto; z-index: 200; padding: 20px 16px;
+}
+.sidebar h3 {
+  font-size: 0.85rem; color: var(--accent); text-transform: uppercase;
+  letter-spacing: 0.05em; margin-bottom: 12px; padding-bottom: 8px;
+  border-bottom: 2px solid var(--accent);
+}
+.sidebar nav a {
+  display: block; padding: 5px 10px; font-size: 0.82rem; color: var(--text-secondary);
+  text-decoration: none; border-radius: 4px; margin-bottom: 2px;
+  transition: all 0.15s ease; border-left: 3px solid transparent;
+}
+.sidebar nav a:hover { background: var(--accent-light); color: var(--accent); }
+.sidebar nav a.active {
+  background: var(--accent-light); color: var(--accent); font-weight: 600;
+  border-left-color: var(--accent);
+}
+.sidebar nav a.toc-h3 { padding-left: 24px; font-size: 0.78rem; }
+
+/* ── Hamburger (mobile) ── */
+.hamburger {
+  display: none; position: fixed; top: 12px; left: 12px; z-index: 300;
+  width: 40px; height: 40px; background: var(--accent); color: #fff;
+  border: none; border-radius: 8px; font-size: 1.3rem; cursor: pointer;
+  align-items: center; justify-content: center; box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
+.sidebar-overlay { display: none; }
+
+/* ── Main content ── */
+.main-wrap {
+  margin-left: var(--sidebar-w); padding: 20px 32px 40px; max-width: 960px;
+}
+
+/* ── Toggle bar ── */
 .toggle-bar {
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  display: flex;
-  justify-content: flex-end;
-  gap: 0;
-  padding: 10px 0 16px;
+  position: sticky; top: 0; z-index: 100; display: flex;
+  justify-content: flex-end; gap: 0; padding: 10px 0 16px;
   background: linear-gradient(to bottom, #fff 60%, transparent);
 }
-
 .toggle-btn {
-  padding: 8px 22px;
-  border: 2px solid var(--accent);
-  background: var(--toggle-bg);
-  color: var(--accent);
-  cursor: pointer;
-  font-size: 0.92rem;
-  font-weight: 600;
-  transition: all 0.2s ease;
-  outline: none;
-  font-family: inherit;
+  padding: 8px 22px; border: 2px solid var(--accent);
+  background: var(--toggle-bg); color: var(--accent); cursor: pointer;
+  font-size: 0.92rem; font-weight: 600; transition: all 0.2s ease;
+  outline: none; font-family: inherit;
 }
-
 .toggle-btn:first-child { border-radius: 8px 0 0 8px; }
 .toggle-btn:last-child  { border-radius: 0 8px 8px 0; }
-
-.toggle-btn.active {
-  background: var(--toggle-active);
-  color: var(--toggle-text);
-}
-
-.toggle-btn:hover:not(.active) {
-  background: var(--accent-light);
-}
+.toggle-btn.active { background: var(--toggle-active); color: var(--toggle-text); }
+.toggle-btn:hover:not(.active) { background: var(--accent-light); }
 
 /* ── Typography ── */
-h1 {
-  font-size: 2rem;
-  color: var(--accent);
-  border-bottom: 3px solid var(--accent);
-  padding-bottom: 12px;
-  margin-bottom: 8px;
-  line-height: 1.3;
-}
-
-h2 {
-  font-size: 1.5rem;
-  color: var(--accent);
-  margin-top: 36px;
-  margin-bottom: 16px;
-  padding-bottom: 6px;
-  border-bottom: 2px solid var(--border);
-}
-
-h3 {
-  font-size: 1.2rem;
-  color: #333;
-  margin-top: 28px;
-  margin-bottom: 10px;
-}
-
-h4 {
-  font-size: 1.05rem;
-  color: var(--accent);
-  margin-top: 20px;
-  margin-bottom: 8px;
-}
-
+h1 { font-size: 1.85rem; color: var(--accent); border-bottom: 3px solid var(--accent); padding-bottom: 12px; margin-bottom: 8px; line-height: 1.3; }
+h2 { font-size: 1.4rem; color: var(--accent); margin-top: 36px; margin-bottom: 14px; padding-bottom: 6px; border-bottom: 2px solid var(--border); }
+h3 { font-size: 1.15rem; color: #333; margin-top: 28px; margin-bottom: 10px; }
+h4 { font-size: 1.02rem; color: var(--accent); margin-top: 20px; margin-bottom: 8px; }
 p { margin-bottom: 12px; }
-
-hr {
-  border: none;
-  border-top: 1px solid var(--border);
-  margin: 28px 0;
-}
-
+hr { border: none; border-top: 1px solid var(--border); margin: 28px 0; }
 strong { color: #222; }
 
-/* ── Tables ── */
-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin: 16px 0 24px;
-  font-size: 0.92rem;
-  border-radius: 8px;
-  overflow: hidden;
-  box-shadow: 0 1px 4px rgba(0,0,0,0.06);
-}
-
+table { width: 100%; border-collapse: collapse; margin: 14px 0 22px; font-size: 0.9rem; border-radius: 8px; overflow: hidden; box-shadow: 0 1px 4px rgba(0,0,0,0.06); }
 thead { background: var(--accent); }
-
-thead th {
-  color: #fff;
-  padding: 10px 14px;
-  text-align: left;
-  font-weight: 600;
-  white-space: nowrap;
-}
-
-tbody td {
-  padding: 9px 14px;
-  border-bottom: 1px solid var(--border);
-  vertical-align: top;
-}
-
+thead th { color: #fff; padding: 9px 12px; text-align: left; font-weight: 600; white-space: nowrap; }
+tbody td { padding: 8px 12px; border-bottom: 1px solid var(--border); vertical-align: top; }
 tbody tr:nth-child(even) { background: var(--table-stripe); }
 tbody tr:hover { background: var(--accent-light); }
 
-ul, ol { margin: 8px 0 16px 24px; }
+ul, ol { margin: 8px 0 14px 24px; }
 li { margin-bottom: 4px; }
-
 a { color: var(--accent); text-decoration: none; }
 a:hover { text-decoration: underline; }
+code { background: var(--code-bg); padding: 2px 6px; border-radius: 4px; font-size: 0.9em; font-family: "SF Mono", "Fira Code", "Consolas", monospace; }
+blockquote { border-left: 4px solid var(--accent); padding: 10px 16px; margin: 14px 0; background: var(--accent-light); border-radius: 0 6px 6px 0; color: #555; }
 
-code {
-  background: var(--code-bg);
-  padding: 2px 6px;
-  border-radius: 4px;
-  font-size: 0.9em;
-  font-family: "SF Mono", "Fira Code", "Consolas", monospace;
-}
-
-blockquote {
-  border-left: 4px solid var(--accent);
-  padding: 10px 18px;
-  margin: 16px 0;
-  background: var(--accent-light);
-  border-radius: 0 6px 6px 0;
-  color: #555;
-}
-
-.callout-warn {
-  background: #fff3e0;
-  border-left: 4px solid #e65100;
-  padding: 10px 16px;
-  margin: 12px 0;
-  border-radius: 0 6px 6px 0;
-}
-
-/* ── Language visibility ── */
 .lang-content { display: none; }
 .lang-content.active { display: block; }
 
-/* ── Tier row highlights ── */
-.tier1-highlight td:first-child { border-left: 4px solid var(--tier1); }
-
 /* ── Responsive ── */
-@media (max-width: 768px) {
-  body { padding: 16px 12px; font-size: 0.9rem; }
+@media (max-width: 900px) {
+  .sidebar { transform: translateX(-100%); transition: transform 0.25s ease; }
+  .sidebar.open { transform: translateX(0); box-shadow: 4px 0 20px rgba(0,0,0,0.15); }
+  .sidebar-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.3); z-index: 199; }
+  .sidebar-overlay.open { display: block; }
+  .hamburger { display: flex; }
+  .main-wrap { margin-left: 0; padding: 16px 12px 40px; }
+  body { font-size: 0.9rem; }
   table { font-size: 0.78rem; }
   thead th, tbody td { padding: 6px 8px; }
   .toggle-btn { padding: 6px 14px; font-size: 0.82rem; }
 }
 
 @media print {
-  .toggle-bar { display: none; }
+  .sidebar, .hamburger, .sidebar-overlay, .toggle-bar { display: none; }
   .lang-content { display: block !important; }
-  body { padding: 20px; max-width: 100%; }
-  table { box-shadow: none; }
-  thead { background: #333; }
+  .main-wrap { margin-left: 0; padding: 16px; max-width: 100%; }
+  table { box-shadow: none; } thead { background: #333; }
 }
 </style>
 </head>
 <body>
 
+<button class="hamburger" id="hamburger" aria-label="Menu">&#9776;</button>
+<div class="sidebar-overlay" id="sidebar-overlay"></div>
+
+<aside class="sidebar" id="sidebar">
+  <h3 id="toc-title">Contents</h3>
+  <nav id="toc-nav"></nav>
+</aside>
+
+<div class="main-wrap">
+
 <div class="toggle-bar">
-  <button class="toggle-btn active" id="btn-en">&#127482;&#127480; English</button>
-  <button class="toggle-btn" id="btn-zh">&#127464;&#127475; 中文</button>
+  <button class="toggle-btn active" id="btn-zh">中文</button>
+  <button class="toggle-btn" id="btn-en">English</button>
 </div>
 
-<div class="lang-content active" id="content-en">
+<div class="lang-content active" id="content-zh">
 <h1>Influencer Discovery: Parenting · USA · Momcozy-Adjacent</h1>
 <p><strong>Search Date</strong>: 2026-07-23<br />
 <strong>Brand/Campaign</strong>: Momcozy (maternal/baby care, wearable breast pumps, postpartum)<br />
@@ -2228,1758 +2160,1758 @@ Highly authentic, trusted community. Diverse representation — important for in
 <p><em>Report generated per <a href="../SKILL.md">influencer-discovery SKILL.md</a> workflow. Next skill: <a href="../fit-scorer/SKILL.md">fit-scorer</a> for weighted scoring and final ranking.</em></p>
 </div>
 
-<div class="lang-content" id="content-zh">
-<h1>红人发现报告：育儿 · 美国 · Momcozy 相关品牌</h1>
-<p><strong>搜索日期</strong>：2026-07-23<br />
-<strong>品牌/活动</strong>：Momcozy（母婴护理、可穿戴吸奶器、产后恢复）<br />
-<strong>搜索标准摘要</strong>：育儿领域，5万-20万粉丝，YouTube + Instagram，美国，互动率 &gt;4%，与 Momcozy 类似品牌的合作经验</p>
+<div class="lang-content" id="content-en">
+<h1>Influencer Discovery: Parenting · USA · Momcozy-Adjacent</h1>
+<p><strong>Search Date</strong>: 2026-07-23<br />
+<strong>Brand/Campaign</strong>: Momcozy (maternal/baby care, wearable breast pumps, postpartum)<br />
+<strong>Criteria Summary</strong>: Parenting niche, 50K–200K followers, YouTube + Instagram, USA-based, engagement &gt;4%, brand affinity to Momcozy-like brands</p>
 <hr />
-<h2>第一步 — 搜索参数</h2>
-<p><strong>品牌/产品</strong>：Momcozy / 母婴护理及婴儿用品品牌<br />
-<strong>活动目标</strong>：考虑与转化（产品评测、真实演示、UGC）<br />
-<strong>预算范围</strong>：中腰部达人预算（基于2025-2026年5万-20万粉丝级别，单帖 $1,000–$8,000）</p>
-<p><strong>搜索标准</strong>：</p>
+<h2>Step 1 — Discovery Parameters</h2>
+<p><strong>Brand/Product</strong>: Momcozy / maternal care &amp; baby gear brands<br />
+<strong>Campaign Goal</strong>: Consideration &amp; conversion (product reviews, authentic demos, UGC)<br />
+<strong>Budget Range</strong>: Mid-tier influencer budget ($1,000–$8,000 per post based on 2025-2026 rates for 50K–200K tier)</p>
+<p><strong>Search Criteria</strong>:</p>
 <table>
 <thead>
 <tr>
-<th>参数</th>
-<th>要求</th>
-<th>优先级</th>
+<th>Parameter</th>
+<th>Requirement</th>
+<th>Priority</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>领域/品类</td>
-<td>育儿、母亲、婴儿护理、产后</td>
-<td>必须</td>
+<td>Niche/Category</td>
+<td>Parenting, motherhood, baby care, postpartum</td>
+<td>Required</td>
 </tr>
 <tr>
-<td>平台</td>
-<td>YouTube、Instagram</td>
-<td>必须</td>
+<td>Platform(s)</td>
+<td>YouTube, Instagram</td>
+<td>Required</td>
 </tr>
 <tr>
-<td>粉丝范围</td>
-<td>5万–20万</td>
-<td>必须</td>
+<td>Follower Range</td>
+<td>50K–200K</td>
+<td>Required</td>
 </tr>
 <tr>
-<td>互动率</td>
+<td>Engagement Rate</td>
 <td>&gt;4%</td>
-<td>必须</td>
+<td>Required</td>
 </tr>
 <tr>
-<td>地区</td>
-<td>美国</td>
-<td>必须</td>
+<td>Location</td>
+<td>USA</td>
+<td>Required</td>
 </tr>
 <tr>
-<td>语言</td>
-<td>英语</td>
-<td>必须</td>
+<td>Language</td>
+<td>English</td>
+<td>Required</td>
 </tr>
 <tr>
-<td>内容类型</td>
-<td>视频（Reels/YT）、图文、评测</td>
-<td>偏好</td>
+<td>Content Type</td>
+<td>Video (Reels/YT), photo carousels, reviews</td>
+<td>Preferred</td>
 </tr>
 <tr>
-<td>发布频率</td>
-<td>≥2 帖/周</td>
-<td>偏好</td>
+<td>Posting Frequency</td>
+<td>≥2 posts/week</td>
+<td>Preferred</td>
 </tr>
 <tr>
-<td>受众画像</td>
-<td>父母、孕产妇、25–40岁女性为主</td>
-<td>偏好</td>
+<td>Audience Demographics</td>
+<td>Parents, expecting mothers, 25–40 F primary</td>
+<td>Preferred</td>
 </tr>
 <tr>
-<td>品牌安全</td>
-<td>无争议内容、无竞品排他协议</td>
-<td>必须</td>
+<td>Brand Safety</td>
+<td>No controversial content, no competitor exclusivity</td>
+<td>Required</td>
 </tr>
 </tbody>
 </table>
-<p><strong>加分项</strong>：<br />
-- 曾与母婴/婴儿品牌合作（吸奶器、婴儿背带、产后护理）<br />
-- 护理/哺乳/儿童发展相关资质<br />
-- 多平台运营<br />
-- 真实评测风格内容（非精致广告）</p>
-<p><strong>排除项</strong>：<br />
-- 与竞品品牌的排他协议（Willow、Elvie、Medela、Spectra）<br />
-- 利用儿童盈利的家庭Vlog频道（Ruby Franke事件后敏感）<br />
-- 政治/争议内容创作者<br />
-- 不活跃账号（超过30天未发布）</p>
+<p><strong>Nice-to-Have</strong>:<br />
+- Previous work with maternal/baby brands (breast pumps, baby carriers, postpartum care)<br />
+- Nursing/lactation/child development credentials<br />
+- Multi-platform presence<br />
+- Authentic, review-style content (not polished ads)</p>
+<p><strong>Exclusions</strong>:<br />
+- Exclusivity contracts with competitor brands (Willow, Elvie, Medela, Spectra)<br />
+- Family vlog channels exploiting children (post-Ruby Franke sensitivity)<br />
+- Political/controversial content creators<br />
+- Inactive accounts (&gt;30 days no posting)</p>
 <hr />
-<h2>第二步 — 搜索策略</h2>
-<h3>主要搜索方法</h3>
+<h2>Step 2 — Search Strategy</h2>
+<h3>Primary Search Methods</h3>
 <ol>
-<li><strong>话题标签搜索</strong></li>
-<li>核心标签：#momlife、#parenting、#motherhood、#postpartum</li>
-<li>细分标签：#breastfeeding、#pumpingmom、#babygear、#wearablepump、#momcozy</li>
+<li><strong>Hashtag Research</strong></li>
+<li>Core: #momlife, #parenting, #motherhood, #postpartum</li>
+<li>Niche: #breastfeeding, #pumpingmom, #babygear, #wearablepump, #momcozy</li>
 <li>
-<p>品牌相关：#momblogger、#honestmomreview、#fourthtrimester</p>
+<p>Brand-adjacent: #momblogger, #honestmomreview, #fourthtrimester</p>
 </li>
 <li>
-<p><strong>相似账号 / 平台发现</strong></p>
+<p><strong>Similar Accounts / Platform Discovery</strong></p>
 </li>
-<li>起点：@karrie_locher（哺乳顾问）、@mommyshorts（育儿幽默）</li>
-<li>YouTube：育儿评测内容的相关频道</li>
+<li>Starting from: @karrie_locher (lactation expert), @mommyshorts (parenting humor)</li>
+<li>YouTube: Related channels from parenting review content</li>
 <li>
-<p>Instagram：育儿/婴儿用品品类的 Explore 页面和 Reels</p>
-</li>
-<li>
-<p><strong>竞品与品牌提及</strong></p>
-</li>
-<li>Momcozy 合作者：Abbie Herbert（头部达人，仅作参考）、Becca Kufrin（品牌大使）</li>
-<li>竞品标签帖子：Willow、Elvie、Medela、Spectra、BabyBuddha</li>
-<li>
-<p>曾评测 Momcozy 或类似产品的相关创作者</p>
+<p>Instagram: Explore page and Reels in parenting/baby gear categories</p>
 </li>
 <li>
-<p><strong>达人数据库搜索</strong></p>
+<p><strong>Competitor &amp; Brand Mentions</strong></p>
 </li>
-<li>IZEA 顶级育儿达人（2024）</li>
-<li>Favikon 家庭与育儿排名（美国）</li>
-<li>HypeAuditor 品类分析</li>
-<li>Ainfluencer 美国育儿 Instagram 目录</li>
-<li>Feedspot 职场妈妈达人（2026）</li>
+<li>Momcozy partners: Abbie Herbert (macro-tier, reference only), Becca Kufrin (brand ambassador)</li>
+<li>Competitor brand tagged posts: Willow, Elvie, Medela, Spectra, BabyBuddha</li>
+<li>
+<p>Brand-adjacent creators who reviewed Momcozy or similar products</p>
+</li>
+<li>
+<p><strong>Influencer Database Searches</strong></p>
+</li>
+<li>IZEA Top Parenting Influencers (2024)</li>
+<li>Favikon Family &amp; Parenting Rankings (US)</li>
+<li>HypeAuditor category analytics</li>
+<li>Ainfluencer American Parenting Instagram directory</li>
+<li>Feedspot Working Mom Influencers (2026)</li>
 </ol>
-<h3>工具查询（网页搜索）</h3>
+<h3>Tool Queries (Web Search)</h3>
 <ul>
 <li>"parenting influencers YouTube Instagram 50K-200K USA 2025"</li>
 <li>"Momcozy brand ambassador parenting influencer partnership"</li>
 <li>"breast pump baby gear influencer review Instagram YouTube mom"</li>
-<li>多平台中腰部及微型妈妈达人目录</li>
+<li>Mid-tier and micro mom influencer directories across multiple platforms</li>
 </ul>
 <hr />
-<h2>第三步 — 初步筛选</h2>
-<p><strong>总候选人数</strong>：52<br />
-<strong>初步筛选后</strong>：15（另加 3 人放入观察名单）</p>
-<h3>应用的筛选标准</h3>
+<h2>Step 3 — Initial Screening</h2>
+<p><strong>Total Candidates Surfaced</strong>: 52<br />
+<strong>After Initial Screening</strong>: 15 (plus 3 placed in Watch List)</p>
+<h3>Screening Criteria Applied</h3>
 <table>
 <thead>
 <tr>
-<th>标准</th>
-<th>过滤条件</th>
-<th>淘汰人数</th>
+<th>Criterion</th>
+<th>Filter</th>
+<th>Eliminated</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>粉丝范围</td>
-<td>5万–20万（主平台）</td>
+<td>Follower range</td>
+<td>50K–200K (primary platform)</td>
 <td>18</td>
 </tr>
 <tr>
-<td>互动率</td>
-<td>&gt;4%（估算或确认）</td>
+<td>Engagement rate</td>
+<td>&gt;4% (estimated or confirmed)</td>
 <td>8</td>
 </tr>
 <tr>
-<td>近期活跃</td>
-<td>&lt;30天不活跃</td>
+<td>Recent activity</td>
+<td>&lt;30 days inactive</td>
 <td>5</td>
 </tr>
 <tr>
-<td>内容相关性</td>
-<td>育儿/婴儿/母婴焦点</td>
+<td>Content relevance</td>
+<td>Parenting/baby/maternal focus</td>
 <td>4</td>
 </tr>
 <tr>
-<td>品牌安全</td>
-<td>无争议、无儿童利用</td>
+<td>Brand safety</td>
+<td>No controversy, no child exploitation</td>
 <td>2</td>
 </tr>
 </tbody>
 </table>
-<h3>已识别的红旗</h3>
+<h3>Red Flags Identified</h3>
 <ul>
-<li>6 个账号疑似假粉（高粉丝数但互动率异常低）</li>
-<li>2 个账号存在争议内容（一个疑似反疫苗，一个类似Ruby Franke式家庭Vlog）</li>
-<li>5 个账号有竞品排他信号（Willow/Elvie 专属大使）</li>
-<li>3 个账号超过30天不活跃（包括 Janna Faye，放入观察名单）</li>
-<li>2 个账号受众地域不在美国（&gt;60%非美国）</li>
+<li>6 accounts with suspected fake follower patterns (high follower count, unusually low engagement)</li>
+<li>2 accounts with controversial content (one anti-vax adjacent, one with Ruby Franke-style family vlogging)</li>
+<li>5 accounts with competitor exclusivity signals (Willow/Elvie dedicated ambassadors)</li>
+<li>3 accounts inactive &gt;30 days (including Janna Faye, placed in Watch List)</li>
+<li>2 accounts with audience geography outside USA (&gt;60% non-US)</li>
 </ul>
 <hr />
-<h2>第四步 — 达人画像</h2>
+<h2>Step 4 — Influencer Profiles</h2>
 <hr />
-<h2>达人 #1：@karrie_locher</h2>
-<h3>基本信息</h3>
+<h2>Influencer #1: @karrie_locher</h2>
+<h3>Basic Information</h3>
 <table>
 <thead>
 <tr>
-<th>属性</th>
-<th>详情</th>
+<th>Attribute</th>
+<th>Details</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><strong>姓名</strong></td>
+<td><strong>Name</strong></td>
 <td>Karrie Locher</td>
 </tr>
 <tr>
-<td><strong>账号</strong></td>
+<td><strong>Handle</strong></td>
 <td>@karrie_locher</td>
 </tr>
 <tr>
-<td><strong>平台</strong></td>
-<td>Instagram（主）</td>
+<td><strong>Platform</strong></td>
+<td>Instagram (primary)</td>
 </tr>
 <tr>
-<td><strong>其他平台</strong></td>
-<td>博客 (karingforpostpartum.com)、播客嘉宾</td>
+<td><strong>Other Platforms</strong></td>
+<td>Blog (karingforpostpartum.com), Podcast guest</td>
 </tr>
 <tr>
-<td><strong>地区</strong></td>
-<td>美国（中西部）</td>
+<td><strong>Location</strong></td>
+<td>USA (Midwest)</td>
 </tr>
 <tr>
-<td><strong>语言</strong></td>
-<td>英语</td>
+<td><strong>Language</strong></td>
+<td>English</td>
 </tr>
 <tr>
-<td><strong>领域</strong></td>
-<td>产后护理、母乳喂养、新生儿教育</td>
+<td><strong>Niche</strong></td>
+<td>Postpartum care, breastfeeding, newborn education</td>
 </tr>
 </tbody>
 </table>
-<h3>指标</h3>
+<h3>Metrics</h3>
 <table>
 <thead>
 <tr>
-<th>平台</th>
-<th>粉丝数</th>
-<th>互动率</th>
-<th>平均播放量</th>
+<th>Platform</th>
+<th>Followers</th>
+<th>Engagement Rate</th>
+<th>Avg. Views</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>Instagram</td>
-<td>~16.5万（估）</td>
-<td>~5.5%（估，高信任度/教育类内容）</td>
-<td>~9K/Story</td>
+<td>~165K (est.)</td>
+<td>~5.5% (est., high trust/educational niche)</td>
+<td>~9K/story</td>
 </tr>
 </tbody>
 </table>
-<p><strong>增长趋势</strong>：增长中 — 课程销量和邮件列表数据表明受众转化强劲（2.5万+邮件订阅者，~1万课程销售）</p>
-<h3>受众分析</h3>
+<p><strong>Growth Trend</strong>: Growing — course sales and email list data indicate strong audience conversion (25K+ email subscribers, ~10K course sales)</p>
+<h3>Audience Analysis</h3>
 <table>
 <thead>
 <tr>
-<th>人口统计</th>
-<th>分布</th>
-<th>备注</th>
+<th>Demographic</th>
+<th>Breakdown</th>
+<th>Notes</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>性别</td>
-<td>~95% 女</td>
-<td>新手及孕产妇</td>
+<td>Gender</td>
+<td>~95% F</td>
+<td>New and expecting mothers</td>
 </tr>
 <tr>
-<td>年龄</td>
-<td>25–38岁为主</td>
-<td>千禧一代父母</td>
+<td>Age</td>
+<td>25–38 primary</td>
+<td>Millennial parents</td>
 </tr>
 <tr>
-<td>地区</td>
-<td>美国为主</td>
-<td>英语用户</td>
+<td>Location</td>
+<td>USA-dominant</td>
+<td>English-speaking</td>
 </tr>
 <tr>
-<td>兴趣</td>
-<td>母乳喂养、产后、新生儿护理、婴儿产品</td>
-<td>高购买意向</td>
+<td>Interests</td>
+<td>Breastfeeding, postpartum, newborn care, baby products</td>
+<td>High purchase intent</td>
 </tr>
 </tbody>
 </table>
-<p><strong>受众质量评分</strong>：9/10<br />
-- 真实粉丝估算：~92%<br />
-- 受众-品牌重叠度：<strong>非常高</strong> — 与 Momcozy 核心客户（吸奶/哺乳妈妈）直接对齐</p>
-<h3>内容分析</h3>
-<p><strong>内容风格</strong>：<br />
-- 主要形式：图文轮播教育帖、Reels、Story Q&amp;A<br />
-- 发布频率：~5帖/周<br />
-- 视觉风格：干净、温暖、专业但亲切<br />
-- 语调：让人安心、循证、"我经历过"的护士口吻</p>
-<p><strong>表现最佳的内容</strong>：<br />
-1. 哺乳姿势图文轮播：高收藏率，1.2万+点赞<br />
-2. 吸奶时间表模板 Reel：20万+播放<br />
-3. 产后恢复必备品：强联盟转化</p>
-<p><strong>品牌适配度评估</strong>：<br />
-- 视觉一致性：高 — 温暖、母性、有养育感<br />
-- 价值一致性：<strong>非常高</strong> — RN/CLC资质 + 实用支持 = Momcozy"支持母亲"的使命<br />
-- 受众一致性：<strong>非常高</strong> — 可穿戴吸奶器的精准目标人群</p>
-<h3>合作历史</h3>
-<p><strong>过往品牌合作</strong>：<br />
-| 品牌 | 日期 | 内容类型 | 预估效果 |<br />
+<p><strong>Audience Quality Score</strong>: 9/10<br />
+- Real followers estimate: ~92%<br />
+- Audience-brand overlap: <strong>Very High</strong> — directly aligned with Momcozy's core customer (pumping/nursing mothers)</p>
+<h3>Content Analysis</h3>
+<p><strong>Content Style</strong>:<br />
+- Primary format: Carousel education posts, Reels, Story Q&amp;As<br />
+- Posting frequency: ~5 posts/week<br />
+- Aesthetic: Clean, warm, clinical-but-approachable<br />
+- Tone: Reassuring, evidence-based, "I've been there" RN voice</p>
+<p><strong>Top Performing Content</strong>:<br />
+1. Breastfeeding positions carousel: high save rate, 12K+ likes<br />
+2. Pumping schedule template Reel: 200K+ views<br />
+3. Postpartum recovery must-haves: strong affiliate conversion</p>
+<p><strong>Brand Fit Assessment</strong>:<br />
+- Visual alignment: High — warm, maternal, nurturing aesthetic<br />
+- Value alignment: <strong>Very High</strong> — RN/CLC credentials + practical support = Momcozy's "support mothers" mission<br />
+- Audience alignment: <strong>Very High</strong> — exact target demo for wearable pumps</p>
+<h3>Partnership History</h3>
+<p><strong>Past Brand Partnerships</strong>:<br />
+| Brand | Date | Content Type | Est. Performance |<br />
 |-------|------|--------------|------------------|<br />
-| 母婴健康品牌 | 持续 | 教育+产品融合 | 强 |<br />
-| 婴儿产品公司 | 持续 | 评测+演示 | 高互动 |<br />
-| 健康/生活方式 | 定期 | 赞助帖 | 好 |</p>
-<p><strong>竞品合作</strong>：未检测到与 Momcozy 直接竞品（Willow、Elvie、Medela）的合作。在母婴领域广泛合作，无排他迹象。</p>
-<h3>联系信息</h3>
+| Maternal health brands | Ongoing | Educational + product integration | Strong |<br />
+| Baby product companies | Ongoing | Reviews + demos | High engagement |<br />
+| Wellness/lifestyle | Periodic | Sponsored posts | Good |</p>
+<p><strong>Competitor Partnerships</strong>: None detected with direct Momcozy competitors (Willow, Elvie, Medela). Appears to partner broadly in maternal/baby space without exclusivity.</p>
+<h3>Contact Information</h3>
 <ul>
-<li><strong>网站</strong>：karingforpostpartum.com</li>
-<li><strong>联系途径</strong>：网站联系表单 / 商务邮箱</li>
-<li><strong>代理/经纪人</strong>：自运营（基于现有信息）</li>
+<li><strong>Website</strong>: karingforpostpartum.com</li>
+<li><strong>Contact Method</strong>: Website contact form / business email</li>
+<li><strong>Agency/Manager</strong>: Self-managed (based on available info)</li>
 </ul>
-<h3>适配评分摘要</h3>
+<h3>Fit Score Summary</h3>
 <table>
 <thead>
 <tr>
-<th>维度</th>
-<th>评分 (1-5)</th>
+<th>Factor</th>
+<th>Score (1-5)</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>受众匹配</td>
+<td>Audience match</td>
 <td>5</td>
 </tr>
 <tr>
-<td>内容质量</td>
+<td>Content quality</td>
 <td>5</td>
 </tr>
 <tr>
-<td>品牌一致性</td>
+<td>Brand alignment</td>
 <td>5</td>
 </tr>
 <tr>
-<td>互动质量</td>
+<td>Engagement quality</td>
 <td>5</td>
 </tr>
 <tr>
-<td>真实度</td>
+<td>Authenticity</td>
 <td>5</td>
 </tr>
 <tr>
-<td><strong>总分</strong></td>
+<td><strong>Total</strong></td>
 <td><strong>25/25</strong></td>
 </tr>
 </tbody>
 </table>
-<p><strong>推荐等级</strong>：⭐ 强烈推荐</p>
-<p><strong>为什么合适</strong>：<br />
-Karrie Locher 是本次候选池中 Momcozy 的最强候选人。作为注册护士和认证哺乳顾问，她为可穿戴吸奶器推荐带来了临床公信力。她的哺乳/吸奶妈妈受众正是 Momcozy 的精准目标人群。她的教育内容风格天然适合产品评测和演示，给人以"有帮助"而非"推销"的感觉。</p>
-<p><strong>潜在顾虑</strong>：<br />
-- 确切粉丝数和互动率需通过达人分析平台验证<br />
-- 因专业资质和高转化率，可能报价较高</p>
+<p><strong>Recommendation</strong>: ⭐ Highly Recommended</p>
+<p><strong>Why They're a Good Fit</strong>:<br />
+Karrie Locher is the single strongest candidate in this pool for Momcozy. As an RN and Certified Lactation Counselor, she brings clinical credibility to wearable pump recommendations. Her audience of nursing/pumping mothers is Momcozy's exact target demographic. Her educational content style naturally accommodates product reviews and demos that feel helpful rather than salesy.</p>
+<p><strong>Potential Concerns</strong>:<br />
+- Exact follower count and engagement rate need verification via influencer analytics platform<br />
+- May command premium rates given her specialized credentials and high conversion track record</p>
 <hr />
-<h2>达人 #2：@glowmaven (Latham Thomas)</h2>
-<h3>基本信息</h3>
+<h2>Influencer #2: @glowmaven (Latham Thomas)</h2>
+<h3>Basic Information</h3>
 <table>
 <thead>
 <tr>
-<th>属性</th>
-<th>详情</th>
+<th>Attribute</th>
+<th>Details</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><strong>姓名</strong></td>
+<td><strong>Name</strong></td>
 <td>Latham Thomas</td>
 </tr>
 <tr>
-<td><strong>账号</strong></td>
+<td><strong>Handle</strong></td>
 <td>@glowmaven</td>
 </tr>
 <tr>
-<td><strong>平台</strong></td>
-<td>Instagram（主）</td>
+<td><strong>Platform</strong></td>
+<td>Instagram (primary)</td>
 </tr>
 <tr>
-<td><strong>其他平台</strong></td>
-<td>Mama Glow 基金会、出版书籍、播客</td>
+<td><strong>Other Platforms</strong></td>
+<td>Mama Glow foundation, books, podcast appearances</td>
 </tr>
 <tr>
-<td><strong>地区</strong></td>
-<td>纽约，美国</td>
+<td><strong>Location</strong></td>
+<td>New York, NY</td>
 </tr>
 <tr>
-<td><strong>语言</strong></td>
-<td>英语</td>
+<td><strong>Language</strong></td>
+<td>English</td>
 </tr>
 <tr>
-<td><strong>领域</strong></td>
-<td>母婴健康、导乐服务、黑人母亲权益倡导</td>
+<td><strong>Niche</strong></td>
+<td>Maternal wellness, doula services, Black motherhood advocacy</td>
 </tr>
 </tbody>
 </table>
-<h3>指标</h3>
+<h3>Metrics</h3>
 <table>
 <thead>
 <tr>
-<th>平台</th>
-<th>粉丝数</th>
-<th>互动率</th>
-<th>平均播放量</th>
+<th>Platform</th>
+<th>Followers</th>
+<th>Engagement Rate</th>
+<th>Avg. Views</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>Instagram</td>
-<td>~13.4万</td>
-<td>~4.5%（估，高度互动的健康社区）</td>
+<td>~134K</td>
+<td>~4.5% (est., highly engaged wellness community)</td>
 <td>N/A</td>
 </tr>
 </tbody>
 </table>
-<p><strong>增长趋势</strong>：稳定 — 既有权威与持续影响力。Oprah's Super Soul 100 校友。</p>
-<h3>受众分析</h3>
+<p><strong>Growth Trend</strong>: Stable — established authority with sustained relevance. Oprah's Super Soul 100 alumni.</p>
+<h3>Audience Analysis</h3>
 <table>
 <thead>
 <tr>
-<th>人口统计</th>
-<th>分布</th>
-<th>备注</th>
+<th>Demographic</th>
+<th>Breakdown</th>
+<th>Notes</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>性别</td>
-<td>~90% 女</td>
-<td>母亲、孕产妇、分娩工作者</td>
+<td>Gender</td>
+<td>~90% F</td>
+<td>Mothers, expectant mothers, birth workers</td>
 </tr>
 <tr>
-<td>年龄</td>
-<td>28–40岁为主</td>
+<td>Age</td>
+<td>28–40 primary</td>
 <td></td>
 </tr>
 <tr>
-<td>地区</td>
-<td>美国为主（纽约中心）</td>
+<td>Location</td>
+<td>USA-dominant (NYC hub)</td>
 <td></td>
 </tr>
 <tr>
-<td>兴趣</td>
-<td>整体母婴健康、分娩、产后保健</td>
-<td>高端品牌偏好</td>
+<td>Interests</td>
+<td>Holistic maternal health, birth, postpartum wellness</td>
+<td>Premium brand affinity</td>
 </tr>
 </tbody>
 </table>
-<p><strong>受众质量评分</strong>：9/10<br />
-- 真实粉丝估算：~90%<br />
-- 受众-品牌重叠度：<strong>高</strong> — 母婴健康受众与 Momcozy 产后关注点重叠</p>
-<h3>内容分析</h3>
-<p><strong>内容风格</strong>：<br />
-- 主要形式：生活方式照片、活动报道、教育帖<br />
-- 发布频率：~3-4帖/周<br />
-- 视觉风格：精致、温暖、有品位<br />
-- 语调：赋权、整体观、社群导向</p>
-<p><strong>表现最佳的内容</strong>：<br />
-1. 明星导乐客户分享（Alicia Keys、Anne Hathaway）<br />
-2. 母婴健康倡导帖<br />
-3. Mama Glow 活动/静修报道</p>
-<p><strong>品牌适配度评估</strong>：<br />
-- 视觉一致性：高 — 高端母婴健康美学<br />
-- 价值一致性：<strong>非常高</strong> — Mama Glow "陪伴母亲全程"的理念与 Momcozy 使命一致<br />
-- 受众一致性：高 — 产后及母婴护理受众</p>
-<h3>合作历史</h3>
-<p><strong>过往品牌合作</strong>：<br />
-| 品牌 | 日期 | 内容类型 | 预估效果 |<br />
+<p><strong>Audience Quality Score</strong>: 9/10<br />
+- Real followers estimate: ~90%<br />
+- Audience-brand overlap: <strong>High</strong> — maternal wellness audience overlaps with Momcozy's postpartum focus</p>
+<h3>Content Analysis</h3>
+<p><strong>Content Style</strong>:<br />
+- Primary format: Lifestyle photos, event coverage, educational posts<br />
+- Posting frequency: ~3-4 posts/week<br />
+- Aesthetic: Polished, warm, aspirational wellness<br />
+- Tone: Empowering, holistic, community-oriented</p>
+<p><strong>Top Performing Content</strong>:<br />
+1. Celebrity doula client reveals (Alicia Keys, Anne Hathaway)<br />
+2. Maternal health advocacy posts<br />
+3. Mama Glow event/retreat coverage</p>
+<p><strong>Brand Fit Assessment</strong>:<br />
+- Visual alignment: High — premium maternal wellness aesthetic<br />
+- Value alignment: <strong>Very High</strong> — Mama Glow's "support mothers through the journey" mirrors Momcozy's mission<br />
+- Audience alignment: High — postpartum and maternal care audience</p>
+<h3>Partnership History</h3>
+<p><strong>Past Brand Partnerships</strong>:<br />
+| Brand | Date | Content Type | Est. Performance |<br />
 |-------|------|--------------|------------------|<br />
-| 健康机构 | 持续 | 倡导+宣传 | 高信誉 |<br />
-| 保险公司 | 持续 | 母婴护理改善 | 机构信任 |<br />
-| 医院系统 | 持续 | 产科护理合作 | 权威信号 |</p>
-<p><strong>竞品合作</strong>：未检测到。侧重健康/生活方式，无特定吸奶器品牌合作。</p>
-<h3>联系信息</h3>
+| Health organizations | Ongoing | Advocacy + awareness | High credibility |<br />
+| Insurance companies | Ongoing | Maternal care improvement | Institutional trust |<br />
+| Hospital systems | Ongoing | Maternity care partnerships | Authority signal |</p>
+<p><strong>Competitor Partnerships</strong>: None detected. Wellness/lifestyle focus rather than specific pump brand affiliations.</p>
+<h3>Contact Information</h3>
 <ul>
-<li><strong>网站</strong>：mamaglow.com</li>
-<li><strong>代理/经纪人</strong>：Mama Glow 团队</li>
-<li><strong>联系途径</strong>：网站/媒体联系的品牌合作渠道</li>
+<li><strong>Website</strong>: mamaglow.com</li>
+<li><strong>Agency/Manager</strong>: Mama Glow team</li>
+<li><strong>Contact Method</strong>: Brand partnerships via website / press contact</li>
 </ul>
-<h3>适配评分摘要</h3>
+<h3>Fit Score Summary</h3>
 <table>
 <thead>
 <tr>
-<th>维度</th>
-<th>评分 (1-5)</th>
+<th>Factor</th>
+<th>Score (1-5)</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>受众匹配</td>
+<td>Audience match</td>
 <td>4</td>
 </tr>
 <tr>
-<td>内容质量</td>
+<td>Content quality</td>
 <td>5</td>
 </tr>
 <tr>
-<td>品牌一致性</td>
+<td>Brand alignment</td>
 <td>5</td>
 </tr>
 <tr>
-<td>互动质量</td>
+<td>Engagement quality</td>
 <td>4</td>
 </tr>
 <tr>
-<td>真实度</td>
+<td>Authenticity</td>
 <td>5</td>
 </tr>
 <tr>
-<td><strong>总分</strong></td>
+<td><strong>Total</strong></td>
 <td><strong>23/25</strong></td>
 </tr>
 </tbody>
 </table>
-<p><strong>推荐等级</strong>：⭐ 强烈推荐</p>
-<p><strong>为什么合适</strong>：<br />
-Latham Thomas 为 Momcozy 的品牌定位带来声望和权威。作为明星导乐和 Oprah 认可的母婴健康倡导者，她将品牌从"只是一个吸奶器"提升为全方位的母婴健康伙伴。她的受众在产后和母婴护理方面非常信任她。与她合作将传递 Momcozy 被顶级母婴健康专业人士认可的强信号。</p>
-<p><strong>潜在顾虑</strong>：<br />
-- 可能定位高于 Momcozy 的实用/亲民价格区间（高端受众）<br />
-- 因明星客户和出版背景，报价可能较高<br />
-- 内容风格偏生活方式而非产品评测 — 可能需要创意沟通对齐</p>
+<p><strong>Recommendation</strong>: ⭐ Highly Recommended</p>
+<p><strong>Why They're a Good Fit</strong>:<br />
+Latham Thomas brings prestige and authority to Momcozy's brand positioning. As a celebrity doula and Oprah-endorsed maternal health advocate, she elevates the brand beyond "just a pump" to a comprehensive maternal wellness partner. Her audience trusts her deeply on postpartum and maternal care decisions. A partnership would signal that Momcozy is endorsed by the top tier of maternal health professionals.</p>
+<p><strong>Potential Concerns</strong>:<br />
+- May be positioned above Momcozy's practical/accessible price point (premium audience)<br />
+- Likely higher rate card given celebrity clientele and book deals<br />
+- Content style is more lifestyle than product-review — may require creative brief alignment</p>
 <hr />
-<h2>达人 #3：@lunchboxdad (Beau Coffron)</h2>
-<h3>基本信息</h3>
+<h2>Influencer #3: @lunchboxdad (Beau Coffron)</h2>
+<h3>Basic Information</h3>
 <table>
 <thead>
 <tr>
-<th>属性</th>
-<th>详情</th>
+<th>Attribute</th>
+<th>Details</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><strong>姓名</strong></td>
+<td><strong>Name</strong></td>
 <td>Beau Coffron</td>
 </tr>
 <tr>
-<td><strong>账号</strong></td>
+<td><strong>Handle</strong></td>
 <td>@lunchboxdad</td>
 </tr>
 <tr>
-<td><strong>平台</strong></td>
-<td>Instagram（主）</td>
+<td><strong>Platform</strong></td>
+<td>Instagram (primary)</td>
 </tr>
 <tr>
-<td><strong>其他平台</strong></td>
-<td>TikTok、YouTube（有限）</td>
+<td><strong>Other Platforms</strong></td>
+<td>TikTok, YouTube (limited)</td>
 </tr>
 <tr>
-<td><strong>地区</strong></td>
-<td>俄克拉荷马城，美国</td>
+<td><strong>Location</strong></td>
+<td>Oklahoma City, OK</td>
 </tr>
 <tr>
-<td><strong>语言</strong></td>
-<td>英语</td>
+<td><strong>Language</strong></td>
+<td>English</td>
 </tr>
 <tr>
-<td><strong>领域</strong></td>
-<td>创意育儿、儿童食物艺术、家庭生活</td>
+<td><strong>Niche</strong></td>
+<td>Creative parenting, kids' food art, family life</td>
 </tr>
 </tbody>
 </table>
-<h3>指标</h3>
+<h3>Metrics</h3>
 <table>
 <thead>
 <tr>
-<th>平台</th>
-<th>粉丝数</th>
-<th>互动率</th>
-<th>平均播放量</th>
+<th>Platform</th>
+<th>Followers</th>
+<th>Engagement Rate</th>
+<th>Avg. Views</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>Instagram</td>
-<td>~11.4万</td>
-<td>~4.8%（估，食物艺术内容病毒传播力强）</td>
-<td>病毒帖可达百万级</td>
+<td>~114K</td>
+<td>~4.8% (est., high virality on food art content)</td>
+<td>Viral posts reach millions</td>
 </tr>
 <tr>
 <td>TikTok</td>
-<td>增长中</td>
-<td>高</td>
+<td>Growing presence</td>
+<td>High</td>
 <td>N/A</td>
 </tr>
 </tbody>
 </table>
-<p><strong>增长趋势</strong>：稳定 — 自2013年起运营，通过内容迭代维持影响力</p>
-<h3>受众分析</h3>
+<p><strong>Growth Trend</strong>: Stable — established since 2013, sustained relevance through evolving content</p>
+<h3>Audience Analysis</h3>
 <table>
 <thead>
 <tr>
-<th>人口统计</th>
-<th>分布</th>
-<th>备注</th>
+<th>Demographic</th>
+<th>Breakdown</th>
+<th>Notes</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>性别</td>
-<td>~65% 女 / 35% 男</td>
-<td>对父母双方均有吸引力</td>
+<td>Gender</td>
+<td>~65% F / 35% M</td>
+<td>Appeals to both parents</td>
 </tr>
 <tr>
-<td>年龄</td>
-<td>28–42岁为主</td>
-<td>学龄儿童父母</td>
+<td>Age</td>
+<td>28–42 primary</td>
+<td>Parents of school-age kids</td>
 </tr>
 <tr>
-<td>地区</td>
-<td>美国为主</td>
+<td>Location</td>
+<td>USA-dominant</td>
 <td></td>
 </tr>
 <tr>
-<td>兴趣</td>
-<td>创意育儿、备餐、家庭活动</td>
-<td>实用、注重性价比</td>
+<td>Interests</td>
+<td>Creative parenting, meal prep, family activities</td>
+<td>Practical, budget-conscious</td>
 </tr>
 </tbody>
 </table>
-<p><strong>受众质量评分</strong>：8/10<br />
-- 真实粉丝估算：~90%<br />
-- 受众-品牌重叠度：<strong>中等</strong> — 父母受众但非专门婴儿/产后</p>
-<h3>内容分析</h3>
-<p><strong>内容风格</strong>：<br />
-- 主要形式：照片图文（便当艺术）、Reels（制作过程）、Story 幕后<br />
-- 发布频率：~3-4帖/周<br />
-- 视觉风格：多彩、有趣、亲切<br />
-- 语调：温暖爸爸力、实用技巧、幽默</p>
-<p><strong>表现最佳的内容</strong>：<br />
-1. 卡通主题便当盒展示（高分享率）<br />
-2. 节日主题食物艺术（季节性病毒传播）<br />
-3. 幕后孩子反应</p>
-<p><strong>品牌适配度评估</strong>：<br />
-- 视觉一致性：中 — 多彩/有趣 vs. Momcozy的温暖/母性<br />
-- 价值一致性：中 — 育儿支持但处于不同生命阶段<br />
-- 受众一致性：中 — 父母但超出新生儿/产后窗口期</p>
-<h3>合作历史</h3>
-<p><strong>过往品牌合作</strong>：<br />
-| 品牌 | 日期 | 内容类型 | 预估效果 |<br />
+<p><strong>Audience Quality Score</strong>: 8/10<br />
+- Real followers estimate: ~90%<br />
+- Audience-brand overlap: <strong>Medium</strong> — parent audience but not specifically baby/postpartum</p>
+<h3>Content Analysis</h3>
+<p><strong>Content Style</strong>:<br />
+- Primary format: Photo carousels (lunch art), Reels (prep process), story BTS<br />
+- Posting frequency: ~3-4 posts/week<br />
+- Aesthetic: Colorful, fun, approachable<br />
+- Tone: Warm dad energy, practical tips, humorous</p>
+<p><strong>Top Performing Content</strong>:<br />
+1. Character-themed lunch box reveals (high share rate)<br />
+2. Holiday-themed food art (seasonal viral spikes)<br />
+3. Behind-the-scenes kid reactions</p>
+<p><strong>Brand Fit Assessment</strong>:<br />
+- Visual alignment: Medium — colorful/fun vs. Momcozy's warm/maternal<br />
+- Value alignment: Medium — parenting support but different life stage<br />
+- Audience alignment: Medium — parents but beyond newborn/postpartum window</p>
+<h3>Partnership History</h3>
+<p><strong>Past Brand Partnerships</strong>:<br />
+| Brand | Date | Content Type | Est. Performance |<br />
 |-------|------|--------------|------------------|<br />
-| Little Tikes | 2024 | 赞助系列（IG + TikTok） | 强互动 |<br />
-| Arm &amp; Hammer | 2020 | 虚拟夏令营 YouTube 系列 | 1.4万注册 |<br />
-| Babybel | N/A | 家庭旅行赞助 | 好触达 |<br />
-| Kraft | N/A | 生日派对项目 | 社区影响 |</p>
-<p><strong>竞品合作</strong>：未检测到母婴/吸奶器品牌合作。</p>
-<h3>联系信息</h3>
+| Little Tikes | 2024 | Sponsored series (IG + TikTok) | Strong engagement |<br />
+| Arm &amp; Hammer | 2020 | Virtual camp YouTube series | 14K sign-ups |<br />
+| Babybel | N/A | Family trip sponsorship | Good reach |<br />
+| Kraft | N/A | Birthday Party Project | Community impact |</p>
+<p><strong>Competitor Partnerships</strong>: No maternal/baby pump brand affiliations detected.</p>
+<h3>Contact Information</h3>
 <ul>
-<li><strong>网站</strong>：lunchboxdad.com</li>
-<li><strong>代理/经纪人</strong>：Life.Church 社交媒体团队（本职工作）</li>
-<li><strong>联系途径</strong>：Instagram DM / 网站</li>
+<li><strong>Website</strong>: lunchboxdad.com</li>
+<li><strong>Agency/Manager</strong>: Life.Church social media team (professional role)</li>
+<li><strong>Contact Method</strong>: Instagram DM / website</li>
 </ul>
-<h3>适配评分摘要</h3>
+<h3>Fit Score Summary</h3>
 <table>
 <thead>
 <tr>
-<th>维度</th>
-<th>评分 (1-5)</th>
+<th>Factor</th>
+<th>Score (1-5)</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>受众匹配</td>
+<td>Audience match</td>
 <td>3</td>
 </tr>
 <tr>
-<td>内容质量</td>
+<td>Content quality</td>
 <td>5</td>
 </tr>
 <tr>
-<td>品牌一致性</td>
+<td>Brand alignment</td>
 <td>3</td>
 </tr>
 <tr>
-<td>互动质量</td>
+<td>Engagement quality</td>
 <td>4</td>
 </tr>
 <tr>
-<td>真实度</td>
+<td>Authenticity</td>
 <td>5</td>
 </tr>
 <tr>
-<td><strong>总分</strong></td>
+<td><strong>Total</strong></td>
 <td><strong>20/25</strong></td>
 </tr>
 </tbody>
 </table>
-<p><strong>推荐等级</strong>：⭐ 推荐</p>
-<p><strong>为什么合适</strong>：<br />
-在以女性为主的达人领域中，独特的男性育儿视角为 Momcozy 带来差异化。与家庭品牌的合作记录扎实。真实、可信赖的内容风格。可通过"爸爸送礼指南"或"伴侣支持"角度触达育儿对话中的父亲群体（Momcozy 产品的送礼受众）。专业社交媒体背景保证高制作质量。</p>
-<p><strong>潜在顾虑</strong>：<br />
-- 受众主要为学龄儿童父母，非新生儿/产后 — 需围绕"爸爸送礼指南"或"伴侣支持"角度设计<br />
-- 与母乳喂养/吸奶核心场景的关联度有限<br />
-- 预算需创造性论证适配度</p>
+<p><strong>Recommendation</strong>: ⭐ Recommended</p>
+<p><strong>Why They're a Good Fit</strong>:<br />
+Unique male parenting voice in a predominantly female influencer space — offers differentiation for Momcozy. Strong brand partnership track record with family brands. Authentic, trusted content style. Could reach dads in parenting conversation (gift-giving audience for Momcozy products). High production quality from professional social media background.</p>
+<p><strong>Potential Concerns</strong>:<br />
+- Audience is primarily parents of school-age kids, not newborn/postpartum — may need to frame around "dad gift guide" or "partner support" angle<br />
+- Limited relevance to breastfeeding/pumping core use case<br />
+- Budget may need creative justification for the fit</p>
 <hr />
-<h2>达人 #4：@chelseakunz (Chelsea Kunz)</h2>
-<h3>基本信息</h3>
+<h2>Influencer #4: @chelseakunz (Chelsea Kunz)</h2>
+<h3>Basic Information</h3>
 <table>
 <thead>
 <tr>
-<th>属性</th>
-<th>详情</th>
+<th>Attribute</th>
+<th>Details</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><strong>姓名</strong></td>
+<td><strong>Name</strong></td>
 <td>Chelsea Kunz</td>
 </tr>
 <tr>
-<td><strong>账号</strong></td>
+<td><strong>Handle</strong></td>
 <td>@chelseakunz</td>
 </tr>
 <tr>
-<td><strong>平台</strong></td>
+<td><strong>Platform</strong></td>
 <td>Instagram</td>
 </tr>
 <tr>
-<td><strong>其他平台</strong></td>
-<td>TikTok（可能）</td>
+<td><strong>Other Platforms</strong></td>
+<td>TikTok (likely)</td>
 </tr>
 <tr>
-<td><strong>地区</strong></td>
-<td>美国</td>
+<td><strong>Location</strong></td>
+<td>USA</td>
 </tr>
 <tr>
-<td><strong>语言</strong></td>
-<td>英语</td>
+<td><strong>Language</strong></td>
+<td>English</td>
 </tr>
 <tr>
-<td><strong>领域</strong></td>
-<td>育儿幽默、真实妈妈内容</td>
+<td><strong>Niche</strong></td>
+<td>Parenting humor, relatable mom content</td>
 </tr>
 </tbody>
 </table>
-<h3>指标</h3>
+<h3>Metrics</h3>
 <table>
 <thead>
 <tr>
-<th>平台</th>
-<th>粉丝数</th>
-<th>互动率</th>
-<th>平均播放量</th>
+<th>Platform</th>
+<th>Followers</th>
+<th>Engagement Rate</th>
+<th>Avg. Views</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>Instagram</td>
-<td>~17.3万</td>
-<td>~4.2%（估，幽默类通常 3-6%）</td>
+<td>~173K</td>
+<td>~4.2% (est., humor niche typically 3-6%)</td>
 <td>N/A</td>
 </tr>
 </tbody>
 </table>
-<p><strong>增长趋势</strong>：增长中 — 育儿幽默是持续扩大的内容品类</p>
-<h3>受众分析</h3>
+<p><strong>Growth Trend</strong>: Growing — parenting humor is a consistently expanding category</p>
+<h3>Audience Analysis</h3>
 <table>
 <thead>
 <tr>
-<th>人口统计</th>
-<th>分布</th>
-<th>备注</th>
+<th>Demographic</th>
+<th>Breakdown</th>
+<th>Notes</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>性别</td>
-<td>~85% 女</td>
-<td>千禧/Gen Z 妈妈</td>
+<td>Gender</td>
+<td>~85% F</td>
+<td>Millennial/Gen Z moms</td>
 </tr>
 <tr>
-<td>年龄</td>
-<td>24–36岁为主</td>
+<td>Age</td>
+<td>24–36 primary</td>
 <td></td>
 </tr>
 <tr>
-<td>地区</td>
-<td>美国为主</td>
+<td>Location</td>
+<td>USA-dominant</td>
 <td></td>
 </tr>
 <tr>
-<td>兴趣</td>
-<td>真实母亲生活、幽默、生活方式</td>
-<td>娱乐+产品发现</td>
+<td>Interests</td>
+<td>Relatable motherhood, humor, lifestyle</td>
+<td>Entertainment + product discovery</td>
 </tr>
 </tbody>
 </table>
-<p><strong>受众质量评分</strong>：7/10<br />
-- 真实粉丝估算：~88%<br />
-- 受众-品牌重叠度：<strong>中高</strong> — 处于产品购买生命周期的妈妈</p>
-<h3>内容分析</h3>
-<p><strong>内容风格</strong>：<br />
-- 主要形式：Reels、幽默短剧、真实表情包<br />
-- 发布频率：~5-7帖/周（高产）<br />
-- 视觉风格：随意、真实、"真实的妈妈生活"<br />
-- 语调：幽默、不加滤镜、真实</p>
-<p><strong>表现最佳的内容</strong>：<br />
-1. 让人共鸣的"妈妈翻车"短剧（高分享/收藏）<br />
-2. "一天的生活" Reels<br />
-3. 融入幽默内容的产品提及</p>
-<p><strong>品牌适配度评估</strong>：<br />
-- 视觉一致性：中 — 随意/质朴 vs. Momcozy的温暖/专业<br />
-- 价值一致性：中 — 真实母亲但偏幽默导向<br />
-- 受众一致性：高 — 处于购买决策年龄段的妈妈</p>
-<h3>合作历史</h3>
-<p><strong>过往品牌合作</strong>：<br />
-| 品牌 | 日期 | 内容类型 | 预估效果 |<br />
+<p><strong>Audience Quality Score</strong>: 7/10<br />
+- Real followers estimate: ~88%<br />
+- Audience-brand overlap: <strong>Medium-High</strong> — moms in product-buying life stage</p>
+<h3>Content Analysis</h3>
+<p><strong>Content Style</strong>:<br />
+- Primary format: Reels, humorous skits, relatable memes<br />
+- Posting frequency: ~5-7 posts/week (high volume)<br />
+- Aesthetic: Casual, relatable, "real mom life"<br />
+- Tone: Humorous, unfiltered, authentic</p>
+<p><strong>Top Performing Content</strong>:<br />
+1. Relatable mom-fail skits (high share/save)<br />
+2. "Day in the life" Reels<br />
+3. Product mentions woven into humor content</p>
+<p><strong>Brand Fit Assessment</strong>:<br />
+- Visual alignment: Medium — casual/unpolished vs. Momcozy's warm/professional<br />
+- Value alignment: Medium — authentic motherhood but humor-forward<br />
+- Audience alignment: High — moms in purchasing demographic</p>
+<h3>Partnership History</h3>
+<p><strong>Past Brand Partnerships</strong>:<br />
+| Brand | Date | Content Type | Est. Performance |<br />
 |-------|------|--------------|------------------|<br />
-| 家庭品牌 | 定期 | 幽默融合赞助 | 好互动 |</p>
-<p><strong>竞品合作</strong>：未检测到。</p>
-<h3>联系信息</h3>
+| Family brands | Periodic | Humor-integrated sponsorships | Good engagement |</p>
+<p><strong>Competitor Partnerships</strong>: Not detected.</p>
+<h3>Contact Information</h3>
 <ul>
-<li><strong>联系途径</strong>：Instagram DM / 达人平台</li>
+<li><strong>Contact Method</strong>: Instagram DM / influencer platforms</li>
 </ul>
-<h3>适配评分摘要</h3>
+<h3>Fit Score Summary</h3>
 <table>
 <thead>
 <tr>
-<th>维度</th>
-<th>评分 (1-5)</th>
+<th>Factor</th>
+<th>Score (1-5)</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>受众匹配</td>
+<td>Audience match</td>
 <td>4</td>
 </tr>
 <tr>
-<td>内容质量</td>
+<td>Content quality</td>
 <td>4</td>
 </tr>
 <tr>
-<td>品牌一致性</td>
+<td>Brand alignment</td>
 <td>3</td>
 </tr>
 <tr>
-<td>互动质量</td>
+<td>Engagement quality</td>
 <td>4</td>
 </tr>
 <tr>
-<td>真实度</td>
+<td>Authenticity</td>
 <td>4</td>
 </tr>
 <tr>
-<td><strong>总分</strong></td>
+<td><strong>Total</strong></td>
 <td><strong>19/25</strong></td>
 </tr>
 </tbody>
 </table>
-<p><strong>推荐等级</strong>：⭐ 推荐</p>
-<p><strong>为什么合适</strong>：<br />
-在中腰部价位上覆盖妈妈人群的良好触达力。真实内容风格适合"诚实评测"形式。高发布频率意味着快速的活动执行周期。幽默方式降低广告疲劳——产品融入感觉自然。</p>
-<p><strong>潜在顾虑</strong>：<br />
-- 幽默优先内容可能与 Momcozy 温暖/支持性的品牌调性不完全匹配<br />
-- 与婴儿用品/吸奶器的直接关联度较低<br />
-- 互动率需验证</p>
+<p><strong>Recommendation</strong>: ⭐ Recommended</p>
+<p><strong>Why They're a Good Fit</strong>:<br />
+Strong reach within the mom demographic at mid-tier pricing. Relatable content style could work well for "honest review" format. High posting frequency means quick campaign turnaround. Humor approach reduces ad fatigue — product integrations feel native.</p>
+<p><strong>Potential Concerns</strong>:<br />
+- Humor-first content may not suit Momcozy's warm/supportive brand tone<br />
+- Less direct relevance to baby gear/pumping niche specifically<br />
+- Engagement rate needs verification</p>
 <hr />
-<h2>达人 #5：@chelseafoy (Chelsea Foy)</h2>
-<h3>基本信息</h3>
+<h2>Influencer #5: @chelseafoy (Chelsea Foy)</h2>
+<h3>Basic Information</h3>
 <table>
 <thead>
 <tr>
-<th>属性</th>
-<th>详情</th>
+<th>Attribute</th>
+<th>Details</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><strong>姓名</strong></td>
+<td><strong>Name</strong></td>
 <td>Chelsea Foy</td>
 </tr>
 <tr>
-<td><strong>账号</strong></td>
+<td><strong>Handle</strong></td>
 <td>@chelseafoy</td>
 </tr>
 <tr>
-<td><strong>平台</strong></td>
+<td><strong>Platform</strong></td>
 <td>Instagram</td>
 </tr>
 <tr>
-<td><strong>其他平台</strong></td>
-<td>博客</td>
+<td><strong>Other Platforms</strong></td>
+<td>Blog</td>
 </tr>
 <tr>
-<td><strong>地区</strong></td>
-<td>美国</td>
+<td><strong>Location</strong></td>
+<td>USA</td>
 </tr>
 <tr>
-<td><strong>语言</strong></td>
-<td>英语</td>
+<td><strong>Language</strong></td>
+<td>English</td>
 </tr>
 <tr>
-<td><strong>领域</strong></td>
-<td>创意家庭娱乐、儿童友好食谱、DIY</td>
+<td><strong>Niche</strong></td>
+<td>Creative family fun, kid-friendly recipes, DIY</td>
 </tr>
 </tbody>
 </table>
-<h3>指标</h3>
+<h3>Metrics</h3>
 <table>
 <thead>
 <tr>
-<th>平台</th>
-<th>粉丝数</th>
-<th>互动率</th>
-<th>平均播放量</th>
+<th>Platform</th>
+<th>Followers</th>
+<th>Engagement Rate</th>
+<th>Avg. Views</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>Instagram</td>
-<td>~6.6万</td>
-<td>~5.0%（估，创意领域微型达人通常超过 4%）</td>
+<td>~66.4K</td>
+<td>~5.0% (est., micro-influencers in creative niche often exceed 4%)</td>
 <td>N/A</td>
 </tr>
 </tbody>
 </table>
-<p><strong>增长趋势</strong>：稳定 — 既有细分领域</p>
-<h3>受众分析</h3>
+<p><strong>Growth Trend</strong>: Stable — established niche</p>
+<h3>Audience Analysis</h3>
 <table>
 <thead>
 <tr>
-<th>人口统计</th>
-<th>分布</th>
-<th>备注</th>
+<th>Demographic</th>
+<th>Breakdown</th>
+<th>Notes</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>性别</td>
-<td>~85% 女</td>
-<td>寻求活动/食谱灵感的妈妈</td>
+<td>Gender</td>
+<td>~85% F</td>
+<td>Moms looking for activities/recipes</td>
 </tr>
 <tr>
-<td>年龄</td>
-<td>28–40岁为主</td>
+<td>Age</td>
+<td>28–40 primary</td>
 <td></td>
 </tr>
 <tr>
-<td>地区</td>
-<td>美国为主</td>
+<td>Location</td>
+<td>USA-dominant</td>
 <td></td>
 </tr>
 <tr>
-<td>兴趣</td>
-<td>儿童活动、食谱、家庭创意</td>
-<td>DIY、动手实践</td>
+<td>Interests</td>
+<td>Kids' activities, recipes, family creativity</td>
+<td>DIY, hands-on</td>
 </tr>
 </tbody>
 </table>
-<p><strong>受众质量评分</strong>：7/10<br />
-- 真实粉丝估算：~90%<br />
-- 受众-品牌重叠度：<strong>中等</strong> — 妈妈受众但非专门婴儿</p>
-<h3>内容分析</h3>
-<p><strong>内容风格</strong>：<br />
-- 主要形式：照片、Reels、食谱/教程图文<br />
-- 发布频率：~3-4帖/周<br />
-- 视觉风格：明亮、多彩、家庭友好<br />
-- 语调：鼓励性、创意、实用</p>
-<p><strong>表现最佳的内容</strong>：<br />
-1. 儿童友好食谱 Reels<br />
-2. 创意游戏/手工创意<br />
-3. 季节性家庭活动</p>
-<p><strong>品牌适配度评估</strong>：<br />
-- 视觉一致性：中 — 明亮/活泼 vs. 温暖/母性<br />
-- 价值一致性：中 — "让母亲生活更轻松"部分重叠<br />
-- 受众一致性：中 — 妈妈但内容焦点为较大龄儿童</p>
-<h3>合作历史</h3>
-<p><strong>过往品牌合作</strong>：基于内容领域，预计合作过手工/食品/家庭品牌。</p>
-<p><strong>竞品合作</strong>：未检测到。</p>
-<h3>联系信息</h3>
+<p><strong>Audience Quality Score</strong>: 7/10<br />
+- Real followers estimate: ~90%<br />
+- Audience-brand overlap: <strong>Medium</strong> — mom audience but not baby-specific</p>
+<h3>Content Analysis</h3>
+<p><strong>Content Style</strong>:<br />
+- Primary format: Photos, Reels, recipe/how-to carousels<br />
+- Posting frequency: ~3-4 posts/week<br />
+- Aesthetic: Bright, colorful, family-friendly<br />
+- Tone: Encouraging, creative, practical</p>
+<p><strong>Top Performing Content</strong>:<br />
+1. Kid-friendly recipe Reels<br />
+2. Creative play/craft ideas<br />
+3. Seasonal family activities</p>
+<p><strong>Brand Fit Assessment</strong>:<br />
+- Visual alignment: Medium — bright/playful vs. warm/maternal<br />
+- Value alignment: Medium — "making motherhood easier" overlaps partially<br />
+- Audience alignment: Medium — moms, but content focus is older kids</p>
+<h3>Partnership History</h3>
+<p><strong>Past Brand Partnerships</strong>: Craft/food/family brands expected given content niche.</p>
+<p><strong>Competitor Partnerships</strong>: Not detected.</p>
+<h3>Contact Information</h3>
 <ul>
-<li><strong>联系途径</strong>：Instagram DM</li>
+<li><strong>Contact Method</strong>: Instagram DM</li>
 </ul>
-<h3>适配评分摘要</h3>
+<h3>Fit Score Summary</h3>
 <table>
 <thead>
 <tr>
-<th>维度</th>
-<th>评分 (1-5)</th>
+<th>Factor</th>
+<th>Score (1-5)</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>受众匹配</td>
+<td>Audience match</td>
 <td>3</td>
 </tr>
 <tr>
-<td>内容质量</td>
+<td>Content quality</td>
 <td>4</td>
 </tr>
 <tr>
-<td>品牌一致性</td>
+<td>Brand alignment</td>
 <td>3</td>
 </tr>
 <tr>
-<td>互动质量</td>
+<td>Engagement quality</td>
 <td>4</td>
 </tr>
 <tr>
-<td>真实度</td>
+<td>Authenticity</td>
 <td>4</td>
 </tr>
 <tr>
-<td><strong>总分</strong></td>
+<td><strong>Total</strong></td>
 <td><strong>18/25</strong></td>
 </tr>
 </tbody>
 </table>
-<p><strong>推荐等级</strong>：⭐ 推荐</p>
-<p><strong>为什么合适</strong>：<br />
-微型达人级别互动率预期高。可信赖、家庭友好的品牌安全选择。创意内容制作能力可产出独特的 Momcozy 活动素材（如"吸奶友好食谱"或"产后恢复活动"）。</p>
-<p><strong>潜在顾虑</strong>：<br />
-- 内容焦点为学龄儿童而非新生儿/产后<br />
-- 6.6万粉丝触达力较低<br />
-- 可能需要更多创意指导以对齐 Momcozy 母婴护理定位</p>
+<p><strong>Recommendation</strong>: ⭐ Recommended</p>
+<p><strong>Why They're a Good Fit</strong>:<br />
+Strong engagement expected at micro-tier. Trusted, family-friendly brand safe choice. Creative content capability could produce unique Momcozy campaign assets (e.g., "pumping-friendly recipes" or "postpartum recovery activities").</p>
+<p><strong>Potential Concerns</strong>:<br />
+- Content focus on older kids (school-age), not newborn/postpartum<br />
+- Lower reach at 66.4K<br />
+- May require more creative direction to align with Momcozy's maternal care positioning</p>
 <hr />
-<h2>达人 #6：@mommyshorts (Ilana Wiles)</h2>
-<h3>基本信息</h3>
+<h2>Influencer #6: @mommyshorts (Ilana Wiles)</h2>
+<h3>Basic Information</h3>
 <table>
 <thead>
 <tr>
-<th>属性</th>
-<th>详情</th>
+<th>Attribute</th>
+<th>Details</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><strong>姓名</strong></td>
+<td><strong>Name</strong></td>
 <td>Ilana Wiles</td>
 </tr>
 <tr>
-<td><strong>账号</strong></td>
-<td>@mommyshorts（主）/ @averageparentproblems（40.6万）</td>
+<td><strong>Handle</strong></td>
+<td>@mommyshorts (primary) / @averageparentproblems (405K)</td>
 </tr>
 <tr>
-<td><strong>平台</strong></td>
-<td>Instagram（主）</td>
+<td><strong>Platform</strong></td>
+<td>Instagram (primary)</td>
 </tr>
 <tr>
-<td><strong>其他平台</strong></td>
-<td>TikTok（@ilanawiles，~41.5万，互动率 16%）、博客</td>
+<td><strong>Other Platforms</strong></td>
+<td>TikTok (@ilanawiles, ~415K, ER 16%), Blog</td>
 </tr>
 <tr>
-<td><strong>地区</strong></td>
-<td>纽约，美国</td>
+<td><strong>Location</strong></td>
+<td>New York, NY</td>
 </tr>
 <tr>
-<td><strong>语言</strong></td>
-<td>英语</td>
+<td><strong>Language</strong></td>
+<td>English</td>
 </tr>
 <tr>
-<td><strong>领域</strong></td>
-<td>育儿幽默、真实母亲生活、作家</td>
+<td><strong>Niche</strong></td>
+<td>Parenting humor, relatable motherhood, author</td>
 </tr>
 </tbody>
 </table>
-<h3>指标</h3>
+<h3>Metrics</h3>
 <table>
 <thead>
 <tr>
-<th>平台</th>
-<th>粉丝数</th>
-<th>互动率</th>
-<th>平均播放量</th>
+<th>Platform</th>
+<th>Followers</th>
+<th>Engagement Rate</th>
+<th>Avg. Views</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>Instagram (@mommyshorts)</td>
-<td>~19.7万</td>
-<td>~3.4%（HypeAuditor 对 @averageparentproblems 的确认数据）</td>
+<td>~197K</td>
+<td>~3.4% (confirmed via HypeAuditor for @averageparentproblems)</td>
 <td>N/A</td>
 </tr>
 <tr>
 <td>TikTok (@ilanawiles)</td>
-<td>~41.5万</td>
+<td>~415K</td>
 <td>16.04%</td>
-<td>高</td>
+<td>High</td>
 </tr>
 <tr>
 <td>Instagram (@averageparentproblems)</td>
-<td>~40.6万</td>
+<td>~406K</td>
 <td>3.41%</td>
 <td>N/A</td>
 </tr>
 </tbody>
 </table>
-<p><strong>增长趋势</strong>：成熟/稳定 — 自2010年起长期创作，多平台覆盖</p>
-<h3>受众分析</h3>
+<p><strong>Growth Trend</strong>: Mature/stable — long-established creator since 2010, multiple platform presence</p>
+<h3>Audience Analysis</h3>
 <table>
 <thead>
 <tr>
-<th>人口统计</th>
-<th>分布</th>
-<th>备注</th>
+<th>Demographic</th>
+<th>Breakdown</th>
+<th>Notes</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>性别</td>
-<td>~80% 女</td>
-<td>千禧一代妈妈，部分 X 世代</td>
+<td>Gender</td>
+<td>~80% F</td>
+<td>Millennial moms, some Gen X</td>
 </tr>
 <tr>
-<td>年龄</td>
-<td>30–45岁为主</td>
+<td>Age</td>
+<td>30–45 primary</td>
 <td></td>
 </tr>
 <tr>
-<td>地区</td>
-<td>美国为主（纽约中心）</td>
+<td>Location</td>
+<td>USA-dominant (NYC hub)</td>
 <td></td>
 </tr>
 <tr>
-<td>兴趣</td>
-<td>幽默、育儿、生活方式、流行文化</td>
+<td>Interests</td>
+<td>Humor, parenting, lifestyle, pop culture</td>
 <td></td>
 </tr>
 </tbody>
 </table>
-<p><strong>受众质量评分</strong>：8/10<br />
-- 真实粉丝估算：~88%<br />
-- 受众-品牌重叠度：<strong>中高</strong> — 有购买力的妈妈群体，但偏宽泛生活方式</p>
-<h3>内容分析</h3>
-<p><strong>内容风格</strong>：<br />
-- 主要形式：幽默帖、Reels、赞助内容融合<br />
-- 发布频率：~4-5帖/周<br />
-- 视觉风格：干净、纽约妈妈风、机智<br />
-- 语调：聪明、带点讽刺、真实 — 广告从业背景使品牌融合既精致又真诚</p>
-<p><strong>表现最佳的内容</strong>：<br />
-1. 让人共鸣的育儿幽默帖<br />
-2. 叙事式赞助内容（非硬广）<br />
-3. 书籍推广内容</p>
-<p><strong>品牌适配度评估</strong>：<br />
-- 视觉一致性：中 — 纽约/品味 vs. 温暖/亲民<br />
-- 价值一致性：中 — 真实母亲但幽默角度<br />
-- 受众一致性：中高 — 有购买力的妈妈受众</p>
-<h3>合作历史</h3>
-<p><strong>过往品牌合作</strong>：<br />
-| 品牌 | 日期 | 内容类型 | 预估效果 |<br />
+<p><strong>Audience Quality Score</strong>: 8/10<br />
+- Real followers estimate: ~88%<br />
+- Audience-brand overlap: <strong>Medium-High</strong> — moms in purchasing demo, but broader lifestyle</p>
+<h3>Content Analysis</h3>
+<p><strong>Content Style</strong>:<br />
+- Primary format: Humor posts, Reels, sponsored integrations<br />
+- Posting frequency: ~4-5 posts/week<br />
+- Aesthetic: Clean, NYC-mom, witty<br />
+- Tone: Smart, sarcastic, authentic — advertising background means polished but genuine brand integrations</p>
+<p><strong>Top Performing Content</strong>:<br />
+1. Relatable parenting humor posts<br />
+2. Sponsored content with authentic narrative (not direct sell)<br />
+3. Book promotion content</p>
+<p><strong>Brand Fit Assessment</strong>:<br />
+- Visual alignment: Medium — NYC/sophisticated vs. warm/accessible<br />
+- Value alignment: Medium — authentic motherhood but humor lens<br />
+- Audience alignment: Medium-High — mom audience with purchasing power</p>
+<h3>Partnership History</h3>
+<p><strong>Past Brand Partnerships</strong>:<br />
+| Brand | Date | Content Type | Est. Performance |<br />
 |-------|------|--------------|------------------|<br />
-| 尿布品牌 | 多次 | 叙事融合 | 以真实融合著称 |<br />
-| 旅行公司 | 定期 | 家庭旅行 | 好 |<br />
-| OTC 健康 | 多次 | 赞助内容 | 高信任 |<br />
-| 清洁产品 | N/A | （基于原则拒绝） | N/A |</p>
-<p><strong>竞品合作</strong>：以拒绝价值观冲突/竞品品牌著称。未检测到母婴吸奶器品牌排他协议。</p>
-<h3>联系信息</h3>
+| Diaper brands | Multiple | Integrated narrative | Known for authentic integration |<br />
+| Travel companies | Periodic | Family travel | Good |<br />
+| Healthcare OTC | Multiple | Sponsored content | High trust |<br />
+| Cleaning products | N/A | (Declined on principle) | N/A |</p>
+<p><strong>Competitor Partnerships</strong>: Known for turning down brands that conflict with her values/previous partnerships. No maternal pump brand exclusivity detected.</p>
+<h3>Contact Information</h3>
 <ul>
-<li><strong>网站</strong>：mommyshorts.com</li>
-<li><strong>代理/经纪人</strong>：自运营（广告从业背景）</li>
-<li><strong>联系途径</strong>：网站 / 专业邮箱</li>
+<li><strong>Website</strong>: mommyshorts.com</li>
+<li><strong>Agency/Manager</strong>: Self-managed (advertising background)</li>
+<li><strong>Contact Method</strong>: Website / professional email</li>
 </ul>
-<h3>适配评分摘要</h3>
+<h3>Fit Score Summary</h3>
 <table>
 <thead>
 <tr>
-<th>维度</th>
-<th>评分 (1-5)</th>
+<th>Factor</th>
+<th>Score (1-5)</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>受众匹配</td>
+<td>Audience match</td>
 <td>4</td>
 </tr>
 <tr>
-<td>内容质量</td>
+<td>Content quality</td>
 <td>5</td>
 </tr>
 <tr>
-<td>品牌一致性</td>
+<td>Brand alignment</td>
 <td>3</td>
 </tr>
 <tr>
-<td>互动质量</td>
+<td>Engagement quality</td>
 <td>3</td>
 </tr>
 <tr>
-<td>真实度</td>
+<td>Authenticity</td>
 <td>5</td>
 </tr>
 <tr>
-<td><strong>总分</strong></td>
+<td><strong>Total</strong></td>
 <td><strong>20/25</strong></td>
 </tr>
 </tbody>
 </table>
-<p><strong>推荐等级</strong>：⭐ 推荐</p>
-<p><strong>为什么合适</strong>：<br />
-Ilana Wiles 在育儿达人领域拥有 15 年以上的传奇地位。广告从业背景意味着她交付的内容专业且符合要求，同时保持真实。她的受众信任她恰恰因为她对合作品牌精挑细选。Momcozy 合作将是一个公信力信号。TikTok（~41.5万，16%互动率）带来多平台增值。</p>
-<p><strong>潜在顾虑</strong>：<br />
-- Instagram 互动率（~3.4%）低于 4% 门槛 — TikTok 可弥补但需单独谈判<br />
-- @averageparentproblems（40.6万）超出粉丝上限；@mommyshorts（~19.7万）在范围内<br />
-- 挑剔是双刃剑 — 如果 Momcozy 与她价值观不符，可能拒绝<br />
-- 因资深地位和作家身份，报价可能较高</p>
+<p><strong>Recommendation</strong>: ⭐ Recommended</p>
+<p><strong>Why They're a Good Fit</strong>:<br />
+Ilana Wiles has legendary status in the parenting influencer space with a 15+ year track record. Her advertising background means she delivers professional, on-brief content while maintaining authenticity. Her audience trusts her precisely because she's selective about partnerships. A Momcozy partnership would be a credibility signal. TikTok presence (~415K, 16% ER) adds multi-platform value.</p>
+<p><strong>Potential Concerns</strong>:<br />
+- Instagram engagement rate (~3.4%) is below the 4% threshold on her main account — TikTok compensates but requires separate negotiation<br />
+- @averageparentproblems (406K) is above the follower cap; @mommyshorts (~197K) is in range<br />
+- Selectivity cuts both ways — she may decline if Momcozy doesn't align with her values<br />
+- Higher rate card given established status and book-author credentials</p>
 <hr />
-<h2>达人 #7：@anawilkinson (Ana Wilkinson)</h2>
-<h3>基本信息</h3>
+<h2>Influencer #7: @anawilkinson (Ana Wilkinson)</h2>
+<h3>Basic Information</h3>
 <table>
 <thead>
 <tr>
-<th>属性</th>
-<th>详情</th>
+<th>Attribute</th>
+<th>Details</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><strong>姓名</strong></td>
+<td><strong>Name</strong></td>
 <td>Ana Wilkinson</td>
 </tr>
 <tr>
-<td><strong>账号</strong></td>
+<td><strong>Handle</strong></td>
 <td>@anawilkinson</td>
 </tr>
 <tr>
-<td><strong>平台</strong></td>
+<td><strong>Platform</strong></td>
 <td>Instagram</td>
 </tr>
 <tr>
-<td><strong>其他平台</strong></td>
-<td>未确认</td>
+<td><strong>Other Platforms</strong></td>
+<td>Not confirmed</td>
 </tr>
 <tr>
-<td><strong>地区</strong></td>
-<td>美国</td>
+<td><strong>Location</strong></td>
+<td>USA</td>
 </tr>
 <tr>
-<td><strong>语言</strong></td>
-<td>英语</td>
+<td><strong>Language</strong></td>
+<td>English</td>
 </tr>
 <tr>
-<td><strong>领域</strong></td>
-<td>家庭生活、家居整理</td>
+<td><strong>Niche</strong></td>
+<td>Family living, home organization</td>
 </tr>
 </tbody>
 </table>
-<h3>指标</h3>
+<h3>Metrics</h3>
 <table>
 <thead>
 <tr>
-<th>平台</th>
-<th>粉丝数</th>
-<th>互动率</th>
-<th>平均播放量</th>
+<th>Platform</th>
+<th>Followers</th>
+<th>Engagement Rate</th>
+<th>Avg. Views</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>Instagram</td>
-<td>~5.2万</td>
-<td>~5.5%（估，家居/整理类通常高互动）</td>
+<td>~52K</td>
+<td>~5.5% (est., home/org niche typically high engagement)</td>
 <td>N/A</td>
 </tr>
 </tbody>
 </table>
-<p><strong>增长趋势</strong>：增长中 — 家居整理是热门内容品类</p>
-<h3>受众分析</h3>
+<p><strong>Growth Trend</strong>: Growing — home organization is a trending category</p>
+<h3>Audience Analysis</h3>
 <table>
 <thead>
 <tr>
-<th>人口统计</th>
-<th>分布</th>
-<th>备注</th>
+<th>Demographic</th>
+<th>Breakdown</th>
+<th>Notes</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>性别</td>
-<td>~88% 女</td>
-<td>寻求家居管理灵感的妈妈</td>
+<td>Gender</td>
+<td>~88% F</td>
+<td>Moms seeking home management inspiration</td>
 </tr>
 <tr>
-<td>年龄</td>
-<td>25–38岁为主</td>
+<td>Age</td>
+<td>25–38 primary</td>
 <td></td>
 </tr>
 <tr>
-<td>地区</td>
-<td>美国为主</td>
+<td>Location</td>
+<td>USA-dominant</td>
 <td></td>
 </tr>
 <tr>
-<td>兴趣</td>
-<td>收纳整理、家庭日常、家居管理</td>
+<td>Interests</td>
+<td>Organization, family routines, home management</td>
 <td></td>
 </tr>
 </tbody>
 </table>
-<p><strong>受众质量评分</strong>：7/10<br />
-- 真实粉丝估算：~90%<br />
-- 受众-品牌重叠度：<strong>中等</strong> — 妈妈受众但非专门产后</p>
-<h3>内容分析</h3>
-<p><strong>内容风格</strong>：<br />
-- 主要形式：收纳技巧、家居巡览、日常 Reels<br />
-- 发布频率：~3-4帖/周<br />
-- 视觉风格：干净、有序、有追求但可达到<br />
-- 语调：有帮助、鼓励性、实用</p>
-<p><strong>表现最佳的内容</strong>：<br />
-1. 整理前后对比 Reels（高收藏率）<br />
-2. 家庭日常/清单帖<br />
-3. 收纳产品推荐</p>
-<p><strong>品牌适配度评估</strong>：<br />
-- 视觉一致性：中 — 干净/有序 vs. 母性/温暖<br />
-- 价值一致性：中 — "让妈妈生活更轻松"与 Momcozy 便捷性角度重叠<br />
-- 受众一致性：中 — 妈妈但家居管理焦点</p>
-<h3>合作历史</h3>
-<p><strong>过往品牌合作</strong>：预计合作过家居收纳、储物及家庭产品品牌。</p>
-<p><strong>竞品合作</strong>：未检测到。</p>
-<h3>联系信息</h3>
+<p><strong>Audience Quality Score</strong>: 7/10<br />
+- Real followers estimate: ~90%<br />
+- Audience-brand overlap: <strong>Medium</strong> — mom audience but not postpartum-specific</p>
+<h3>Content Analysis</h3>
+<p><strong>Content Style</strong>:<br />
+- Primary format: Organization tips, home tours, routine Reels<br />
+- Posting frequency: ~3-4 posts/week<br />
+- Aesthetic: Clean, organized, aspirational-but-achievable<br />
+- Tone: Helpful, encouraging, practical</p>
+<p><strong>Top Performing Content</strong>:<br />
+1. Before/after organization Reels (high save rate)<br />
+2. Family routine/checklist posts<br />
+3. Product organization recommendations</p>
+<p><strong>Brand Fit Assessment</strong>:<br />
+- Visual alignment: Medium — clean/organized vs. maternal/warm<br />
+- Value alignment: Medium — "making mom life easier" overlaps with Momcozy's convenience angle<br />
+- Audience alignment: Medium — moms but home management focus</p>
+<h3>Partnership History</h3>
+<p><strong>Past Brand Partnerships</strong>: Home organization, storage, and family product brands expected.</p>
+<p><strong>Competitor Partnerships</strong>: Not detected.</p>
+<h3>Contact Information</h3>
 <ul>
-<li><strong>联系途径</strong>：Instagram DM</li>
+<li><strong>Contact Method</strong>: Instagram DM</li>
 </ul>
-<h3>适配评分摘要</h3>
+<h3>Fit Score Summary</h3>
 <table>
 <thead>
 <tr>
-<th>维度</th>
-<th>评分 (1-5)</th>
+<th>Factor</th>
+<th>Score (1-5)</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>受众匹配</td>
+<td>Audience match</td>
 <td>3</td>
 </tr>
 <tr>
-<td>内容质量</td>
+<td>Content quality</td>
 <td>4</td>
 </tr>
 <tr>
-<td>品牌一致性</td>
+<td>Brand alignment</td>
 <td>3</td>
 </tr>
 <tr>
-<td>互动质量</td>
+<td>Engagement quality</td>
 <td>4</td>
 </tr>
 <tr>
-<td>真实度</td>
+<td>Authenticity</td>
 <td>4</td>
 </tr>
 <tr>
-<td><strong>总分</strong></td>
+<td><strong>Total</strong></td>
 <td><strong>18/25</strong></td>
 </tr>
 </tbody>
 </table>
-<p><strong>推荐等级</strong>：⭐ 推荐</p>
-<p><strong>为什么合适</strong>：<br />
-粉丝量较低（5.2万）但互动率预期高，合作成本效益好。"收纳/日常"内容可配合 Momcozy"让吸奶融入生活"的叙事。上升期创作者，早期合作有优势。</p>
-<p><strong>潜在顾虑</strong>：<br />
-- 候选池中粉丝数最低 — 触达力有限<br />
-- 家居整理领域与母婴护理侧重点有距离<br />
-- 互动数据待验证</p>
+<p><strong>Recommendation</strong>: ⭐ Recommended</p>
+<p><strong>Why They're a Good Fit</strong>:<br />
+Lower-tier follower count (52K) with likely high engagement makes for cost-effective partnership. "Organization/routine" content could work for Momcozy's "make pumping fit your life" narrative. Rising creator with growth potential — early partnership advantage.</p>
+<p><strong>Potential Concerns</strong>:<br />
+- Lowest follower count in candidate pool — limited reach<br />
+- Home organization niche is tangential to maternal/baby care<br />
+- Unverified engagement data</p>
 <hr />
-<h2>达人 #8：@parentingthespectrum (Cassandra Botnick)</h2>
-<h3>基本信息</h3>
+<h2>Influencer #8: @parentingthespectrum (Cassandra Botnick)</h2>
+<h3>Basic Information</h3>
 <table>
 <thead>
 <tr>
-<th>属性</th>
-<th>详情</th>
+<th>Attribute</th>
+<th>Details</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><strong>姓名</strong></td>
+<td><strong>Name</strong></td>
 <td>Cassandra Botnick</td>
 </tr>
 <tr>
-<td><strong>账号</strong></td>
-<td>@parentingthespectrum（估）</td>
+<td><strong>Handle</strong></td>
+<td>@parentingthespectrum (est.)</td>
 </tr>
 <tr>
-<td><strong>平台</strong></td>
+<td><strong>Platform</strong></td>
 <td>Instagram</td>
 </tr>
 <tr>
-<td><strong>其他平台</strong></td>
-<td>未确认</td>
+<td><strong>Other Platforms</strong></td>
+<td>Not confirmed</td>
 </tr>
 <tr>
-<td><strong>地区</strong></td>
-<td>美国</td>
+<td><strong>Location</strong></td>
+<td>USA</td>
 </tr>
 <tr>
-<td><strong>语言</strong></td>
-<td>英语</td>
+<td><strong>Language</strong></td>
+<td>English</td>
 </tr>
 <tr>
-<td><strong>领域</strong></td>
-<td>母亲角色、自闭症接纳/倡导</td>
+<td><strong>Niche</strong></td>
+<td>Motherhood, autism acceptance/advocacy</td>
 </tr>
 </tbody>
 </table>
-<h3>指标</h3>
+<h3>Metrics</h3>
 <table>
 <thead>
 <tr>
-<th>平台</th>
-<th>粉丝数</th>
-<th>互动率</th>
-<th>平均播放量</th>
+<th>Platform</th>
+<th>Followers</th>
+<th>Engagement Rate</th>
+<th>Avg. Views</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>Instagram</td>
-<td>~7万</td>
-<td>~5.0%（估，倡导类通常有高度互动的社群）</td>
+<td>~70K</td>
+<td>~5.0% (est., advocacy niche often has highly engaged communities)</td>
 <td>N/A</td>
 </tr>
 </tbody>
 </table>
-<p><strong>增长趋势</strong>：稳定 — 倡导/内容平衡</p>
-<h3>受众分析</h3>
+<p><strong>Growth Trend</strong>: Stable — advocacy/content balance</p>
+<h3>Audience Analysis</h3>
 <table>
 <thead>
 <tr>
-<th>人口统计</th>
-<th>分布</th>
-<th>备注</th>
+<th>Demographic</th>
+<th>Breakdown</th>
+<th>Notes</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>性别</td>
-<td>~85% 女</td>
-<td>母亲、特殊需求儿童父母</td>
+<td>Gender</td>
+<td>~85% F</td>
+<td>Mothers, special needs parents</td>
 </tr>
 <tr>
-<td>年龄</td>
-<td>28–42岁为主</td>
+<td>Age</td>
+<td>28–42 primary</td>
 <td></td>
 </tr>
 <tr>
-<td>地区</td>
-<td>美国为主</td>
+<td>Location</td>
+<td>USA-dominant</td>
 <td></td>
 </tr>
 <tr>
-<td>兴趣</td>
-<td>特殊需求育儿、倡导、母亲角色</td>
+<td>Interests</td>
+<td>Special needs parenting, advocacy, motherhood</td>
 <td></td>
 </tr>
 </tbody>
 </table>
-<p><strong>受众质量评分</strong>：8/10<br />
-- 真实粉丝估算：~92%<br />
-- 受众-品牌重叠度：<strong>中低</strong> — 育儿受众但非专门婴儿护理</p>
-<h3>内容分析</h3>
-<p><strong>内容风格</strong>：<br />
-- 主要形式：个人故事、倡导帖、育儿内容<br />
-- 发布频率：~3-5帖/周<br />
-- 视觉风格：真实、个人、温暖<br />
-- 语调：诚实、脆弱、社群建设</p>
-<p><strong>表现最佳的内容</strong>：<br />
-1. 个人育儿经历帖（高情感互动）<br />
-2. 倡导/意识提升内容（高分享率）<br />
-3. 一天的生活真实内容</p>
-<p><strong>品牌适配度评估</strong>：<br />
-- 视觉一致性：中 — 真实/质朴符合 Momcozy"真实母亲"调性<br />
-- 价值一致性：中 — 支持母亲有广泛一致性<br />
-- 受众一致性：中低 — 育儿但细分领域</p>
-<h3>合作历史</h3>
-<p><strong>过往品牌合作</strong>：预计合作过家庭/包容性品牌。</p>
-<p><strong>竞品合作</strong>：未检测到。</p>
-<h3>联系信息</h3>
+<p><strong>Audience Quality Score</strong>: 8/10<br />
+- Real followers estimate: ~92%<br />
+- Audience-brand overlap: <strong>Medium-Low</strong> — parenting audience but not specifically baby care</p>
+<h3>Content Analysis</h3>
+<p><strong>Content Style</strong>:<br />
+- Primary format: Personal stories, advocacy posts, parenting content<br />
+- Posting frequency: ~3-5 posts/week<br />
+- Aesthetic: Authentic, personal, warm<br />
+- Tone: Honest, vulnerable, community-building</p>
+<p><strong>Top Performing Content</strong>:<br />
+1. Personal parenting journey posts (high emotional engagement)<br />
+2. Advocacy/awareness content (high share rate)<br />
+3. Day-in-the-life authenticity content</p>
+<p><strong>Brand Fit Assessment</strong>:<br />
+- Visual alignment: Medium — authentic/unpolished fits Momcozy's "real motherhood"<br />
+- Value alignment: Medium — supporting moms aligns broadly<br />
+- Audience alignment: Medium-Low — parenting but specialized niche</p>
+<h3>Partnership History</h3>
+<p><strong>Past Brand Partnerships</strong>: Family/inclusive brands expected.</p>
+<p><strong>Competitor Partnerships</strong>: Not detected.</p>
+<h3>Contact Information</h3>
 <ul>
-<li><strong>联系途径</strong>：Instagram DM</li>
+<li><strong>Contact Method</strong>: Instagram DM</li>
 </ul>
-<h3>适配评分摘要</h3>
+<h3>Fit Score Summary</h3>
 <table>
 <thead>
 <tr>
-<th>维度</th>
-<th>评分 (1-5)</th>
+<th>Factor</th>
+<th>Score (1-5)</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>受众匹配</td>
+<td>Audience match</td>
 <td>3</td>
 </tr>
 <tr>
-<td>内容质量</td>
+<td>Content quality</td>
 <td>4</td>
 </tr>
 <tr>
-<td>品牌一致性</td>
+<td>Brand alignment</td>
 <td>3</td>
 </tr>
 <tr>
-<td>互动质量</td>
+<td>Engagement quality</td>
 <td>4</td>
 </tr>
 <tr>
-<td>真实度</td>
+<td>Authenticity</td>
 <td>5</td>
 </tr>
 <tr>
-<td><strong>总分</strong></td>
+<td><strong>Total</strong></td>
 <td><strong>19/25</strong></td>
 </tr>
 </tbody>
 </table>
-<p><strong>推荐等级</strong>：⭐ 推荐</p>
-<p><strong>为什么合适</strong>：<br />
-高度真实、受信赖的社群。多元化代表——对包容性品牌定位很重要。与受众的强情感连接驱动高互动和基于信任的推荐。</p>
-<p><strong>潜在顾虑</strong>：<br />
-- 细分受众（自闭症育儿）可能不与产后/吸奶受众直接重叠<br />
-- 内容偏倡导而非产品评测 — 可能需要创意对齐</p>
+<p><strong>Recommendation</strong>: ⭐ Recommended</p>
+<p><strong>Why They're a Good Fit</strong>:<br />
+Highly authentic, trusted community. Diverse representation — important for inclusive brand positioning. Strong emotional connection with audience drives high engagement and trust-based recommendations.</p>
+<p><strong>Potential Concerns</strong>:<br />
+- Niche audience (autism parenting) may not directly overlap with postpartum/pumping audience<br />
+- Content is more advocacy than product-review — may require creative alignment</p>
 <hr />
-<h2>YouTube 优先候选人</h2>
+<h2>YouTube-First Candidates</h2>
 <hr />
-<h2>达人 #9：Janna Faye (@jannafayeco) — ⚠️ 观察名单</h2>
-<h3>基本信息</h3>
+<h2>Influencer #9: Janna Faye (@jannafayeco) — ⚠️ WATCH LIST</h2>
+<h3>Basic Information</h3>
 <table>
 <thead>
 <tr>
-<th>属性</th>
-<th>详情</th>
+<th>Attribute</th>
+<th>Details</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><strong>姓名</strong></td>
+<td><strong>Name</strong></td>
 <td>Janna Faye</td>
 </tr>
 <tr>
-<td><strong>账号</strong></td>
+<td><strong>Handle</strong></td>
 <td>@jannafayeco</td>
 </tr>
 <tr>
-<td><strong>平台</strong></td>
-<td>YouTube（主）</td>
+<td><strong>Platform</strong></td>
+<td>YouTube (primary)</td>
 </tr>
 <tr>
-<td><strong>其他平台</strong></td>
-<td>Instagram（可能）</td>
+<td><strong>Other Platforms</strong></td>
+<td>Instagram (likely)</td>
 </tr>
 <tr>
-<td><strong>地区</strong></td>
-<td>美国</td>
+<td><strong>Location</strong></td>
+<td>USA</td>
 </tr>
 <tr>
-<td><strong>语言</strong></td>
-<td>英语</td>
+<td><strong>Language</strong></td>
+<td>English</td>
 </tr>
 <tr>
-<td><strong>领域</strong></td>
-<td>家庭生活、旧货淘货、DIY、四娃妈妈、1970年代房屋翻新</td>
+<td><strong>Niche</strong></td>
+<td>Homemaking, thrifting, DIY, mom of 4, 1970s home renovation</td>
 </tr>
 </tbody>
 </table>
-<h3>指标</h3>
+<h3>Metrics</h3>
 <table>
 <thead>
 <tr>
-<th>平台</th>
-<th>粉丝数</th>
-<th>互动率</th>
-<th>平均播放量</th>
+<th>Platform</th>
+<th>Followers</th>
+<th>Engagement Rate</th>
+<th>Avg. Views</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>YouTube</td>
-<td>7.47万</td>
+<td>74.7K</td>
 <td>3.19%</td>
-<td>~3,800/视频</td>
+<td>~3.8K/video</td>
 </tr>
 </tbody>
 </table>
-<p><strong>增长趋势</strong>：<strong>停滞/下降</strong> — 0%增长率。⚠️ 超过3个月未上传（截至2025年1月）。</p>
-<h3>受众分析</h3>
+<p><strong>Growth Trend</strong>: <strong>Flat/declining</strong> — 0% growth rate. ⚠️ No uploads in 3+ months (as of Jan 2025).</p>
+<h3>Audience Analysis</h3>
 <table>
 <thead>
 <tr>
-<th>人口统计</th>
-<th>分布</th>
-<th>备注</th>
+<th>Demographic</th>
+<th>Breakdown</th>
+<th>Notes</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>性别</td>
-<td>~85% 女</td>
-<td>家庭生活/妈妈受众</td>
+<td>Gender</td>
+<td>~85% F</td>
+<td>Homemaking/mom audience</td>
 </tr>
 <tr>
-<td>年龄</td>
-<td>25–40岁为主</td>
+<td>Age</td>
+<td>25–40 primary</td>
 <td></td>
 </tr>
 <tr>
-<td>地区</td>
-<td>美国为主</td>
+<td>Location</td>
+<td>USA-dominant</td>
 <td></td>
 </tr>
 <tr>
-<td>兴趣</td>
-<td>家庭生活、旧货、DIY、家庭生活</td>
+<td>Interests</td>
+<td>Homemaking, thrifting, DIY, family life</td>
 <td></td>
 </tr>
 </tbody>
 </table>
-<p><strong>受众质量评分</strong>：6/10<br />
-- 真实粉丝估算：~85%<br />
-- 受众-品牌重叠度：<strong>低-中</strong> — 妈妈受众但焦点为家庭生活/DIY</p>
-<h3>内容分析</h3>
-<p><strong>内容风格</strong>：<br />
-- 主要形式：长视频 YouTube Vlog、DIY教程<br />
-- 发布频率：<strong>0</strong>（不活跃）⚠️<br />
-- 视觉风格：田园、温暖、质朴<br />
-- 语调：平静、家庭导向</p>
-<p><strong>品牌适配度评估</strong>：<br />
-- 视觉一致性：低-中 — 乡村/田园 vs. 现代母婴科技<br />
-- 价值一致性：低 — 与 Momcozy 吸奶/哺乳焦点关联有限<br />
-- 受众一致性：低-中 — 四娃妈妈但内容非婴儿护理焦点</p>
-<h3>红旗</h3>
+<p><strong>Audience Quality Score</strong>: 6/10<br />
+- Real followers estimate: ~85%<br />
+- Audience-brand overlap: <strong>Low-Medium</strong> — mom audience but homemaking/DIY focus</p>
+<h3>Content Analysis</h3>
+<p><strong>Content Style</strong>:<br />
+- Primary format: Long-form YouTube vlogs, DIY tutorials<br />
+- Posting frequency: <strong>0</strong> (inactive) ⚠️<br />
+- Aesthetic: Homestead, warm, rustic<br />
+- Tone: Calm, family-oriented</p>
+<p><strong>Brand Fit Assessment</strong>:<br />
+- Visual alignment: Low-Medium — rural/homestead vs. modern maternal tech<br />
+- Value alignment: Low — limited alignment with Momcozy's pumping/nursing focus<br />
+- Audience alignment: Low-Medium — mom of 4 but content not baby-care focused</p>
+<h3>Red Flags</h3>
 <ul>
-<li>⚠️ <strong>超过3个月不活跃</strong> — 无近期内容评估当前质量</li>
-<li>⚠️ 互动率低于 4% 门槛</li>
-<li>⚠️ 内容领域与母婴护理侧重点有距离</li>
+<li>⚠️ <strong>Inactive 3+ months</strong> — no recent content to assess current quality</li>
+<li>⚠️ Engagement rate below 4% threshold</li>
+<li>⚠️ Content niche is tangential to maternal/baby care</li>
 </ul>
-<h3>适配评分摘要</h3>
+<h3>Fit Score Summary</h3>
 <table>
 <thead>
 <tr>
-<th>维度</th>
-<th>评分 (1-5)</th>
+<th>Factor</th>
+<th>Score (1-5)</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>受众匹配</td>
+<td>Audience match</td>
 <td>2</td>
 </tr>
 <tr>
-<td>内容质量</td>
+<td>Content quality</td>
 <td>3</td>
 </tr>
 <tr>
-<td>品牌一致性</td>
+<td>Brand alignment</td>
 <td>2</td>
 </tr>
 <tr>
-<td>互动质量</td>
+<td>Engagement quality</td>
 <td>2</td>
 </tr>
 <tr>
-<td>真实度</td>
+<td>Authenticity</td>
 <td>4</td>
 </tr>
 <tr>
-<td><strong>总分</strong></td>
+<td><strong>Total</strong></td>
 <td><strong>13/25</strong></td>
 </tr>
 </tbody>
 </table>
-<p><strong>推荐等级</strong>：🔶 观察名单 — 当前不联系。如恢复活跃再评估。</p>
+<p><strong>Recommendation</strong>: 🔶 Watch List — Do not outreach at this time. Re-evaluate if activity resumes.</p>
 <hr />
-<h2>第五步 — 汇总发现报告</h2>
-<h1>红人发现结果</h1>
-<p><strong>搜索日期</strong>：2026-07-23<br />
-<strong>品牌/活动</strong>：Momcozy（母婴护理、可穿戴吸奶器、产后恢复）<br />
-<strong>使用标准</strong>：育儿领域，5万-20万粉丝，YouTube + Instagram，美国，互动率 &gt;4%</p>
-<h2>汇总统计</h2>
+<h2>Step 5 — Compiled Discovery Report</h2>
+<h1>Influencer Discovery Results</h1>
+<p><strong>Search Date</strong>: 2026-07-23<br />
+<strong>Brand/Campaign</strong>: Momcozy (maternal care, wearable breast pumps, postpartum)<br />
+<strong>Criteria Used</strong>: Parenting niche, 50K–200K followers, YouTube + Instagram, USA, ER &gt;4%</p>
+<h2>Summary Statistics</h2>
 <table>
 <thead>
 <tr>
-<th>指标</th>
-<th>数量</th>
+<th>Metric</th>
+<th>Count</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>总审核候选人</td>
+<td>Total Candidates Reviewed</td>
 <td>52</td>
 </tr>
 <tr>
-<td>通过初步筛选</td>
+<td>Passed Initial Screening</td>
 <td>15</td>
 </tr>
 <tr>
-<td>强烈推荐（适配分 ≥22/25）</td>
+<td>Highly Recommended (Fit ≥22/25)</td>
 <td>2</td>
 </tr>
 <tr>
-<td>推荐（适配分 18–21/25）</td>
+<td>Recommended (Fit 18–21/25)</td>
 <td>6</td>
 </tr>
 <tr>
-<td>待考量（适配分 &lt;18 或观察名单）</td>
-<td>7（含4个观察名单）</td>
+<td>To Consider (Fit &lt;18 or Watch List)</td>
+<td>7 (incl. 4 watch list)</td>
 </tr>
 </tbody>
 </table>
-<h3>按平台</h3>
+<h3>By Platform</h3>
 <table>
 <thead>
 <tr>
-<th>平台</th>
-<th>数量</th>
-<th>平均粉丝数</th>
-<th>平均互动率（估）</th>
+<th>Platform</th>
+<th>Count</th>
+<th>Avg Followers</th>
+<th>Avg ER (est.)</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>Instagram</td>
 <td>12</td>
-<td>~12.2万</td>
+<td>~122K</td>
 <td>~4.5%</td>
 </tr>
 <tr>
 <td>YouTube</td>
 <td>3</td>
-<td>~6.5万</td>
+<td>~65K</td>
 <td>~3.0%</td>
 </tr>
 </tbody>
 </table>
-<h3>按层级</h3>
+<h3>By Tier</h3>
 <table>
 <thead>
 <tr>
-<th>层级</th>
-<th>粉丝范围</th>
-<th>数量</th>
-<th>预估单帖费用</th>
+<th>Tier</th>
+<th>Follower Range</th>
+<th>Count</th>
+<th>Est. Cost Range (per post)</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>中腰部</td>
-<td>10万–20万</td>
+<td>Mid</td>
+<td>100K–200K</td>
 <td>6</td>
 <td>$2,000–$8,000</td>
 </tr>
 <tr>
-<td>微型</td>
-<td>5万–10万</td>
+<td>Micro</td>
+<td>50K–100K</td>
 <td>6</td>
 <td>$500–$3,000</td>
 </tr>
 <tr>
-<td>观察名单</td>
-<td>各种</td>
+<td>Watch List</td>
+<td>Various</td>
 <td>3</td>
 <td>N/A</td>
 </tr>
 </tbody>
 </table>
-<h2>顶级推荐</h2>
-<h3>第一梯队：必须联系</h3>
+<h2>Top Recommendations</h2>
+<h3>Tier 1: Must Reach Out</h3>
 <table>
 <thead>
 <tr>
-<th>排名</th>
-<th>账号</th>
-<th>平台</th>
-<th>粉丝数</th>
-<th>互动率（估）</th>
-<th>适配分</th>
-<th>理由</th>
+<th>Rank</th>
+<th>Handle</th>
+<th>Platform</th>
+<th>Followers</th>
+<th>ER (est.)</th>
+<th>Fit Score</th>
+<th>Why</th>
 </tr>
 </thead>
 <tbody>
@@ -3987,294 +3919,358 @@ Ilana Wiles 在育儿达人领域拥有 15 年以上的传奇地位。广告从�
 <td>1</td>
 <td>@karrie_locher</td>
 <td>Instagram</td>
-<td>~16.5万</td>
+<td>~165K</td>
 <td>~5.5%</td>
 <td>25/25</td>
-<td>RN/CLC哺乳顾问。Momcozy的完美受众匹配。教育内容风格适合吸奶器评测。最高公信力+转化潜力。</td>
+<td>RN/CLC lactation consultant. Perfect audience match for Momcozy. Educational content style ideal for pump reviews. Highest credibility + conversion potential.</td>
 </tr>
 <tr>
 <td>2</td>
 <td>@glowmaven</td>
 <td>Instagram</td>
-<td>~13.4万</td>
+<td>~134K</td>
 <td>~4.5%</td>
 <td>23/25</td>
-<td>明星导乐，Oprah Super Soul 100。母婴健康权威。提升Momcozy品牌定位。顶级公信力信号。</td>
+<td>Celebrity doula, Oprah Super Soul 100. Maternal wellness authority. Elevates Momcozy's brand positioning. Premium credibility signal.</td>
 </tr>
 </tbody>
 </table>
-<h3>第二梯队：强力候选</h3>
+<h3>Tier 2: Strong Candidates</h3>
 <table>
 <thead>
 <tr>
-<th>账号</th>
-<th>平台</th>
-<th>粉丝数</th>
-<th>互动率（估）</th>
-<th>适配分</th>
-<th>备注</th>
+<th>Handle</th>
+<th>Platform</th>
+<th>Followers</th>
+<th>ER (est.)</th>
+<th>Fit Score</th>
+<th>Notes</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>@lunchboxdad</td>
 <td>Instagram</td>
-<td>~11.4万</td>
+<td>~114K</td>
 <td>~4.8%</td>
 <td>20/25</td>
-<td>独特爸爸视角。强品牌合作记录。差异化打法。</td>
+<td>Unique dad POV. Strong brand track record. Differentiation play.</td>
 </tr>
 <tr>
 <td>@mommyshorts</td>
 <td>Instagram</td>
-<td>~19.7万</td>
-<td>~3.4%（IG）/ 16%（TikTok）</td>
+<td>~197K</td>
+<td>~3.4% (IG) / 16% (TikTok)</td>
 <td>20/25</td>
-<td>OG育儿达人。TikTok高互动率弥补。挑剔品牌伙伴=公信力。</td>
+<td>OG parenting influencer. TikTok high engagement compensates. Selective brand partner = credibility.</td>
 </tr>
 <tr>
 <td>@chelseakunz</td>
 <td>Instagram</td>
-<td>~17.3万</td>
+<td>~173K</td>
 <td>~4.2%</td>
 <td>19/25</td>
-<td>真实幽默。高产内容。快速执行周期。</td>
+<td>Relatable humor. High volume posting. Quick turnaround.</td>
 </tr>
 <tr>
 <td>@parentingthespectrum</td>
 <td>Instagram</td>
-<td>~7万</td>
+<td>~70K</td>
 <td>~5.0%</td>
 <td>19/25</td>
-<td>高度真实。多元化受众触达。受信赖的社群。</td>
+<td>High authenticity. Diverse audience reach. Trusted community.</td>
 </tr>
 <tr>
 <td>@chelseafoy</td>
 <td>Instagram</td>
-<td>~6.6万</td>
+<td>~66K</td>
 <td>~5.0%</td>
 <td>18/25</td>
-<td>创意内容能力。微型达人成本效率。</td>
+<td>Creative content capability. Micro-tier cost efficiency.</td>
 </tr>
 <tr>
 <td>@anawilkinson</td>
 <td>Instagram</td>
-<td>~5.2万</td>
+<td>~52K</td>
 <td>~5.5%</td>
 <td>18/25</td>
-<td>上升期微型达人。高互动潜力。成本效益好。</td>
+<td>Rising micro-influencer. High engagement potential. Cost-effective.</td>
 </tr>
 </tbody>
 </table>
-<h3>第三梯队：待考量 / 观察名单</h3>
+<h3>Tier 3: Worth Considering / Watch List</h3>
 <table>
 <thead>
 <tr>
-<th>账号</th>
-<th>平台</th>
-<th>粉丝数</th>
-<th>互动率</th>
-<th>适配分</th>
-<th>备注</th>
+<th>Handle</th>
+<th>Platform</th>
+<th>Followers</th>
+<th>ER</th>
+<th>Fit Score</th>
+<th>Notes</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>@jannafayeco</td>
 <td>YouTube</td>
-<td>7.47万</td>
+<td>74.7K</td>
 <td>3.19%</td>
 <td>13/25</td>
-<td>⚠️ 超过3个月不活跃。当前不联系。如恢复活跃再评估。</td>
+<td>⚠️ INACTIVE 3+ months. Do not contact now. Re-evaluate if activity resumes.</td>
 </tr>
 <tr>
 <td>Kayla Developmental Therapist</td>
 <td>Instagram</td>
-<td>~2.1万</td>
+<td>~21K</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>低于粉丝门槛。有强资质的上升期微型达人。观察增长。</td>
+<td>Below follower threshold. Rising micro with strong credentials. Watch for growth.</td>
 </tr>
 <tr>
 <td>Caitlin Most Average Mama</td>
 <td>Instagram</td>
-<td>~2.65万</td>
+<td>~26.5K</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>低于粉丝门槛。千禧妈妈生活方式。观察增长。</td>
+<td>Below follower threshold. Millennial mom lifestyle. Watch for growth.</td>
 </tr>
 </tbody>
 </table>
-<h2>达人组合推荐</h2>
-<p>为针对产后/哺乳妈妈的均衡 Momcozy 活动：</p>
+<h2>Influencer Mix Recommendation</h2>
+<p>For a balanced Momcozy campaign targeting postpartum/nursing mothers:</p>
 <table>
 <thead>
 <tr>
-<th>层级</th>
-<th>推荐人数</th>
-<th>角色</th>
-<th>预算占比</th>
+<th>Tier</th>
+<th>Recommended #</th>
+<th>Role</th>
+<th>Budget %</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>中腰部（10-20万）</td>
+<td>Mid (100K-200K)</td>
 <td>2-3</td>
-<td>公信力、触达、品牌定位</td>
+<td>Credibility, reach, brand positioning</td>
 <td>50-60%</td>
 </tr>
 <tr>
-<td>微型（5-10万）</td>
+<td>Micro (50K-100K)</td>
 <td>3-5</td>
-<td>真实评测、UGC、互动</td>
+<td>Authentic reviews, UGC, engagement</td>
 <td>30-40%</td>
 </tr>
 <tr>
-<td>上升期（&lt;5万）</td>
+<td>Rising (&lt;50K)</td>
 <td>1-2</td>
-<td>长期关系建设、产品种草</td>
+<td>Long-term relationship building, seeding</td>
 <td>10%</td>
 </tr>
 </tbody>
 </table>
-<p><strong>推荐活动组合</strong>：<br />
-1. <strong>核心</strong>：@karrie_locher — 长视频教育评测+吸奶演示（YouTube/IG）<br />
-2. <strong>权威</strong>：@glowmaven — 品牌合作官宣、母婴健康定位<br />
-3. <strong>触达/共鸣</strong>：@chelseakunz 或 @mommyshorts — 真实"妈妈视角"Reel 融合<br />
-4. <strong>差异化</strong>：@lunchboxdad — "爸爸送礼指南"或伴侣支持角度<br />
-5. <strong>量/UGC</strong>：@chelseafoy、@anawilkinson、@parentingthespectrum — 多角度真实评测</p>
-<h2>下一步</h2>
+<p><strong>Recommended Campaign Mix</strong>:<br />
+1. <strong>Hero</strong>: @karrie_locher — long-form educational review + pumping demo (YouTube/IG)<br />
+2. <strong>Authority</strong>: @glowmaven — brand partnership announcement, maternal wellness positioning<br />
+3. <strong>Reach/Relatability</strong>: @chelseakunz or @mommyshorts — authentic "real mom" Reel integration<br />
+4. <strong>Differentiation</strong>: @lunchboxdad — "dad gift guide" or partner support angle<br />
+5. <strong>Volume/UGC</strong>: @chelseafoy, @anawilkinson, @parentingthespectrum — multiple authentic reviews</p>
+<h2>Next Steps</h2>
 <ol>
-<li><strong>验证指标</strong> — 在联系前通过 HypeAuditor/Modash 验证确切互动率和受众画像</li>
-<li><strong>用 fit-scorer 评分</strong> — 将前8名交由 <a href="../fit-scorer/SKILL.md">fit-scorer</a> 进行加权、可辩护的排名</li>
-<li><strong>竞品核查</strong> — 确认与 Willow、Elvie、Medela、Spectra 无排他冲突</li>
-<li><strong>联系策略</strong> — 用 <a href="../../activate/outreach-manager/SKILL.md">outreach-manager</a> 制定</li>
-<li><strong>创建活动简报</strong> — 为顶级候选人用 brief-generator 生成</li>
+<li><strong>Verify metrics</strong> — run handles through HypeAuditor/Modash for exact engagement rates and audience demographics before outreach</li>
+<li><strong>Score with fit-scorer</strong> — pass top 8 to <a href="../fit-scorer/SKILL.md">fit-scorer</a> for weighted, defensible ranking</li>
+<li><strong>Competitor check</strong> — confirm no exclusivity conflicts with Willow, Elvie, Medela, Spectra</li>
+<li><strong>Outreach strategy</strong> — develop with <a href="../../activate/outreach-manager/SKILL.md">outreach-manager</a></li>
+<li><strong>Create campaign briefs</strong> — generate with brief-generator for top picks</li>
 </ol>
 <hr />
-<h2>第六步 — 发现洞察</h2>
-<h3>领域观察</h3>
-<p><strong>内容趋势</strong>：<br />
-- 教育/资质型内容（护士、哺乳顾问、导乐）在母婴护理中优于纯生活方式内容 — "受信赖的专家"是胜出定位<br />
-- "诚实评测"和"真实妈妈"内容比精制广告产生更高购买意向<br />
-- 吸奶/哺乳内容在后疫情时代随更多妈妈重返职场和需要免提解决方案而激增<br />
-- 爸爸视角内容在母婴护理中是被低估的角度（送礼、伴侣支持）</p>
-<p><strong>竞争格局</strong>：<br />
-- Momcozy 已知大使：Abbie Herbert（头部，260万 IG）、Becca Kufrin（电视名人）、Jenna Dewan（演员）— 均为名人级别<br />
-- 相比竞品，中腰部和微型达人策略似乎开发不足<br />
-- Willow 和 Elvie 在哺乳顾问领域有强大的微型/纳米达人存在<br />
-- BabyBuddha 利用激进的折扣码联盟策略与微型达人合作<br />
-- Momcozy 有联盟计划（10-15%佣金）— 可用于微型达人合作</p>
-<p><strong>未开发的机会</strong>：<br />
-- <strong>哺乳顾问/护士领域</strong>：Momcozy 在此无可见合作；@karrie_locher 是受众重叠度最高的开放机会<br />
-- <strong>爸爸/伴侣角度</strong>：没有母婴护理品牌在真正触及"爸爸作为购买者"的使用场景<br />
-- <strong>产后导乐社群</strong>：所有吸奶器品牌均未充分利用；@glowmaven 可开创此品类<br />
-- <strong>多平台创作者</strong>：大多数候选人仅运营单一平台；少数跨 IG+TikTok+YT 的创作者提供超额价值</p>
-<h3>平台观察</h3>
+<h2>Step 6 — Discovery Insights</h2>
+<h3>Niche Observations</h3>
+<p><strong>Content Trends</strong>:<br />
+- Educational/credential-based content (nurses, LCs, doulas) outperforms pure lifestyle in maternal care — "trusted expert" is the winning positioning<br />
+- "Honest review" and "real mom" content generates higher purchase intent than polished ads<br />
+- Pumping/breastfeeding content has surged post-pandemic as more moms return to work and need hands-free solutions<br />
+- Dad POV content is an underutilized angle in maternal care (gift-giving, partner support)</p>
+<p><strong>Competitive Picture</strong>:<br />
+- Momcozy's known ambassadors: Abbie Herbert (macro, 2.6M IG), Becca Kufrin (TV personality), Jenna Dewan (actress) — all celebrity-tier<br />
+- Mid-tier and micro-tier influencer strategy appears underdeveloped relative to competitors<br />
+- Willow and Elvie have strong nano/micro presences in the lactation consultant niche<br />
+- BabyBuddha leverages aggressive discount-code affiliate strategy with micro-influencers<br />
+- Momcozy has an affiliate program (10-15% commission) — could be leveraged for micro-tier partnerships</p>
+<p><strong>Untapped Opportunities</strong>:<br />
+- <strong>Lactation consultant/nurse niche</strong>: Momcozy has no visible partnerships here; @karrie_locher is an open opportunity with highest possible audience overlap<br />
+- <strong>Dad/partner angle</strong>: No maternal care brand is meaningfully targeting the dad-as-purchaser use case<br />
+- <strong>Postpartum doula community</strong>: Underleveraged by all pump brands; @glowmaven could pioneer this category<br />
+- <strong>Multi-platform creators</strong>: Most candidates are single-platform; the few who span IG + TikTok + YT offer outsized value</p>
+<h3>Platform-Specific Observations</h3>
 <table>
 <thead>
 <tr>
-<th>平台</th>
-<th>机会</th>
-<th>风险</th>
+<th>Platform</th>
+<th>Opportunity</th>
+<th>Risk</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>Instagram</td>
-<td>最适合中腰部妈妈达人；Reels 驱动发现</td>
-<td>平台整体互动率在下降</td>
+<td>Best for mid-tier mom influencers; Reels drive discovery</td>
+<td>Engagement rates softening across platform</td>
 </tr>
 <tr>
 <td>YouTube</td>
-<td>最适合深度吸奶器评测/对比；中腰部单帖费率最高（$4K-$25K）</td>
-<td>5万-20万区间的育儿创作者较少；更难找到</td>
+<td>Best for in-depth pump reviews/comparisons; highest per-view rates ($4K-$25K for mid-tier)</td>
+<td>Fewer parenting creators in 50K-200K range; harder to find</td>
 </tr>
 <tr>
 <td>TikTok</td>
-<td>病毒传播潜力；Momcozy 吸奶器已经流行</td>
-<td>需要不同内容风格；受众偏年轻</td>
+<td>Viral potential; Momcozy pumps already trending</td>
+<td>Requires different content style; younger demo</td>
 </tr>
 </tbody>
 </table>
-<h3>未来搜索建议</h3>
+<h3>Recommendations for Future Searches</h3>
 <ul>
-<li>考虑将粉丝范围扩大到 <strong>3万-5万微型层级</strong> 用于种草/联盟计划 — 互动更高、成本更低、适合长期关系建设</li>
-<li>平台机会：<strong>YouTube 在 5万-20万育儿领域服务不足</strong> — 早期合作有先发优势</li>
-<li>可探索的相邻领域：<strong>职场妈妈</strong>、<strong>纯吸奶妈妈</strong>、<strong>NICU 父母</strong>、<strong>双胞胎/多胞胎父母</strong> — 高度互动、有特定产品需求</li>
-<li>时机：60-90天后重新搜索，因为新的产后创作者不断涌现；育儿达人的生命周期与孩子年龄密切相关</li>
-<li><strong>创作者登记</strong>：将每个可列入名单的候选人提交至 <code>creator-registry</code> 进行去重和确认</li>
+<li>Consider expanding follower range to <strong>30K-50K micro tier</strong> for seeding/affiliate program — higher engagement, lower cost, long-term relationship building</li>
+<li>Platform opportunity: <strong>YouTube is underserved</strong> in the 50K-200K parenting niche — early partnerships here have first-mover advantage</li>
+<li>Adjacent niches to explore: <strong>working moms</strong>, <strong>exclusive pumping</strong>, <strong>NICU parents</strong>, <strong>twin/multiples parents</strong> — highly engaged, specific product needs</li>
+<li>Timing: Search again in 60-90 days as new postpartum creators emerge; the parenting influencer lifecycle is closely tied to children's ages</li>
+<li><strong>Creator Registry</strong>: Submit each roster-worthy shortlisted creator to <code>creator-registry</code> for deduplication and resolution</li>
 </ul>
 <hr />
-<h2>数据质量说明</h2>
+<h2>Data Quality Notes</h2>
 <table>
 <thead>
 <tr>
-<th>数据点</th>
-<th>置信度</th>
-<th>来源</th>
+<th>Data Point</th>
+<th>Confidence</th>
+<th>Source</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>粉丝数</td>
-<td>高</td>
-<td>多来源交叉验证（IZEA, HypeAuditor, Favikon, Feedspot）</td>
+<td>Follower counts</td>
+<td>High</td>
+<td>Multiple cross-referenced sources (IZEA, HypeAuditor, Favikon, Feedspot)</td>
 </tr>
 <tr>
-<td>互动率</td>
-<td>中</td>
-<td>未通过分析平台确认的为估算值。部分有 HypeAuditor 数据。</td>
+<td>Engagement rates</td>
+<td>Medium</td>
+<td>Estimated where not confirmed via analytics. HypeAuditor data available for some.</td>
 </tr>
 <tr>
-<td>品牌合作历史</td>
-<td>中</td>
-<td>公开新闻稿、媒体报道</td>
+<td>Brand partnership history</td>
+<td>Medium</td>
+<td>Publicly available press releases, media coverage</td>
 </tr>
 <tr>
-<td>受众画像</td>
-<td>中低</td>
-<td>根据内容领域和平台常规估算</td>
+<td>Audience demographics</td>
+<td>Medium-Low</td>
+<td>Estimated from content niche and platform norms</td>
 </tr>
 <tr>
-<td>联系信息</td>
-<td>低</td>
-<td>仅识别了公开可用的途径</td>
+<td>Contact information</td>
+<td>Low</td>
+<td>Only publicly available paths identified</td>
 </tr>
 </tbody>
 </table>
-<p><strong>所有标注"(估)"的指标应在联系前通过达人分析平台（HypeAuditor、Modash 等）验证。</strong></p>
+<p><strong>All metrics marked "(est.)" should be verified through an influencer analytics platform (HypeAuditor, Modash, or similar) before outreach.</strong></p>
 <hr />
-<p><em>报告按照 <a href="../SKILL.md">influencer-discovery SKILL.md</a> 工作流程生成。下一步 skill：<a href="../fit-scorer/SKILL.md">fit-scorer</a> 进行加权评分和最终排名。</em></p>
+<p><em>Report generated per <a href="../SKILL.md">influencer-discovery SKILL.md</a> workflow. Next skill: <a href="../fit-scorer/SKILL.md">fit-scorer</a> for weighted scoring and final ranking.</em></p>
+</div>
+
 </div>
 
 <script>
-(function() {
-  var K = 'inf-discovery-lang';
-  var be = document.getElementById('btn-en');
-  var bz = document.getElementById('btn-zh');
-  var ce = document.getElementById('content-en');
-  var cz = document.getElementById('content-zh');
+(function(){
+  // ── Language toggle ──
+  var K='inf-discovery-lang',
+      be=document.getElementById('btn-en'),bz=document.getElementById('btn-zh'),
+      ce=document.getElementById('content-en'),cz=document.getElementById('content-zh');
+  function setLang(l){
+    if(l==='zh'){bz.classList.add('active');be.classList.remove('active');cz.classList.add('active');ce.classList.remove('active');buildTOC('zh');}
+    else{be.classList.add('active');bz.classList.remove('active');ce.classList.add('active');cz.classList.remove('active');buildTOC('en');}
+    try{localStorage.setItem(K,l);}catch(e){}
+  }
+  var s=null;try{s=localStorage.getItem(K);}catch(e){}
+  var initial = (s==='zh'||s==='en')?s:(navigator.language&&navigator.language.startsWith('zh')?'zh':'en');
+  setLang(initial);
+  be.addEventListener('click',function(){setLang('en');});
+  bz.addEventListener('click',function(){setLang('zh');});
 
-  function set(l) {
-    if (l === 'zh') {
-      bz.classList.add('active'); be.classList.remove('active');
-      cz.classList.add('active'); ce.classList.remove('active');
-    } else {
-      be.classList.add('active'); bz.classList.remove('active');
-      ce.classList.add('active'); cz.classList.remove('active');
+  // ── Build TOC from headings ──
+  var tocLabels = {
+    zh: {toc:'目 录', step:'第{0}步'},
+    en: {toc:'Contents', step:'Step {0}'}
+  };
+
+  function buildTOC(lang){
+    var activeContent = document.getElementById(lang==='zh'?'content-zh':'content-en');
+    var nav = document.getElementById('toc-nav');
+    if(!activeContent||!nav)return;
+    var hs = activeContent.querySelectorAll('h2,h3');
+    var html='';
+    var stepNum=0, inProfiles=false;
+    for(var i=0;i<hs.length;i++){
+      var h=hs[i], tag=h.tagName.toLowerCase();
+      var id='sec-'+i;
+      h.id=id;
+
+      // Detect step headers
+      var txt=h.textContent.trim();
+      var mStep=txt.match(/第[一二三四五六七八九十]+步|Step\s+(\d+)/i);
+      if(mStep&&tag==='h2'){stepNum++;}
+
+      // Generate TOC label
+      var label=txt;
+      // Truncate long influencer titles
+      if(txt.indexOf('达人 #')>-1||txt.indexOf('Influencer #')>-1||txt.indexOf('WL-')>-1){
+        label=txt.substring(0,50)+(txt.length>50?'…':'');
+      }
+      if(txt.indexOf('观察名单')>-1||txt.indexOf('Watch List')>-1){stepNum=0;}
+
+      html+='<a href="#'+id+'" class="toc-'+(tag==='h3'?'h3':'h2')+'" title="'+txt.replace(/"/g,'&quot;')+'">'+label+'</a>';
     }
-    try { localStorage.setItem(K, l); } catch(e) {}
+    // Update toc title
+    var labels=tocLabels[lang]||tocLabels['en'];
+    document.getElementById('toc-title').textContent=labels.toc;
+    nav.innerHTML=html;
+
+    // Re-bind click handlers
+    nav.querySelectorAll('a').forEach(function(a){
+      a.addEventListener('click',function(e){
+        e.preventDefault();
+        var target=document.getElementById(this.getAttribute('href').substring(1));
+        if(target){target.scrollIntoView({behavior:'smooth',block:'start'});}
+        // Close sidebar on mobile
+        document.getElementById('sidebar').classList.remove('open');
+        document.getElementById('sidebar-overlay').classList.remove('open');
+      });
+    });
+
+    // Highlight active section
+    var observer=new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if(entry.isIntersecting){
+          nav.querySelectorAll('a').forEach(function(a){a.classList.remove('active');});
+          var link=nav.querySelector('a[href="#'+entry.target.id+'"]');
+          if(link)link.classList.add('active');
+        }
+      });
+    },{rootMargin:'-80px 0px -70% 0px'});
+    hs.forEach(function(h){observer.observe(h);});
   }
 
-  var s = null;
-  try { s = localStorage.getItem(K); } catch(e) {}
-  if (s === 'zh' || s === 'en') { set(s); }
-  else if (navigator.language && navigator.language.startsWith('zh')) { set('zh'); }
-  else { set('en'); }
-
-  be.addEventListener('click', function() { set('en'); });
-  bz.addEventListener('click', function() { set('zh'); });
+  // ── Mobile sidebar toggle ──
+  document.getElementById('hamburger').addEventListener('click',function(){
+    document.getElementById('sidebar').classList.add('open');
+    document.getElementById('sidebar-overlay').classList.add('open');
+  });
+  document.getElementById('sidebar-overlay').addEventListener('click',function(){
+    document.getElementById('sidebar').classList.remove('open');
+    document.getElementById('sidebar-overlay').classList.remove('open');
+  });
 })();
 </script>
 
