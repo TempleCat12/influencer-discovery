@@ -1,0 +1,1357 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>红人发现报告：TikTok 婴儿科技产品 · 10K-200K 粉丝 · 美国 / Influencer Discovery: TikTok Baby Tech · 10K-200K · USA</title>
+<style>
+:root {
+  --bg: #ffffff; --text: #1a1a2e; --text-secondary: #555;
+  --border: #e0e0e0; --accent: #c2185b; --accent-light: #fce4ec;
+  --toggle-bg: #f5f5f5; --toggle-active: #c2185b; --toggle-text: #fff;
+  --table-stripe: #fafafa; --code-bg: #f5f5f5;
+  --sidebar-w: 250px; --sidebar-bg: #fafafa;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+               "Helvetica Neue", Arial, "PingFang SC", "Microsoft YaHei", sans-serif;
+  color: var(--text); background: var(--bg); line-height: 1.7;
+}
+
+/* ── Sidebar ── */
+.sidebar {
+  position: fixed; top: 0; left: 0; width: var(--sidebar-w); height: 100vh;
+  background: var(--sidebar-bg); border-right: 1px solid var(--border);
+  overflow-y: auto; z-index: 200; padding: 20px 16px;
+}
+.sidebar h3 {
+  font-size: 0.85rem; color: var(--accent); text-transform: uppercase;
+  letter-spacing: 0.05em; margin-bottom: 12px; padding-bottom: 8px;
+  border-bottom: 2px solid var(--accent);
+}
+.sidebar nav a {
+  display: block; padding: 5px 10px; font-size: 0.82rem; color: var(--text-secondary);
+  text-decoration: none; border-radius: 4px; margin-bottom: 2px;
+  transition: all 0.15s ease; border-left: 3px solid transparent;
+}
+.sidebar nav a:hover { background: var(--accent-light); color: var(--accent); }
+.sidebar nav a.active {
+  background: var(--accent-light); color: var(--accent); font-weight: 600;
+  border-left-color: var(--accent);
+}
+.sidebar nav a.toc-h3 { padding-left: 24px; font-size: 0.78rem; }
+
+/* ── Hamburger (mobile) ── */
+.hamburger {
+  display: none; position: fixed; top: 12px; left: 12px; z-index: 300;
+  width: 40px; height: 40px; background: var(--accent); color: #fff;
+  border: none; border-radius: 8px; font-size: 1.3rem; cursor: pointer;
+  align-items: center; justify-content: center; box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
+.sidebar-overlay { display: none; }
+
+/* ── Main content ── */
+.main-wrap {
+  margin-left: var(--sidebar-w); padding: 20px 32px 40px; max-width: 960px;
+}
+
+/* ── Toggle bar ── */
+.toggle-bar {
+  position: sticky; top: 0; z-index: 100; display: flex;
+  justify-content: flex-end; gap: 0; padding: 10px 0 16px;
+  background: linear-gradient(to bottom, #fff 60%, transparent);
+}
+.toggle-btn {
+  padding: 8px 22px; border: 2px solid var(--accent);
+  background: var(--toggle-bg); color: var(--accent); cursor: pointer;
+  font-size: 0.92rem; font-weight: 600; transition: all 0.2s ease;
+  outline: none; font-family: inherit;
+}
+.toggle-btn:first-child { border-radius: 8px 0 0 8px; }
+.toggle-btn:last-child  { border-radius: 0 8px 8px 0; }
+.toggle-btn.active { background: var(--toggle-active); color: var(--toggle-text); }
+.toggle-btn:hover:not(.active) { background: var(--accent-light); }
+
+/* ── Typography ── */
+h1 { font-size: 1.85rem; color: var(--accent); border-bottom: 3px solid var(--accent); padding-bottom: 12px; margin-bottom: 8px; line-height: 1.3; }
+h2 { font-size: 1.4rem; color: var(--accent); margin-top: 36px; margin-bottom: 14px; padding-bottom: 6px; border-bottom: 2px solid var(--border); }
+h3 { font-size: 1.15rem; color: #333; margin-top: 28px; margin-bottom: 10px; }
+h4 { font-size: 1.02rem; color: var(--accent); margin-top: 20px; margin-bottom: 8px; }
+p { margin-bottom: 12px; }
+hr { border: none; border-top: 1px solid var(--border); margin: 28px 0; }
+strong { color: #222; }
+
+table { width: 100%; border-collapse: collapse; margin: 14px 0 22px; font-size: 0.9rem; border-radius: 8px; overflow: hidden; box-shadow: 0 1px 4px rgba(0,0,0,0.06); }
+thead { background: var(--accent); }
+thead th { color: #fff; padding: 9px 12px; text-align: left; font-weight: 600; white-space: nowrap; }
+tbody td { padding: 8px 12px; border-bottom: 1px solid var(--border); vertical-align: top; }
+tbody tr:nth-child(even) { background: var(--table-stripe); }
+tbody tr:hover { background: var(--accent-light); }
+
+ul, ol { margin: 8px 0 14px 24px; }
+li { margin-bottom: 4px; }
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+code { background: var(--code-bg); padding: 2px 6px; border-radius: 4px; font-size: 0.9em; font-family: "SF Mono", "Fira Code", "Consolas", monospace; }
+blockquote { border-left: 4px solid var(--accent); padding: 10px 16px; margin: 14px 0; background: var(--accent-light); border-radius: 0 6px 6px 0; color: #555; }
+
+.lang-content { display: none; }
+.lang-content.active { display: block; }
+
+/* ── Responsive ── */
+@media (max-width: 900px) {
+  .sidebar { transform: translateX(-100%); transition: transform 0.25s ease; }
+  .sidebar.open { transform: translateX(0); box-shadow: 4px 0 20px rgba(0,0,0,0.15); }
+  .sidebar-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.3); z-index: 199; }
+  .sidebar-overlay.open { display: block; }
+  .hamburger { display: flex; }
+  .main-wrap { margin-left: 0; padding: 16px 12px 40px; }
+  body { font-size: 0.9rem; }
+  table { font-size: 0.78rem; }
+  thead th, tbody td { padding: 6px 8px; }
+  .toggle-btn { padding: 6px 14px; font-size: 0.82rem; }
+}
+
+@media print {
+  .sidebar, .hamburger, .sidebar-overlay, .toggle-bar { display: none; }
+  .lang-content { display: block !important; }
+  .main-wrap { margin-left: 0; padding: 16px; max-width: 100%; }
+  table { box-shadow: none; } thead { background: #333; }
+}
+</style>
+</head>
+<body>
+
+<button class="hamburger" id="hamburger" aria-label="Menu">&#9776;</button>
+<div class="sidebar-overlay" id="sidebar-overlay"></div>
+
+<aside class="sidebar" id="sidebar">
+  <h3 id="toc-title">Contents</h3>
+  <nav id="toc-nav"></nav>
+</aside>
+
+<div class="main-wrap">
+
+<div class="toggle-bar">
+  <button class="toggle-btn active" id="btn-zh">中文</button>
+  <button class="toggle-btn" id="btn-en">English</button>
+</div>
+
+<div class="lang-content active" id="content-zh">
+<h1>红人发现报告：TikTok 婴儿科技产品 · 10K-200K 粉丝 · 美国</h1>
+<p><strong>搜索日期</strong>：2026-07-23<br />
+<strong>搜索标准</strong>：TikTok 平台，10,000–200,000 粉丝，互动率 &gt;4%，美国，拍摄过 baby car camera / baby monitor / portable milk warmer 相关内容</p>
+<hr />
+<h2>第一步 — 搜索参数</h2>
+<p><strong>品牌/产品场景</strong>：婴儿车载摄像头、婴儿监视器、便携式暖奶器<br />
+<strong>活动目标</strong>：TikTok 短视频评测、真实使用演示、UGC 病毒内容<br />
+<strong>预算范围</strong>：微型至中腰部达人（$200–$5,000/视频，基于 10K-200K 粉丝级别）</p>
+<p><strong>搜索标准</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>要求</th>
+<th>优先级</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>领域</td>
+<td>婴儿科技产品、育儿用品评测</td>
+<td>必须</td>
+</tr>
+<tr>
+<td>平台</td>
+<td>TikTok</td>
+<td>必须</td>
+</tr>
+<tr>
+<td>粉丝范围</td>
+<td>10,000 – 200,000</td>
+<td>必须</td>
+</tr>
+<tr>
+<td>互动率</td>
+<td>&gt;4%</td>
+<td>必须</td>
+</tr>
+<tr>
+<td>内容类型</td>
+<td>短视频评测、真实演示、产品对比</td>
+<td>必须</td>
+</tr>
+<tr>
+<td>目标产品</td>
+<td>baby car camera / baby monitor / portable milk warmer</td>
+<td>必须</td>
+</tr>
+<tr>
+<td>地区</td>
+<td>美国</td>
+<td>必须</td>
+</tr>
+<tr>
+<td>语言</td>
+<td>英语为主</td>
+<td>偏好</td>
+</tr>
+</tbody>
+</table>
+<p><strong>加分项</strong>：<br />
+- 育儿/护理专业资质（IBCLC、RN、CPST 等）<br />
+- 多平台运营（TikTok + Instagram）<br />
+- 真实/不加修饰的评测风格<br />
+- 产后/新手妈妈阶段</p>
+<p><strong>排除项</strong>：<br />
+- 纯品牌营销号<br />
+- 超过 60 天不活跃<br />
+- 主要内容非育儿相关<br />
+- 非美国地区<br />
+- 虚假互动（异常 views/follower 比率）</p>
+<hr />
+<h2>第二步 — 搜索策略</h2>
+<ol>
+<li><strong>TikTok 话题标签搜索</strong>：#babycarcamera、#babymonitorreview、#portablemilkwarmer、#momcozy、#owlet、#nanit、#dohonest</li>
+<li><strong>竞品品牌追踪</strong>：Momcozy、Owlet、Nanit、DoHonest 的用户生成评测内容</li>
+<li><strong>跨平台交叉发现</strong>：Lemon8 评测者 → TikTok 账号回溯</li>
+<li><strong>病毒内容追踪</strong>：Owlet 智能袜、Momcozy 暖奶器、婴儿监视器安全讨论等病毒话题的创作者</li>
+</ol>
+<hr />
+<h2>第三步 — 初步筛选</h2>
+<p><strong>总候选人数</strong>：24<br />
+<strong>初步筛选后</strong>：8（另加 3 人放入观察名单）</p>
+<h3>筛选标准应用</h3>
+<table>
+<thead>
+<tr>
+<th>标准</th>
+<th>过滤条件</th>
+<th>淘汰人数</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>粉丝范围</td>
+<td>10K-200K（TikTok 主平台）</td>
+<td>8</td>
+</tr>
+<tr>
+<td>互动率</td>
+<td>&gt;4%</td>
+<td>4</td>
+</tr>
+<tr>
+<td>内容相关性</td>
+<td>婴儿科技/用品评测</td>
+<td>3</td>
+</tr>
+<tr>
+<td>地区</td>
+<td>美国</td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+<h3>红旗识别</h3>
+<ul>
+<li>2 个纯品牌推广号</li>
+<li>2 个疑似假粉（异常 views/follower 比率）</li>
+<li>1 个内容转向非育儿领域</li>
+</ul>
+<blockquote>
+<p>⚠️ <strong>数据质量说明</strong>：TikTok 10K-200K 区间的达人发现同样受限于网页搜索。TikTok 内容主要通过平台内搜索和推荐算法分发，搜索引擎索引有限。本次搜索综合利用了新闻事件追踪（病毒视频报道）、竞品品牌评测回溯、Lemon8 交叉发现及达人平台数据。<strong>强烈建议</strong>通过 <code>~~influencer database</code> 和 <code>~~social platform analytics</code> 连接器进行精确筛选。</p>
+</blockquote>
+<hr />
+<h2>第四步 — 达人画像</h2>
+<hr />
+<h2>达人 #1：Kelsey Rose（@therealkelseyrose）</h2>
+<h3>基本信息</h3>
+<table>
+<thead>
+<tr>
+<th>属性</th>
+<th>详情</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>姓名</strong></td>
+<td>Kelsey Rose</td>
+</tr>
+<tr>
+<td><strong>账号</strong></td>
+<td><a href="https://tiktok.com/@therealkelseyrose">@therealkelseyrose</a></td>
+</tr>
+<tr>
+<td><strong>Profile URL</strong></td>
+<td>https://tiktok.com/@therealkelseyrose</td>
+</tr>
+<tr>
+<td><strong>平台</strong></td>
+<td>TikTok</td>
+</tr>
+<tr>
+<td><strong>其他平台</strong></td>
+<td>Instagram（可能）</td>
+</tr>
+<tr>
+<td><strong>地区</strong></td>
+<td>美国</td>
+</tr>
+<tr>
+<td><strong>语言</strong></td>
+<td>英语</td>
+</tr>
+<tr>
+<td><strong>领域</strong></td>
+<td>育儿安全、婴儿监视器、真实妈妈</td>
+</tr>
+</tbody>
+</table>
+<h3>指标</h3>
+<table>
+<thead>
+<tr>
+<th>指标</th>
+<th>数据</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>TikTok 粉丝</td>
+<td>~120,000（估，基于病毒传播量和新闻媒体报道）</td>
+</tr>
+<tr>
+<td>代表作品</td>
+<td>Owlet 婴儿监视器安全警示视频（289,000+ 播放，3天内）</td>
+</tr>
+<tr>
+<td>互动率</td>
+<td>极高 — 单条视频引发全国性讨论，被 Newsweek 报道</td>
+</tr>
+</tbody>
+</table>
+<p><strong>增长趋势</strong>：快速增长 — 婴儿监视器安全警示视频引发全国关注，被 Newsweek 等主流媒体引用报道</p>
+<h3>受众分析</h3>
+<table>
+<thead>
+<tr>
+<th>维度</th>
+<th>分布</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>人群</td>
+<td>新手父母、关注婴儿安全的家长</td>
+<td>高度精准</td>
+</tr>
+<tr>
+<td>兴趣</td>
+<td>婴儿监视器安全、育儿科技</td>
+<td>高购买意向</td>
+</tr>
+</tbody>
+</table>
+<p><strong>受众质量评分</strong>：9/10<br />
+- 受众-品牌重叠度：<strong>非常高</strong>（婴儿监视器）— 直接相关</p>
+<h3>品牌适配度评估</h3>
+<table>
+<thead>
+<tr>
+<th>产品</th>
+<th>相关性</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>baby car camera</td>
+<td><strong>中</strong> — 婴儿安全科技品类可延伸</td>
+</tr>
+<tr>
+<td>baby monitor</td>
+<td><strong>非常高</strong> — 核心内容领域，病毒视频证明影响力</td>
+</tr>
+<tr>
+<td>portable milk warmer</td>
+<td><strong>低</strong> — 不在核心品类</td>
+</tr>
+</tbody>
+</table>
+<h3>适配评分摘要</h3>
+<table>
+<thead>
+<tr>
+<th>维度</th>
+<th>评分 (1-5)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>受众匹配</td>
+<td>5</td>
+</tr>
+<tr>
+<td>内容质量</td>
+<td>5</td>
+</tr>
+<tr>
+<td>产品相关性</td>
+<td>3</td>
+</tr>
+<tr>
+<td>互动质量</td>
+<td>5</td>
+</tr>
+<tr>
+<td>真实度</td>
+<td>5</td>
+</tr>
+<tr>
+<td><strong>总分</strong></td>
+<td><strong>23/25</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>推荐等级</strong>：⭐ 强烈推荐（婴儿监视器品类最佳人选）</p>
+<p><strong>为什么合适</strong>：<br />
+婴儿监视器安全警示视频引发全国性讨论并被主流媒体报道，证明了极高的内容影响力和受众信任度。真实、不加修饰的风格完全契合产品评测需求。婴儿安全科技品类下，监视器→车载摄像头的延伸逻辑自然。TikTok 原生创作者，熟悉平台内容节奏。</p>
+<hr />
+<h2>达人 #2：@positravelty</h2>
+<h3>基本信息</h3>
+<table>
+<thead>
+<tr>
+<th>属性</th>
+<th>详情</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>账号</strong></td>
+<td><a href="https://tiktok.com/@positravelty">@positravelty</a></td>
+</tr>
+<tr>
+<td><strong>Profile URL</strong></td>
+<td>https://tiktok.com/@positravelty</td>
+</tr>
+<tr>
+<td><strong>平台</strong></td>
+<td>TikTok</td>
+</tr>
+<tr>
+<td><strong>地区</strong></td>
+<td>美国（推测）</td>
+</tr>
+<tr>
+<td><strong>语言</strong></td>
+<td>英语</td>
+</tr>
+<tr>
+<td><strong>领域</strong></td>
+<td>育儿情感、婴儿健康监测（Owlet 智能袜）</td>
+</tr>
+</tbody>
+</table>
+<h3>指标</h3>
+<table>
+<thead>
+<tr>
+<th>指标</th>
+<th>数据</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>TikTok 粉丝</td>
+<td>~150,000（估）</td>
+</tr>
+<tr>
+<td>代表作品</td>
+<td>Owlet Dream Sock 11秒情感评测 — 5M 播放、490K 点赞、59K 分享</td>
+</tr>
+<tr>
+<td>互动率</td>
+<td>极高 — 播放/点赞/分享比率远超平台均值</td>
+</tr>
+</tbody>
+</table>
+<p><strong>增长趋势</strong>：快速增长 — 单条高度情感化的视频引爆流量</p>
+<h3>品牌适配度评估</h3>
+<table>
+<thead>
+<tr>
+<th>产品</th>
+<th>相关性</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>baby car camera</td>
+<td><strong>中</strong> — 婴儿安全科技感可延伸</td>
+</tr>
+<tr>
+<td>baby monitor</td>
+<td><strong>非常高</strong> — Owlet 智能袜评测直接对标</td>
+</tr>
+<tr>
+<td>portable milk warmer</td>
+<td><strong>中</strong> — 婴儿用品但非核心</td>
+</tr>
+</tbody>
+</table>
+<h3>适配评分摘要</h3>
+<table>
+<thead>
+<tr>
+<th>维度</th>
+<th>评分 (1-5)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>受众匹配</td>
+<td>5</td>
+</tr>
+<tr>
+<td>内容质量</td>
+<td>5</td>
+</tr>
+<tr>
+<td>产品相关性</td>
+<td>3</td>
+</tr>
+<tr>
+<td>互动质量</td>
+<td>5</td>
+</tr>
+<tr>
+<td>真实度</td>
+<td>5</td>
+</tr>
+<tr>
+<td><strong>总分</strong></td>
+<td><strong>23/25</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>推荐等级</strong>：⭐ 强烈推荐（婴儿监视器/健康监测品类）</p>
+<p><strong>Why</strong>：11秒不加修饰的真实情感视频 → 5M 播放 + 490K 点赞，证明了"情感共鸣 &gt; 精制广告"的 TikTok 内容公式。Owlet 种草效果远超任何付费广告。内容风格可自然延伸至婴儿监视器和婴儿安全产品。</p>
+<hr />
+<h2>达人 #3：Mallory（@malrob8）</h2>
+<h3>基本信息</h3>
+<table>
+<thead>
+<tr>
+<th>属性</th>
+<th>详情</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>姓名</strong></td>
+<td>Mallory</td>
+</tr>
+<tr>
+<td><strong>账号</strong></td>
+<td><a href="https://tiktok.com/@malrob8">@malrob8</a></td>
+</tr>
+<tr>
+<td><strong>Profile URL</strong></td>
+<td>https://tiktok.com/@malrob8</td>
+</tr>
+<tr>
+<td><strong>平台</strong></td>
+<td>TikTok</td>
+</tr>
+<tr>
+<td><strong>地区</strong></td>
+<td>美国（推测）</td>
+</tr>
+<tr>
+<td><strong>语言</strong></td>
+<td>英语</td>
+</tr>
+<tr>
+<td><strong>领域</strong></td>
+<td>育儿幽默、婴儿监视器日常</td>
+</tr>
+</tbody>
+</table>
+<h3>指标</h3>
+<table>
+<thead>
+<tr>
+<th>指标</th>
+<th>数据</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>代表作品</td>
+<td>婴儿监视器搞笑视频 — 2.9M 播放</td>
+</tr>
+<tr>
+<td>互动率</td>
+<td>极高（高播放+高评论互动）</td>
+</tr>
+</tbody>
+</table>
+<h3>适配评分摘要</h3>
+<table>
+<thead>
+<tr>
+<th>维度</th>
+<th>评分 (1-5)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>受众匹配</td>
+<td>4</td>
+</tr>
+<tr>
+<td>内容质量</td>
+<td>5</td>
+</tr>
+<tr>
+<td>产品相关性</td>
+<td>3</td>
+</tr>
+<tr>
+<td>互动质量</td>
+<td>5</td>
+</tr>
+<tr>
+<td>真实度</td>
+<td>5</td>
+</tr>
+<tr>
+<td><strong>总分</strong></td>
+<td><strong>22/25</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>推荐等级</strong>：⭐ 推荐（婴儿监视器品类情感/幽默角度）</p>
+<hr />
+<h2>达人 #4：@ciaradeanne（三娃妈妈）</h2>
+<h3>基本信息</h3>
+<table>
+<thead>
+<tr>
+<th>属性</th>
+<th>详情</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>姓名</strong></td>
+<td>Ciara Deanne</td>
+</tr>
+<tr>
+<td><strong>账号</strong></td>
+<td><a href="https://tiktok.com/@ciaradeanne">@ciaradeanne</a>（待验证）</td>
+</tr>
+<tr>
+<td><strong>Profile URL</strong></td>
+<td>待验证</td>
+</tr>
+<tr>
+<td><strong>平台</strong></td>
+<td>TikTok + 博客 (ciaradeanne.com)</td>
+</tr>
+<tr>
+<td><strong>地区</strong></td>
+<td>美国</td>
+</tr>
+<tr>
+<td><strong>语言</strong></td>
+<td>英语</td>
+</tr>
+<tr>
+<td><strong>领域</strong></td>
+<td>三娃妈妈、Momcozy 旅行冷却器 + 暖奶器评测</td>
+</tr>
+</tbody>
+</table>
+<h3>指标</h3>
+<table>
+<thead>
+<tr>
+<th>指标</th>
+<th>数据</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>TikTok 粉丝</td>
+<td>~35,000（估）</td>
+</tr>
+<tr>
+<td>内容特色</td>
+<td>Momcozy Travel Cooler + Milk Warmer 完整评测</td>
+</tr>
+</tbody>
+</table>
+<h3>适配评分摘要</h3>
+<table>
+<thead>
+<tr>
+<th>维度</th>
+<th>评分 (1-5)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>受众匹配</td>
+<td>5</td>
+</tr>
+<tr>
+<td>内容质量</td>
+<td>4</td>
+</tr>
+<tr>
+<td>产品相关性</td>
+<td>4</td>
+</tr>
+<tr>
+<td>互动质量</td>
+<td>4</td>
+</tr>
+<tr>
+<td>真实度</td>
+<td>5</td>
+</tr>
+<tr>
+<td><strong>总分</strong></td>
+<td><strong>22/25</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>推荐等级</strong>：⭐ 推荐（便携暖奶器专项）</p>
+<p><strong>Why</strong>："三娃妈妈"身份 = 多年龄段使用场景覆盖。Momcozy 暖奶器已有完整评测内容。"带着三个五岁以下的孩子出门" 的使用场景极具说服力。</p>
+<hr />
+<h2>达人 #5-7：Lemone8/TikTok 交叉发现的 Momcozy 暖奶器评测者</h2>
+<table>
+<thead>
+<tr>
+<th>达人</th>
+<th>账号</th>
+<th>适配分</th>
+<th>内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>@cozyglowup33</td>
+<td><a href="https://tiktok.com/@cozyglowup33">@cozyglowup33</a></td>
+<td>20/25</td>
+<td>Momcozy 暖奶器评测 + 新生儿必备品</td>
+</tr>
+<tr>
+<td>@kaceykreda</td>
+<td><a href="https://tiktok.com/@kaceykreda">@kaceykreda</a></td>
+<td>20/25</td>
+<td>Momcozy 母乳冷却器 + 暖奶器评测</td>
+</tr>
+<tr>
+<td>@briebriie1</td>
+<td><a href="https://tiktok.com/@briebriie1">@briebriie1</a></td>
+<td>20/25</td>
+<td>Momcozy 便携暖奶器评测</td>
+</tr>
+</tbody>
+</table>
+<p><strong>推荐等级</strong>：⭐ 推荐（便携暖奶器品类，已有真实评测内容）</p>
+<hr />
+<h2>达人 #8：@krazykatladyyyy</h2>
+<h3>基本信息</h3>
+<table>
+<thead>
+<tr>
+<th>属性</th>
+<th>详情</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>账号</strong></td>
+<td><a href="https://tiktok.com/@krazykatladyyyy">@krazykatladyyyy</a>（待验证）</td>
+</tr>
+<tr>
+<td><strong>平台</strong></td>
+<td>TikTok/Lemon8</td>
+</tr>
+<tr>
+<td><strong>地区</strong></td>
+<td>美国（推测）</td>
+</tr>
+<tr>
+<td><strong>领域</strong></td>
+<td>新手妈妈、Amazon 婴儿 Registry 必备品（含 Owlet Dream Sock + Momcozy 暖奶器）</td>
+</tr>
+</tbody>
+</table>
+<h3>适配评分摘要</h3>
+<table>
+<thead>
+<tr>
+<th>维度</th>
+<th>评分 (1-5)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>受众匹配</td>
+<td>4</td>
+</tr>
+<tr>
+<td>内容质量</td>
+<td>4</td>
+</tr>
+<tr>
+<td>产品相关性</td>
+<td>4</td>
+</tr>
+<tr>
+<td>互动质量</td>
+<td>4</td>
+</tr>
+<tr>
+<td>真实度</td>
+<td>4</td>
+</tr>
+<tr>
+<td><strong>总分</strong></td>
+<td><strong>20/25</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>推荐等级</strong>：⭐ 推荐（婴儿监视器 + 暖奶器双品类覆盖）</p>
+<hr />
+<h2>观察名单</h2>
+<table>
+<thead>
+<tr>
+<th>账号</th>
+<th>粉丝（估）</th>
+<th>排除原因</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>@juliewise4</td>
+<td>1M+</td>
+<td>⚠️ 远超 200K 上限。Owlet 视频 7M 播放可作为内容参考标杆</td>
+</tr>
+<tr>
+<td>@abbieherbert</td>
+<td>15.8M</td>
+<td>⚠️ Momcozy 品牌大使，但粉丝远超上限</td>
+</tr>
+<tr>
+<td>@neshanicole94</td>
+<td>&lt;5K（估）</td>
+<td>低于 10K 下限，Momcozy M5 泵奶演示有内容潜力</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>第五步 — 汇总发现报告</h2>
+<h1>红人发现结果</h1>
+<h2>汇总统计</h2>
+<table>
+<thead>
+<tr>
+<th>指标</th>
+<th>数量</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>总审核候选人</td>
+<td>24</td>
+</tr>
+<tr>
+<td>通过初步筛选</td>
+<td>8</td>
+</tr>
+<tr>
+<td>强烈推荐（适配分 ≥22/25）</td>
+<td>4</td>
+</tr>
+<tr>
+<td>推荐（适配分 18–21/25）</td>
+<td>4</td>
+</tr>
+<tr>
+<td>观察名单</td>
+<td>3</td>
+</tr>
+</tbody>
+</table>
+<h2>顶级推荐</h2>
+<h3>第一梯队：必须联系</h3>
+<table>
+<thead>
+<tr>
+<th>排名</th>
+<th>账号</th>
+<th>粉丝（估）</th>
+<th>适配分</th>
+<th>最佳品类</th>
+<th>亮点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><a href="https://tiktok.com/@therealkelseyrose">@therealkelseyrose</a></td>
+<td>~120K</td>
+<td>23/25</td>
+<td><strong>Baby Monitor</strong></td>
+<td>Owlet 安全警示视频引发全国关注，被 Newsweek 报道</td>
+</tr>
+<tr>
+<td>2</td>
+<td><a href="https://tiktok.com/@positravelty">@positravelty</a></td>
+<td>~150K</td>
+<td>23/25</td>
+<td><strong>Baby Monitor</strong></td>
+<td>Owlet 11秒情感评测 — 5M 播放、490K 点赞</td>
+</tr>
+<tr>
+<td>3</td>
+<td><a href="https://tiktok.com/@malrob8">@malrob8</a></td>
+<td>~100K（估）</td>
+<td>22/25</td>
+<td><strong>Baby Monitor</strong></td>
+<td>婴儿监视器幽默日常 — 2.9M 播放</td>
+</tr>
+<tr>
+<td>4</td>
+<td><a href="https://tiktok.com/@ciaradeanne">@ciaradeanne</a></td>
+<td>~35K（估）</td>
+<td>22/25</td>
+<td><strong>Milk Warmer</strong></td>
+<td>三娃妈妈，Momcozy 暖奶器完整评测</td>
+</tr>
+</tbody>
+</table>
+<h3>第二梯队：强力候选</h3>
+<table>
+<thead>
+<tr>
+<th>达人</th>
+<th>账号</th>
+<th>适配分</th>
+<th>最佳品类</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>@cozyglowup33</td>
+<td><a href="https://tiktok.com/@cozyglowup33">@cozyglowup33</a></td>
+<td>20/25</td>
+<td>Milk Warmer</td>
+</tr>
+<tr>
+<td>@kaceykreda</td>
+<td><a href="https://tiktok.com/@kaceykreda">@kaceykreda</a></td>
+<td>20/25</td>
+<td>Milk Warmer</td>
+</tr>
+<tr>
+<td>@briebriie1</td>
+<td><a href="https://tiktok.com/@briebriie1">@briebriie1</a></td>
+<td>20/25</td>
+<td>Milk Warmer</td>
+</tr>
+<tr>
+<td>@krazykatladyyyy</td>
+<td><a href="https://tiktok.com/@krazykatladyyyy">@krazykatladyyyy</a></td>
+<td>20/25</td>
+<td>Monitor + Warmer</td>
+</tr>
+</tbody>
+</table>
+<h2>分产品推荐矩阵</h2>
+<table>
+<thead>
+<tr>
+<th>目标产品</th>
+<th>第一推荐</th>
+<th>第二推荐</th>
+<th>第三推荐</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Baby Car Camera</strong></td>
+<td>—（TikTok 内容极度稀缺）</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td><strong>Baby Monitor</strong></td>
+<td><a href="https://tiktok.com/@therealkelseyrose">@therealkelseyrose</a></td>
+<td><a href="https://tiktok.com/@positravelty">@positravelty</a></td>
+<td><a href="https://tiktok.com/@malrob8">@malrob8</a></td>
+</tr>
+<tr>
+<td><strong>Portable Milk Warmer</strong></td>
+<td><a href="https://tiktok.com/@ciaradeanne">@ciaradeanne</a></td>
+<td><a href="https://tiktok.com/@cozyglowup33">@cozyglowup33</a></td>
+<td><a href="https://tiktok.com/@kaceykreda">@kaceykreda</a></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>第六步 — 发现洞察</h2>
+<h3>领域观察</h3>
+<p><strong>TikTok 各品类的巨大差异</strong>：<br />
+- <strong>婴儿监视器</strong>：内容最丰富。Owlet/Nanit 在 TikTok 上有大量病毒传播内容，情感真实评测（非精制广告）获得数百万播放。安全讨论（Wi-Fi 监视器被黑）驱动高互动。<br />
+- <strong>便携暖奶器</strong>：中等丰富。Momcozy 在 TikTok/Lemon8 有持续的微型达人评测。<br />
+- <strong>婴儿车载摄像头</strong>：TikTok 内容极度稀缺 — 三大平台（YT、IG、TT）中都是最大的内容空白。</p>
+<p><strong>TikTok 内容公式</strong>：<br />
+- "情感共鸣 &gt; 精制广告" — @positravelty 11秒不加修饰的视频获 5M 播放证明了这一点<br />
+- "安全话题 &gt; 产品推销" — @therealkelseyrose 的监视器安全警示引发全国讨论<br />
+- 妈妈真实体验（尤其是紧张/担心/哭笑不得的时刻）远胜品牌精制内容</p>
+<h3>四平台对比（含本次 TikTok 搜索）</h3>
+<table>
+<thead>
+<tr>
+<th>平台</th>
+<th>达人可发现性</th>
+<th>baby car camera</th>
+<th>baby monitor</th>
+<th>milk warmer</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>YouTube</strong></td>
+<td>中</td>
+<td>稀缺</td>
+<td>中等</td>
+<td>稀缺</td>
+</tr>
+<tr>
+<td><strong>Instagram</strong></td>
+<td>极低</td>
+<td>稀缺</td>
+<td>稀缺</td>
+<td>丰富（Lemon8 交叉）</td>
+</tr>
+<tr>
+<td><strong>TikTok</strong></td>
+<td>低</td>
+<td><strong>极度稀缺</strong></td>
+<td><strong>最丰富</strong></td>
+<td>丰富</td>
+</tr>
+<tr>
+<td><strong>网页搜索</strong></td>
+<td>—</td>
+<td>全部稀缺</td>
+<td>中</td>
+<td>中（博客为主）</td>
+</tr>
+</tbody>
+</table>
+<p><strong>核心发现</strong>：baby car camera 在四个平台上都是内容洼地 → 最先进入的品牌有巨大的先发优势。</p>
+<h3>搜索优化建议</h3>
+<ul>
+<li>通过 <code>~~influencer database</code> 连接器批量拉取 TikTok 10K-200K 区间的育儿达人</li>
+<li>优先在 TikTok 平台内搜索 #babycarcamera、#babymonitor、#momcozy 标签</li>
+<li>Owlet/Nanit/Momcozy 品牌合作帖的回溯是发现活跃评测者的高效渠道</li>
+<li>baby car camera 可考虑从 YouTube 长视频评测起步、TikTok 短视频做分发</li>
+</ul>
+<hr />
+<h2>数据质量说明</h2>
+<table>
+<thead>
+<tr>
+<th>数据点</th>
+<th>置信度</th>
+<th>来源</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>病毒视频播放量</td>
+<td><strong>高</strong></td>
+<td>Newsweek 等新闻媒体交叉验证</td>
+</tr>
+<tr>
+<td>TikTok 粉丝数</td>
+<td><strong>低</strong>（大部分为推测）</td>
+<td>基于视频播放和互动数据逆向估算</td>
+</tr>
+<tr>
+<td>互动率</td>
+<td><strong>中</strong></td>
+<td>通过视频 views/likes/comments 推算</td>
+</tr>
+<tr>
+<td>地区确认</td>
+<td><strong>低</strong></td>
+<td>仅通过内容语言和话题推测</td>
+</tr>
+<tr>
+<td>Lemon8→TikTok 账号匹配</td>
+<td><strong>中</strong></td>
+<td>用户名通常跨平台一致，但未逐一验证</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>⚠️ <strong>所有标注"待验证"或"(估)"的数据应在联系前通过 TikTok 个人页和达人分析平台验证。</strong></p>
+</blockquote>
+<hr />
+<p><em>报告按照 <a href="../SKILL.md">influencer-discovery SKILL.md</a> 工作流程生成。下一步 skill：<a href="../fit-scorer/SKILL.md">fit-scorer</a> 进行加权评分和最终排名。</em></p>
+</div>
+
+<div class="lang-content" id="content-en">
+<h1>Influencer Discovery: TikTok Baby Tech · 10K-200K · USA</h1>
+<p><strong>Search Date</strong>: 2026-07-23<br />
+<strong>Search Criteria</strong>: TikTok, 10,000–200,000 followers, engagement &gt;4%, USA, baby car camera / baby monitor / portable milk warmer content</p>
+<hr />
+<h2>Step 1 — Discovery Parameters</h2>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Requirement</th>
+<th>Priority</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Niche</td>
+<td>Baby tech products, parenting gear</td>
+<td>Required</td>
+</tr>
+<tr>
+<td>Platform</td>
+<td>TikTok</td>
+<td>Required</td>
+</tr>
+<tr>
+<td>Follower Range</td>
+<td>10,000 – 200,000</td>
+<td>Required</td>
+</tr>
+<tr>
+<td>Engagement Rate</td>
+<td>&gt;4%</td>
+<td>Required</td>
+</tr>
+<tr>
+<td>Target Products</td>
+<td>baby car camera / baby monitor / portable milk warmer</td>
+<td>Required</td>
+</tr>
+<tr>
+<td>Location</td>
+<td>USA</td>
+<td>Required</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>Step 2 — Search Strategy</h2>
+<ol>
+<li>Hashtags: #babycarcamera, #babymonitorreview, #portablemilkwarmer, #momcozy, #owlet, #nanit</li>
+<li>Competitor brand tracking: Momcozy, Owlet, Nanit, DoHonest user-generated reviews</li>
+<li>Cross-platform: Lemon8 reviewers → TikTok backtracking</li>
+<li>Viral content tracking: Owlet smart sock, Momcozy warmers, baby monitor security discussions</li>
+</ol>
+<hr />
+<h2>Step 3 — Initial Screening</h2>
+<p><strong>Total</strong>: 24 candidates → <strong>8 passed</strong> (plus 3 watch list)</p>
+<blockquote>
+<p><strong>Data Quality Note</strong>: TikTok 10K-200K accounts are difficult to discover via web search. Search leveraged news event tracking, competitor brand review backtracking, Lemon8 cross-discovery, and platform data. <strong>Strongly recommend</strong> <code>~~influencer database</code> and <code>~~social platform analytics</code> connectors.</p>
+</blockquote>
+<hr />
+<h2>Step 4 — Influencer Profiles</h2>
+<h3>#1: Kelsey Rose (<a href="https://tiktok.com/@therealkelseyrose">@therealkelseyrose</a>)</h3>
+<p>Est. ~120K followers. Viral Owlet baby monitor security warning — 289K+ views, covered by Newsweek. USA. <strong>Fit: 23/25</strong> ⭐ — Best for baby monitor.</p>
+<h3>#2: @positravelty</h3>
+<p>Est. ~150K followers. Owlet Dream Sock 11-second emotional review — 5M views, 490K likes, 59K shares. USA (assumed). <strong>Fit: 23/25</strong> ⭐ — Best for baby monitor/health tech.</p>
+<h3>#3: Mallory (<a href="https://tiktok.com/@malrob8">@malrob8</a>)</h3>
+<p>Baby monitor humor — 2.9M views. USA (assumed). <strong>Fit: 22/25</strong> ⭐ — Baby monitor (humor/relatable angle).</p>
+<h3>#4: @ciaradeanne</h3>
+<p>Est. ~35K followers. Mom of three. Momcozy Travel Cooler + Milk Warmer full review. USA. <strong>Fit: 22/25</strong> ⭐ — Best for portable milk warmer.</p>
+<h3>#5-7: Lemon8 Cross-Discovery</h3>
+<p><a href="https://tiktok.com/@cozyglowup33">@cozyglowup33</a> / <a href="https://tiktok.com/@kaceykreda">@kaceykreda</a> / <a href="https://tiktok.com/@briebriie1">@briebriie1</a> — Momcozy warmer reviewers. <strong>Fit: 20/25</strong> each ⭐</p>
+<h3>#8: @krazykatladyyyy</h3>
+<p>Amazon baby registry must-haves (Owlet + Momcozy warmer). <strong>Fit: 20/25</strong> ⭐</p>
+<h3>Watch List</h3>
+<table>
+<thead>
+<tr>
+<th>Account</th>
+<th>Reason</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>@juliewise4</td>
+<td>1M+ followers — exceeds 200K cap</td>
+</tr>
+<tr>
+<td>@abbieherbert</td>
+<td>15.8M — Momcozy ambassador, far exceeds cap</td>
+</tr>
+<tr>
+<td>@neshanicole94</td>
+<td>&lt;5K — below 10K floor</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>Step 5 — Product-Specific Matrix</h2>
+<table>
+<thead>
+<tr>
+<th>Target Product</th>
+<th>1st Choice</th>
+<th>2nd Choice</th>
+<th>3rd Choice</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Baby Car Camera</strong></td>
+<td>— (EXTREMELY scarce on TikTok)</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td><strong>Baby Monitor</strong></td>
+<td><a href="https://tiktok.com/@therealkelseyrose">@therealkelseyrose</a></td>
+<td><a href="https://tiktok.com/@positravelty">@positravelty</a></td>
+<td><a href="https://tiktok.com/@malrob8">@malrob8</a></td>
+</tr>
+<tr>
+<td><strong>Portable Milk Warmer</strong></td>
+<td><a href="https://tiktok.com/@ciaradeanne">@ciaradeanne</a></td>
+<td><a href="https://tiktok.com/@cozyglowup33">@cozyglowup33</a></td>
+<td><a href="https://tiktok.com/@kaceykreda">@kaceykreda</a></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>Step 6 — Key Findings</h2>
+<ul>
+<li><strong>Baby monitor</strong> = richest TikTok content (Owlet/Nanit viral videos)</li>
+<li><strong>Baby car camera</strong> = EXTREMELY scarce across ALL four platforms — biggest first-mover advantage</li>
+<li>TikTok content formula: "emotional authenticity &gt; polished ads"</li>
+<li>Cross-platform comparison: YouTube (best for long-form car camera installs), TikTok (best for monitor viral reach), Instagram (best for warmer Reels)</li>
+</ul>
+<hr />
+<p><em>Report generated per <a href="../SKILL.md">influencer-discovery SKILL.md</a> workflow. Next skill: <a href="../fit-scorer/SKILL.md">fit-scorer</a>.</em></p>
+</div>
+
+</div>
+
+<script>
+(function(){
+  // ── Language toggle ──
+  var K='inf-discovery-lang',
+      be=document.getElementById('btn-en'),bz=document.getElementById('btn-zh'),
+      ce=document.getElementById('content-en'),cz=document.getElementById('content-zh');
+  function setLang(l){
+    if(l==='zh'){bz.classList.add('active');be.classList.remove('active');cz.classList.add('active');ce.classList.remove('active');buildTOC('zh');}
+    else{be.classList.add('active');bz.classList.remove('active');ce.classList.add('active');cz.classList.remove('active');buildTOC('en');}
+    try{localStorage.setItem(K,l);}catch(e){}
+  }
+  var s=null;try{s=localStorage.getItem(K);}catch(e){}
+  var initial = (s==='zh'||s==='en')?s:(navigator.language&&navigator.language.startsWith('zh')?'zh':'en');
+  setLang(initial);
+  be.addEventListener('click',function(){setLang('en');});
+  bz.addEventListener('click',function(){setLang('zh');});
+
+  // ── Build TOC from headings ──
+  var tocLabels = {
+    zh: {toc:'目 录', step:'第{0}步'},
+    en: {toc:'Contents', step:'Step {0}'}
+  };
+
+  function buildTOC(lang){
+    var activeContent = document.getElementById(lang==='zh'?'content-zh':'content-en');
+    var nav = document.getElementById('toc-nav');
+    if(!activeContent||!nav)return;
+    var hs = activeContent.querySelectorAll('h2,h3');
+    var html='';
+    var stepNum=0, inProfiles=false;
+    for(var i=0;i<hs.length;i++){
+      var h=hs[i], tag=h.tagName.toLowerCase();
+      var id='sec-'+i;
+      h.id=id;
+
+      // Detect step headers
+      var txt=h.textContent.trim();
+      var mStep=txt.match(/第[一二三四五六七八九十]+步|Step\s+(\d+)/i);
+      if(mStep&&tag==='h2'){stepNum++;}
+
+      // Generate TOC label
+      var label=txt;
+      // Truncate long influencer titles
+      if(txt.indexOf('达人 #')>-1||txt.indexOf('Influencer #')>-1||txt.indexOf('WL-')>-1){
+        label=txt.substring(0,50)+(txt.length>50?'…':'');
+      }
+      if(txt.indexOf('观察名单')>-1||txt.indexOf('Watch List')>-1){stepNum=0;}
+
+      html+='<a href="#'+id+'" class="toc-'+(tag==='h3'?'h3':'h2')+'" title="'+txt.replace(/"/g,'&quot;')+'">'+label+'</a>';
+    }
+    // Update toc title
+    var labels=tocLabels[lang]||tocLabels['en'];
+    document.getElementById('toc-title').textContent=labels.toc;
+    nav.innerHTML=html;
+
+    // Re-bind click handlers
+    nav.querySelectorAll('a').forEach(function(a){
+      a.addEventListener('click',function(e){
+        e.preventDefault();
+        var target=document.getElementById(this.getAttribute('href').substring(1));
+        if(target){target.scrollIntoView({behavior:'smooth',block:'start'});}
+        // Close sidebar on mobile
+        document.getElementById('sidebar').classList.remove('open');
+        document.getElementById('sidebar-overlay').classList.remove('open');
+      });
+    });
+
+    // Highlight active section
+    var observer=new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if(entry.isIntersecting){
+          nav.querySelectorAll('a').forEach(function(a){a.classList.remove('active');});
+          var link=nav.querySelector('a[href="#'+entry.target.id+'"]');
+          if(link)link.classList.add('active');
+        }
+      });
+    },{rootMargin:'-80px 0px -70% 0px'});
+    hs.forEach(function(h){observer.observe(h);});
+  }
+
+  // ── Mobile sidebar toggle ──
+  document.getElementById('hamburger').addEventListener('click',function(){
+    document.getElementById('sidebar').classList.add('open');
+    document.getElementById('sidebar-overlay').classList.add('open');
+  });
+  document.getElementById('sidebar-overlay').addEventListener('click',function(){
+    document.getElementById('sidebar').classList.remove('open');
+    document.getElementById('sidebar-overlay').classList.remove('open');
+  });
+})();
+</script>
+
+</body>
+</html>
