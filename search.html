@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Influencer Discovery · 红人发现</title>
+<style>
+:root {
+  --bg: #f8f9fa; --card-bg: #fff; --text: #1a1a2e; --text-secondary: #6b7280;
+  --border: #e5e7eb; --accent: #c2185b; --accent-light: #fce4ec;
+  --accent2: #1565c0; --radius: 12px; --shadow: 0 1px 3px rgba(0,0,0,0.08);
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+               "PingFang SC", "Microsoft YaHei", sans-serif;
+  background: var(--bg); color: var(--text); line-height: 1.6; min-height: 100vh;
+}
+header {
+  background: linear-gradient(135deg, var(--accent), #880e4f);
+  color: #fff; padding: 32px 24px; text-align: center;
+}
+header h1 { font-size: 1.8rem; margin-bottom: 4px; }
+header p { opacity: 0.85; font-size: 0.95rem; }
+
+.container { max-width: 1100px; margin: 0 auto; padding: 24px; display: grid; grid-template-columns: 1fr 400px; gap: 24px; }
+@media (max-width: 860px) { .container { grid-template-columns: 1fr; } }
+
+.card {
+  background: var(--card-bg); border-radius: var(--radius);
+  box-shadow: var(--shadow); padding: 24px; margin-bottom: 20px;
+  border: 1px solid var(--border);
+}
+.card h2 { font-size: 1.15rem; color: var(--accent); margin-bottom: 16px; padding-bottom: 10px; border-bottom: 2px solid var(--accent-light); }
+
+.form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.form-grid .full { grid-column: 1 / -1; }
+label { display: block; font-size: 0.82rem; font-weight: 600; color: var(--text-secondary); margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.04em; }
+input, select, textarea {
+  width: 100%; padding: 10px 12px; border: 1.5px solid var(--border); border-radius: 8px;
+  font-size: 0.92rem; font-family: inherit; transition: border-color 0.2s; background: var(--bg);
+}
+input:focus, select:focus, textarea:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-light); }
+textarea { resize: vertical; min-height: 60px; }
+
+.btn {
+  display: inline-flex; align-items: center; gap: 6px; padding: 11px 22px;
+  border: none; border-radius: 8px; font-size: 0.92rem; font-weight: 600;
+  cursor: pointer; transition: all 0.2s; font-family: inherit; text-decoration: none;
+}
+.btn-primary { background: var(--accent); color: #fff; }
+.btn-primary:hover { background: #ad1457; }
+.btn-primary:disabled { opacity: 0.5; cursor: not-allowed; }
+
+.status-card { display: flex; align-items: center; gap: 14px; padding: 16px; border-radius: 10px; margin-top: 14px; }
+.status-card.processing { background: #eff6ff; border: 1px solid #bfdbfe; }
+.status-card.done { background: #f0fdf4; border: 1px solid #bbf7d0; }
+.status-card.error { background: #fef2f2; border: 1px solid #fecaca; }
+.spinner { width: 32px; height: 32px; border: 3px solid #bfdbfe; border-top-color: var(--accent2); border-radius: 50%; animation: spin 0.8s linear infinite; flex-shrink: 0; }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.history-item {
+  display: flex; align-items: flex-start; gap: 12px; padding: 14px;
+  border: 1px solid var(--border); border-radius: 10px; margin-bottom: 10px;
+  transition: all 0.15s; text-decoration: none; color: inherit;
+}
+.history-item:hover { border-color: var(--accent); box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+.history-icon { font-size: 1.5rem; flex-shrink: 0; width: 40px; text-align: center; }
+.history-info { flex: 1; min-width: 0; }
+.history-title { font-weight: 600; font-size: 0.92rem; margin-bottom: 2px; }
+.history-meta { font-size: 0.78rem; color: var(--text-secondary); }
+.history-meta span { margin-right: 12px; white-space: nowrap; }
+.history-arrow { color: var(--accent); flex-shrink: 0; font-size: 1.1rem; margin-top: 4px; }
+.empty-state { text-align: center; padding: 40px 20px; color: var(--text-secondary); }
+.empty-state .icon { font-size: 3rem; margin-bottom: 12px; }
+
+.toast {
+  position: fixed; bottom: 24px; right: 24px; background: #1f2937; color: #fff;
+  padding: 12px 20px; border-radius: 8px; font-size: 0.88rem; z-index: 999;
+  opacity: 0; transform: translateY(10px); transition: all 0.3s;
+}
+.toast.show { opacity: 1; transform: translateY(0); }
+.server-badge { display: inline-block; padding: 3px 10px; border-radius: 20px; font-size: 0.72rem; font-weight: 600; }
+.server-on { background: #d1fae5; color: #059669; }
+.server-off { background: #fee2e2; color: #dc2626; }
+.stats { display: flex; gap: 20px; flex-wrap: wrap; margin-bottom: 16px; }
+.stat { font-size: 0.85rem; color: var(--text-secondary); }
+.stat strong { color: var(--accent); font-size: 1.1rem; }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>📣 Influencer Discovery · 红人发现</h1>
+  <p>多平台红人挖掘 — 输入需求 → Skill 自动处理 → 生成报告</p>
+</header>
+
+<div class="container">
+
+<div>
+  <div class="card">
+    <h2>🔍 新建搜索</h2>
+    <div class="form-grid">
+      <div><label>品牌/产品/领域 *</label><input type="text" id="f-niche" placeholder="例：Momcozy, baby car camera"></div>
+      <div><label>平台</label>
+        <select id="f-platform">
+          <option>Instagram</option><option>TikTok</option><option>YouTube</option>
+          <option>YouTube + Instagram</option><option>TikTok + Instagram</option>
+        </select>
+      </div>
+      <div><label>粉丝范围</label><input type="text" id="f-followers" placeholder="例：5K-50K"></div>
+      <div><label>互动率下限</label><input type="text" id="f-engagement" placeholder="例：4%"></div>
+      <div><label>地区</label><input type="text" id="f-location" placeholder="例：美国，USA, Canada"></div>
+      <div><label>内容关键词</label><input type="text" id="f-content" placeholder="例：baby monitor, milk warmer"></div>
+      <div class="full"><label>额外要求</label><textarea id="f-extra" placeholder="例：who have worked with brands like Momcozy"></textarea></div>
+    </div>
+    <div style="margin-top:14px;display:flex;gap:10px;align-items:center;flex-wrap:wrap;">
+      <button class="btn btn-primary" id="btn-submit" onclick="doSearch()">✨ 开始搜索</button>
+      <span class="server-badge server-on" id="badge-on" style="display:none">🟢 已连接</span>
+      <span class="server-badge server-off" id="badge-off" style="display:none">🔴 请运行 server.py</span>
+    </div>
+    <div id="status-area"></div>
+  </div>
+</div>
+
+<div>
+  <div class="card"><h2>📊 搜索历史</h2><div class="stats" id="stats-bar"></div></div>
+  <div id="history-list"><div class="empty-state"><div class="icon">📭</div><p>暂无记录</p></div></div>
+</div>
+
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+var SERVER = (window.location.port === '8765');
+var API = SERVER ? '' : null;
+
+function getData(){
+  return {
+    niche: document.getElementById('f-niche').value.trim(),
+    platform: document.getElementById('f-platform').value,
+    followers: document.getElementById('f-followers').value.trim(),
+    engagement: document.getElementById('f-engagement').value.trim(),
+    location: document.getElementById('f-location').value.trim(),
+    content: document.getElementById('f-content').value.trim(),
+    extra: document.getElementById('f-extra').value.trim()
+  };
+}
+
+function doSearch(){
+  var d = getData();
+  if (!d.niche) { toast('请至少填写品牌/产品/领域'); return; }
+  if (!SERVER) { toast('请先运行 python3 server.py，然后访问 http://localhost:8765'); return; }
+
+  var btn = document.getElementById('btn-submit');
+  btn.disabled = true; btn.textContent = '⏳ 提交中...';
+  var area = document.getElementById('status-area');
+  area.innerHTML = '<div class="status-card processing"><div class="spinner"></div><div><strong>搜索已提交</strong><p>Claude Code 正在处理...</p></div></div>';
+
+  fetch('/api/search', {method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(d)})
+    .then(function(r){return r.json();})
+    .then(function(resp){
+      if (resp.error) {
+        area.innerHTML = '<div class="status-card error"><strong>❌ '+resp.error+'</strong></div>';
+        btn.disabled = false; btn.textContent = '✨ 开始搜索';
+        return;
+      }
+      poll(resp.task_id);
+    })
+    .catch(function(e){
+      area.innerHTML = '<div class="status-card error"><strong>❌ 连接失败</strong><p>确认 server.py 已启动</p></div>';
+      btn.disabled = false; btn.textContent = '✨ 开始搜索';
+    });
+}
+
+function poll(taskId){
+  var area = document.getElementById('status-area');
+  var btn = document.getElementById('btn-submit');
+  var n = 0;
+  function tick(){
+    fetch('/api/status?task='+taskId).then(function(r){return r.json();}).then(function(resp){
+      n++;
+      if (resp.status === 'done') {
+        if (resp.report) {
+          var link = 'memory/influencer/influencer-discovery/' + resp.report.html;
+          area.innerHTML = '<div class="status-card done"><div style="flex:1"><strong>✅ 报告已生成！</strong><p style="margin:4px 0;font-size:0.88rem;">'+esc(resp.report.title)+'</p></div><a class="btn btn-primary" href="'+link+'" target="_blank">📄 查看报告</a></div>';
+          toast('✅ 报告已生成');
+          loadHistory();
+        } else {
+          area.innerHTML = '<div class="status-card done"><strong>⚠️ '+ (resp.message||'处理完成但未检测到新报告') +'</strong></div>';
+        }
+        btn.disabled = false; btn.textContent = '✨ 开始搜索';
+      } else if (resp.status === 'error') {
+        area.innerHTML = '<div class="status-card error"><strong>❌ '+resp.message+'</strong></div>';
+        btn.disabled = false; btn.textContent = '✨ 开始搜索';
+      } else {
+        var e = resp.elapsed_seconds||0;
+        area.innerHTML = '<div class="status-card processing"><div class="spinner"></div><div><strong>处理中...</strong><p>已等待 '+Math.floor(e/60)+'分'+e%60+'秒</p></div></div>';
+        if (n < 300) setTimeout(tick, 5000);
+      }
+    }).catch(function(){ if (n < 300) setTimeout(tick, 5000); });
+  }
+  tick();
+}
+
+function loadHistory(){
+  fetch('memory/influencer/influencer-discovery/reports.json?'+Date.now())
+    .then(function(r){return r.json();})
+    .then(function(rs){
+      document.getElementById('stats-bar').innerHTML = '<div class="stat"><strong>'+rs.length+'</strong> 次搜索</div>';
+      var h='';
+      rs.forEach(function(r){
+        var icon = r.platform && r.platform.toLowerCase().includes('youtube')?'▶️':r.platform&&r.platform.toLowerCase().includes('instagram')?'📷':r.platform&&r.platform.toLowerCase().includes('tiktok')?'🎵':'🌐';
+        h+='<a class="history-item" href="memory/influencer/influencer-discovery/'+r.html+'" target="_blank">';
+        h+='<div class="history-icon">'+icon+'</div>';
+        h+='<div class="history-info"><div class="history-title">'+esc(r.title)+'</div>';
+        h+='<div class="history-meta"><span>📅 '+r.date+'</span><span>📌 '+esc(r.platform||'')+'</span>';
+        if(r.followers) h+='<span>👥 '+esc(r.followers)+'</span>';
+        h+='</div></div><div class="history-arrow">→</div></a>';
+      });
+      document.getElementById('history-list').innerHTML = h || '<div class="empty-state"><div class="icon">📭</div><p>暂无记录</p></div>';
+    })
+    .catch(function(){});
+}
+
+function esc(s){ return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+function toast(m){ var t=document.getElementById('toast');t.textContent=m;t.classList.add('show');setTimeout(function(){t.classList.remove('show');},2500); }
+
+// Init
+if (SERVER) { document.getElementById('badge-on').style.display='inline-block'; }
+else { document.getElementById('badge-off').style.display='inline-block'; }
+loadHistory();
+</script>
+</body>
+</html>

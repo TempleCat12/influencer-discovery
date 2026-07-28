@@ -321,7 +321,58 @@ def build(input_md_path, output_html_path=None):
     with open(output_html_path, "w", encoding="utf-8") as f:
         f.write(full)
 
+    _update_manifest(input_md_path, output_html_path, md_zh)
     return output_html_path, len(full)
+
+
+def _update_manifest(md_path, html_path, md_zh_text):
+    """Update reports.json with this report's metadata (for search.html history & server polling)."""
+    import json
+    manifest_path = os.path.join(os.path.dirname(os.path.abspath(md_path)), "reports.json")
+    reports = []
+    if os.path.exists(manifest_path):
+        try:
+            with open(manifest_path, "r", encoding="utf-8") as f:
+                reports = json.load(f)
+        except Exception:
+            reports = []
+
+    first_line = md_zh_text.strip().split("\n")[0].lstrip("#").strip()
+    date_match = re.search(r"(\d{4}-\d{2}-\d{2})", os.path.basename(md_path))
+    date_str = date_match.group(1) if date_match else __import__("datetime").datetime.now().strftime("%Y-%m-%d")
+
+    fname = os.path.basename(md_path)
+    platform = "Multi"
+    for p in ["tiktok", "instagram", "youtube"]:
+        if p in fname.lower():
+            platform = p.capitalize()
+            break
+    if "parenting-usa" in fname.lower():
+        platform = "YouTube + Instagram"
+
+    followers = ""
+    f_match = re.search(r"(\d+k?-?\d*k)", fname.lower())
+    if f_match:
+        followers = f_match.group(1).upper()
+
+    entry = {
+        "id": os.path.basename(md_path).replace(".md", ""),
+        "title": first_line,
+        "date": date_str,
+        "platform": platform,
+        "followers": followers,
+        "md": os.path.basename(md_path),
+        "html": os.path.basename(html_path),
+    }
+
+    reports = [r for r in reports if r.get("id") != entry["id"]]
+    reports.insert(0, entry)
+    reports.sort(key=lambda r: r.get("date", ""), reverse=True)
+
+    with open(manifest_path, "w", encoding="utf-8") as f:
+        json.dump(reports, f, ensure_ascii=False, indent=2)
+
+    print(f"   Manifest: {len(reports)} reports")
 
 
 if __name__ == "__main__":

@@ -19,6 +19,12 @@ Icon
 memory/**/build_bilingual.py
 memory/**/build_youtube_baby_tech.py
 
+# Task logs (runtime artifacts from server.py)
+memory/**/task-*.log
+
+# Server PID files
+*.pid
+
 # Python cache
 __pycache__/
 *.pyc
