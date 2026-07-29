@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Influencer Discovery: Parenting · USA · Momcozy-Adjacent / Influencer Discovery: Parenting · USA · Momcozy-Adjacent</title>
+<title>Influencer Discovery: Parenting · USA · Momcozy-Adjacent</title>
 <style>
 :root {
   --bg: #ffffff; --text: #1a1a2e; --text-secondary: #555;
@@ -29,6 +29,23 @@ body {
   letter-spacing: 0.05em; margin-bottom: 12px; padding-bottom: 8px;
   border-bottom: 2px solid var(--accent);
 }
+.toc-group { margin-bottom: 2px; }
+.toc-h2-wrap {
+  display: flex; align-items: center; cursor: pointer;
+  padding: 5px 10px; border-radius: 4px; border-left: 3px solid transparent;
+  transition: all 0.15s ease; user-select: none;
+}
+.toc-h2-wrap:hover { background: var(--accent-light); }
+.toc-h2-wrap .arrow {
+  font-size: 0.65rem; margin-right: 6px; transition: transform 0.2s ease;
+  flex-shrink: 0; color: var(--text-secondary);
+}
+.toc-h2-wrap.collapsed .arrow { transform: rotate(-90deg); }
+.toc-h2-wrap .toc-label { font-size: 0.82rem; color: var(--text-secondary); flex: 1; }
+.toc-h2-wrap.active { background: var(--accent-light); border-left-color: var(--accent); }
+.toc-h2-wrap.active .toc-label { color: var(--accent); font-weight: 600; }
+.toc-h3-list { overflow: hidden; transition: max-height 0.3s ease; }
+.toc-h3-list.collapsed { max-height: 0 !important; }
 .sidebar nav a {
   display: block; padding: 5px 10px; font-size: 0.82rem; color: var(--text-secondary);
   text-decoration: none; border-radius: 4px; margin-bottom: 2px;
@@ -88,8 +105,9 @@ a { color: var(--accent); text-decoration: none; }
 a:hover { text-decoration: underline; }
 code { background: var(--code-bg); padding: 2px 6px; border-radius: 4px; font-size: 0.9em; font-family: "SF Mono", "Fira Code", "Consolas", monospace; }
 blockquote { border-left: 4px solid var(--accent); padding: 10px 16px; margin: 14px 0; background: var(--accent-light); border-radius: 0 6px 6px 0; color: #555; }
-.lang-content { display: none; }
-.lang-content.active { display: block; }
+.lang-content { display: block; }
+.lang-content.bilingual { display: none; }
+.lang-content.bilingual.active { display: block; }
 /* ── Mobile ── */
 @media (max-width: 900px) {
   .sidebar { transform: translateX(-100%); transition: transform 0.25s ease; }
@@ -105,7 +123,6 @@ blockquote { border-left: 4px solid var(--accent); padding: 10px 16px; margin: 1
 }
 @media print {
   .sidebar, .hamburger, .sidebar-overlay, .toggle-bar { display: none; }
-  .lang-content { display: block !important; }
   .main-wrap { margin-left: 0; padding: 16px; max-width: 100%; }
   table { box-shadow: none; } thead { background: #333; }
 }
@@ -116,218 +133,205 @@ blockquote { border-left: 4px solid var(--accent); padding: 10px 16px; margin: 1
 <button class="hamburger" id="hamburger" aria-label="Menu">&#9776;</button>
 <div class="sidebar-overlay" id="sidebar-overlay"></div>
 
-<aside class="sidebar" id="sidebar">
-  <div id="toc-zh">
-<h3>目 录</h3>
+<aside class="sidebar" id="sidebar"><h3>目 录</h3>
 <nav>
-  <a href="#sec-zh-0" class="toc-h2">Step 1 — Discovery Parameters</a>
-  <a href="#sec-zh-1" class="toc-h2">Step 2 — Search Strategy</a>
-  <a href="#sec-zh-2" class="toc-h3">Primary Search Methods</a>
-  <a href="#sec-zh-3" class="toc-h3">Tool Queries (Web Search)</a>
-  <a href="#sec-zh-4" class="toc-h2">Step 3 — Initial Screening</a>
-  <a href="#sec-zh-5" class="toc-h3">Screening Criteria Applied</a>
-  <a href="#sec-zh-6" class="toc-h3">Red Flags Identified</a>
-  <a href="#sec-zh-7" class="toc-h2">Step 4 — Influencer Profiles</a>
-  <a href="#sec-zh-8" class="toc-h2">Influencer #1: @karrie_locher</a>
-  <a href="#sec-zh-9" class="toc-h3">Basic Information</a>
-  <a href="#sec-zh-10" class="toc-h3">Metrics</a>
-  <a href="#sec-zh-11" class="toc-h3">Audience Analysis</a>
-  <a href="#sec-zh-12" class="toc-h3">Content Analysis</a>
-  <a href="#sec-zh-13" class="toc-h3">Partnership History</a>
-  <a href="#sec-zh-14" class="toc-h3">Contact Information</a>
-  <a href="#sec-zh-15" class="toc-h3">Fit Score Summary</a>
-  <a href="#sec-zh-16" class="toc-h2">Influencer #2: @glowmaven (Latham Thomas)</a>
-  <a href="#sec-zh-17" class="toc-h3">Basic Information</a>
-  <a href="#sec-zh-18" class="toc-h3">Metrics</a>
-  <a href="#sec-zh-19" class="toc-h3">Audience Analysis</a>
-  <a href="#sec-zh-20" class="toc-h3">Content Analysis</a>
-  <a href="#sec-zh-21" class="toc-h3">Partnership History</a>
-  <a href="#sec-zh-22" class="toc-h3">Contact Information</a>
-  <a href="#sec-zh-23" class="toc-h3">Fit Score Summary</a>
-  <a href="#sec-zh-24" class="toc-h2">Influencer #3: @lunchboxdad (Beau Coffron)</a>
-  <a href="#sec-zh-25" class="toc-h3">Basic Information</a>
-  <a href="#sec-zh-26" class="toc-h3">Metrics</a>
-  <a href="#sec-zh-27" class="toc-h3">Audience Analysis</a>
-  <a href="#sec-zh-28" class="toc-h3">Content Analysis</a>
-  <a href="#sec-zh-29" class="toc-h3">Partnership History</a>
-  <a href="#sec-zh-30" class="toc-h3">Contact Information</a>
-  <a href="#sec-zh-31" class="toc-h3">Fit Score Summary</a>
-  <a href="#sec-zh-32" class="toc-h2">Influencer #4: @chelseakunz (Chelsea Kunz)</a>
-  <a href="#sec-zh-33" class="toc-h3">Basic Information</a>
-  <a href="#sec-zh-34" class="toc-h3">Metrics</a>
-  <a href="#sec-zh-35" class="toc-h3">Audience Analysis</a>
-  <a href="#sec-zh-36" class="toc-h3">Content Analysis</a>
-  <a href="#sec-zh-37" class="toc-h3">Partnership History</a>
-  <a href="#sec-zh-38" class="toc-h3">Contact Information</a>
-  <a href="#sec-zh-39" class="toc-h3">Fit Score Summary</a>
-  <a href="#sec-zh-40" class="toc-h2">Influencer #5: @chelseafoy (Chelsea Foy)</a>
-  <a href="#sec-zh-41" class="toc-h3">Basic Information</a>
-  <a href="#sec-zh-42" class="toc-h3">Metrics</a>
-  <a href="#sec-zh-43" class="toc-h3">Audience Analysis</a>
-  <a href="#sec-zh-44" class="toc-h3">Content Analysis</a>
-  <a href="#sec-zh-45" class="toc-h3">Partnership History</a>
-  <a href="#sec-zh-46" class="toc-h3">Contact Information</a>
-  <a href="#sec-zh-47" class="toc-h3">Fit Score Summary</a>
-  <a href="#sec-zh-48" class="toc-h2">Influencer #6: @mommyshorts (Ilana Wiles)</a>
-  <a href="#sec-zh-49" class="toc-h3">Basic Information</a>
-  <a href="#sec-zh-50" class="toc-h3">Metrics</a>
-  <a href="#sec-zh-51" class="toc-h3">Audience Analysis</a>
-  <a href="#sec-zh-52" class="toc-h3">Content Analysis</a>
-  <a href="#sec-zh-53" class="toc-h3">Partnership History</a>
-  <a href="#sec-zh-54" class="toc-h3">Contact Information</a>
-  <a href="#sec-zh-55" class="toc-h3">Fit Score Summary</a>
-  <a href="#sec-zh-56" class="toc-h2">Influencer #7: @anawilkinson (Ana Wilkinson)</a>
-  <a href="#sec-zh-57" class="toc-h3">Basic Information</a>
-  <a href="#sec-zh-58" class="toc-h3">Metrics</a>
-  <a href="#sec-zh-59" class="toc-h3">Audience Analysis</a>
-  <a href="#sec-zh-60" class="toc-h3">Content Analysis</a>
-  <a href="#sec-zh-61" class="toc-h3">Partnership History</a>
-  <a href="#sec-zh-62" class="toc-h3">Contact Information</a>
-  <a href="#sec-zh-63" class="toc-h3">Fit Score Summary</a>
-  <a href="#sec-zh-64" class="toc-h2">Influencer #8: @parentingthespectrum (Cassandra Bo…</a>
-  <a href="#sec-zh-65" class="toc-h3">Basic Information</a>
-  <a href="#sec-zh-66" class="toc-h3">Metrics</a>
-  <a href="#sec-zh-67" class="toc-h3">Audience Analysis</a>
-  <a href="#sec-zh-68" class="toc-h3">Content Analysis</a>
-  <a href="#sec-zh-69" class="toc-h3">Partnership History</a>
-  <a href="#sec-zh-70" class="toc-h3">Contact Information</a>
-  <a href="#sec-zh-71" class="toc-h3">Fit Score Summary</a>
-  <a href="#sec-zh-72" class="toc-h2">YouTube-First Candidates</a>
-  <a href="#sec-zh-73" class="toc-h2">Influencer #9: Janna Faye (@jannafayeco) — ⚠️ WATC…</a>
-  <a href="#sec-zh-74" class="toc-h3">Basic Information</a>
-  <a href="#sec-zh-75" class="toc-h3">Metrics</a>
-  <a href="#sec-zh-76" class="toc-h3">Audience Analysis</a>
-  <a href="#sec-zh-77" class="toc-h3">Content Analysis</a>
-  <a href="#sec-zh-78" class="toc-h3">Red Flags</a>
-  <a href="#sec-zh-79" class="toc-h3">Fit Score Summary</a>
-  <a href="#sec-zh-80" class="toc-h2">Step 5 — Compiled Discovery Report</a>
-  <a href="#sec-zh-81" class="toc-h2">Summary Statistics</a>
-  <a href="#sec-zh-82" class="toc-h3">By Platform</a>
-  <a href="#sec-zh-83" class="toc-h3">By Tier</a>
-  <a href="#sec-zh-84" class="toc-h2">Top Recommendations</a>
-  <a href="#sec-zh-85" class="toc-h3">Tier 1: Must Reach Out</a>
-  <a href="#sec-zh-86" class="toc-h3">Tier 2: Strong Candidates</a>
-  <a href="#sec-zh-87" class="toc-h3">Tier 3: Worth Considering / Watch List</a>
-  <a href="#sec-zh-88" class="toc-h2">Influencer Mix Recommendation</a>
-  <a href="#sec-zh-89" class="toc-h2">Next Steps</a>
-  <a href="#sec-zh-90" class="toc-h2">Step 6 — Discovery Insights</a>
-  <a href="#sec-zh-91" class="toc-h3">Niche Observations</a>
-  <a href="#sec-zh-92" class="toc-h3">Platform-Specific Observations</a>
-  <a href="#sec-zh-93" class="toc-h3">Recommendations for Future Searches</a>
-  <a href="#sec-zh-94" class="toc-h2">Data Quality Notes</a>
-</nav>
+<a href="#sec-zh-0" class="toc-h2">Step 1 — Discovery Parameters</a>
+<div class="toc-group">
+  <div class="toc-h2-wrap" data-target="#sec-zh-1" onclick="toggleTOC(this)">
+    <span class="arrow">&#9660;</span>
+    <span class="toc-label">Step 2 — Search Strategy</span>
   </div>
-  <div id="toc-en" style="display:none">
-<h3>Contents</h3>
-<nav>
-  <a href="#sec-en-0" class="toc-h2">Step 1 — Discovery Parameters</a>
-  <a href="#sec-en-1" class="toc-h2">Step 2 — Search Strategy</a>
-  <a href="#sec-en-2" class="toc-h3">Primary Search Methods</a>
-  <a href="#sec-en-3" class="toc-h3">Tool Queries (Web Search)</a>
-  <a href="#sec-en-4" class="toc-h2">Step 3 — Initial Screening</a>
-  <a href="#sec-en-5" class="toc-h3">Screening Criteria Applied</a>
-  <a href="#sec-en-6" class="toc-h3">Red Flags Identified</a>
-  <a href="#sec-en-7" class="toc-h2">Step 4 — Influencer Profiles</a>
-  <a href="#sec-en-8" class="toc-h2">Influencer #1: @karrie_locher</a>
-  <a href="#sec-en-9" class="toc-h3">Basic Information</a>
-  <a href="#sec-en-10" class="toc-h3">Metrics</a>
-  <a href="#sec-en-11" class="toc-h3">Audience Analysis</a>
-  <a href="#sec-en-12" class="toc-h3">Content Analysis</a>
-  <a href="#sec-en-13" class="toc-h3">Partnership History</a>
-  <a href="#sec-en-14" class="toc-h3">Contact Information</a>
-  <a href="#sec-en-15" class="toc-h3">Fit Score Summary</a>
-  <a href="#sec-en-16" class="toc-h2">Influencer #2: @glowmaven (Latham Thomas)</a>
-  <a href="#sec-en-17" class="toc-h3">Basic Information</a>
-  <a href="#sec-en-18" class="toc-h3">Metrics</a>
-  <a href="#sec-en-19" class="toc-h3">Audience Analysis</a>
-  <a href="#sec-en-20" class="toc-h3">Content Analysis</a>
-  <a href="#sec-en-21" class="toc-h3">Partnership History</a>
-  <a href="#sec-en-22" class="toc-h3">Contact Information</a>
-  <a href="#sec-en-23" class="toc-h3">Fit Score Summary</a>
-  <a href="#sec-en-24" class="toc-h2">Influencer #3: @lunchboxdad (Beau Coffron)</a>
-  <a href="#sec-en-25" class="toc-h3">Basic Information</a>
-  <a href="#sec-en-26" class="toc-h3">Metrics</a>
-  <a href="#sec-en-27" class="toc-h3">Audience Analysis</a>
-  <a href="#sec-en-28" class="toc-h3">Content Analysis</a>
-  <a href="#sec-en-29" class="toc-h3">Partnership History</a>
-  <a href="#sec-en-30" class="toc-h3">Contact Information</a>
-  <a href="#sec-en-31" class="toc-h3">Fit Score Summary</a>
-  <a href="#sec-en-32" class="toc-h2">Influencer #4: @chelseakunz (Chelsea Kunz)</a>
-  <a href="#sec-en-33" class="toc-h3">Basic Information</a>
-  <a href="#sec-en-34" class="toc-h3">Metrics</a>
-  <a href="#sec-en-35" class="toc-h3">Audience Analysis</a>
-  <a href="#sec-en-36" class="toc-h3">Content Analysis</a>
-  <a href="#sec-en-37" class="toc-h3">Partnership History</a>
-  <a href="#sec-en-38" class="toc-h3">Contact Information</a>
-  <a href="#sec-en-39" class="toc-h3">Fit Score Summary</a>
-  <a href="#sec-en-40" class="toc-h2">Influencer #5: @chelseafoy (Chelsea Foy)</a>
-  <a href="#sec-en-41" class="toc-h3">Basic Information</a>
-  <a href="#sec-en-42" class="toc-h3">Metrics</a>
-  <a href="#sec-en-43" class="toc-h3">Audience Analysis</a>
-  <a href="#sec-en-44" class="toc-h3">Content Analysis</a>
-  <a href="#sec-en-45" class="toc-h3">Partnership History</a>
-  <a href="#sec-en-46" class="toc-h3">Contact Information</a>
-  <a href="#sec-en-47" class="toc-h3">Fit Score Summary</a>
-  <a href="#sec-en-48" class="toc-h2">Influencer #6: @mommyshorts (Ilana Wiles)</a>
-  <a href="#sec-en-49" class="toc-h3">Basic Information</a>
-  <a href="#sec-en-50" class="toc-h3">Metrics</a>
-  <a href="#sec-en-51" class="toc-h3">Audience Analysis</a>
-  <a href="#sec-en-52" class="toc-h3">Content Analysis</a>
-  <a href="#sec-en-53" class="toc-h3">Partnership History</a>
-  <a href="#sec-en-54" class="toc-h3">Contact Information</a>
-  <a href="#sec-en-55" class="toc-h3">Fit Score Summary</a>
-  <a href="#sec-en-56" class="toc-h2">Influencer #7: @anawilkinson (Ana Wilkinson)</a>
-  <a href="#sec-en-57" class="toc-h3">Basic Information</a>
-  <a href="#sec-en-58" class="toc-h3">Metrics</a>
-  <a href="#sec-en-59" class="toc-h3">Audience Analysis</a>
-  <a href="#sec-en-60" class="toc-h3">Content Analysis</a>
-  <a href="#sec-en-61" class="toc-h3">Partnership History</a>
-  <a href="#sec-en-62" class="toc-h3">Contact Information</a>
-  <a href="#sec-en-63" class="toc-h3">Fit Score Summary</a>
-  <a href="#sec-en-64" class="toc-h2">Influencer #8: @parentingthespectrum (Cassandra Bo…</a>
-  <a href="#sec-en-65" class="toc-h3">Basic Information</a>
-  <a href="#sec-en-66" class="toc-h3">Metrics</a>
-  <a href="#sec-en-67" class="toc-h3">Audience Analysis</a>
-  <a href="#sec-en-68" class="toc-h3">Content Analysis</a>
-  <a href="#sec-en-69" class="toc-h3">Partnership History</a>
-  <a href="#sec-en-70" class="toc-h3">Contact Information</a>
-  <a href="#sec-en-71" class="toc-h3">Fit Score Summary</a>
-  <a href="#sec-en-72" class="toc-h2">YouTube-First Candidates</a>
-  <a href="#sec-en-73" class="toc-h2">Influencer #9: Janna Faye (@jannafayeco) — ⚠️ WATC…</a>
-  <a href="#sec-en-74" class="toc-h3">Basic Information</a>
-  <a href="#sec-en-75" class="toc-h3">Metrics</a>
-  <a href="#sec-en-76" class="toc-h3">Audience Analysis</a>
-  <a href="#sec-en-77" class="toc-h3">Content Analysis</a>
-  <a href="#sec-en-78" class="toc-h3">Red Flags</a>
-  <a href="#sec-en-79" class="toc-h3">Fit Score Summary</a>
-  <a href="#sec-en-80" class="toc-h2">Step 5 — Compiled Discovery Report</a>
-  <a href="#sec-en-81" class="toc-h2">Summary Statistics</a>
-  <a href="#sec-en-82" class="toc-h3">By Platform</a>
-  <a href="#sec-en-83" class="toc-h3">By Tier</a>
-  <a href="#sec-en-84" class="toc-h2">Top Recommendations</a>
-  <a href="#sec-en-85" class="toc-h3">Tier 1: Must Reach Out</a>
-  <a href="#sec-en-86" class="toc-h3">Tier 2: Strong Candidates</a>
-  <a href="#sec-en-87" class="toc-h3">Tier 3: Worth Considering / Watch List</a>
-  <a href="#sec-en-88" class="toc-h2">Influencer Mix Recommendation</a>
-  <a href="#sec-en-89" class="toc-h2">Next Steps</a>
-  <a href="#sec-en-90" class="toc-h2">Step 6 — Discovery Insights</a>
-  <a href="#sec-en-91" class="toc-h3">Niche Observations</a>
-  <a href="#sec-en-92" class="toc-h3">Platform-Specific Observations</a>
-  <a href="#sec-en-93" class="toc-h3">Recommendations for Future Searches</a>
-  <a href="#sec-en-94" class="toc-h2">Data Quality Notes</a>
-</nav>
+  <div class="toc-h3-list" style="max-height:56px">
+    <a href="#sec-zh-2" class="toc-h3">Primary Search Methods</a>
+    <a href="#sec-zh-3" class="toc-h3">Tool Queries (Web Search)</a>
   </div>
-</aside>
+</div>
+<div class="toc-group">
+  <div class="toc-h2-wrap" data-target="#sec-zh-4" onclick="toggleTOC(this)">
+    <span class="arrow">&#9660;</span>
+    <span class="toc-label">Step 3 — Initial Screening</span>
+  </div>
+  <div class="toc-h3-list" style="max-height:56px">
+    <a href="#sec-zh-5" class="toc-h3">Screening Criteria Applied</a>
+    <a href="#sec-zh-6" class="toc-h3">Red Flags Identified</a>
+  </div>
+</div>
+<a href="#sec-zh-7" class="toc-h2">Step 4 — Influencer Profiles</a>
+<div class="toc-group">
+  <div class="toc-h2-wrap" data-target="#sec-zh-8" onclick="toggleTOC(this)">
+    <span class="arrow">&#9660;</span>
+    <span class="toc-label">Influencer #1: @karrie_locher</span>
+  </div>
+  <div class="toc-h3-list" style="max-height:196px">
+    <a href="#sec-zh-9" class="toc-h3">Basic Information</a>
+    <a href="#sec-zh-10" class="toc-h3">Metrics</a>
+    <a href="#sec-zh-11" class="toc-h3">Audience Analysis</a>
+    <a href="#sec-zh-12" class="toc-h3">Content Analysis</a>
+    <a href="#sec-zh-13" class="toc-h3">Partnership History</a>
+    <a href="#sec-zh-14" class="toc-h3">Contact Information</a>
+    <a href="#sec-zh-15" class="toc-h3">Fit Score Summary</a>
+  </div>
+</div>
+<div class="toc-group">
+  <div class="toc-h2-wrap" data-target="#sec-zh-16" onclick="toggleTOC(this)">
+    <span class="arrow">&#9660;</span>
+    <span class="toc-label">Influencer #2: @glowmaven (Latham Thomas)</span>
+  </div>
+  <div class="toc-h3-list" style="max-height:196px">
+    <a href="#sec-zh-17" class="toc-h3">Basic Information</a>
+    <a href="#sec-zh-18" class="toc-h3">Metrics</a>
+    <a href="#sec-zh-19" class="toc-h3">Audience Analysis</a>
+    <a href="#sec-zh-20" class="toc-h3">Content Analysis</a>
+    <a href="#sec-zh-21" class="toc-h3">Partnership History</a>
+    <a href="#sec-zh-22" class="toc-h3">Contact Information</a>
+    <a href="#sec-zh-23" class="toc-h3">Fit Score Summary</a>
+  </div>
+</div>
+<div class="toc-group">
+  <div class="toc-h2-wrap" data-target="#sec-zh-24" onclick="toggleTOC(this)">
+    <span class="arrow">&#9660;</span>
+    <span class="toc-label">Influencer #3: @lunchboxdad (Beau Coffron)</span>
+  </div>
+  <div class="toc-h3-list" style="max-height:196px">
+    <a href="#sec-zh-25" class="toc-h3">Basic Information</a>
+    <a href="#sec-zh-26" class="toc-h3">Metrics</a>
+    <a href="#sec-zh-27" class="toc-h3">Audience Analysis</a>
+    <a href="#sec-zh-28" class="toc-h3">Content Analysis</a>
+    <a href="#sec-zh-29" class="toc-h3">Partnership History</a>
+    <a href="#sec-zh-30" class="toc-h3">Contact Information</a>
+    <a href="#sec-zh-31" class="toc-h3">Fit Score Summary</a>
+  </div>
+</div>
+<div class="toc-group">
+  <div class="toc-h2-wrap" data-target="#sec-zh-32" onclick="toggleTOC(this)">
+    <span class="arrow">&#9660;</span>
+    <span class="toc-label">Influencer #4: @chelseakunz (Chelsea Kunz)</span>
+  </div>
+  <div class="toc-h3-list" style="max-height:196px">
+    <a href="#sec-zh-33" class="toc-h3">Basic Information</a>
+    <a href="#sec-zh-34" class="toc-h3">Metrics</a>
+    <a href="#sec-zh-35" class="toc-h3">Audience Analysis</a>
+    <a href="#sec-zh-36" class="toc-h3">Content Analysis</a>
+    <a href="#sec-zh-37" class="toc-h3">Partnership History</a>
+    <a href="#sec-zh-38" class="toc-h3">Contact Information</a>
+    <a href="#sec-zh-39" class="toc-h3">Fit Score Summary</a>
+  </div>
+</div>
+<div class="toc-group">
+  <div class="toc-h2-wrap" data-target="#sec-zh-40" onclick="toggleTOC(this)">
+    <span class="arrow">&#9660;</span>
+    <span class="toc-label">Influencer #5: @chelseafoy (Chelsea Foy)</span>
+  </div>
+  <div class="toc-h3-list" style="max-height:196px">
+    <a href="#sec-zh-41" class="toc-h3">Basic Information</a>
+    <a href="#sec-zh-42" class="toc-h3">Metrics</a>
+    <a href="#sec-zh-43" class="toc-h3">Audience Analysis</a>
+    <a href="#sec-zh-44" class="toc-h3">Content Analysis</a>
+    <a href="#sec-zh-45" class="toc-h3">Partnership History</a>
+    <a href="#sec-zh-46" class="toc-h3">Contact Information</a>
+    <a href="#sec-zh-47" class="toc-h3">Fit Score Summary</a>
+  </div>
+</div>
+<div class="toc-group">
+  <div class="toc-h2-wrap" data-target="#sec-zh-48" onclick="toggleTOC(this)">
+    <span class="arrow">&#9660;</span>
+    <span class="toc-label">Influencer #6: @mommyshorts (Ilana Wiles)</span>
+  </div>
+  <div class="toc-h3-list" style="max-height:196px">
+    <a href="#sec-zh-49" class="toc-h3">Basic Information</a>
+    <a href="#sec-zh-50" class="toc-h3">Metrics</a>
+    <a href="#sec-zh-51" class="toc-h3">Audience Analysis</a>
+    <a href="#sec-zh-52" class="toc-h3">Content Analysis</a>
+    <a href="#sec-zh-53" class="toc-h3">Partnership History</a>
+    <a href="#sec-zh-54" class="toc-h3">Contact Information</a>
+    <a href="#sec-zh-55" class="toc-h3">Fit Score Summary</a>
+  </div>
+</div>
+<div class="toc-group">
+  <div class="toc-h2-wrap" data-target="#sec-zh-56" onclick="toggleTOC(this)">
+    <span class="arrow">&#9660;</span>
+    <span class="toc-label">Influencer #7: @anawilkinson (Ana Wilkinson)</span>
+  </div>
+  <div class="toc-h3-list" style="max-height:196px">
+    <a href="#sec-zh-57" class="toc-h3">Basic Information</a>
+    <a href="#sec-zh-58" class="toc-h3">Metrics</a>
+    <a href="#sec-zh-59" class="toc-h3">Audience Analysis</a>
+    <a href="#sec-zh-60" class="toc-h3">Content Analysis</a>
+    <a href="#sec-zh-61" class="toc-h3">Partnership History</a>
+    <a href="#sec-zh-62" class="toc-h3">Contact Information</a>
+    <a href="#sec-zh-63" class="toc-h3">Fit Score Summary</a>
+  </div>
+</div>
+<div class="toc-group">
+  <div class="toc-h2-wrap" data-target="#sec-zh-64" onclick="toggleTOC(this)">
+    <span class="arrow">&#9660;</span>
+    <span class="toc-label">Influencer #8: @parentingthespectrum (Cassandra Bo…</span>
+  </div>
+  <div class="toc-h3-list" style="max-height:196px">
+    <a href="#sec-zh-65" class="toc-h3">Basic Information</a>
+    <a href="#sec-zh-66" class="toc-h3">Metrics</a>
+    <a href="#sec-zh-67" class="toc-h3">Audience Analysis</a>
+    <a href="#sec-zh-68" class="toc-h3">Content Analysis</a>
+    <a href="#sec-zh-69" class="toc-h3">Partnership History</a>
+    <a href="#sec-zh-70" class="toc-h3">Contact Information</a>
+    <a href="#sec-zh-71" class="toc-h3">Fit Score Summary</a>
+  </div>
+</div>
+<a href="#sec-zh-72" class="toc-h2">YouTube-First Candidates</a>
+<div class="toc-group">
+  <div class="toc-h2-wrap" data-target="#sec-zh-73" onclick="toggleTOC(this)">
+    <span class="arrow">&#9660;</span>
+    <span class="toc-label">Influencer #9: Janna Faye (@jannafayeco) — ⚠️ WATC…</span>
+  </div>
+  <div class="toc-h3-list" style="max-height:168px">
+    <a href="#sec-zh-74" class="toc-h3">Basic Information</a>
+    <a href="#sec-zh-75" class="toc-h3">Metrics</a>
+    <a href="#sec-zh-76" class="toc-h3">Audience Analysis</a>
+    <a href="#sec-zh-77" class="toc-h3">Content Analysis</a>
+    <a href="#sec-zh-78" class="toc-h3">Red Flags</a>
+    <a href="#sec-zh-79" class="toc-h3">Fit Score Summary</a>
+  </div>
+</div>
+<a href="#sec-zh-80" class="toc-h2">Step 5 — Compiled Discovery Report</a>
+<div class="toc-group">
+  <div class="toc-h2-wrap" data-target="#sec-zh-81" onclick="toggleTOC(this)">
+    <span class="arrow">&#9660;</span>
+    <span class="toc-label">Summary Statistics</span>
+  </div>
+  <div class="toc-h3-list" style="max-height:56px">
+    <a href="#sec-zh-82" class="toc-h3">By Platform</a>
+    <a href="#sec-zh-83" class="toc-h3">By Tier</a>
+  </div>
+</div>
+<div class="toc-group">
+  <div class="toc-h2-wrap" data-target="#sec-zh-84" onclick="toggleTOC(this)">
+    <span class="arrow">&#9660;</span>
+    <span class="toc-label">Top Recommendations</span>
+  </div>
+  <div class="toc-h3-list" style="max-height:84px">
+    <a href="#sec-zh-85" class="toc-h3">Tier 1: Must Reach Out</a>
+    <a href="#sec-zh-86" class="toc-h3">Tier 2: Strong Candidates</a>
+    <a href="#sec-zh-87" class="toc-h3">Tier 3: Worth Considering / Watch List</a>
+  </div>
+</div>
+<a href="#sec-zh-88" class="toc-h2">Influencer Mix Recommendation</a>
+<a href="#sec-zh-89" class="toc-h2">Next Steps</a>
+<div class="toc-group">
+  <div class="toc-h2-wrap" data-target="#sec-zh-90" onclick="toggleTOC(this)">
+    <span class="arrow">&#9660;</span>
+    <span class="toc-label">Step 6 — Discovery Insights</span>
+  </div>
+  <div class="toc-h3-list" style="max-height:84px">
+    <a href="#sec-zh-91" class="toc-h3">Niche Observations</a>
+    <a href="#sec-zh-92" class="toc-h3">Platform-Specific Observations</a>
+    <a href="#sec-zh-93" class="toc-h3">Recommendations for Future Searches</a>
+  </div>
+</div>
+<a href="#sec-zh-94" class="toc-h2">Data Quality Notes</a>
+</nav></aside>
 
 <div class="main-wrap">
-
-<div class="toggle-bar">
-  <button class="toggle-btn active" id="btn-zh">中文</button>
-  <button class="toggle-btn" id="btn-en">English</button>
-</div>
-
-<div class="lang-content active" id="content-zh">
-<h1>Influencer Discovery: Parenting · USA · Momcozy-Adjacent</h1>
+<div class="lang-content active" id="content-zh"><h1>Influencer Discovery: Parenting · USA · Momcozy-Adjacent</h1>
 <p><strong>Search Date</strong>: 2026-07-23<br />
 <strong>Brand/Campaign</strong>: Momcozy (maternal/baby care, wearable breast pumps, postpartum)<br />
 <strong>Criteria Summary</strong>: Parenting niche, 50K–200K followers, YouTube + Instagram, USA-based, engagement &gt;4%, brand affinity to Momcozy-like brands</p>
@@ -2343,2086 +2347,29 @@ Highly authentic, trusted community. Diverse representation — important for in
 </table>
 <p><strong>All metrics marked "(est.)" should be verified through an influencer analytics platform (HypeAuditor, Modash, or similar) before outreach.</strong></p>
 <hr />
-<p><em>Report generated per <a href="../SKILL.md">influencer-discovery SKILL.md</a> workflow. Next skill: <a href="../fit-scorer/SKILL.md">fit-scorer</a> for weighted scoring and final ranking.</em></p>
-</div>
-
-<div class="lang-content" id="content-en">
-<h1>Influencer Discovery: Parenting · USA · Momcozy-Adjacent</h1>
-<p><strong>Search Date</strong>: 2026-07-23<br />
-<strong>Brand/Campaign</strong>: Momcozy (maternal/baby care, wearable breast pumps, postpartum)<br />
-<strong>Criteria Summary</strong>: Parenting niche, 50K–200K followers, YouTube + Instagram, USA-based, engagement &gt;4%, brand affinity to Momcozy-like brands</p>
-<hr />
-<h2 id="sec-en-0">Step 1 — Discovery Parameters</h2>
-<p><strong>Brand/Product</strong>: Momcozy / maternal care &amp; baby gear brands<br />
-<strong>Campaign Goal</strong>: Consideration &amp; conversion (product reviews, authentic demos, UGC)<br />
-<strong>Budget Range</strong>: Mid-tier influencer budget ($1,000–$8,000 per post based on 2025-2026 rates for 50K–200K tier)</p>
-<p><strong>Search Criteria</strong>:</p>
-<table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Requirement</th>
-<th>Priority</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Niche/Category</td>
-<td>Parenting, motherhood, baby care, postpartum</td>
-<td>Required</td>
-</tr>
-<tr>
-<td>Platform(s)</td>
-<td>YouTube, Instagram</td>
-<td>Required</td>
-</tr>
-<tr>
-<td>Follower Range</td>
-<td>50K–200K</td>
-<td>Required</td>
-</tr>
-<tr>
-<td>Engagement Rate</td>
-<td>&gt;4%</td>
-<td>Required</td>
-</tr>
-<tr>
-<td>Location</td>
-<td>USA</td>
-<td>Required</td>
-</tr>
-<tr>
-<td>Language</td>
-<td>English</td>
-<td>Required</td>
-</tr>
-<tr>
-<td>Content Type</td>
-<td>Video (Reels/YT), photo carousels, reviews</td>
-<td>Preferred</td>
-</tr>
-<tr>
-<td>Posting Frequency</td>
-<td>≥2 posts/week</td>
-<td>Preferred</td>
-</tr>
-<tr>
-<td>Audience Demographics</td>
-<td>Parents, expecting mothers, 25–40 F primary</td>
-<td>Preferred</td>
-</tr>
-<tr>
-<td>Brand Safety</td>
-<td>No controversial content, no competitor exclusivity</td>
-<td>Required</td>
-</tr>
-</tbody>
-</table>
-<p><strong>Nice-to-Have</strong>:<br />
-- Previous work with maternal/baby brands (breast pumps, baby carriers, postpartum care)<br />
-- Nursing/lactation/child development credentials<br />
-- Multi-platform presence<br />
-- Authentic, review-style content (not polished ads)</p>
-<p><strong>Exclusions</strong>:<br />
-- Exclusivity contracts with competitor brands (Willow, Elvie, Medela, Spectra)<br />
-- Family vlog channels exploiting children (post-Ruby Franke sensitivity)<br />
-- Political/controversial content creators<br />
-- Inactive accounts (&gt;30 days no posting)</p>
-<hr />
-<h2 id="sec-en-1">Step 2 — Search Strategy</h2>
-<h3 id="sec-en-2">Primary Search Methods</h3>
-<ol>
-<li><strong>Hashtag Research</strong></li>
-<li>Core: #momlife, #parenting, #motherhood, #postpartum</li>
-<li>Niche: #breastfeeding, #pumpingmom, #babygear, #wearablepump, #momcozy</li>
-<li>
-<p>Brand-adjacent: #momblogger, #honestmomreview, #fourthtrimester</p>
-</li>
-<li>
-<p><strong>Similar Accounts / Platform Discovery</strong></p>
-</li>
-<li>Starting from: @karrie_locher (lactation expert), @mommyshorts (parenting humor)</li>
-<li>YouTube: Related channels from parenting review content</li>
-<li>
-<p>Instagram: Explore page and Reels in parenting/baby gear categories</p>
-</li>
-<li>
-<p><strong>Competitor &amp; Brand Mentions</strong></p>
-</li>
-<li>Momcozy partners: Abbie Herbert (macro-tier, reference only), Becca Kufrin (brand ambassador)</li>
-<li>Competitor brand tagged posts: Willow, Elvie, Medela, Spectra, BabyBuddha</li>
-<li>
-<p>Brand-adjacent creators who reviewed Momcozy or similar products</p>
-</li>
-<li>
-<p><strong>Influencer Database Searches</strong></p>
-</li>
-<li>IZEA Top Parenting Influencers (2024)</li>
-<li>Favikon Family &amp; Parenting Rankings (US)</li>
-<li>HypeAuditor category analytics</li>
-<li>Ainfluencer American Parenting Instagram directory</li>
-<li>Feedspot Working Mom Influencers (2026)</li>
-</ol>
-<h3 id="sec-en-3">Tool Queries (Web Search)</h3>
-<ul>
-<li>"parenting influencers YouTube Instagram 50K-200K USA 2025"</li>
-<li>"Momcozy brand ambassador parenting influencer partnership"</li>
-<li>"breast pump baby gear influencer review Instagram YouTube mom"</li>
-<li>Mid-tier and micro mom influencer directories across multiple platforms</li>
-</ul>
-<hr />
-<h2 id="sec-en-4">Step 3 — Initial Screening</h2>
-<p><strong>Total Candidates Surfaced</strong>: 52<br />
-<strong>After Initial Screening</strong>: 15 (plus 3 placed in Watch List)</p>
-<h3 id="sec-en-5">Screening Criteria Applied</h3>
-<table>
-<thead>
-<tr>
-<th>Criterion</th>
-<th>Filter</th>
-<th>Eliminated</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Follower range</td>
-<td>50K–200K (primary platform)</td>
-<td>18</td>
-</tr>
-<tr>
-<td>Engagement rate</td>
-<td>&gt;4% (estimated or confirmed)</td>
-<td>8</td>
-</tr>
-<tr>
-<td>Recent activity</td>
-<td>&lt;30 days inactive</td>
-<td>5</td>
-</tr>
-<tr>
-<td>Content relevance</td>
-<td>Parenting/baby/maternal focus</td>
-<td>4</td>
-</tr>
-<tr>
-<td>Brand safety</td>
-<td>No controversy, no child exploitation</td>
-<td>2</td>
-</tr>
-</tbody>
-</table>
-<h3 id="sec-en-6">Red Flags Identified</h3>
-<ul>
-<li>6 accounts with suspected fake follower patterns (high follower count, unusually low engagement)</li>
-<li>2 accounts with controversial content (one anti-vax adjacent, one with Ruby Franke-style family vlogging)</li>
-<li>5 accounts with competitor exclusivity signals (Willow/Elvie dedicated ambassadors)</li>
-<li>3 accounts inactive &gt;30 days (including Janna Faye, placed in Watch List)</li>
-<li>2 accounts with audience geography outside USA (&gt;60% non-US)</li>
-</ul>
-<hr />
-<h2 id="sec-en-7">Step 4 — Influencer Profiles</h2>
-<hr />
-<h2 id="sec-en-8">Influencer #1: @karrie_locher</h2>
-<h3 id="sec-en-9">Basic Information</h3>
-<table>
-<thead>
-<tr>
-<th>Attribute</th>
-<th>Details</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>Name</strong></td>
-<td>Karrie Locher</td>
-</tr>
-<tr>
-<td><strong>Handle</strong></td>
-<td>@karrie_locher</td>
-</tr>
-<tr>
-<td><strong>Platform</strong></td>
-<td>Instagram (primary)</td>
-</tr>
-<tr>
-<td><strong>Other Platforms</strong></td>
-<td>Blog (karingforpostpartum.com), Podcast guest</td>
-</tr>
-<tr>
-<td><strong>Location</strong></td>
-<td>USA (Midwest)</td>
-</tr>
-<tr>
-<td><strong>Language</strong></td>
-<td>English</td>
-</tr>
-<tr>
-<td><strong>Niche</strong></td>
-<td>Postpartum care, breastfeeding, newborn education</td>
-</tr>
-</tbody>
-</table>
-<h3 id="sec-en-10">Metrics</h3>
-<table>
-<thead>
-<tr>
-<th>Platform</th>
-<th>Followers</th>
-<th>Engagement Rate</th>
-<th>Avg. Views</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Instagram</td>
-<td>~165K (est.)</td>
-<td>~5.5% (est., high trust/educational niche)</td>
-<td>~9K/story</td>
-</tr>
-</tbody>
-</table>
-<p><strong>Growth Trend</strong>: Growing — course sales and email list data indicate strong audience conversion (25K+ email subscribers, ~10K course sales)</p>
-<h3 id="sec-en-11">Audience Analysis</h3>
-<table>
-<thead>
-<tr>
-<th>Demographic</th>
-<th>Breakdown</th>
-<th>Notes</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Gender</td>
-<td>~95% F</td>
-<td>New and expecting mothers</td>
-</tr>
-<tr>
-<td>Age</td>
-<td>25–38 primary</td>
-<td>Millennial parents</td>
-</tr>
-<tr>
-<td>Location</td>
-<td>USA-dominant</td>
-<td>English-speaking</td>
-</tr>
-<tr>
-<td>Interests</td>
-<td>Breastfeeding, postpartum, newborn care, baby products</td>
-<td>High purchase intent</td>
-</tr>
-</tbody>
-</table>
-<p><strong>Audience Quality Score</strong>: 9/10<br />
-- Real followers estimate: ~92%<br />
-- Audience-brand overlap: <strong>Very High</strong> — directly aligned with Momcozy's core customer (pumping/nursing mothers)</p>
-<h3 id="sec-en-12">Content Analysis</h3>
-<p><strong>Content Style</strong>:<br />
-- Primary format: Carousel education posts, Reels, Story Q&amp;As<br />
-- Posting frequency: ~5 posts/week<br />
-- Aesthetic: Clean, warm, clinical-but-approachable<br />
-- Tone: Reassuring, evidence-based, "I've been there" RN voice</p>
-<p><strong>Top Performing Content</strong>:<br />
-1. Breastfeeding positions carousel: high save rate, 12K+ likes<br />
-2. Pumping schedule template Reel: 200K+ views<br />
-3. Postpartum recovery must-haves: strong affiliate conversion</p>
-<p><strong>Brand Fit Assessment</strong>:<br />
-- Visual alignment: High — warm, maternal, nurturing aesthetic<br />
-- Value alignment: <strong>Very High</strong> — RN/CLC credentials + practical support = Momcozy's "support mothers" mission<br />
-- Audience alignment: <strong>Very High</strong> — exact target demo for wearable pumps</p>
-<h3 id="sec-en-13">Partnership History</h3>
-<p><strong>Past Brand Partnerships</strong>:<br />
-| Brand | Date | Content Type | Est. Performance |<br />
-|-------|------|--------------|------------------|<br />
-| Maternal health brands | Ongoing | Educational + product integration | Strong |<br />
-| Baby product companies | Ongoing | Reviews + demos | High engagement |<br />
-| Wellness/lifestyle | Periodic | Sponsored posts | Good |</p>
-<p><strong>Competitor Partnerships</strong>: None detected with direct Momcozy competitors (Willow, Elvie, Medela). Appears to partner broadly in maternal/baby space without exclusivity.</p>
-<h3 id="sec-en-14">Contact Information</h3>
-<ul>
-<li><strong>Website</strong>: karingforpostpartum.com</li>
-<li><strong>Contact Method</strong>: Website contact form / business email</li>
-<li><strong>Agency/Manager</strong>: Self-managed (based on available info)</li>
-</ul>
-<h3 id="sec-en-15">Fit Score Summary</h3>
-<table>
-<thead>
-<tr>
-<th>Factor</th>
-<th>Score (1-5)</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Audience match</td>
-<td>5</td>
-</tr>
-<tr>
-<td>Content quality</td>
-<td>5</td>
-</tr>
-<tr>
-<td>Brand alignment</td>
-<td>5</td>
-</tr>
-<tr>
-<td>Engagement quality</td>
-<td>5</td>
-</tr>
-<tr>
-<td>Authenticity</td>
-<td>5</td>
-</tr>
-<tr>
-<td><strong>Total</strong></td>
-<td><strong>25/25</strong></td>
-</tr>
-</tbody>
-</table>
-<p><strong>Recommendation</strong>: ⭐ Highly Recommended</p>
-<p><strong>Why They're a Good Fit</strong>:<br />
-Karrie Locher is the single strongest candidate in this pool for Momcozy. As an RN and Certified Lactation Counselor, she brings clinical credibility to wearable pump recommendations. Her audience of nursing/pumping mothers is Momcozy's exact target demographic. Her educational content style naturally accommodates product reviews and demos that feel helpful rather than salesy.</p>
-<p><strong>Potential Concerns</strong>:<br />
-- Exact follower count and engagement rate need verification via influencer analytics platform<br />
-- May command premium rates given her specialized credentials and high conversion track record</p>
-<hr />
-<h2 id="sec-en-16">Influencer #2: @glowmaven (Latham Thomas)</h2>
-<h3 id="sec-en-17">Basic Information</h3>
-<table>
-<thead>
-<tr>
-<th>Attribute</th>
-<th>Details</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>Name</strong></td>
-<td>Latham Thomas</td>
-</tr>
-<tr>
-<td><strong>Handle</strong></td>
-<td>@glowmaven</td>
-</tr>
-<tr>
-<td><strong>Platform</strong></td>
-<td>Instagram (primary)</td>
-</tr>
-<tr>
-<td><strong>Other Platforms</strong></td>
-<td>Mama Glow foundation, books, podcast appearances</td>
-</tr>
-<tr>
-<td><strong>Location</strong></td>
-<td>New York, NY</td>
-</tr>
-<tr>
-<td><strong>Language</strong></td>
-<td>English</td>
-</tr>
-<tr>
-<td><strong>Niche</strong></td>
-<td>Maternal wellness, doula services, Black motherhood advocacy</td>
-</tr>
-</tbody>
-</table>
-<h3 id="sec-en-18">Metrics</h3>
-<table>
-<thead>
-<tr>
-<th>Platform</th>
-<th>Followers</th>
-<th>Engagement Rate</th>
-<th>Avg. Views</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Instagram</td>
-<td>~134K</td>
-<td>~4.5% (est., highly engaged wellness community)</td>
-<td>N/A</td>
-</tr>
-</tbody>
-</table>
-<p><strong>Growth Trend</strong>: Stable — established authority with sustained relevance. Oprah's Super Soul 100 alumni.</p>
-<h3 id="sec-en-19">Audience Analysis</h3>
-<table>
-<thead>
-<tr>
-<th>Demographic</th>
-<th>Breakdown</th>
-<th>Notes</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Gender</td>
-<td>~90% F</td>
-<td>Mothers, expectant mothers, birth workers</td>
-</tr>
-<tr>
-<td>Age</td>
-<td>28–40 primary</td>
-<td></td>
-</tr>
-<tr>
-<td>Location</td>
-<td>USA-dominant (NYC hub)</td>
-<td></td>
-</tr>
-<tr>
-<td>Interests</td>
-<td>Holistic maternal health, birth, postpartum wellness</td>
-<td>Premium brand affinity</td>
-</tr>
-</tbody>
-</table>
-<p><strong>Audience Quality Score</strong>: 9/10<br />
-- Real followers estimate: ~90%<br />
-- Audience-brand overlap: <strong>High</strong> — maternal wellness audience overlaps with Momcozy's postpartum focus</p>
-<h3 id="sec-en-20">Content Analysis</h3>
-<p><strong>Content Style</strong>:<br />
-- Primary format: Lifestyle photos, event coverage, educational posts<br />
-- Posting frequency: ~3-4 posts/week<br />
-- Aesthetic: Polished, warm, aspirational wellness<br />
-- Tone: Empowering, holistic, community-oriented</p>
-<p><strong>Top Performing Content</strong>:<br />
-1. Celebrity doula client reveals (Alicia Keys, Anne Hathaway)<br />
-2. Maternal health advocacy posts<br />
-3. Mama Glow event/retreat coverage</p>
-<p><strong>Brand Fit Assessment</strong>:<br />
-- Visual alignment: High — premium maternal wellness aesthetic<br />
-- Value alignment: <strong>Very High</strong> — Mama Glow's "support mothers through the journey" mirrors Momcozy's mission<br />
-- Audience alignment: High — postpartum and maternal care audience</p>
-<h3 id="sec-en-21">Partnership History</h3>
-<p><strong>Past Brand Partnerships</strong>:<br />
-| Brand | Date | Content Type | Est. Performance |<br />
-|-------|------|--------------|------------------|<br />
-| Health organizations | Ongoing | Advocacy + awareness | High credibility |<br />
-| Insurance companies | Ongoing | Maternal care improvement | Institutional trust |<br />
-| Hospital systems | Ongoing | Maternity care partnerships | Authority signal |</p>
-<p><strong>Competitor Partnerships</strong>: None detected. Wellness/lifestyle focus rather than specific pump brand affiliations.</p>
-<h3 id="sec-en-22">Contact Information</h3>
-<ul>
-<li><strong>Website</strong>: mamaglow.com</li>
-<li><strong>Agency/Manager</strong>: Mama Glow team</li>
-<li><strong>Contact Method</strong>: Brand partnerships via website / press contact</li>
-</ul>
-<h3 id="sec-en-23">Fit Score Summary</h3>
-<table>
-<thead>
-<tr>
-<th>Factor</th>
-<th>Score (1-5)</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Audience match</td>
-<td>4</td>
-</tr>
-<tr>
-<td>Content quality</td>
-<td>5</td>
-</tr>
-<tr>
-<td>Brand alignment</td>
-<td>5</td>
-</tr>
-<tr>
-<td>Engagement quality</td>
-<td>4</td>
-</tr>
-<tr>
-<td>Authenticity</td>
-<td>5</td>
-</tr>
-<tr>
-<td><strong>Total</strong></td>
-<td><strong>23/25</strong></td>
-</tr>
-</tbody>
-</table>
-<p><strong>Recommendation</strong>: ⭐ Highly Recommended</p>
-<p><strong>Why They're a Good Fit</strong>:<br />
-Latham Thomas brings prestige and authority to Momcozy's brand positioning. As a celebrity doula and Oprah-endorsed maternal health advocate, she elevates the brand beyond "just a pump" to a comprehensive maternal wellness partner. Her audience trusts her deeply on postpartum and maternal care decisions. A partnership would signal that Momcozy is endorsed by the top tier of maternal health professionals.</p>
-<p><strong>Potential Concerns</strong>:<br />
-- May be positioned above Momcozy's practical/accessible price point (premium audience)<br />
-- Likely higher rate card given celebrity clientele and book deals<br />
-- Content style is more lifestyle than product-review — may require creative brief alignment</p>
-<hr />
-<h2 id="sec-en-24">Influencer #3: @lunchboxdad (Beau Coffron)</h2>
-<h3 id="sec-en-25">Basic Information</h3>
-<table>
-<thead>
-<tr>
-<th>Attribute</th>
-<th>Details</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>Name</strong></td>
-<td>Beau Coffron</td>
-</tr>
-<tr>
-<td><strong>Handle</strong></td>
-<td>@lunchboxdad</td>
-</tr>
-<tr>
-<td><strong>Platform</strong></td>
-<td>Instagram (primary)</td>
-</tr>
-<tr>
-<td><strong>Other Platforms</strong></td>
-<td>TikTok, YouTube (limited)</td>
-</tr>
-<tr>
-<td><strong>Location</strong></td>
-<td>Oklahoma City, OK</td>
-</tr>
-<tr>
-<td><strong>Language</strong></td>
-<td>English</td>
-</tr>
-<tr>
-<td><strong>Niche</strong></td>
-<td>Creative parenting, kids' food art, family life</td>
-</tr>
-</tbody>
-</table>
-<h3 id="sec-en-26">Metrics</h3>
-<table>
-<thead>
-<tr>
-<th>Platform</th>
-<th>Followers</th>
-<th>Engagement Rate</th>
-<th>Avg. Views</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Instagram</td>
-<td>~114K</td>
-<td>~4.8% (est., high virality on food art content)</td>
-<td>Viral posts reach millions</td>
-</tr>
-<tr>
-<td>TikTok</td>
-<td>Growing presence</td>
-<td>High</td>
-<td>N/A</td>
-</tr>
-</tbody>
-</table>
-<p><strong>Growth Trend</strong>: Stable — established since 2013, sustained relevance through evolving content</p>
-<h3 id="sec-en-27">Audience Analysis</h3>
-<table>
-<thead>
-<tr>
-<th>Demographic</th>
-<th>Breakdown</th>
-<th>Notes</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Gender</td>
-<td>~65% F / 35% M</td>
-<td>Appeals to both parents</td>
-</tr>
-<tr>
-<td>Age</td>
-<td>28–42 primary</td>
-<td>Parents of school-age kids</td>
-</tr>
-<tr>
-<td>Location</td>
-<td>USA-dominant</td>
-<td></td>
-</tr>
-<tr>
-<td>Interests</td>
-<td>Creative parenting, meal prep, family activities</td>
-<td>Practical, budget-conscious</td>
-</tr>
-</tbody>
-</table>
-<p><strong>Audience Quality Score</strong>: 8/10<br />
-- Real followers estimate: ~90%<br />
-- Audience-brand overlap: <strong>Medium</strong> — parent audience but not specifically baby/postpartum</p>
-<h3 id="sec-en-28">Content Analysis</h3>
-<p><strong>Content Style</strong>:<br />
-- Primary format: Photo carousels (lunch art), Reels (prep process), story BTS<br />
-- Posting frequency: ~3-4 posts/week<br />
-- Aesthetic: Colorful, fun, approachable<br />
-- Tone: Warm dad energy, practical tips, humorous</p>
-<p><strong>Top Performing Content</strong>:<br />
-1. Character-themed lunch box reveals (high share rate)<br />
-2. Holiday-themed food art (seasonal viral spikes)<br />
-3. Behind-the-scenes kid reactions</p>
-<p><strong>Brand Fit Assessment</strong>:<br />
-- Visual alignment: Medium — colorful/fun vs. Momcozy's warm/maternal<br />
-- Value alignment: Medium — parenting support but different life stage<br />
-- Audience alignment: Medium — parents but beyond newborn/postpartum window</p>
-<h3 id="sec-en-29">Partnership History</h3>
-<p><strong>Past Brand Partnerships</strong>:<br />
-| Brand | Date | Content Type | Est. Performance |<br />
-|-------|------|--------------|------------------|<br />
-| Little Tikes | 2024 | Sponsored series (IG + TikTok) | Strong engagement |<br />
-| Arm &amp; Hammer | 2020 | Virtual camp YouTube series | 14K sign-ups |<br />
-| Babybel | N/A | Family trip sponsorship | Good reach |<br />
-| Kraft | N/A | Birthday Party Project | Community impact |</p>
-<p><strong>Competitor Partnerships</strong>: No maternal/baby pump brand affiliations detected.</p>
-<h3 id="sec-en-30">Contact Information</h3>
-<ul>
-<li><strong>Website</strong>: lunchboxdad.com</li>
-<li><strong>Agency/Manager</strong>: Life.Church social media team (professional role)</li>
-<li><strong>Contact Method</strong>: Instagram DM / website</li>
-</ul>
-<h3 id="sec-en-31">Fit Score Summary</h3>
-<table>
-<thead>
-<tr>
-<th>Factor</th>
-<th>Score (1-5)</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Audience match</td>
-<td>3</td>
-</tr>
-<tr>
-<td>Content quality</td>
-<td>5</td>
-</tr>
-<tr>
-<td>Brand alignment</td>
-<td>3</td>
-</tr>
-<tr>
-<td>Engagement quality</td>
-<td>4</td>
-</tr>
-<tr>
-<td>Authenticity</td>
-<td>5</td>
-</tr>
-<tr>
-<td><strong>Total</strong></td>
-<td><strong>20/25</strong></td>
-</tr>
-</tbody>
-</table>
-<p><strong>Recommendation</strong>: ⭐ Recommended</p>
-<p><strong>Why They're a Good Fit</strong>:<br />
-Unique male parenting voice in a predominantly female influencer space — offers differentiation for Momcozy. Strong brand partnership track record with family brands. Authentic, trusted content style. Could reach dads in parenting conversation (gift-giving audience for Momcozy products). High production quality from professional social media background.</p>
-<p><strong>Potential Concerns</strong>:<br />
-- Audience is primarily parents of school-age kids, not newborn/postpartum — may need to frame around "dad gift guide" or "partner support" angle<br />
-- Limited relevance to breastfeeding/pumping core use case<br />
-- Budget may need creative justification for the fit</p>
-<hr />
-<h2 id="sec-en-32">Influencer #4: @chelseakunz (Chelsea Kunz)</h2>
-<h3 id="sec-en-33">Basic Information</h3>
-<table>
-<thead>
-<tr>
-<th>Attribute</th>
-<th>Details</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>Name</strong></td>
-<td>Chelsea Kunz</td>
-</tr>
-<tr>
-<td><strong>Handle</strong></td>
-<td>@chelseakunz</td>
-</tr>
-<tr>
-<td><strong>Platform</strong></td>
-<td>Instagram</td>
-</tr>
-<tr>
-<td><strong>Other Platforms</strong></td>
-<td>TikTok (likely)</td>
-</tr>
-<tr>
-<td><strong>Location</strong></td>
-<td>USA</td>
-</tr>
-<tr>
-<td><strong>Language</strong></td>
-<td>English</td>
-</tr>
-<tr>
-<td><strong>Niche</strong></td>
-<td>Parenting humor, relatable mom content</td>
-</tr>
-</tbody>
-</table>
-<h3 id="sec-en-34">Metrics</h3>
-<table>
-<thead>
-<tr>
-<th>Platform</th>
-<th>Followers</th>
-<th>Engagement Rate</th>
-<th>Avg. Views</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Instagram</td>
-<td>~173K</td>
-<td>~4.2% (est., humor niche typically 3-6%)</td>
-<td>N/A</td>
-</tr>
-</tbody>
-</table>
-<p><strong>Growth Trend</strong>: Growing — parenting humor is a consistently expanding category</p>
-<h3 id="sec-en-35">Audience Analysis</h3>
-<table>
-<thead>
-<tr>
-<th>Demographic</th>
-<th>Breakdown</th>
-<th>Notes</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Gender</td>
-<td>~85% F</td>
-<td>Millennial/Gen Z moms</td>
-</tr>
-<tr>
-<td>Age</td>
-<td>24–36 primary</td>
-<td></td>
-</tr>
-<tr>
-<td>Location</td>
-<td>USA-dominant</td>
-<td></td>
-</tr>
-<tr>
-<td>Interests</td>
-<td>Relatable motherhood, humor, lifestyle</td>
-<td>Entertainment + product discovery</td>
-</tr>
-</tbody>
-</table>
-<p><strong>Audience Quality Score</strong>: 7/10<br />
-- Real followers estimate: ~88%<br />
-- Audience-brand overlap: <strong>Medium-High</strong> — moms in product-buying life stage</p>
-<h3 id="sec-en-36">Content Analysis</h3>
-<p><strong>Content Style</strong>:<br />
-- Primary format: Reels, humorous skits, relatable memes<br />
-- Posting frequency: ~5-7 posts/week (high volume)<br />
-- Aesthetic: Casual, relatable, "real mom life"<br />
-- Tone: Humorous, unfiltered, authentic</p>
-<p><strong>Top Performing Content</strong>:<br />
-1. Relatable mom-fail skits (high share/save)<br />
-2. "Day in the life" Reels<br />
-3. Product mentions woven into humor content</p>
-<p><strong>Brand Fit Assessment</strong>:<br />
-- Visual alignment: Medium — casual/unpolished vs. Momcozy's warm/professional<br />
-- Value alignment: Medium — authentic motherhood but humor-forward<br />
-- Audience alignment: High — moms in purchasing demographic</p>
-<h3 id="sec-en-37">Partnership History</h3>
-<p><strong>Past Brand Partnerships</strong>:<br />
-| Brand | Date | Content Type | Est. Performance |<br />
-|-------|------|--------------|------------------|<br />
-| Family brands | Periodic | Humor-integrated sponsorships | Good engagement |</p>
-<p><strong>Competitor Partnerships</strong>: Not detected.</p>
-<h3 id="sec-en-38">Contact Information</h3>
-<ul>
-<li><strong>Contact Method</strong>: Instagram DM / influencer platforms</li>
-</ul>
-<h3 id="sec-en-39">Fit Score Summary</h3>
-<table>
-<thead>
-<tr>
-<th>Factor</th>
-<th>Score (1-5)</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Audience match</td>
-<td>4</td>
-</tr>
-<tr>
-<td>Content quality</td>
-<td>4</td>
-</tr>
-<tr>
-<td>Brand alignment</td>
-<td>3</td>
-</tr>
-<tr>
-<td>Engagement quality</td>
-<td>4</td>
-</tr>
-<tr>
-<td>Authenticity</td>
-<td>4</td>
-</tr>
-<tr>
-<td><strong>Total</strong></td>
-<td><strong>19/25</strong></td>
-</tr>
-</tbody>
-</table>
-<p><strong>Recommendation</strong>: ⭐ Recommended</p>
-<p><strong>Why They're a Good Fit</strong>:<br />
-Strong reach within the mom demographic at mid-tier pricing. Relatable content style could work well for "honest review" format. High posting frequency means quick campaign turnaround. Humor approach reduces ad fatigue — product integrations feel native.</p>
-<p><strong>Potential Concerns</strong>:<br />
-- Humor-first content may not suit Momcozy's warm/supportive brand tone<br />
-- Less direct relevance to baby gear/pumping niche specifically<br />
-- Engagement rate needs verification</p>
-<hr />
-<h2 id="sec-en-40">Influencer #5: @chelseafoy (Chelsea Foy)</h2>
-<h3 id="sec-en-41">Basic Information</h3>
-<table>
-<thead>
-<tr>
-<th>Attribute</th>
-<th>Details</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>Name</strong></td>
-<td>Chelsea Foy</td>
-</tr>
-<tr>
-<td><strong>Handle</strong></td>
-<td>@chelseafoy</td>
-</tr>
-<tr>
-<td><strong>Platform</strong></td>
-<td>Instagram</td>
-</tr>
-<tr>
-<td><strong>Other Platforms</strong></td>
-<td>Blog</td>
-</tr>
-<tr>
-<td><strong>Location</strong></td>
-<td>USA</td>
-</tr>
-<tr>
-<td><strong>Language</strong></td>
-<td>English</td>
-</tr>
-<tr>
-<td><strong>Niche</strong></td>
-<td>Creative family fun, kid-friendly recipes, DIY</td>
-</tr>
-</tbody>
-</table>
-<h3 id="sec-en-42">Metrics</h3>
-<table>
-<thead>
-<tr>
-<th>Platform</th>
-<th>Followers</th>
-<th>Engagement Rate</th>
-<th>Avg. Views</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Instagram</td>
-<td>~66.4K</td>
-<td>~5.0% (est., micro-influencers in creative niche often exceed 4%)</td>
-<td>N/A</td>
-</tr>
-</tbody>
-</table>
-<p><strong>Growth Trend</strong>: Stable — established niche</p>
-<h3 id="sec-en-43">Audience Analysis</h3>
-<table>
-<thead>
-<tr>
-<th>Demographic</th>
-<th>Breakdown</th>
-<th>Notes</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Gender</td>
-<td>~85% F</td>
-<td>Moms looking for activities/recipes</td>
-</tr>
-<tr>
-<td>Age</td>
-<td>28–40 primary</td>
-<td></td>
-</tr>
-<tr>
-<td>Location</td>
-<td>USA-dominant</td>
-<td></td>
-</tr>
-<tr>
-<td>Interests</td>
-<td>Kids' activities, recipes, family creativity</td>
-<td>DIY, hands-on</td>
-</tr>
-</tbody>
-</table>
-<p><strong>Audience Quality Score</strong>: 7/10<br />
-- Real followers estimate: ~90%<br />
-- Audience-brand overlap: <strong>Medium</strong> — mom audience but not baby-specific</p>
-<h3 id="sec-en-44">Content Analysis</h3>
-<p><strong>Content Style</strong>:<br />
-- Primary format: Photos, Reels, recipe/how-to carousels<br />
-- Posting frequency: ~3-4 posts/week<br />
-- Aesthetic: Bright, colorful, family-friendly<br />
-- Tone: Encouraging, creative, practical</p>
-<p><strong>Top Performing Content</strong>:<br />
-1. Kid-friendly recipe Reels<br />
-2. Creative play/craft ideas<br />
-3. Seasonal family activities</p>
-<p><strong>Brand Fit Assessment</strong>:<br />
-- Visual alignment: Medium — bright/playful vs. warm/maternal<br />
-- Value alignment: Medium — "making motherhood easier" overlaps partially<br />
-- Audience alignment: Medium — moms, but content focus is older kids</p>
-<h3 id="sec-en-45">Partnership History</h3>
-<p><strong>Past Brand Partnerships</strong>: Craft/food/family brands expected given content niche.</p>
-<p><strong>Competitor Partnerships</strong>: Not detected.</p>
-<h3 id="sec-en-46">Contact Information</h3>
-<ul>
-<li><strong>Contact Method</strong>: Instagram DM</li>
-</ul>
-<h3 id="sec-en-47">Fit Score Summary</h3>
-<table>
-<thead>
-<tr>
-<th>Factor</th>
-<th>Score (1-5)</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Audience match</td>
-<td>3</td>
-</tr>
-<tr>
-<td>Content quality</td>
-<td>4</td>
-</tr>
-<tr>
-<td>Brand alignment</td>
-<td>3</td>
-</tr>
-<tr>
-<td>Engagement quality</td>
-<td>4</td>
-</tr>
-<tr>
-<td>Authenticity</td>
-<td>4</td>
-</tr>
-<tr>
-<td><strong>Total</strong></td>
-<td><strong>18/25</strong></td>
-</tr>
-</tbody>
-</table>
-<p><strong>Recommendation</strong>: ⭐ Recommended</p>
-<p><strong>Why They're a Good Fit</strong>:<br />
-Strong engagement expected at micro-tier. Trusted, family-friendly brand safe choice. Creative content capability could produce unique Momcozy campaign assets (e.g., "pumping-friendly recipes" or "postpartum recovery activities").</p>
-<p><strong>Potential Concerns</strong>:<br />
-- Content focus on older kids (school-age), not newborn/postpartum<br />
-- Lower reach at 66.4K<br />
-- May require more creative direction to align with Momcozy's maternal care positioning</p>
-<hr />
-<h2 id="sec-en-48">Influencer #6: @mommyshorts (Ilana Wiles)</h2>
-<h3 id="sec-en-49">Basic Information</h3>
-<table>
-<thead>
-<tr>
-<th>Attribute</th>
-<th>Details</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>Name</strong></td>
-<td>Ilana Wiles</td>
-</tr>
-<tr>
-<td><strong>Handle</strong></td>
-<td>@mommyshorts (primary) / @averageparentproblems (405K)</td>
-</tr>
-<tr>
-<td><strong>Platform</strong></td>
-<td>Instagram (primary)</td>
-</tr>
-<tr>
-<td><strong>Other Platforms</strong></td>
-<td>TikTok (@ilanawiles, ~415K, ER 16%), Blog</td>
-</tr>
-<tr>
-<td><strong>Location</strong></td>
-<td>New York, NY</td>
-</tr>
-<tr>
-<td><strong>Language</strong></td>
-<td>English</td>
-</tr>
-<tr>
-<td><strong>Niche</strong></td>
-<td>Parenting humor, relatable motherhood, author</td>
-</tr>
-</tbody>
-</table>
-<h3 id="sec-en-50">Metrics</h3>
-<table>
-<thead>
-<tr>
-<th>Platform</th>
-<th>Followers</th>
-<th>Engagement Rate</th>
-<th>Avg. Views</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Instagram (@mommyshorts)</td>
-<td>~197K</td>
-<td>~3.4% (confirmed via HypeAuditor for @averageparentproblems)</td>
-<td>N/A</td>
-</tr>
-<tr>
-<td>TikTok (@ilanawiles)</td>
-<td>~415K</td>
-<td>16.04%</td>
-<td>High</td>
-</tr>
-<tr>
-<td>Instagram (@averageparentproblems)</td>
-<td>~406K</td>
-<td>3.41%</td>
-<td>N/A</td>
-</tr>
-</tbody>
-</table>
-<p><strong>Growth Trend</strong>: Mature/stable — long-established creator since 2010, multiple platform presence</p>
-<h3 id="sec-en-51">Audience Analysis</h3>
-<table>
-<thead>
-<tr>
-<th>Demographic</th>
-<th>Breakdown</th>
-<th>Notes</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Gender</td>
-<td>~80% F</td>
-<td>Millennial moms, some Gen X</td>
-</tr>
-<tr>
-<td>Age</td>
-<td>30–45 primary</td>
-<td></td>
-</tr>
-<tr>
-<td>Location</td>
-<td>USA-dominant (NYC hub)</td>
-<td></td>
-</tr>
-<tr>
-<td>Interests</td>
-<td>Humor, parenting, lifestyle, pop culture</td>
-<td></td>
-</tr>
-</tbody>
-</table>
-<p><strong>Audience Quality Score</strong>: 8/10<br />
-- Real followers estimate: ~88%<br />
-- Audience-brand overlap: <strong>Medium-High</strong> — moms in purchasing demo, but broader lifestyle</p>
-<h3 id="sec-en-52">Content Analysis</h3>
-<p><strong>Content Style</strong>:<br />
-- Primary format: Humor posts, Reels, sponsored integrations<br />
-- Posting frequency: ~4-5 posts/week<br />
-- Aesthetic: Clean, NYC-mom, witty<br />
-- Tone: Smart, sarcastic, authentic — advertising background means polished but genuine brand integrations</p>
-<p><strong>Top Performing Content</strong>:<br />
-1. Relatable parenting humor posts<br />
-2. Sponsored content with authentic narrative (not direct sell)<br />
-3. Book promotion content</p>
-<p><strong>Brand Fit Assessment</strong>:<br />
-- Visual alignment: Medium — NYC/sophisticated vs. warm/accessible<br />
-- Value alignment: Medium — authentic motherhood but humor lens<br />
-- Audience alignment: Medium-High — mom audience with purchasing power</p>
-<h3 id="sec-en-53">Partnership History</h3>
-<p><strong>Past Brand Partnerships</strong>:<br />
-| Brand | Date | Content Type | Est. Performance |<br />
-|-------|------|--------------|------------------|<br />
-| Diaper brands | Multiple | Integrated narrative | Known for authentic integration |<br />
-| Travel companies | Periodic | Family travel | Good |<br />
-| Healthcare OTC | Multiple | Sponsored content | High trust |<br />
-| Cleaning products | N/A | (Declined on principle) | N/A |</p>
-<p><strong>Competitor Partnerships</strong>: Known for turning down brands that conflict with her values/previous partnerships. No maternal pump brand exclusivity detected.</p>
-<h3 id="sec-en-54">Contact Information</h3>
-<ul>
-<li><strong>Website</strong>: mommyshorts.com</li>
-<li><strong>Agency/Manager</strong>: Self-managed (advertising background)</li>
-<li><strong>Contact Method</strong>: Website / professional email</li>
-</ul>
-<h3 id="sec-en-55">Fit Score Summary</h3>
-<table>
-<thead>
-<tr>
-<th>Factor</th>
-<th>Score (1-5)</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Audience match</td>
-<td>4</td>
-</tr>
-<tr>
-<td>Content quality</td>
-<td>5</td>
-</tr>
-<tr>
-<td>Brand alignment</td>
-<td>3</td>
-</tr>
-<tr>
-<td>Engagement quality</td>
-<td>3</td>
-</tr>
-<tr>
-<td>Authenticity</td>
-<td>5</td>
-</tr>
-<tr>
-<td><strong>Total</strong></td>
-<td><strong>20/25</strong></td>
-</tr>
-</tbody>
-</table>
-<p><strong>Recommendation</strong>: ⭐ Recommended</p>
-<p><strong>Why They're a Good Fit</strong>:<br />
-Ilana Wiles has legendary status in the parenting influencer space with a 15+ year track record. Her advertising background means she delivers professional, on-brief content while maintaining authenticity. Her audience trusts her precisely because she's selective about partnerships. A Momcozy partnership would be a credibility signal. TikTok presence (~415K, 16% ER) adds multi-platform value.</p>
-<p><strong>Potential Concerns</strong>:<br />
-- Instagram engagement rate (~3.4%) is below the 4% threshold on her main account — TikTok compensates but requires separate negotiation<br />
-- @averageparentproblems (406K) is above the follower cap; @mommyshorts (~197K) is in range<br />
-- Selectivity cuts both ways — she may decline if Momcozy doesn't align with her values<br />
-- Higher rate card given established status and book-author credentials</p>
-<hr />
-<h2 id="sec-en-56">Influencer #7: @anawilkinson (Ana Wilkinson)</h2>
-<h3 id="sec-en-57">Basic Information</h3>
-<table>
-<thead>
-<tr>
-<th>Attribute</th>
-<th>Details</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>Name</strong></td>
-<td>Ana Wilkinson</td>
-</tr>
-<tr>
-<td><strong>Handle</strong></td>
-<td>@anawilkinson</td>
-</tr>
-<tr>
-<td><strong>Platform</strong></td>
-<td>Instagram</td>
-</tr>
-<tr>
-<td><strong>Other Platforms</strong></td>
-<td>Not confirmed</td>
-</tr>
-<tr>
-<td><strong>Location</strong></td>
-<td>USA</td>
-</tr>
-<tr>
-<td><strong>Language</strong></td>
-<td>English</td>
-</tr>
-<tr>
-<td><strong>Niche</strong></td>
-<td>Family living, home organization</td>
-</tr>
-</tbody>
-</table>
-<h3 id="sec-en-58">Metrics</h3>
-<table>
-<thead>
-<tr>
-<th>Platform</th>
-<th>Followers</th>
-<th>Engagement Rate</th>
-<th>Avg. Views</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Instagram</td>
-<td>~52K</td>
-<td>~5.5% (est., home/org niche typically high engagement)</td>
-<td>N/A</td>
-</tr>
-</tbody>
-</table>
-<p><strong>Growth Trend</strong>: Growing — home organization is a trending category</p>
-<h3 id="sec-en-59">Audience Analysis</h3>
-<table>
-<thead>
-<tr>
-<th>Demographic</th>
-<th>Breakdown</th>
-<th>Notes</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Gender</td>
-<td>~88% F</td>
-<td>Moms seeking home management inspiration</td>
-</tr>
-<tr>
-<td>Age</td>
-<td>25–38 primary</td>
-<td></td>
-</tr>
-<tr>
-<td>Location</td>
-<td>USA-dominant</td>
-<td></td>
-</tr>
-<tr>
-<td>Interests</td>
-<td>Organization, family routines, home management</td>
-<td></td>
-</tr>
-</tbody>
-</table>
-<p><strong>Audience Quality Score</strong>: 7/10<br />
-- Real followers estimate: ~90%<br />
-- Audience-brand overlap: <strong>Medium</strong> — mom audience but not postpartum-specific</p>
-<h3 id="sec-en-60">Content Analysis</h3>
-<p><strong>Content Style</strong>:<br />
-- Primary format: Organization tips, home tours, routine Reels<br />
-- Posting frequency: ~3-4 posts/week<br />
-- Aesthetic: Clean, organized, aspirational-but-achievable<br />
-- Tone: Helpful, encouraging, practical</p>
-<p><strong>Top Performing Content</strong>:<br />
-1. Before/after organization Reels (high save rate)<br />
-2. Family routine/checklist posts<br />
-3. Product organization recommendations</p>
-<p><strong>Brand Fit Assessment</strong>:<br />
-- Visual alignment: Medium — clean/organized vs. maternal/warm<br />
-- Value alignment: Medium — "making mom life easier" overlaps with Momcozy's convenience angle<br />
-- Audience alignment: Medium — moms but home management focus</p>
-<h3 id="sec-en-61">Partnership History</h3>
-<p><strong>Past Brand Partnerships</strong>: Home organization, storage, and family product brands expected.</p>
-<p><strong>Competitor Partnerships</strong>: Not detected.</p>
-<h3 id="sec-en-62">Contact Information</h3>
-<ul>
-<li><strong>Contact Method</strong>: Instagram DM</li>
-</ul>
-<h3 id="sec-en-63">Fit Score Summary</h3>
-<table>
-<thead>
-<tr>
-<th>Factor</th>
-<th>Score (1-5)</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Audience match</td>
-<td>3</td>
-</tr>
-<tr>
-<td>Content quality</td>
-<td>4</td>
-</tr>
-<tr>
-<td>Brand alignment</td>
-<td>3</td>
-</tr>
-<tr>
-<td>Engagement quality</td>
-<td>4</td>
-</tr>
-<tr>
-<td>Authenticity</td>
-<td>4</td>
-</tr>
-<tr>
-<td><strong>Total</strong></td>
-<td><strong>18/25</strong></td>
-</tr>
-</tbody>
-</table>
-<p><strong>Recommendation</strong>: ⭐ Recommended</p>
-<p><strong>Why They're a Good Fit</strong>:<br />
-Lower-tier follower count (52K) with likely high engagement makes for cost-effective partnership. "Organization/routine" content could work for Momcozy's "make pumping fit your life" narrative. Rising creator with growth potential — early partnership advantage.</p>
-<p><strong>Potential Concerns</strong>:<br />
-- Lowest follower count in candidate pool — limited reach<br />
-- Home organization niche is tangential to maternal/baby care<br />
-- Unverified engagement data</p>
-<hr />
-<h2 id="sec-en-64">Influencer #8: @parentingthespectrum (Cassandra Botnick)</h2>
-<h3 id="sec-en-65">Basic Information</h3>
-<table>
-<thead>
-<tr>
-<th>Attribute</th>
-<th>Details</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>Name</strong></td>
-<td>Cassandra Botnick</td>
-</tr>
-<tr>
-<td><strong>Handle</strong></td>
-<td>@parentingthespectrum (est.)</td>
-</tr>
-<tr>
-<td><strong>Platform</strong></td>
-<td>Instagram</td>
-</tr>
-<tr>
-<td><strong>Other Platforms</strong></td>
-<td>Not confirmed</td>
-</tr>
-<tr>
-<td><strong>Location</strong></td>
-<td>USA</td>
-</tr>
-<tr>
-<td><strong>Language</strong></td>
-<td>English</td>
-</tr>
-<tr>
-<td><strong>Niche</strong></td>
-<td>Motherhood, autism acceptance/advocacy</td>
-</tr>
-</tbody>
-</table>
-<h3 id="sec-en-66">Metrics</h3>
-<table>
-<thead>
-<tr>
-<th>Platform</th>
-<th>Followers</th>
-<th>Engagement Rate</th>
-<th>Avg. Views</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Instagram</td>
-<td>~70K</td>
-<td>~5.0% (est., advocacy niche often has highly engaged communities)</td>
-<td>N/A</td>
-</tr>
-</tbody>
-</table>
-<p><strong>Growth Trend</strong>: Stable — advocacy/content balance</p>
-<h3 id="sec-en-67">Audience Analysis</h3>
-<table>
-<thead>
-<tr>
-<th>Demographic</th>
-<th>Breakdown</th>
-<th>Notes</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Gender</td>
-<td>~85% F</td>
-<td>Mothers, special needs parents</td>
-</tr>
-<tr>
-<td>Age</td>
-<td>28–42 primary</td>
-<td></td>
-</tr>
-<tr>
-<td>Location</td>
-<td>USA-dominant</td>
-<td></td>
-</tr>
-<tr>
-<td>Interests</td>
-<td>Special needs parenting, advocacy, motherhood</td>
-<td></td>
-</tr>
-</tbody>
-</table>
-<p><strong>Audience Quality Score</strong>: 8/10<br />
-- Real followers estimate: ~92%<br />
-- Audience-brand overlap: <strong>Medium-Low</strong> — parenting audience but not specifically baby care</p>
-<h3 id="sec-en-68">Content Analysis</h3>
-<p><strong>Content Style</strong>:<br />
-- Primary format: Personal stories, advocacy posts, parenting content<br />
-- Posting frequency: ~3-5 posts/week<br />
-- Aesthetic: Authentic, personal, warm<br />
-- Tone: Honest, vulnerable, community-building</p>
-<p><strong>Top Performing Content</strong>:<br />
-1. Personal parenting journey posts (high emotional engagement)<br />
-2. Advocacy/awareness content (high share rate)<br />
-3. Day-in-the-life authenticity content</p>
-<p><strong>Brand Fit Assessment</strong>:<br />
-- Visual alignment: Medium — authentic/unpolished fits Momcozy's "real motherhood"<br />
-- Value alignment: Medium — supporting moms aligns broadly<br />
-- Audience alignment: Medium-Low — parenting but specialized niche</p>
-<h3 id="sec-en-69">Partnership History</h3>
-<p><strong>Past Brand Partnerships</strong>: Family/inclusive brands expected.</p>
-<p><strong>Competitor Partnerships</strong>: Not detected.</p>
-<h3 id="sec-en-70">Contact Information</h3>
-<ul>
-<li><strong>Contact Method</strong>: Instagram DM</li>
-</ul>
-<h3 id="sec-en-71">Fit Score Summary</h3>
-<table>
-<thead>
-<tr>
-<th>Factor</th>
-<th>Score (1-5)</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Audience match</td>
-<td>3</td>
-</tr>
-<tr>
-<td>Content quality</td>
-<td>4</td>
-</tr>
-<tr>
-<td>Brand alignment</td>
-<td>3</td>
-</tr>
-<tr>
-<td>Engagement quality</td>
-<td>4</td>
-</tr>
-<tr>
-<td>Authenticity</td>
-<td>5</td>
-</tr>
-<tr>
-<td><strong>Total</strong></td>
-<td><strong>19/25</strong></td>
-</tr>
-</tbody>
-</table>
-<p><strong>Recommendation</strong>: ⭐ Recommended</p>
-<p><strong>Why They're a Good Fit</strong>:<br />
-Highly authentic, trusted community. Diverse representation — important for inclusive brand positioning. Strong emotional connection with audience drives high engagement and trust-based recommendations.</p>
-<p><strong>Potential Concerns</strong>:<br />
-- Niche audience (autism parenting) may not directly overlap with postpartum/pumping audience<br />
-- Content is more advocacy than product-review — may require creative alignment</p>
-<hr />
-<h2 id="sec-en-72">YouTube-First Candidates</h2>
-<hr />
-<h2 id="sec-en-73">Influencer #9: Janna Faye (@jannafayeco) — ⚠️ WATCH LIST</h2>
-<h3 id="sec-en-74">Basic Information</h3>
-<table>
-<thead>
-<tr>
-<th>Attribute</th>
-<th>Details</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>Name</strong></td>
-<td>Janna Faye</td>
-</tr>
-<tr>
-<td><strong>Handle</strong></td>
-<td>@jannafayeco</td>
-</tr>
-<tr>
-<td><strong>Platform</strong></td>
-<td>YouTube (primary)</td>
-</tr>
-<tr>
-<td><strong>Other Platforms</strong></td>
-<td>Instagram (likely)</td>
-</tr>
-<tr>
-<td><strong>Location</strong></td>
-<td>USA</td>
-</tr>
-<tr>
-<td><strong>Language</strong></td>
-<td>English</td>
-</tr>
-<tr>
-<td><strong>Niche</strong></td>
-<td>Homemaking, thrifting, DIY, mom of 4, 1970s home renovation</td>
-</tr>
-</tbody>
-</table>
-<h3 id="sec-en-75">Metrics</h3>
-<table>
-<thead>
-<tr>
-<th>Platform</th>
-<th>Followers</th>
-<th>Engagement Rate</th>
-<th>Avg. Views</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>YouTube</td>
-<td>74.7K</td>
-<td>3.19%</td>
-<td>~3.8K/video</td>
-</tr>
-</tbody>
-</table>
-<p><strong>Growth Trend</strong>: <strong>Flat/declining</strong> — 0% growth rate. ⚠️ No uploads in 3+ months (as of Jan 2025).</p>
-<h3 id="sec-en-76">Audience Analysis</h3>
-<table>
-<thead>
-<tr>
-<th>Demographic</th>
-<th>Breakdown</th>
-<th>Notes</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Gender</td>
-<td>~85% F</td>
-<td>Homemaking/mom audience</td>
-</tr>
-<tr>
-<td>Age</td>
-<td>25–40 primary</td>
-<td></td>
-</tr>
-<tr>
-<td>Location</td>
-<td>USA-dominant</td>
-<td></td>
-</tr>
-<tr>
-<td>Interests</td>
-<td>Homemaking, thrifting, DIY, family life</td>
-<td></td>
-</tr>
-</tbody>
-</table>
-<p><strong>Audience Quality Score</strong>: 6/10<br />
-- Real followers estimate: ~85%<br />
-- Audience-brand overlap: <strong>Low-Medium</strong> — mom audience but homemaking/DIY focus</p>
-<h3 id="sec-en-77">Content Analysis</h3>
-<p><strong>Content Style</strong>:<br />
-- Primary format: Long-form YouTube vlogs, DIY tutorials<br />
-- Posting frequency: <strong>0</strong> (inactive) ⚠️<br />
-- Aesthetic: Homestead, warm, rustic<br />
-- Tone: Calm, family-oriented</p>
-<p><strong>Brand Fit Assessment</strong>:<br />
-- Visual alignment: Low-Medium — rural/homestead vs. modern maternal tech<br />
-- Value alignment: Low — limited alignment with Momcozy's pumping/nursing focus<br />
-- Audience alignment: Low-Medium — mom of 4 but content not baby-care focused</p>
-<h3 id="sec-en-78">Red Flags</h3>
-<ul>
-<li>⚠️ <strong>Inactive 3+ months</strong> — no recent content to assess current quality</li>
-<li>⚠️ Engagement rate below 4% threshold</li>
-<li>⚠️ Content niche is tangential to maternal/baby care</li>
-</ul>
-<h3 id="sec-en-79">Fit Score Summary</h3>
-<table>
-<thead>
-<tr>
-<th>Factor</th>
-<th>Score (1-5)</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Audience match</td>
-<td>2</td>
-</tr>
-<tr>
-<td>Content quality</td>
-<td>3</td>
-</tr>
-<tr>
-<td>Brand alignment</td>
-<td>2</td>
-</tr>
-<tr>
-<td>Engagement quality</td>
-<td>2</td>
-</tr>
-<tr>
-<td>Authenticity</td>
-<td>4</td>
-</tr>
-<tr>
-<td><strong>Total</strong></td>
-<td><strong>13/25</strong></td>
-</tr>
-</tbody>
-</table>
-<p><strong>Recommendation</strong>: 🔶 Watch List — Do not outreach at this time. Re-evaluate if activity resumes.</p>
-<hr />
-<h2 id="sec-en-80">Step 5 — Compiled Discovery Report</h2>
-<h1>Influencer Discovery Results</h1>
-<p><strong>Search Date</strong>: 2026-07-23<br />
-<strong>Brand/Campaign</strong>: Momcozy (maternal care, wearable breast pumps, postpartum)<br />
-<strong>Criteria Used</strong>: Parenting niche, 50K–200K followers, YouTube + Instagram, USA, ER &gt;4%</p>
-<h2 id="sec-en-81">Summary Statistics</h2>
-<table>
-<thead>
-<tr>
-<th>Metric</th>
-<th>Count</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Total Candidates Reviewed</td>
-<td>52</td>
-</tr>
-<tr>
-<td>Passed Initial Screening</td>
-<td>15</td>
-</tr>
-<tr>
-<td>Highly Recommended (Fit ≥22/25)</td>
-<td>2</td>
-</tr>
-<tr>
-<td>Recommended (Fit 18–21/25)</td>
-<td>6</td>
-</tr>
-<tr>
-<td>To Consider (Fit &lt;18 or Watch List)</td>
-<td>7 (incl. 4 watch list)</td>
-</tr>
-</tbody>
-</table>
-<h3 id="sec-en-82">By Platform</h3>
-<table>
-<thead>
-<tr>
-<th>Platform</th>
-<th>Count</th>
-<th>Avg Followers</th>
-<th>Avg ER (est.)</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Instagram</td>
-<td>12</td>
-<td>~122K</td>
-<td>~4.5%</td>
-</tr>
-<tr>
-<td>YouTube</td>
-<td>3</td>
-<td>~65K</td>
-<td>~3.0%</td>
-</tr>
-</tbody>
-</table>
-<h3 id="sec-en-83">By Tier</h3>
-<table>
-<thead>
-<tr>
-<th>Tier</th>
-<th>Follower Range</th>
-<th>Count</th>
-<th>Est. Cost Range (per post)</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Mid</td>
-<td>100K–200K</td>
-<td>6</td>
-<td>$2,000–$8,000</td>
-</tr>
-<tr>
-<td>Micro</td>
-<td>50K–100K</td>
-<td>6</td>
-<td>$500–$3,000</td>
-</tr>
-<tr>
-<td>Watch List</td>
-<td>Various</td>
-<td>3</td>
-<td>N/A</td>
-</tr>
-</tbody>
-</table>
-<h2 id="sec-en-84">Top Recommendations</h2>
-<h3 id="sec-en-85">Tier 1: Must Reach Out</h3>
-<table>
-<thead>
-<tr>
-<th>Rank</th>
-<th>Handle</th>
-<th>Platform</th>
-<th>Followers</th>
-<th>ER (est.)</th>
-<th>Fit Score</th>
-<th>Why</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>1</td>
-<td>@karrie_locher</td>
-<td>Instagram</td>
-<td>~165K</td>
-<td>~5.5%</td>
-<td>25/25</td>
-<td>RN/CLC lactation consultant. Perfect audience match for Momcozy. Educational content style ideal for pump reviews. Highest credibility + conversion potential.</td>
-</tr>
-<tr>
-<td>2</td>
-<td>@glowmaven</td>
-<td>Instagram</td>
-<td>~134K</td>
-<td>~4.5%</td>
-<td>23/25</td>
-<td>Celebrity doula, Oprah Super Soul 100. Maternal wellness authority. Elevates Momcozy's brand positioning. Premium credibility signal.</td>
-</tr>
-</tbody>
-</table>
-<h3 id="sec-en-86">Tier 2: Strong Candidates</h3>
-<table>
-<thead>
-<tr>
-<th>Handle</th>
-<th>Platform</th>
-<th>Followers</th>
-<th>ER (est.)</th>
-<th>Fit Score</th>
-<th>Notes</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>@lunchboxdad</td>
-<td>Instagram</td>
-<td>~114K</td>
-<td>~4.8%</td>
-<td>20/25</td>
-<td>Unique dad POV. Strong brand track record. Differentiation play.</td>
-</tr>
-<tr>
-<td>@mommyshorts</td>
-<td>Instagram</td>
-<td>~197K</td>
-<td>~3.4% (IG) / 16% (TikTok)</td>
-<td>20/25</td>
-<td>OG parenting influencer. TikTok high engagement compensates. Selective brand partner = credibility.</td>
-</tr>
-<tr>
-<td>@chelseakunz</td>
-<td>Instagram</td>
-<td>~173K</td>
-<td>~4.2%</td>
-<td>19/25</td>
-<td>Relatable humor. High volume posting. Quick turnaround.</td>
-</tr>
-<tr>
-<td>@parentingthespectrum</td>
-<td>Instagram</td>
-<td>~70K</td>
-<td>~5.0%</td>
-<td>19/25</td>
-<td>High authenticity. Diverse audience reach. Trusted community.</td>
-</tr>
-<tr>
-<td>@chelseafoy</td>
-<td>Instagram</td>
-<td>~66K</td>
-<td>~5.0%</td>
-<td>18/25</td>
-<td>Creative content capability. Micro-tier cost efficiency.</td>
-</tr>
-<tr>
-<td>@anawilkinson</td>
-<td>Instagram</td>
-<td>~52K</td>
-<td>~5.5%</td>
-<td>18/25</td>
-<td>Rising micro-influencer. High engagement potential. Cost-effective.</td>
-</tr>
-</tbody>
-</table>
-<h3 id="sec-en-87">Tier 3: Worth Considering / Watch List</h3>
-<table>
-<thead>
-<tr>
-<th>Handle</th>
-<th>Platform</th>
-<th>Followers</th>
-<th>ER</th>
-<th>Fit Score</th>
-<th>Notes</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>@jannafayeco</td>
-<td>YouTube</td>
-<td>74.7K</td>
-<td>3.19%</td>
-<td>13/25</td>
-<td>⚠️ INACTIVE 3+ months. Do not contact now. Re-evaluate if activity resumes.</td>
-</tr>
-<tr>
-<td>Kayla Developmental Therapist</td>
-<td>Instagram</td>
-<td>~21K</td>
-<td>N/A</td>
-<td>N/A</td>
-<td>Below follower threshold. Rising micro with strong credentials. Watch for growth.</td>
-</tr>
-<tr>
-<td>Caitlin Most Average Mama</td>
-<td>Instagram</td>
-<td>~26.5K</td>
-<td>N/A</td>
-<td>N/A</td>
-<td>Below follower threshold. Millennial mom lifestyle. Watch for growth.</td>
-</tr>
-</tbody>
-</table>
-<h2 id="sec-en-88">Influencer Mix Recommendation</h2>
-<p>For a balanced Momcozy campaign targeting postpartum/nursing mothers:</p>
-<table>
-<thead>
-<tr>
-<th>Tier</th>
-<th>Recommended #</th>
-<th>Role</th>
-<th>Budget %</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Mid (100K-200K)</td>
-<td>2-3</td>
-<td>Credibility, reach, brand positioning</td>
-<td>50-60%</td>
-</tr>
-<tr>
-<td>Micro (50K-100K)</td>
-<td>3-5</td>
-<td>Authentic reviews, UGC, engagement</td>
-<td>30-40%</td>
-</tr>
-<tr>
-<td>Rising (&lt;50K)</td>
-<td>1-2</td>
-<td>Long-term relationship building, seeding</td>
-<td>10%</td>
-</tr>
-</tbody>
-</table>
-<p><strong>Recommended Campaign Mix</strong>:<br />
-1. <strong>Hero</strong>: @karrie_locher — long-form educational review + pumping demo (YouTube/IG)<br />
-2. <strong>Authority</strong>: @glowmaven — brand partnership announcement, maternal wellness positioning<br />
-3. <strong>Reach/Relatability</strong>: @chelseakunz or @mommyshorts — authentic "real mom" Reel integration<br />
-4. <strong>Differentiation</strong>: @lunchboxdad — "dad gift guide" or partner support angle<br />
-5. <strong>Volume/UGC</strong>: @chelseafoy, @anawilkinson, @parentingthespectrum — multiple authentic reviews</p>
-<h2 id="sec-en-89">Next Steps</h2>
-<ol>
-<li><strong>Verify metrics</strong> — run handles through HypeAuditor/Modash for exact engagement rates and audience demographics before outreach</li>
-<li><strong>Score with fit-scorer</strong> — pass top 8 to <a href="../fit-scorer/SKILL.md">fit-scorer</a> for weighted, defensible ranking</li>
-<li><strong>Competitor check</strong> — confirm no exclusivity conflicts with Willow, Elvie, Medela, Spectra</li>
-<li><strong>Outreach strategy</strong> — develop with <a href="../../activate/outreach-manager/SKILL.md">outreach-manager</a></li>
-<li><strong>Create campaign briefs</strong> — generate with brief-generator for top picks</li>
-</ol>
-<hr />
-<h2 id="sec-en-90">Step 6 — Discovery Insights</h2>
-<h3 id="sec-en-91">Niche Observations</h3>
-<p><strong>Content Trends</strong>:<br />
-- Educational/credential-based content (nurses, LCs, doulas) outperforms pure lifestyle in maternal care — "trusted expert" is the winning positioning<br />
-- "Honest review" and "real mom" content generates higher purchase intent than polished ads<br />
-- Pumping/breastfeeding content has surged post-pandemic as more moms return to work and need hands-free solutions<br />
-- Dad POV content is an underutilized angle in maternal care (gift-giving, partner support)</p>
-<p><strong>Competitive Picture</strong>:<br />
-- Momcozy's known ambassadors: Abbie Herbert (macro, 2.6M IG), Becca Kufrin (TV personality), Jenna Dewan (actress) — all celebrity-tier<br />
-- Mid-tier and micro-tier influencer strategy appears underdeveloped relative to competitors<br />
-- Willow and Elvie have strong nano/micro presences in the lactation consultant niche<br />
-- BabyBuddha leverages aggressive discount-code affiliate strategy with micro-influencers<br />
-- Momcozy has an affiliate program (10-15% commission) — could be leveraged for micro-tier partnerships</p>
-<p><strong>Untapped Opportunities</strong>:<br />
-- <strong>Lactation consultant/nurse niche</strong>: Momcozy has no visible partnerships here; @karrie_locher is an open opportunity with highest possible audience overlap<br />
-- <strong>Dad/partner angle</strong>: No maternal care brand is meaningfully targeting the dad-as-purchaser use case<br />
-- <strong>Postpartum doula community</strong>: Underleveraged by all pump brands; @glowmaven could pioneer this category<br />
-- <strong>Multi-platform creators</strong>: Most candidates are single-platform; the few who span IG + TikTok + YT offer outsized value</p>
-<h3 id="sec-en-92">Platform-Specific Observations</h3>
-<table>
-<thead>
-<tr>
-<th>Platform</th>
-<th>Opportunity</th>
-<th>Risk</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Instagram</td>
-<td>Best for mid-tier mom influencers; Reels drive discovery</td>
-<td>Engagement rates softening across platform</td>
-</tr>
-<tr>
-<td>YouTube</td>
-<td>Best for in-depth pump reviews/comparisons; highest per-view rates ($4K-$25K for mid-tier)</td>
-<td>Fewer parenting creators in 50K-200K range; harder to find</td>
-</tr>
-<tr>
-<td>TikTok</td>
-<td>Viral potential; Momcozy pumps already trending</td>
-<td>Requires different content style; younger demo</td>
-</tr>
-</tbody>
-</table>
-<h3 id="sec-en-93">Recommendations for Future Searches</h3>
-<ul>
-<li>Consider expanding follower range to <strong>30K-50K micro tier</strong> for seeding/affiliate program — higher engagement, lower cost, long-term relationship building</li>
-<li>Platform opportunity: <strong>YouTube is underserved</strong> in the 50K-200K parenting niche — early partnerships here have first-mover advantage</li>
-<li>Adjacent niches to explore: <strong>working moms</strong>, <strong>exclusive pumping</strong>, <strong>NICU parents</strong>, <strong>twin/multiples parents</strong> — highly engaged, specific product needs</li>
-<li>Timing: Search again in 60-90 days as new postpartum creators emerge; the parenting influencer lifecycle is closely tied to children's ages</li>
-<li><strong>Creator Registry</strong>: Submit each roster-worthy shortlisted creator to <code>creator-registry</code> for deduplication and resolution</li>
-</ul>
-<hr />
-<h2 id="sec-en-94">Data Quality Notes</h2>
-<table>
-<thead>
-<tr>
-<th>Data Point</th>
-<th>Confidence</th>
-<th>Source</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Follower counts</td>
-<td>High</td>
-<td>Multiple cross-referenced sources (IZEA, HypeAuditor, Favikon, Feedspot)</td>
-</tr>
-<tr>
-<td>Engagement rates</td>
-<td>Medium</td>
-<td>Estimated where not confirmed via analytics. HypeAuditor data available for some.</td>
-</tr>
-<tr>
-<td>Brand partnership history</td>
-<td>Medium</td>
-<td>Publicly available press releases, media coverage</td>
-</tr>
-<tr>
-<td>Audience demographics</td>
-<td>Medium-Low</td>
-<td>Estimated from content niche and platform norms</td>
-</tr>
-<tr>
-<td>Contact information</td>
-<td>Low</td>
-<td>Only publicly available paths identified</td>
-</tr>
-</tbody>
-</table>
-<p><strong>All metrics marked "(est.)" should be verified through an influencer analytics platform (HypeAuditor, Modash, or similar) before outreach.</strong></p>
-<hr />
-<p><em>Report generated per <a href="../SKILL.md">influencer-discovery SKILL.md</a> workflow. Next skill: <a href="../fit-scorer/SKILL.md">fit-scorer</a> for weighted scoring and final ranking.</em></p>
-</div>
-
+<p><em>Report generated per <a href="../SKILL.md">influencer-discovery SKILL.md</a> workflow. Next skill: <a href="../fit-scorer/SKILL.md">fit-scorer</a> for weighted scoring and final ranking.</em></p></div>
 </div>
 
 <script>
 (function(){
-  var K='inf-discovery-lang',
-      be=document.getElementById('btn-en'),bz=document.getElementById('btn-zh'),
-      ce=document.getElementById('content-en'),cz=document.getElementById('content-zh'),
-      te=document.getElementById('toc-en'),tz=document.getElementById('toc-zh');
-
-  function setLang(l){
-    if(l==='zh'){
-      bz.classList.add('active');be.classList.remove('active');
-      cz.classList.add('active');ce.classList.remove('active');
-      tz.style.display='';te.style.display='none';
-    } else {
-      be.classList.add('active');bz.classList.remove('active');
-      ce.classList.add('active');cz.classList.remove('active');
-      te.style.display='';tz.style.display='none';
-    }
-    try{localStorage.setItem(K,l);}catch(e){}
-    // Re-run active section tracking
-    initObserver();
-  }
-
-  var s=null;try{s=localStorage.getItem(K);}catch(e){}
-  var initial=(s==='zh'||s==='en')?s:(navigator.language&&navigator.language.startsWith('zh')?'zh':'en');
-  setLang(initial);
-
-  be.addEventListener('click',function(){setLang('en');});
-  bz.addEventListener('click',function(){setLang('zh');});
-
-  // ── Active section tracking ──
   var observer;
   function initObserver(){
     if(observer){observer.disconnect();}
-    var activeContent=document.querySelector('.lang-content.active');
-    if(!activeContent)return;
-    var hs=activeContent.querySelectorAll('h2[id],h3[id]');
-    var navLinks=document.querySelectorAll('#toc-zh a, #toc-en a');
+    var hs=document.querySelectorAll('h2[id],h3[id]');
+    if(!hs.length)return;
     observer=new IntersectionObserver(function(entries){
       entries.forEach(function(entry){
         if(entry.isIntersecting){
-          navLinks.forEach(function(a){a.classList.remove('active');});
-          var visibleToc=document.querySelector('#toc-zh[style*="display"]:not([style*="display: none"]), #toc-en[style*="display"]:not([style*="display: none"])');
-          if(!visibleToc)visibleToc=document.getElementById(lang()==='zh'?'toc-zh':'toc-en');
-          var link=visibleToc.querySelector('a[href="#'+entry.target.id+'"]');
+          document.querySelectorAll('.toc-h2-wrap.active, .sidebar nav a.active').forEach(function(el){el.classList.remove('active');});
+          var link=document.querySelector('.toc-h2-wrap[data-target="#'+entry.target.id+'"]');
+          if(!link)link=document.querySelector('a[href="#'+entry.target.id+'"]');
           if(link)link.classList.add('active');
         }
       });
     },{rootMargin:'-80px 0px -70% 0px'});
     hs.forEach(function(h){observer.observe(h);});
   }
-  function lang(){return document.getElementById('content-zh').classList.contains('active')?'zh':'en';}
-  // Delay observer init slightly to let DOM settle
   setTimeout(initObserver,100);
-
-  // ── Mobile sidebar ──
   document.getElementById('hamburger').addEventListener('click',function(){
     document.getElementById('sidebar').classList.add('open');
     document.getElementById('sidebar-overlay').classList.add('open');
@@ -4431,8 +2378,7 @@ Highly authentic, trusted community. Diverse representation — important for in
     document.getElementById('sidebar').classList.remove('open');
     document.getElementById('sidebar-overlay').classList.remove('open');
   });
-  // Close sidebar on TOC link click (mobile)
-  document.querySelectorAll('#toc-zh a, #toc-en a').forEach(function(a){
+  document.querySelectorAll('.sidebar a').forEach(function(a){
     a.addEventListener('click',function(e){
       e.preventDefault();
       var target=document.getElementById(this.getAttribute('href').substring(1));
@@ -4442,6 +2388,11 @@ Highly authentic, trusted community. Diverse representation — important for in
     });
   });
 })();
+function toggleTOC(wrap){
+  wrap.classList.toggle('collapsed');
+  var list=wrap.nextElementSibling;
+  if(list&&list.classList.contains('toc-h3-list')){list.classList.toggle('collapsed');}
+}
 </script>
 
 </body>

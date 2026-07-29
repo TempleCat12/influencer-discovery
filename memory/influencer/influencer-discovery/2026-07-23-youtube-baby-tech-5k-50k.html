@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>红人发现报告：YouTube 婴儿科技产品 · 5K-50K 粉丝 / 红人发现报告：YouTube 婴儿科技产品 · 5K-50K 粉丝</title>
+<title>红人发现报告：YouTube 婴儿科技产品 · 5K-50K 粉丝</title>
 <style>
 :root {
   --bg: #ffffff; --text: #1a1a2e; --text-secondary: #555;
@@ -29,6 +29,23 @@ body {
   letter-spacing: 0.05em; margin-bottom: 12px; padding-bottom: 8px;
   border-bottom: 2px solid var(--accent);
 }
+.toc-group { margin-bottom: 2px; }
+.toc-h2-wrap {
+  display: flex; align-items: center; cursor: pointer;
+  padding: 5px 10px; border-radius: 4px; border-left: 3px solid transparent;
+  transition: all 0.15s ease; user-select: none;
+}
+.toc-h2-wrap:hover { background: var(--accent-light); }
+.toc-h2-wrap .arrow {
+  font-size: 0.65rem; margin-right: 6px; transition: transform 0.2s ease;
+  flex-shrink: 0; color: var(--text-secondary);
+}
+.toc-h2-wrap.collapsed .arrow { transform: rotate(-90deg); }
+.toc-h2-wrap .toc-label { font-size: 0.82rem; color: var(--text-secondary); flex: 1; }
+.toc-h2-wrap.active { background: var(--accent-light); border-left-color: var(--accent); }
+.toc-h2-wrap.active .toc-label { color: var(--accent); font-weight: 600; }
+.toc-h3-list { overflow: hidden; transition: max-height 0.3s ease; }
+.toc-h3-list.collapsed { max-height: 0 !important; }
 .sidebar nav a {
   display: block; padding: 5px 10px; font-size: 0.82rem; color: var(--text-secondary);
   text-decoration: none; border-radius: 4px; margin-bottom: 2px;
@@ -88,8 +105,9 @@ a { color: var(--accent); text-decoration: none; }
 a:hover { text-decoration: underline; }
 code { background: var(--code-bg); padding: 2px 6px; border-radius: 4px; font-size: 0.9em; font-family: "SF Mono", "Fira Code", "Consolas", monospace; }
 blockquote { border-left: 4px solid var(--accent); padding: 10px 16px; margin: 14px 0; background: var(--accent-light); border-radius: 0 6px 6px 0; color: #555; }
-.lang-content { display: none; }
-.lang-content.active { display: block; }
+.lang-content { display: block; }
+.lang-content.bilingual { display: none; }
+.lang-content.bilingual.active { display: block; }
 /* ── Mobile ── */
 @media (max-width: 900px) {
   .sidebar { transform: translateX(-100%); transition: transform 0.25s ease; }
@@ -105,7 +123,6 @@ blockquote { border-left: 4px solid var(--accent); padding: 10px 16px; margin: 1
 }
 @media print {
   .sidebar, .hamburger, .sidebar-overlay, .toggle-bar { display: none; }
-  .lang-content { display: block !important; }
   .main-wrap { margin-left: 0; padding: 16px; max-width: 100%; }
   table { box-shadow: none; } thead { background: #333; }
 }
@@ -116,158 +133,154 @@ blockquote { border-left: 4px solid var(--accent); padding: 10px 16px; margin: 1
 <button class="hamburger" id="hamburger" aria-label="Menu">&#9776;</button>
 <div class="sidebar-overlay" id="sidebar-overlay"></div>
 
-<aside class="sidebar" id="sidebar">
-  <div id="toc-zh">
-<h3>目 录</h3>
+<aside class="sidebar" id="sidebar"><h3>目 录</h3>
 <nav>
-  <a href="#sec-zh-0" class="toc-h2">第一步 — 搜索参数</a>
-  <a href="#sec-zh-1" class="toc-h2">第二步 — 搜索策略</a>
-  <a href="#sec-zh-2" class="toc-h3">主要搜索方法</a>
-  <a href="#sec-zh-3" class="toc-h2">第三步 — 初步筛选</a>
-  <a href="#sec-zh-4" class="toc-h3">筛选标准应用</a>
-  <a href="#sec-zh-5" class="toc-h3">红旗识别</a>
-  <a href="#sec-zh-6" class="toc-h2">第四步 — 达人画像</a>
-  <a href="#sec-zh-7" class="toc-h2">达人 #1：The Stroller Mom</a>
-  <a href="#sec-zh-8" class="toc-h3">基本信息</a>
-  <a href="#sec-zh-9" class="toc-h3">指标</a>
-  <a href="#sec-zh-10" class="toc-h3">受众分析</a>
-  <a href="#sec-zh-11" class="toc-h3">内容分析</a>
-  <a href="#sec-zh-12" class="toc-h3">适配评分摘要</a>
-  <a href="#sec-zh-13" class="toc-h2">达人 #2：The Baby Cubby</a>
-  <a href="#sec-zh-14" class="toc-h3">基本信息</a>
-  <a href="#sec-zh-15" class="toc-h3">指标</a>
-  <a href="#sec-zh-16" class="toc-h3">受众分析</a>
-  <a href="#sec-zh-17" class="toc-h3">内容分析</a>
-  <a href="#sec-zh-18" class="toc-h3">适配评分摘要</a>
-  <a href="#sec-zh-19" class="toc-h2">达人 #3：New Little Life（Allison Tolman）</a>
-  <a href="#sec-zh-20" class="toc-h3">基本信息</a>
-  <a href="#sec-zh-21" class="toc-h3">指标</a>
-  <a href="#sec-zh-22" class="toc-h3">受众分析</a>
-  <a href="#sec-zh-23" class="toc-h3">内容分析</a>
-  <a href="#sec-zh-24" class="toc-h3">适配评分摘要</a>
-  <a href="#sec-zh-25" class="toc-h2">达人 #4：Baby To Child</a>
-  <a href="#sec-zh-26" class="toc-h3">基本信息</a>
-  <a href="#sec-zh-27" class="toc-h3">指标</a>
-  <a href="#sec-zh-28" class="toc-h3">受众分析</a>
-  <a href="#sec-zh-29" class="toc-h3">内容分析</a>
-  <a href="#sec-zh-30" class="toc-h3">适配评分摘要</a>
-  <a href="#sec-zh-31" class="toc-h2">达人 #5：Fabulous Mom Life</a>
-  <a href="#sec-zh-32" class="toc-h3">基本信息</a>
-  <a href="#sec-zh-33" class="toc-h3">指标</a>
-  <a href="#sec-zh-34" class="toc-h3">受众分析</a>
-  <a href="#sec-zh-35" class="toc-h3">内容分析</a>
-  <a href="#sec-zh-36" class="toc-h3">适配评分摘要</a>
-  <a href="#sec-zh-37" class="toc-h2">达人 #6：This Mom Is Learning（Maria）</a>
-  <a href="#sec-zh-38" class="toc-h3">基本信息</a>
-  <a href="#sec-zh-39" class="toc-h3">指标</a>
-  <a href="#sec-zh-40" class="toc-h3">受众分析</a>
-  <a href="#sec-zh-41" class="toc-h3">内容分析</a>
-  <a href="#sec-zh-42" class="toc-h3">适配评分摘要</a>
-  <a href="#sec-zh-43" class="toc-h2">达人 #7：Fathercraft Reviews（Mark）</a>
-  <a href="#sec-zh-44" class="toc-h3">基本信息</a>
-  <a href="#sec-zh-45" class="toc-h3">指标</a>
-  <a href="#sec-zh-46" class="toc-h3">受众分析</a>
-  <a href="#sec-zh-47" class="toc-h3">内容分析</a>
-  <a href="#sec-zh-48" class="toc-h3">适配评分摘要</a>
-  <a href="#sec-zh-49" class="toc-h2">观察名单</a>
-  <a href="#sec-zh-50" class="toc-h2">WL-1：Dad Reviews with LaneVids — ⚠️ 超过粉丝上限</a>
-  <a href="#sec-zh-51" class="toc-h2">WL-2：Mama Nurse Tina — ⚠️ 远超粉丝上限</a>
-  <a href="#sec-zh-52" class="toc-h2">WL-3：Organic Beauty 80 — ⚠️ 数据不足</a>
-  <a href="#sec-zh-53" class="toc-h2">第五步 — 汇总发现报告</a>
-  <a href="#sec-zh-54" class="toc-h2">汇总统计</a>
-  <a href="#sec-zh-55" class="toc-h2">顶级推荐</a>
-  <a href="#sec-zh-56" class="toc-h3">第一梯队：必须联系</a>
-  <a href="#sec-zh-57" class="toc-h3">第二梯队：强力候选</a>
-  <a href="#sec-zh-58" class="toc-h3">第三梯队：观察名单</a>
-  <a href="#sec-zh-59" class="toc-h2">分产品推荐矩阵</a>
-  <a href="#sec-zh-60" class="toc-h2">达人组合推荐</a>
-  <a href="#sec-zh-61" class="toc-h2">第六步 — 发现洞察</a>
-  <a href="#sec-zh-62" class="toc-h3">领域观察</a>
-  <a href="#sec-zh-63" class="toc-h3">搜索限制与建议</a>
-  <a href="#sec-zh-64" class="toc-h2">数据质量说明</a>
-</nav>
+<a href="#sec-zh-0" class="toc-h2">第一步 — 搜索参数</a>
+<div class="toc-group">
+  <div class="toc-h2-wrap" data-target="#sec-zh-1" onclick="toggleTOC(this)">
+    <span class="arrow">&#9660;</span>
+    <span class="toc-label">第二步 — 搜索策略</span>
   </div>
-  <div id="toc-en" style="display:none">
-<h3>Contents</h3>
-<nav>
-  <a href="#sec-en-0" class="toc-h2">第一步 — 搜索参数</a>
-  <a href="#sec-en-1" class="toc-h2">第二步 — 搜索策略</a>
-  <a href="#sec-en-2" class="toc-h3">主要搜索方法</a>
-  <a href="#sec-en-3" class="toc-h2">第三步 — 初步筛选</a>
-  <a href="#sec-en-4" class="toc-h3">筛选标准应用</a>
-  <a href="#sec-en-5" class="toc-h3">红旗识别</a>
-  <a href="#sec-en-6" class="toc-h2">第四步 — 达人画像</a>
-  <a href="#sec-en-7" class="toc-h2">达人 #1：The Stroller Mom</a>
-  <a href="#sec-en-8" class="toc-h3">基本信息</a>
-  <a href="#sec-en-9" class="toc-h3">指标</a>
-  <a href="#sec-en-10" class="toc-h3">受众分析</a>
-  <a href="#sec-en-11" class="toc-h3">内容分析</a>
-  <a href="#sec-en-12" class="toc-h3">适配评分摘要</a>
-  <a href="#sec-en-13" class="toc-h2">达人 #2：The Baby Cubby</a>
-  <a href="#sec-en-14" class="toc-h3">基本信息</a>
-  <a href="#sec-en-15" class="toc-h3">指标</a>
-  <a href="#sec-en-16" class="toc-h3">受众分析</a>
-  <a href="#sec-en-17" class="toc-h3">内容分析</a>
-  <a href="#sec-en-18" class="toc-h3">适配评分摘要</a>
-  <a href="#sec-en-19" class="toc-h2">达人 #3：New Little Life（Allison Tolman）</a>
-  <a href="#sec-en-20" class="toc-h3">基本信息</a>
-  <a href="#sec-en-21" class="toc-h3">指标</a>
-  <a href="#sec-en-22" class="toc-h3">受众分析</a>
-  <a href="#sec-en-23" class="toc-h3">内容分析</a>
-  <a href="#sec-en-24" class="toc-h3">适配评分摘要</a>
-  <a href="#sec-en-25" class="toc-h2">达人 #4：Baby To Child</a>
-  <a href="#sec-en-26" class="toc-h3">基本信息</a>
-  <a href="#sec-en-27" class="toc-h3">指标</a>
-  <a href="#sec-en-28" class="toc-h3">受众分析</a>
-  <a href="#sec-en-29" class="toc-h3">内容分析</a>
-  <a href="#sec-en-30" class="toc-h3">适配评分摘要</a>
-  <a href="#sec-en-31" class="toc-h2">达人 #5：Fabulous Mom Life</a>
-  <a href="#sec-en-32" class="toc-h3">基本信息</a>
-  <a href="#sec-en-33" class="toc-h3">指标</a>
-  <a href="#sec-en-34" class="toc-h3">受众分析</a>
-  <a href="#sec-en-35" class="toc-h3">内容分析</a>
-  <a href="#sec-en-36" class="toc-h3">适配评分摘要</a>
-  <a href="#sec-en-37" class="toc-h2">达人 #6：This Mom Is Learning（Maria）</a>
-  <a href="#sec-en-38" class="toc-h3">基本信息</a>
-  <a href="#sec-en-39" class="toc-h3">指标</a>
-  <a href="#sec-en-40" class="toc-h3">受众分析</a>
-  <a href="#sec-en-41" class="toc-h3">内容分析</a>
-  <a href="#sec-en-42" class="toc-h3">适配评分摘要</a>
-  <a href="#sec-en-43" class="toc-h2">达人 #7：Fathercraft Reviews（Mark）</a>
-  <a href="#sec-en-44" class="toc-h3">基本信息</a>
-  <a href="#sec-en-45" class="toc-h3">指标</a>
-  <a href="#sec-en-46" class="toc-h3">受众分析</a>
-  <a href="#sec-en-47" class="toc-h3">内容分析</a>
-  <a href="#sec-en-48" class="toc-h3">适配评分摘要</a>
-  <a href="#sec-en-49" class="toc-h2">观察名单</a>
-  <a href="#sec-en-50" class="toc-h2">WL-1：Dad Reviews with LaneVids — ⚠️ 超过粉丝上限</a>
-  <a href="#sec-en-51" class="toc-h2">WL-2：Mama Nurse Tina — ⚠️ 远超粉丝上限</a>
-  <a href="#sec-en-52" class="toc-h2">WL-3：Organic Beauty 80 — ⚠️ 数据不足</a>
-  <a href="#sec-en-53" class="toc-h2">第五步 — 汇总发现报告</a>
-  <a href="#sec-en-54" class="toc-h2">汇总统计</a>
-  <a href="#sec-en-55" class="toc-h2">顶级推荐</a>
-  <a href="#sec-en-56" class="toc-h3">第一梯队：必须联系</a>
-  <a href="#sec-en-57" class="toc-h3">第二梯队：强力候选</a>
-  <a href="#sec-en-58" class="toc-h3">第三梯队：观察名单</a>
-  <a href="#sec-en-59" class="toc-h2">分产品推荐矩阵</a>
-  <a href="#sec-en-60" class="toc-h2">达人组合推荐</a>
-  <a href="#sec-en-61" class="toc-h2">第六步 — 发现洞察</a>
-  <a href="#sec-en-62" class="toc-h3">领域观察</a>
-  <a href="#sec-en-63" class="toc-h3">搜索限制与建议</a>
-  <a href="#sec-en-64" class="toc-h2">数据质量说明</a>
-</nav>
+  <div class="toc-h3-list" style="max-height:28px">
+    <a href="#sec-zh-2" class="toc-h3">主要搜索方法</a>
   </div>
-</aside>
+</div>
+<div class="toc-group">
+  <div class="toc-h2-wrap" data-target="#sec-zh-3" onclick="toggleTOC(this)">
+    <span class="arrow">&#9660;</span>
+    <span class="toc-label">第三步 — 初步筛选</span>
+  </div>
+  <div class="toc-h3-list" style="max-height:56px">
+    <a href="#sec-zh-4" class="toc-h3">筛选标准应用</a>
+    <a href="#sec-zh-5" class="toc-h3">红旗识别</a>
+  </div>
+</div>
+<a href="#sec-zh-6" class="toc-h2">第四步 — 达人画像</a>
+<div class="toc-group">
+  <div class="toc-h2-wrap" data-target="#sec-zh-7" onclick="toggleTOC(this)">
+    <span class="arrow">&#9660;</span>
+    <span class="toc-label">达人 #1：The Stroller Mom</span>
+  </div>
+  <div class="toc-h3-list" style="max-height:140px">
+    <a href="#sec-zh-8" class="toc-h3">基本信息</a>
+    <a href="#sec-zh-9" class="toc-h3">指标</a>
+    <a href="#sec-zh-10" class="toc-h3">受众分析</a>
+    <a href="#sec-zh-11" class="toc-h3">内容分析</a>
+    <a href="#sec-zh-12" class="toc-h3">适配评分摘要</a>
+  </div>
+</div>
+<div class="toc-group">
+  <div class="toc-h2-wrap" data-target="#sec-zh-13" onclick="toggleTOC(this)">
+    <span class="arrow">&#9660;</span>
+    <span class="toc-label">达人 #2：The Baby Cubby</span>
+  </div>
+  <div class="toc-h3-list" style="max-height:140px">
+    <a href="#sec-zh-14" class="toc-h3">基本信息</a>
+    <a href="#sec-zh-15" class="toc-h3">指标</a>
+    <a href="#sec-zh-16" class="toc-h3">受众分析</a>
+    <a href="#sec-zh-17" class="toc-h3">内容分析</a>
+    <a href="#sec-zh-18" class="toc-h3">适配评分摘要</a>
+  </div>
+</div>
+<div class="toc-group">
+  <div class="toc-h2-wrap" data-target="#sec-zh-19" onclick="toggleTOC(this)">
+    <span class="arrow">&#9660;</span>
+    <span class="toc-label">达人 #3：New Little Life（Allison Tolman）</span>
+  </div>
+  <div class="toc-h3-list" style="max-height:140px">
+    <a href="#sec-zh-20" class="toc-h3">基本信息</a>
+    <a href="#sec-zh-21" class="toc-h3">指标</a>
+    <a href="#sec-zh-22" class="toc-h3">受众分析</a>
+    <a href="#sec-zh-23" class="toc-h3">内容分析</a>
+    <a href="#sec-zh-24" class="toc-h3">适配评分摘要</a>
+  </div>
+</div>
+<div class="toc-group">
+  <div class="toc-h2-wrap" data-target="#sec-zh-25" onclick="toggleTOC(this)">
+    <span class="arrow">&#9660;</span>
+    <span class="toc-label">达人 #4：Baby To Child</span>
+  </div>
+  <div class="toc-h3-list" style="max-height:140px">
+    <a href="#sec-zh-26" class="toc-h3">基本信息</a>
+    <a href="#sec-zh-27" class="toc-h3">指标</a>
+    <a href="#sec-zh-28" class="toc-h3">受众分析</a>
+    <a href="#sec-zh-29" class="toc-h3">内容分析</a>
+    <a href="#sec-zh-30" class="toc-h3">适配评分摘要</a>
+  </div>
+</div>
+<div class="toc-group">
+  <div class="toc-h2-wrap" data-target="#sec-zh-31" onclick="toggleTOC(this)">
+    <span class="arrow">&#9660;</span>
+    <span class="toc-label">达人 #5：Fabulous Mom Life</span>
+  </div>
+  <div class="toc-h3-list" style="max-height:140px">
+    <a href="#sec-zh-32" class="toc-h3">基本信息</a>
+    <a href="#sec-zh-33" class="toc-h3">指标</a>
+    <a href="#sec-zh-34" class="toc-h3">受众分析</a>
+    <a href="#sec-zh-35" class="toc-h3">内容分析</a>
+    <a href="#sec-zh-36" class="toc-h3">适配评分摘要</a>
+  </div>
+</div>
+<div class="toc-group">
+  <div class="toc-h2-wrap" data-target="#sec-zh-37" onclick="toggleTOC(this)">
+    <span class="arrow">&#9660;</span>
+    <span class="toc-label">达人 #6：This Mom Is Learning（Maria）</span>
+  </div>
+  <div class="toc-h3-list" style="max-height:140px">
+    <a href="#sec-zh-38" class="toc-h3">基本信息</a>
+    <a href="#sec-zh-39" class="toc-h3">指标</a>
+    <a href="#sec-zh-40" class="toc-h3">受众分析</a>
+    <a href="#sec-zh-41" class="toc-h3">内容分析</a>
+    <a href="#sec-zh-42" class="toc-h3">适配评分摘要</a>
+  </div>
+</div>
+<div class="toc-group">
+  <div class="toc-h2-wrap" data-target="#sec-zh-43" onclick="toggleTOC(this)">
+    <span class="arrow">&#9660;</span>
+    <span class="toc-label">达人 #7：Fathercraft Reviews（Mark）</span>
+  </div>
+  <div class="toc-h3-list" style="max-height:140px">
+    <a href="#sec-zh-44" class="toc-h3">基本信息</a>
+    <a href="#sec-zh-45" class="toc-h3">指标</a>
+    <a href="#sec-zh-46" class="toc-h3">受众分析</a>
+    <a href="#sec-zh-47" class="toc-h3">内容分析</a>
+    <a href="#sec-zh-48" class="toc-h3">适配评分摘要</a>
+  </div>
+</div>
+<a href="#sec-zh-49" class="toc-h2">观察名单</a>
+<a href="#sec-zh-50" class="toc-h2">WL-1：Dad Reviews with LaneVids — ⚠️ 超过粉丝上限</a>
+<a href="#sec-zh-51" class="toc-h2">WL-2：Mama Nurse Tina — ⚠️ 远超粉丝上限</a>
+<a href="#sec-zh-52" class="toc-h2">WL-3：Organic Beauty 80 — ⚠️ 数据不足</a>
+<a href="#sec-zh-53" class="toc-h2">第五步 — 汇总发现报告</a>
+<a href="#sec-zh-54" class="toc-h2">汇总统计</a>
+<div class="toc-group">
+  <div class="toc-h2-wrap" data-target="#sec-zh-55" onclick="toggleTOC(this)">
+    <span class="arrow">&#9660;</span>
+    <span class="toc-label">顶级推荐</span>
+  </div>
+  <div class="toc-h3-list" style="max-height:84px">
+    <a href="#sec-zh-56" class="toc-h3">第一梯队：必须联系</a>
+    <a href="#sec-zh-57" class="toc-h3">第二梯队：强力候选</a>
+    <a href="#sec-zh-58" class="toc-h3">第三梯队：观察名单</a>
+  </div>
+</div>
+<a href="#sec-zh-59" class="toc-h2">分产品推荐矩阵</a>
+<a href="#sec-zh-60" class="toc-h2">达人组合推荐</a>
+<div class="toc-group">
+  <div class="toc-h2-wrap" data-target="#sec-zh-61" onclick="toggleTOC(this)">
+    <span class="arrow">&#9660;</span>
+    <span class="toc-label">第六步 — 发现洞察</span>
+  </div>
+  <div class="toc-h3-list" style="max-height:56px">
+    <a href="#sec-zh-62" class="toc-h3">领域观察</a>
+    <a href="#sec-zh-63" class="toc-h3">搜索限制与建议</a>
+  </div>
+</div>
+<a href="#sec-zh-64" class="toc-h2">数据质量说明</a>
+</nav></aside>
 
 <div class="main-wrap">
-
-<div class="toggle-bar">
-  <button class="toggle-btn active" id="btn-zh">中文</button>
-  <button class="toggle-btn" id="btn-en">English</button>
-</div>
-
-<div class="lang-content active" id="content-zh">
-<h1>红人发现报告：YouTube 婴儿科技产品 · 5K-50K 粉丝</h1>
+<div class="lang-content active" id="content-zh"><h1>红人发现报告：YouTube 婴儿科技产品 · 5K-50K 粉丝</h1>
 <p><strong>搜索日期</strong>：2026-07-23<br />
 <strong>搜索标准</strong>：YouTube 平台，5,000-50,000 粉丝，互动率 &gt;4%，拍摄过 baby car camera / baby monitor / portable milk warmer 相关内容<br />
 <strong>语言/地区</strong>：未限制（优先英语内容）</p>
@@ -1814,1617 +1827,29 @@ IBCLC 认证 + 数据驱动评测 = 暖奶器评测的最高公信力。受众�
 <p>⚠️ <strong>所有标注"(估)"的指标应在联系前通过 YouTube 频道页和达人分析平台验证。</strong>5K-50K 区间的频道发现是本 skill 在纯网页搜索条件下的已知限制 — <code>~~influencer database</code> 连接器可显著提升发现精度。</p>
 </blockquote>
 <hr />
-<p><em>报告按照 <a href="../SKILL.md">influencer-discovery SKILL.md</a> 工作流程生成。下一步 skill：<a href="../fit-scorer/SKILL.md">fit-scorer</a> 进行加权评分和最终排名。</em></p>
-</div>
-
-<div class="lang-content" id="content-en">
-<h1>红人发现报告：YouTube 婴儿科技产品 · 5K-50K 粉丝</h1>
-<p><strong>搜索日期</strong>：2026-07-23<br />
-<strong>搜索标准</strong>：YouTube 平台，5,000-50,000 粉丝，互动率 &gt;4%，拍摄过 baby car camera / baby monitor / portable milk warmer 相关内容<br />
-<strong>语言/地区</strong>：未限制（优先英语内容）</p>
-<hr />
-<h2 id="sec-en-0">第一步 — 搜索参数</h2>
-<p><strong>品牌/产品场景</strong>：婴儿车载摄像头、婴儿监视器、便携式暖奶器<br />
-<strong>活动目标</strong>：真实产品评测、开箱演示、UGC 视频素材<br />
-<strong>预算范围</strong>：微型达人（$200-$1,500/视频，基于 5K-50K 粉丝级别）</p>
-<p><strong>搜索标准</strong>：</p>
-<table>
-<thead>
-<tr>
-<th>参数</th>
-<th>要求</th>
-<th>优先级</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>领域</td>
-<td>婴儿科技产品、育儿用品评测</td>
-<td>必须</td>
-</tr>
-<tr>
-<td>平台</td>
-<td>YouTube</td>
-<td>必须</td>
-</tr>
-<tr>
-<td>粉丝范围</td>
-<td>5,000 - 50,000</td>
-<td>必须</td>
-</tr>
-<tr>
-<td>互动率</td>
-<td>&gt;4%</td>
-<td>必须</td>
-</tr>
-<tr>
-<td>内容类型</td>
-<td>产品评测、开箱、对比、演示</td>
-<td>必须</td>
-</tr>
-<tr>
-<td>目标产品</td>
-<td>baby car camera / baby monitor / portable milk warmer</td>
-<td>必须</td>
-</tr>
-<tr>
-<td>语言</td>
-<td>英语为主</td>
-<td>偏好</td>
-</tr>
-<tr>
-<td>发布频率</td>
-<td>≥1 视频/周</td>
-<td>偏好</td>
-</tr>
-<tr>
-<td>地区</td>
-<td>不限（全球搜索）</td>
-<td>灵活</td>
-</tr>
-</tbody>
-</table>
-<p><strong>加分项</strong>：<br />
-- CPST（儿童乘客安全技术员）认证<br />
-- 护理/哺乳/育儿专业资质<br />
-- 多个孩子可展示不同年龄段的真实使用场景<br />
-- 数据驱动评测风格</p>
-<p><strong>排除项</strong>：<br />
-- 纯品牌推广频道（非真实创作者）<br />
-- 超过 3 个月不活跃<br />
-- 主要内容非育儿/婴儿相关<br />
-- 争议内容或虚假互动</p>
-<hr />
-<h2 id="sec-en-1">第二步 — 搜索策略</h2>
-<h3 id="sec-en-2">主要搜索方法</h3>
-<ol>
-<li><strong>YouTube 细分领域搜索</strong></li>
-<li>婴儿推车/安全座椅评测频道（相邻品类，常有 monitor/car camera 内容）</li>
-<li>婴儿产品开箱/评测频道</li>
-<li>
-<p>母乳喂养/吸奶器教育频道（暖奶器相关）</p>
-</li>
-<li>
-<p><strong>话题标签与关键词</strong></p>
-</li>
-<li>YouTube 搜索: "baby car camera review", "baby monitor unboxing", "portable milk warmer test"</li>
-<li>
-<p>达人数据库: findachannel.net（婴儿推车/婴儿产品细分）</p>
-</li>
-<li>
-<p><strong>博客/社交媒体交叉发现</strong></p>
-</li>
-<li>育儿博客中的 YouTube 频道引用</li>
-<li>论坛推荐（What to Expect、Reddit 育儿板块）</li>
-<li>
-<p>品牌合作页面中的达人发现</p>
-</li>
-<li>
-<p><strong>工具查询</strong></p>
-</li>
-<li>findachannel.net - 婴儿推车/婴儿产品细分频道排名</li>
-<li>网页搜索交叉验证频道数据</li>
-</ol>
-<hr />
-<h2 id="sec-en-3">第三步 — 初步筛选</h2>
-<p><strong>总候选人数</strong>：31<br />
-<strong>初步筛选后</strong>：9（另加 3 人放入观察名单）</p>
-<h3 id="sec-en-4">筛选标准应用</h3>
-<table>
-<thead>
-<tr>
-<th>标准</th>
-<th>过滤条件</th>
-<th>淘汰人数</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>粉丝范围</td>
-<td>5K-50K（YouTube 主平台）</td>
-<td>11</td>
-</tr>
-<tr>
-<td>互动率</td>
-<td>&gt;4%（估算或通过 views/sub 比率推算）</td>
-<td>5</td>
-</tr>
-<tr>
-<td>内容相关性</td>
-<td>婴儿科技/用品评测</td>
-<td>4</td>
-</tr>
-<tr>
-<td>近期活跃</td>
-<td>&lt;90 天不活跃</td>
-<td>2</td>
-</tr>
-</tbody>
-</table>
-<h3 id="sec-en-5">红旗识别</h3>
-<ul>
-<li>3 个频道为纯品牌营销号（非独立创作者）</li>
-<li>2 个频道互动率异常低（大量订阅但极低播放量 — 疑似假粉）</li>
-<li>1 个频道内容转向非育儿领域</li>
-<li>1 个频道存在付费评论争议</li>
-</ul>
-<blockquote>
-<p>⚠️ <strong>数据质量说明</strong>：5K-50K 区间的 YouTube 频道很难通过网页搜索精确定位。搜索引擎对小型 YouTube 频道的索引非常有限。本次搜索结合了 findachannel.net 细分频道数据、育儿博客引用、论坛推荐及网页搜索交叉验证。<strong>强烈建议</strong>通过 <code>~~influencer database</code> 连接器进行精确的粉丝、互动率和内容标签筛选。</p>
-</blockquote>
-<hr />
-<h2 id="sec-en-6">第四步 — 达人画像</h2>
-<hr />
-<h2 id="sec-en-7">达人 #1：The Stroller Mom</h2>
-<h3 id="sec-en-8">基本信息</h3>
-<table>
-<thead>
-<tr>
-<th>属性</th>
-<th>详情</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>频道名</strong></td>
-<td>The Stroller Mom</td>
-</tr>
-<tr>
-<td><strong>运营者</strong></td>
-<td>一位 CPST 认证 + 三娃妈妈</td>
-</tr>
-<tr>
-<td><strong>平台</strong></td>
-<td>YouTube</td>
-</tr>
-<tr>
-<td><strong>其他平台</strong></td>
-<td>未确认（可能有 Instagram）</td>
-</tr>
-<tr>
-<td><strong>地区</strong></td>
-<td>美国</td>
-</tr>
-<tr>
-<td><strong>语言</strong></td>
-<td>英语</td>
-</tr>
-<tr>
-<td><strong>领域</strong></td>
-<td>婴儿推车、安全座椅、婴儿监视器等育儿用品评测</td>
-</tr>
-<tr>
-<td><strong>开始时间</strong></td>
-<td>2022年12月</td>
-</tr>
-</tbody>
-</table>
-<h3 id="sec-en-9">指标</h3>
-<table>
-<thead>
-<tr>
-<th>指标</th>
-<th>数据</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>YouTube 订阅</td>
-<td><strong>14,500</strong></td>
-</tr>
-<tr>
-<td>总视频数</td>
-<td>468</td>
-</tr>
-<tr>
-<td>总播放量</td>
-<td>11,095,704</td>
-</tr>
-<tr>
-<td>平均每视频播放</td>
-<td>~23,700（约为订阅数的 <strong>163%</strong> — 极高互动）</td>
-</tr>
-<tr>
-<td>月均预估收入</td>
-<td>~$470</td>
-</tr>
-</tbody>
-</table>
-<p><strong>增长趋势</strong>：稳定增长 — 2022年底起步，不到3年积累了 14.5K 订阅和 1100万+ 播放。该细分频道平均月增 274 订阅，其表现远超均值。</p>
-<h3 id="sec-en-10">受众分析</h3>
-<table>
-<thead>
-<tr>
-<th>维度</th>
-<th>分布</th>
-<th>备注</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>人群</td>
-<td>孕产妇、新手父母</td>
-<td>高度精准</td>
-</tr>
-<tr>
-<td>年龄</td>
-<td>25-40 岁为主</td>
-<td>购买力强</td>
-</tr>
-<tr>
-<td>兴趣</td>
-<td>婴儿用品选购、安全座椅、推车对比</td>
-<td>购买意向极高</td>
-</tr>
-</tbody>
-</table>
-<p><strong>受众质量评分</strong>：9/10<br />
-- 真实粉丝估算：~95%（CPST 认证 + 真实内容 = 高度信任）<br />
-- 受众-品牌重叠度：<strong>高</strong> — 婴儿安全/科技产品的精准购买人群</p>
-<h3 id="sec-en-11">内容分析</h3>
-<p><strong>内容风格</strong>：<br />
-- 主要形式：真实评测、安装教程、对比视频<br />
-- 发布频率：约 3 视频/周（468 视频/约 3.5 年）<br />
-- 风格：诚实、专业（CPST 视角）、真实母亲体验<br />
-- 语调：信息丰富、可信赖、"我用过才说"</p>
-<p><strong>品牌适配度评估</strong>：<br />
-- baby car camera 相关性：<strong>高</strong> — CPST 认证天然覆盖车载安全品类<br />
-- baby monitor 相关性：<strong>高</strong> — 婴儿用品评测覆盖面广<br />
-- portable milk warmer 相关性：<strong>中</strong> — 推车/座椅为主，但育儿用品品类可延伸</p>
-<h3 id="sec-en-12">适配评分摘要</h3>
-<table>
-<thead>
-<tr>
-<th>维度</th>
-<th>评分 (1-5)</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>受众匹配</td>
-<td>5</td>
-</tr>
-<tr>
-<td>内容质量</td>
-<td>5</td>
-</tr>
-<tr>
-<td>产品相关性</td>
-<td>4</td>
-</tr>
-<tr>
-<td>互动质量</td>
-<td>5</td>
-</tr>
-<tr>
-<td>真实度</td>
-<td>5</td>
-</tr>
-<tr>
-<td><strong>总分</strong></td>
-<td><strong>24/25</strong></td>
-</tr>
-</tbody>
-</table>
-<p><strong>推荐等级</strong>：⭐ 强烈推荐</p>
-<p><strong>为什么合适</strong>：<br />
-CPST 认证带来婴儿安全领域的专业公信力，评测婴儿车载摄像头天然契合。极高互动率（平均播放量 1.6 倍于订阅数）表明受众高度信任和依赖她的推荐。三娃妈妈身份让内容覆盖不同年龄段使用场景。468 个视频证明了持续稳定的内容输出能力。</p>
-<p><strong>潜在顾虑</strong>：<br />
-- 内容以推车/座椅为主，暖奶器品类经验待确认<br />
-- 14.5K 处于粉丝范围中等偏下，触达力有限但互动质量补偿</p>
-<hr />
-<h2 id="sec-en-13">达人 #2：The Baby Cubby</h2>
-<h3 id="sec-en-14">基本信息</h3>
-<table>
-<thead>
-<tr>
-<th>属性</th>
-<th>详情</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>频道名</strong></td>
-<td>The Baby Cubby</td>
-</tr>
-<tr>
-<td><strong>运营者</strong></td>
-<td>Cameron &amp; Jacquelyn Muir（犹他州婴儿用品精品店老板）</td>
-</tr>
-<tr>
-<td><strong>平台</strong></td>
-<td>YouTube</td>
-</tr>
-<tr>
-<td><strong>其他平台</strong></td>
-<td>实体店 (babycubby.com)、社交媒体</td>
-</tr>
-<tr>
-<td><strong>地区</strong></td>
-<td>犹他州，美国</td>
-</tr>
-<tr>
-<td><strong>语言</strong></td>
-<td>英语</td>
-</tr>
-<tr>
-<td><strong>领域</strong></td>
-<td>婴儿用品评测、开箱、品牌对比、安全安装教程</td>
-</tr>
-<tr>
-<td><strong>开始时间</strong></td>
-<td>2014年4月</td>
-</tr>
-</tbody>
-</table>
-<h3 id="sec-en-15">指标</h3>
-<table>
-<thead>
-<tr>
-<th>指标</th>
-<th>数据</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>YouTube 订阅</td>
-<td><strong>32,200</strong></td>
-</tr>
-<tr>
-<td>总视频数</td>
-<td>873+</td>
-</tr>
-<tr>
-<td>总播放量</td>
-<td>22,500,000+</td>
-</tr>
-<tr>
-<td>平均每视频播放</td>
-<td>~25,800（约为订阅数的 <strong>80%</strong> — 健康互动）</td>
-</tr>
-</tbody>
-</table>
-<p><strong>增长趋势</strong>：成熟稳定 — 2014年至今超过 11 年积累。实体店+线上双渠道运营，内容可持续性强。</p>
-<h3 id="sec-en-16">受众分析</h3>
-<table>
-<thead>
-<tr>
-<th>维度</th>
-<th>分布</th>
-<th>备注</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>人群</td>
-<td>孕产妇、新手父母、祖父母</td>
-<td>覆盖全购买决策链</td>
-</tr>
-<tr>
-<td>年龄</td>
-<td>25-45 岁为主</td>
-<td></td>
-</tr>
-<tr>
-<td>兴趣</td>
-<td>婴儿用品研究、安全座椅、推车、婴儿床</td>
-<td>高购买意向</td>
-</tr>
-</tbody>
-</table>
-<p><strong>受众质量评分</strong>：8/10<br />
-- 真实粉丝估算：~90%<br />
-- 受众-品牌重叠度：<strong>高</strong> — 婴儿用品购买的精准人群</p>
-<h3 id="sec-en-17">内容分析</h3>
-<p><strong>内容风格</strong>：<br />
-- 主要形式：专业开箱、对比评测、安全安装教程<br />
-- 发布频率：约 1.5 视频/周（873 视频/11 年）<br />
-- 风格：专业、全面、教育性强<br />
-- 特色系列："Fighting for Families" 家庭故事系列</p>
-<p><strong>品牌适配度评估</strong>：<br />
-- baby car camera 相关性：<strong>高</strong> — 有安全座椅安装教程，延伸至车载摄像头自然<br />
-- baby monitor 相关性：<strong>非常高</strong> — 婴儿监视器是核心评测品类之一<br />
-- portable milk warmer 相关性：<strong>中高</strong> — 喂养用品评测覆盖面广</p>
-<h3 id="sec-en-18">适配评分摘要</h3>
-<table>
-<thead>
-<tr>
-<th>维度</th>
-<th>评分 (1-5)</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>受众匹配</td>
-<td>5</td>
-</tr>
-<tr>
-<td>内容质量</td>
-<td>5</td>
-</tr>
-<tr>
-<td>产品相关性</td>
-<td>5</td>
-</tr>
-<tr>
-<td>互动质量</td>
-<td>4</td>
-</tr>
-<tr>
-<td>真实度</td>
-<td>4</td>
-</tr>
-<tr>
-<td><strong>总分</strong></td>
-<td><strong>23/25</strong></td>
-</tr>
-</tbody>
-</table>
-<p><strong>推荐等级</strong>：⭐ 强烈推荐</p>
-<p><strong>为什么合适</strong>：<br />
-11 年运营历史 + 实体店背景 = 极强的产品知识和评测公信力。873 个视频证明持续稳定的内容生产能力。32.2K 粉丝处于筛选范围的高端，性价比最优。品类覆盖全面，三种目标产品均在其评测范围。同时运营实体店意味着品牌合作可延伸至线下。</p>
-<p><strong>潜在顾虑</strong>：<br />
-- 同时是零售商，评测可能存在偏向（需确认其透明度政策）<br />
-- 粉丝数接近上限，合作费用可能高于微型频道<br />
-- 2014年起步的老频道，内容风格可能需要与现代短视频趋势对齐</p>
-<hr />
-<h2 id="sec-en-19">达人 #3：New Little Life（Allison Tolman）</h2>
-<h3 id="sec-en-20">基本信息</h3>
-<table>
-<thead>
-<tr>
-<th>属性</th>
-<th>详情</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>频道名</strong></td>
-<td>New Little Life</td>
-</tr>
-<tr>
-<td><strong>运营者</strong></td>
-<td>Allison Tolman，LPN + IBCLC（认证哺乳顾问）</td>
-</tr>
-<tr>
-<td><strong>平台</strong></td>
-<td>YouTube</td>
-</tr>
-<tr>
-<td><strong>其他平台</strong></td>
-<td>官网 (newlittlelife.com)、付费课程平台</td>
-</tr>
-<tr>
-<td><strong>地区</strong></td>
-<td>美国</td>
-</tr>
-<tr>
-<td><strong>语言</strong></td>
-<td>英语</td>
-</tr>
-<tr>
-<td><strong>领域</strong></td>
-<td>吸奶器评测、母乳喂养教育、哺乳装备</td>
-</tr>
-<tr>
-<td><strong>特色</strong></td>
-<td>发明了 Boobie Barometer™ 吸奶器测试系统</td>
-</tr>
-</tbody>
-</table>
-<h3 id="sec-en-21">指标</h3>
-<table>
-<thead>
-<tr>
-<th>指标</th>
-<th>数据</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>YouTube 订阅</td>
-<td>~22,000（估，基于教育类细分频道规模）</td>
-</tr>
-<tr>
-<td>总视频数</td>
-<td>200+（估）</td>
-</tr>
-<tr>
-<td>内容特色</td>
-<td>50+ 款吸奶器深度数据评测</td>
-</tr>
-</tbody>
-</table>
-<p><strong>增长趋势</strong>：稳定 — 专业教育内容吸引高质量订阅。付费课程（Pumping for Working Moms）和 L-CERP 继续教育课程形成多元收入。</p>
-<h3 id="sec-en-22">受众分析</h3>
-<table>
-<thead>
-<tr>
-<th>维度</th>
-<th>分布</th>
-<th>备注</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>人群</td>
-<td>哺乳妈妈、职场背奶妈妈</td>
-<td>高度垂直</td>
-</tr>
-<tr>
-<td>年龄</td>
-<td>25-38 岁为主</td>
-<td></td>
-</tr>
-<tr>
-<td>兴趣</td>
-<td>吸奶器、母乳喂养、哺乳装备</td>
-<td>购买意向极强</td>
-</tr>
-</tbody>
-</table>
-<p><strong>受众质量评分</strong>：9/10<br />
-- 真实粉丝估算：~95%（IBCLC 认证 = 极高公信力）<br />
-- 受众-品牌重叠度：<strong>非常高</strong>（便携暖奶器）— 哺乳妈妈直接需要暖奶器</p>
-<h3 id="sec-en-23">内容分析</h3>
-<p><strong>内容风格</strong>：<br />
-- 主要形式：数据驱动深度评测、吸奶器对比、哺乳技巧<br />
-- 风格：科学、严谨、"用数据说话"<br />
-- 语调：专业但亲切、"我懂你的需求"</p>
-<p><strong>品牌适配度评估</strong>：<br />
-- baby car camera 相关性：<strong>低</strong> — 不在核心品类<br />
-- baby monitor 相关性：<strong>低</strong> — 不在核心品类<br />
-- portable milk warmer 相关性：<strong>非常高</strong> — 暖奶器是哺乳/吸奶生态的直接延伸</p>
-<h3 id="sec-en-24">适配评分摘要</h3>
-<table>
-<thead>
-<tr>
-<th>维度</th>
-<th>评分 (1-5)</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>受众匹配</td>
-<td>5</td>
-</tr>
-<tr>
-<td>内容质量</td>
-<td>5</td>
-</tr>
-<tr>
-<td>产品相关性</td>
-<td>3</td>
-</tr>
-<tr>
-<td>互动质量</td>
-<td>5</td>
-</tr>
-<tr>
-<td>真实度</td>
-<td>5</td>
-</tr>
-<tr>
-<td><strong>总分</strong></td>
-<td><strong>23/25</strong></td>
-</tr>
-</tbody>
-</table>
-<p><strong>推荐等级</strong>：⭐ 强烈推荐（便携暖奶器品类专攻）</p>
-<p><strong>为什么合适</strong>：<br />
-IBCLC 认证 + 数据驱动评测 = 暖奶器评测的最高公信力。受众是哺乳妈妈，直接需要便携暖奶器产品。"Boobie Barometer" 测试方法论的严谨性可延伸至暖奶器品类（温度精确性、加热速度、电池续航等）。在 baby car camera 和 monitor 品类不适用，但在暖奶器品类中是最强候选人。</p>
-<p><strong>潜在顾虑</strong>：<br />
-- 核心品类（吸奶器）与 baby car camera / monitor 几乎无交集 — 仅适合暖奶器单品类合作<br />
-- 订阅数待验证（估测值）<br />
-- IBCLC 身份对产品安全性要求极高，评测可能更严格</p>
-<hr />
-<h2 id="sec-en-25">达人 #4：Baby To Child</h2>
-<h3 id="sec-en-26">基本信息</h3>
-<table>
-<thead>
-<tr>
-<th>属性</th>
-<th>详情</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>频道名</strong></td>
-<td>Baby To Child</td>
-</tr>
-<tr>
-<td><strong>运营者</strong></td>
-<td>育儿团队（具体身份未确认）</td>
-</tr>
-<tr>
-<td><strong>平台</strong></td>
-<td>YouTube + 博客 (babytochild.com)</td>
-</tr>
-<tr>
-<td><strong>其他平台</strong></td>
-<td>博客 SEO 内容</td>
-</tr>
-<tr>
-<td><strong>地区</strong></td>
-<td>美国（推测）</td>
-</tr>
-<tr>
-<td><strong>语言</strong></td>
-<td>英语</td>
-</tr>
-<tr>
-<td><strong>领域</strong></td>
-<td>婴儿车载摄像头、婴儿监视器、暖奶器、吸奶器等科技产品评测</td>
-</tr>
-</tbody>
-</table>
-<h3 id="sec-en-27">指标</h3>
-<table>
-<thead>
-<tr>
-<th>指标</th>
-<th>数据</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>YouTube 订阅</td>
-<td>~8,500（估，基于内容量和博客流量推测）</td>
-</tr>
-<tr>
-<td>内容特色</td>
-<td>深度评测文章 + YouTube 视频，SEO 覆盖广</td>
-</tr>
-</tbody>
-</table>
-<p><strong>增长趋势</strong>：成长中 — 博客 SEO 驱动流量增长，YouTube 作为视频补充</p>
-<h3 id="sec-en-28">受众分析</h3>
-<table>
-<thead>
-<tr>
-<th>维度</th>
-<th>分布</th>
-<th>备注</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>人群</td>
-<td>搜索"婴儿车载摄像头评测"等关键词的父母</td>
-<td>高购买意向</td>
-</tr>
-<tr>
-<td>年龄</td>
-<td>25-40 岁为主</td>
-<td></td>
-</tr>
-<tr>
-<td>兴趣</td>
-<td>婴儿科技用品选购</td>
-<td>精准搜索流量</td>
-</tr>
-</tbody>
-</table>
-<p><strong>受众质量评分</strong>：7/10<br />
-- 真实粉丝估算：~85%<br />
-- 受众-品牌重叠度：<strong>非常高</strong> — 三种目标产品全部覆盖</p>
-<h3 id="sec-en-29">内容分析</h3>
-<p><strong>内容风格</strong>：<br />
-- 主要形式：产品评测博客 + YouTube 视频演示<br />
-- 风格：SEO 优化、信息全面、购买指南导向<br />
-- 覆盖产品：BM3/BV3 PRO 婴儿车载摄像头、Dr. Brown's 暖奶器、Baby Brezza 暖奶器、Juissiart 暖奶器等</p>
-<p><strong>品牌适配度评估</strong>：<br />
-- baby car camera 相关性：<strong>非常高</strong> — 多篇车载摄像头深度评测<br />
-- baby monitor 相关性：<strong>高</strong> — 婴儿监视器评测<br />
-- portable milk warmer 相关性：<strong>非常高</strong> — 多款暖奶器详细对比</p>
-<h3 id="sec-en-30">适配评分摘要</h3>
-<table>
-<thead>
-<tr>
-<th>维度</th>
-<th>评分 (1-5)</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>受众匹配</td>
-<td>5</td>
-</tr>
-<tr>
-<td>内容质量</td>
-<td>4</td>
-</tr>
-<tr>
-<td>产品相关性</td>
-<td>5</td>
-</tr>
-<tr>
-<td>互动质量</td>
-<td>3</td>
-</tr>
-<tr>
-<td>真实度</td>
-<td>4</td>
-</tr>
-<tr>
-<td><strong>总分</strong></td>
-<td><strong>21/25</strong></td>
-</tr>
-</tbody>
-</table>
-<p><strong>推荐等级</strong>：⭐ 强烈推荐（产品覆盖最全）</p>
-<p><strong>为什么合适</strong>：<br />
-<strong>唯一同时覆盖三种目标产品的候选人</strong> — baby car camera、baby monitor、portable milk warmer 全有现成评测内容。博客 SEO 覆盖意味着长尾搜索流量持续。处于 8.5K 粉丝的早期成长阶段，合作成本低、长期关系潜力大。</p>
-<p><strong>潜在顾虑</strong>：<br />
-- 频道规模最小（~8.5K），单视频触达力有限<br />
-- SEO 导向内容可能偏"购买指南"风格，需要向真实评测方向引导<br />
-- YouTube 频道数据需验证</p>
-<hr />
-<h2 id="sec-en-31">达人 #5：Fabulous Mom Life</h2>
-<h3 id="sec-en-32">基本信息</h3>
-<table>
-<thead>
-<tr>
-<th>属性</th>
-<th>详情</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>频道名</strong></td>
-<td>Fabulous Mom Life</td>
-</tr>
-<tr>
-<td><strong>运营者</strong></td>
-<td>一位妈妈创作者</td>
-</tr>
-<tr>
-<td><strong>平台</strong></td>
-<td>YouTube</td>
-</tr>
-<tr>
-<td><strong>其他平台</strong></td>
-<td>未确认</td>
-</tr>
-<tr>
-<td><strong>地区</strong></td>
-<td>美国（推测）</td>
-</tr>
-<tr>
-<td><strong>语言</strong></td>
-<td>英语</td>
-</tr>
-<tr>
-<td><strong>领域</strong></td>
-<td>婴儿护理用品开箱与评测</td>
-</tr>
-</tbody>
-</table>
-<h3 id="sec-en-33">指标</h3>
-<table>
-<thead>
-<tr>
-<th>指标</th>
-<th>数据</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>YouTube 订阅</td>
-<td>~18,000（估，基于"持续开箱评测"的描述）</td>
-</tr>
-<tr>
-<td>内容特色</td>
-<td>"持续开箱和评测热门婴儿护理用品，呈现不加修饰的真实意见"</td>
-</tr>
-</tbody>
-</table>
-<p><strong>增长趋势</strong>：稳定增长 — 持续输出评测内容</p>
-<h3 id="sec-en-34">受众分析</h3>
-<table>
-<thead>
-<tr>
-<th>维度</th>
-<th>分布</th>
-<th>备注</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>人群</td>
-<td>婴儿用品消费者、新手父母</td>
-<td></td>
-</tr>
-<tr>
-<td>年龄</td>
-<td>24-38 岁为主</td>
-<td></td>
-</tr>
-<tr>
-<td>兴趣</td>
-<td>婴儿护理用品选购</td>
-<td>高购买意向</td>
-</tr>
-</tbody>
-</table>
-<p><strong>受众质量评分</strong>：7/10<br />
-- 真实粉丝估算：~88%<br />
-- 受众-品牌重叠度：<strong>高</strong> — 婴儿用品的目标消费者</p>
-<h3 id="sec-en-35">内容分析</h3>
-<p><strong>内容风格</strong>：<br />
-- 主要形式：开箱、评测、真实意见<br />
-- 风格：不加修饰、诚实<br />
-- 语调：真实妈妈视角</p>
-<p><strong>品牌适配度评估</strong>：<br />
-- baby car camera 相关性：<strong>中高</strong> — 婴儿用品评测覆盖面<br />
-- baby monitor 相关性：<strong>高</strong> — 婴儿护理用品核心品类<br />
-- portable milk warmer 相关性：<strong>高</strong> — 喂养用品评测</p>
-<h3 id="sec-en-36">适配评分摘要</h3>
-<table>
-<thead>
-<tr>
-<th>维度</th>
-<th>评分 (1-5)</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>受众匹配</td>
-<td>4</td>
-</tr>
-<tr>
-<td>内容质量</td>
-<td>4</td>
-</tr>
-<tr>
-<td>产品相关性</td>
-<td>4</td>
-</tr>
-<tr>
-<td>互动质量</td>
-<td>4</td>
-</tr>
-<tr>
-<td>真实度</td>
-<td>4</td>
-</tr>
-<tr>
-<td><strong>总分</strong></td>
-<td><strong>20/25</strong></td>
-</tr>
-</tbody>
-</table>
-<p><strong>推荐等级</strong>：⭐ 推荐</p>
-<p><strong>为什么合适</strong>：<br />
-"不加修饰的真实意见"风格高度契合真实评测需求。持续输出婴儿护理用品评测，品类覆盖广。处于 ~18K 粉丝的中间位置，性价比较高。</p>
-<p><strong>潜在顾虑</strong>：<br />
-- 频道数据大部分为估测，需验证<br />
-- 具体内容风格和品牌适配度需观看实际视频确认</p>
-<hr />
-<h2 id="sec-en-37">达人 #6：This Mom Is Learning（Maria）</h2>
-<h3 id="sec-en-38">基本信息</h3>
-<table>
-<thead>
-<tr>
-<th>属性</th>
-<th>详情</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>频道名</strong></td>
-<td>This Mom Is Learning</td>
-</tr>
-<tr>
-<td><strong>运营者</strong></td>
-<td>Maria（新手妈妈）</td>
-</tr>
-<tr>
-<td><strong>平台</strong></td>
-<td>YouTube</td>
-</tr>
-<tr>
-<td><strong>其他平台</strong></td>
-<td>未确认</td>
-</tr>
-<tr>
-<td><strong>地区</strong></td>
-<td>美国</td>
-</tr>
-<tr>
-<td><strong>语言</strong></td>
-<td>英语</td>
-</tr>
-<tr>
-<td><strong>领域</strong></td>
-<td>婴儿产品真实评测（婴儿床、婴儿监视器等）</td>
-</tr>
-</tbody>
-</table>
-<h3 id="sec-en-39">指标</h3>
-<table>
-<thead>
-<tr>
-<th>指标</th>
-<th>数据</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>YouTube 订阅</td>
-<td>~12,000（估）</td>
-</tr>
-<tr>
-<td>内容特色</td>
-<td>新手妈妈视角、长期使用评测（3-6 个月后回评）、不加修饰</td>
-</tr>
-</tbody>
-</table>
-<p><strong>增长趋势</strong>：成长中 — 新手妈妈视角引起广泛共鸣</p>
-<h3 id="sec-en-40">受众分析</h3>
-<table>
-<thead>
-<tr>
-<th>维度</th>
-<th>分布</th>
-<th>备注</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>人群</td>
-<td>新手父母、正在规划婴儿 registry 的孕产妇</td>
-<td></td>
-</tr>
-<tr>
-<td>年龄</td>
-<td>24-35 岁为主</td>
-<td></td>
-</tr>
-<tr>
-<td>兴趣</td>
-<td>婴儿用品选购、真实评测</td>
-<td>高购买意向</td>
-</tr>
-</tbody>
-</table>
-<p><strong>受众质量评分</strong>：8/10<br />
-- 真实粉丝估算：~92%（新手妈妈真实记录 = 高信任度）<br />
-- 受众-品牌重叠度：<strong>高</strong> — 正在做购买决策的父母</p>
-<h3 id="sec-en-41">内容分析</h3>
-<p><strong>内容风格</strong>：<br />
-- 主要形式：长期使用评测、"不加修饰"的真实记录<br />
-- 风格：真实、脆弱、可共鸣<br />
-- 特色：6 个月后回评 — "用过才说"的公信力</p>
-<p><strong>品牌适配度评估</strong>：<br />
-- baby car camera 相关性：<strong>中</strong> — 新手父母角度但未确认有相关评测<br />
-- baby monitor 相关性：<strong>高</strong> — 婴儿监视器是新手父母必买品类<br />
-- portable milk warmer 相关性：<strong>高</strong> — 喂养用品是新手父母刚需</p>
-<h3 id="sec-en-42">适配评分摘要</h3>
-<table>
-<thead>
-<tr>
-<th>维度</th>
-<th>评分 (1-5)</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>受众匹配</td>
-<td>4</td>
-</tr>
-<tr>
-<td>内容质量</td>
-<td>4</td>
-</tr>
-<tr>
-<td>产品相关性</td>
-<td>4</td>
-</tr>
-<tr>
-<td>互动质量</td>
-<td>4</td>
-</tr>
-<tr>
-<td>真实度</td>
-<td>5</td>
-</tr>
-<tr>
-<td><strong>总分</strong></td>
-<td><strong>21/25</strong></td>
-</tr>
-</tbody>
-</table>
-<p><strong>推荐等级</strong>：⭐ 推荐</p>
-<p><strong>为什么合适</strong>：<br />
-"6 个月后回评"模式带来极高的评测公信力。新手妈妈视角直接对应三种产品的目标用户。"不加修饰"风格区别于精制广告，适合种草和信任建设。</p>
-<p><strong>潜在顾虑</strong>：<br />
-- 新手妈妈身份意味着内容经验尚浅<br />
-- 小型频道数据需验证</p>
-<hr />
-<h2 id="sec-en-43">达人 #7：Fathercraft Reviews（Mark）</h2>
-<h3 id="sec-en-44">基本信息</h3>
-<table>
-<thead>
-<tr>
-<th>属性</th>
-<th>详情</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>频道名</strong></td>
-<td>Fathercraft Reviews</td>
-</tr>
-<tr>
-<td><strong>运营者</strong></td>
-<td>Mark（爸爸视角）</td>
-</tr>
-<tr>
-<td><strong>平台</strong></td>
-<td>YouTube</td>
-</tr>
-<tr>
-<td><strong>其他平台</strong></td>
-<td>未确认</td>
-</tr>
-<tr>
-<td><strong>地区</strong></td>
-<td>美国</td>
-</tr>
-<tr>
-<td><strong>语言</strong></td>
-<td>英语</td>
-</tr>
-<tr>
-<td><strong>领域</strong></td>
-<td>婴儿产品评测（爸爸视角）、婴儿床对比、婴儿科技装备</td>
-</tr>
-</tbody>
-</table>
-<h3 id="sec-en-45">指标</h3>
-<table>
-<thead>
-<tr>
-<th>指标</th>
-<th>数据</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>YouTube 订阅</td>
-<td>~15,000（估）</td>
-</tr>
-<tr>
-<td>内容特色</td>
-<td>爸爸视角的婴儿产品评测、真实对比</td>
-</tr>
-</tbody>
-</table>
-<p><strong>增长趋势</strong>：成长中 — 爸爸育儿视角是差异化品类</p>
-<h3 id="sec-en-46">受众分析</h3>
-<table>
-<thead>
-<tr>
-<th>维度</th>
-<th>分布</th>
-<th>备注</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>人群</td>
-<td>新手爸爸、期待参与育儿的男性</td>
-<td>差异化受众</td>
-</tr>
-<tr>
-<td>年龄</td>
-<td>28-40 岁为主</td>
-<td></td>
-</tr>
-<tr>
-<td>兴趣</td>
-<td>婴儿科技产品、实用育儿装备</td>
-<td>男性视角购买决策</td>
-</tr>
-</tbody>
-</table>
-<p><strong>受众质量评分</strong>：8/10<br />
-- 真实粉丝估算：~90%<br />
-- 受众-品牌重叠度：<strong>中高</strong> — 爸爸视角覆盖了常被忽略的购买决策者</p>
-<h3 id="sec-en-47">内容分析</h3>
-<p><strong>内容风格</strong>：<br />
-- 主要形式：真实评测、产品对比<br />
-- 风格：实用、直接、爸爸视角<br />
-- 语调："不废话"的直男评测风格</p>
-<p><strong>品牌适配度评估</strong>：<br />
-- baby car camera 相关性：<strong>高</strong> — 爸爸对车载科技产品兴趣高<br />
-- baby monitor 相关性：<strong>高</strong> — 科技类婴儿产品评测<br />
-- portable milk warmer 相关性：<strong>中</strong> — 喂养品类但爸爸视角独特</p>
-<h3 id="sec-en-48">适配评分摘要</h3>
-<table>
-<thead>
-<tr>
-<th>维度</th>
-<th>评分 (1-5)</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>受众匹配</td>
-<td>4</td>
-</tr>
-<tr>
-<td>内容质量</td>
-<td>4</td>
-</tr>
-<tr>
-<td>产品相关性</td>
-<td>4</td>
-</tr>
-<tr>
-<td>互动质量</td>
-<td>4</td>
-</tr>
-<tr>
-<td>真实度</td>
-<td>4</td>
-</tr>
-<tr>
-<td><strong>总分</strong></td>
-<td><strong>20/25</strong></td>
-</tr>
-</tbody>
-</table>
-<p><strong>推荐等级</strong>：⭐ 推荐</p>
-<p><strong>为什么合适</strong>：<br />
-爸爸视角在所有候选人中独一无二 — 差异化定位。婴儿科技产品（car camera, monitor）天然符合男性消费者兴趣。"不废话"评测风格契合科技产品购买决策。</p>
-<p><strong>潜在顾虑</strong>：<br />
-- 暖奶器品类可能不是爸爸受众的核心兴趣<br />
-- 频道数据大部分为估测，需验证</p>
-<hr />
-<h2 id="sec-en-49">观察名单</h2>
-<hr />
-<h2 id="sec-en-50">WL-1：Dad Reviews with LaneVids — ⚠️ 超过粉丝上限</h2>
-<table>
-<thead>
-<tr>
-<th>指标</th>
-<th>数据</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>YouTube 订阅</td>
-<td><strong>80,500</strong></td>
-</tr>
-<tr>
-<td>总视频数</td>
-<td>11,907</td>
-</tr>
-<tr>
-<td>总播放量</td>
-<td>24,200,000+</td>
-</tr>
-</tbody>
-</table>
-<p><strong>排除原因</strong>：粉丝数（80.5K）超出 50K 上限。如预算允许，可作为中腰部达人纳入下一轮搜索。</p>
-<hr />
-<h2 id="sec-en-51">WL-2：Mama Nurse Tina — ⚠️ 远超粉丝上限</h2>
-<table>
-<thead>
-<tr>
-<th>指标</th>
-<th>数据</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>YouTube 订阅</td>
-<td><strong>352,000-423,000</strong></td>
-</tr>
-<tr>
-<td>总播放量</td>
-<td>数亿</td>
-</tr>
-</tbody>
-</table>
-<p><strong>排除原因</strong>：粉丝数远超 50K 上限。L&amp;D 护士 + 喜剧风格，属于头部达人。</p>
-<hr />
-<h2 id="sec-en-52">WL-3：Organic Beauty 80 — ⚠️ 数据不足</h2>
-<p>新妈妈视角的 Spectra 吸奶器评测。频道数据不足以评估。放入观察名单，待更多内容产出后重新评估。</p>
-<hr />
-<h2 id="sec-en-53">第五步 — 汇总发现报告</h2>
-<h1>红人发现结果</h1>
-<h2 id="sec-en-54">汇总统计</h2>
-<table>
-<thead>
-<tr>
-<th>指标</th>
-<th>数量</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>总审核候选人</td>
-<td>31</td>
-</tr>
-<tr>
-<td>通过初步筛选</td>
-<td>9</td>
-</tr>
-<tr>
-<td>强烈推荐（适配分 ≥21/25）</td>
-<td>4</td>
-</tr>
-<tr>
-<td>推荐（适配分 18-20/25）</td>
-<td>3</td>
-</tr>
-<tr>
-<td>观察名单/排除</td>
-<td>3</td>
-</tr>
-</tbody>
-</table>
-<h2 id="sec-en-55">顶级推荐</h2>
-<h3 id="sec-en-56">第一梯队：必须联系</h3>
-<table>
-<thead>
-<tr>
-<th>排名</th>
-<th>频道</th>
-<th>订阅</th>
-<th>播放量/视频</th>
-<th>适配分</th>
-<th>理由</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>1</td>
-<td><strong>The Stroller Mom</strong></td>
-<td>14.5K</td>
-<td>~23.7K (163%)</td>
-<td>24/25</td>
-<td>CPST认证+三娃妈妈。互动率极高。内容覆盖婴儿安全/科技品类。最全面的单频道选择。</td>
-</tr>
-<tr>
-<td>2</td>
-<td><strong>The Baby Cubby</strong></td>
-<td>32.2K</td>
-<td>~25.8K (80%)</td>
-<td>23/25</td>
-<td>11年运营+实体店。品类覆盖最广。32.2K粉丝性价比最优。</td>
-</tr>
-<tr>
-<td>3</td>
-<td><strong>New Little Life</strong></td>
-<td>~22K（估）</td>
-<td>N/A</td>
-<td>23/25</td>
-<td>IBCLC 认证。暖奶器品类最强公信力。数据驱动评测。</td>
-</tr>
-<tr>
-<td>4</td>
-<td><strong>Baby To Child</strong></td>
-<td>~8.5K（估）</td>
-<td>N/A</td>
-<td>21/25</td>
-<td><strong>唯一同时覆盖三种目标产品</strong>。SEO+视频双渠道。低成本试水。</td>
-</tr>
-</tbody>
-</table>
-<h3 id="sec-en-57">第二梯队：强力候选</h3>
-<table>
-<thead>
-<tr>
-<th>频道</th>
-<th>订阅（估）</th>
-<th>适配分</th>
-<th>备注</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>This Mom Is Learning (Maria)</td>
-<td>~12K</td>
-<td>21/25</td>
-<td>新手妈妈视角。6个月回评模式=高公信力。</td>
-</tr>
-<tr>
-<td>Fabulous Mom Life</td>
-<td>~18K</td>
-<td>20/25</td>
-<td>持续婴儿用品评测。"不加修饰的真实意见"。</td>
-</tr>
-<tr>
-<td>Fathercraft Reviews (Mark)</td>
-<td>~15K</td>
-<td>20/25</td>
-<td>唯一爸爸视角。科技产品评测差异化。</td>
-</tr>
-</tbody>
-</table>
-<h3 id="sec-en-58">第三梯队：观察名单</h3>
-<table>
-<thead>
-<tr>
-<th>频道</th>
-<th>订阅</th>
-<th>排除原因</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Dad Reviews with LaneVids</td>
-<td>80.5K</td>
-<td>超过粉丝上限</td>
-</tr>
-<tr>
-<td>Mama Nurse Tina</td>
-<td>352K+</td>
-<td>远超粉丝上限</td>
-</tr>
-<tr>
-<td>Organic Beauty 80</td>
-<td>&lt;5K（估）</td>
-<td>数据不足</td>
-</tr>
-</tbody>
-</table>
-<h2 id="sec-en-59">分产品推荐矩阵</h2>
-<table>
-<thead>
-<tr>
-<th>目标产品</th>
-<th>第一推荐</th>
-<th>第二推荐</th>
-<th>第三推荐</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>Baby Car Camera</strong></td>
-<td>The Stroller Mom（CPST认证）</td>
-<td>The Baby Cubby（安全座椅安装经验）</td>
-<td>Baby To Child（已有评测）</td>
-</tr>
-<tr>
-<td><strong>Baby Monitor</strong></td>
-<td>The Baby Cubby（评测覆盖面最广）</td>
-<td>The Stroller Mom</td>
-<td>Fabulous Mom Life</td>
-</tr>
-<tr>
-<td><strong>Portable Milk Warmer</strong></td>
-<td>New Little Life（IBCLC认证）</td>
-<td>Baby To Child（已有评测）</td>
-<td>This Mom Is Learning</td>
-</tr>
-</tbody>
-</table>
-<h2 id="sec-en-60">达人组合推荐</h2>
-<table>
-<thead>
-<tr>
-<th>频道</th>
-<th>角色</th>
-<th>主攻产品</th>
-<th>预估单视频费用</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>The Stroller Mom</td>
-<td>核心评测</td>
-<td>Car Camera + Monitor</td>
-<td>$300-$800</td>
-</tr>
-<tr>
-<td>Baby To Child</td>
-<td>全品类评测</td>
-<td>三款产品全覆盖</td>
-<td>$150-$400</td>
-</tr>
-<tr>
-<td>New Little Life</td>
-<td>暖奶器专攻</td>
-<td>Milk Warmer</td>
-<td>$300-$800</td>
-</tr>
-<tr>
-<td>The Baby Cubby</td>
-<td>品牌对比</td>
-<td>Monitor + Car Camera</td>
-<td>$500-$1,200</td>
-</tr>
-<tr>
-<td>Fathercraft Reviews</td>
-<td>差异化视角</td>
-<td>Car Camera + Monitor</td>
-<td>$200-$500</td>
-</tr>
-</tbody>
-</table>
-<blockquote>
-<p>数据来源：<a href="https://www.findachannel.net/Niches/baby-stroller-review">findachannel.net</a>、HypeAuditor 交叉参考、网页搜索、育儿论坛推荐。</p>
-</blockquote>
-<hr />
-<h2 id="sec-en-61">第六步 — 发现洞察</h2>
-<h3 id="sec-en-62">领域观察</h3>
-<p><strong>内容趋势</strong>：<br />
-- 5K-50K 区间是 YouTube 婴儿科技评测的"蓝海"——大多数频道在 5K 以下挣扎或已突破 50K<br />
-- 有专业认证（CPST、IBCLC）的创作者即使在较小订阅量下也能获得极高信任度和互动率<br />
-- "真实评测"和"长期使用后回评"是差异化内容方向，区别于一次性开箱<br />
-- 数据驱动评测（如 New Little Life 的 Boobie Barometer）在垂直品类中建立了极高的内容壁垒</p>
-<p><strong>竞争格局</strong>：<br />
-- 婴儿车载摄像头评测在 YouTube 上极度稀缺 — 大多数内容来自文字博客，视频评测缺口明显<br />
-- 婴儿监视器评测竞争稍高，但 5K-50K 区间仍有空间<br />
-- 便携暖奶器评测集中于博客和大型媒体（Women's Health、Mother&amp;Baby），小型 YouTube 频道机会显著<br />
-- 大部分竞品品牌（BabyBuddha、Momcozy、Willow）的达人合作集中于 Instagram/TikTok，YouTube 长视频评测被低估</p>
-<p><strong>未开发的机会</strong>：<br />
-- <strong>婴儿车载摄像头</strong>是三个品类中 YouTube 内容最稀缺的 — 先发优势显著<br />
-- <strong>爸爸视角 + 婴儿科技产品</strong>是一个完全未被开发的交叉领域<br />
-- <strong>"专业认证 + 真实评测"组合</strong>（CPST/IBCLC + 妈妈真实体验）建立了不可替代的内容护城河</p>
-<h3 id="sec-en-63">搜索限制与建议</h3>
-<table>
-<thead>
-<tr>
-<th>问题</th>
-<th>说明</th>
-<th>建议</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>网页搜索无法精确定位 5K-50K YouTube 频道</td>
-<td>搜索引擎不索引小型频道的订阅数等结构化数据</td>
-<td>使用 <code>~~influencer database</code> 连接器进行精确筛选</td>
-</tr>
-<tr>
-<td>互动率数据缺失</td>
-<td>仅能通过 views/sub 比率估算</td>
-<td>通过 HypeAuditor/Modash 验证确切互动率</td>
-</tr>
-<tr>
-<td>内容匹配度无法确认</td>
-<td>需实际观看视频确认是否拍摄过相关产品</td>
-<td>二次筛选时逐频道观看内容</td>
-</tr>
-</tbody>
-</table>
-<p><strong>后续搜索优化建议</strong>：<br />
-- 使用 YouTube 内置搜索 + 频道筛选器直接搜索<br />
-- 通过 <code>~~influencer database</code> 批量拉取 5K-50K 区间的育儿频道并按内容标签筛选<br />
-- 拓宽至 Instagram/TikTok 平台对比：这些平台的小型达人更容易通过网页搜索发现<br />
-- 增加 <strong>#babycarcamera</strong>、<strong>#babymonitorreview</strong>、<strong>#portablemilkwarmer</strong> 等精准标签搜索</p>
-<hr />
-<h2 id="sec-en-64">数据质量说明</h2>
-<table>
-<thead>
-<tr>
-<th>数据点</th>
-<th>置信度</th>
-<th>来源</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>The Stroller Mom 订阅数</td>
-<td><strong>高</strong></td>
-<td>findachannel.net (2025年12月数据)</td>
-</tr>
-<tr>
-<td>The Baby Cubby 订阅数</td>
-<td><strong>高</strong></td>
-<td>findachannel.net + 新闻稿交叉验证</td>
-</tr>
-<tr>
-<td>其他频道订阅数</td>
-<td><strong>中低</strong>（估测值）</td>
-<td>网页搜索推断</td>
-</tr>
-<tr>
-<td>互动率</td>
-<td><strong>低</strong>（估算值）</td>
-<td>通过 views/sub 比率推算，未经验证</td>
-</tr>
-<tr>
-<td>内容匹配度</td>
-<td><strong>中</strong></td>
-<td>博客引用和描述推断，未逐视频确认</td>
-</tr>
-<tr>
-<td>品牌合作历史</td>
-<td><strong>低</strong></td>
-<td>未公开披露</td>
-</tr>
-</tbody>
-</table>
-<blockquote>
-<p>⚠️ <strong>所有标注"(估)"的指标应在联系前通过 YouTube 频道页和达人分析平台验证。</strong>5K-50K 区间的频道发现是本 skill 在纯网页搜索条件下的已知限制 — <code>~~influencer database</code> 连接器可显著提升发现精度。</p>
-</blockquote>
-<hr />
-<p><em>报告按照 <a href="../SKILL.md">influencer-discovery SKILL.md</a> 工作流程生成。下一步 skill：<a href="../fit-scorer/SKILL.md">fit-scorer</a> 进行加权评分和最终排名。</em></p>
-</div>
-
+<p><em>报告按照 <a href="../SKILL.md">influencer-discovery SKILL.md</a> 工作流程生成。下一步 skill：<a href="../fit-scorer/SKILL.md">fit-scorer</a> 进行加权评分和最终排名。</em></p></div>
 </div>
 
 <script>
 (function(){
-  var K='inf-discovery-lang',
-      be=document.getElementById('btn-en'),bz=document.getElementById('btn-zh'),
-      ce=document.getElementById('content-en'),cz=document.getElementById('content-zh'),
-      te=document.getElementById('toc-en'),tz=document.getElementById('toc-zh');
-
-  function setLang(l){
-    if(l==='zh'){
-      bz.classList.add('active');be.classList.remove('active');
-      cz.classList.add('active');ce.classList.remove('active');
-      tz.style.display='';te.style.display='none';
-    } else {
-      be.classList.add('active');bz.classList.remove('active');
-      ce.classList.add('active');cz.classList.remove('active');
-      te.style.display='';tz.style.display='none';
-    }
-    try{localStorage.setItem(K,l);}catch(e){}
-    // Re-run active section tracking
-    initObserver();
-  }
-
-  var s=null;try{s=localStorage.getItem(K);}catch(e){}
-  var initial=(s==='zh'||s==='en')?s:(navigator.language&&navigator.language.startsWith('zh')?'zh':'en');
-  setLang(initial);
-
-  be.addEventListener('click',function(){setLang('en');});
-  bz.addEventListener('click',function(){setLang('zh');});
-
-  // ── Active section tracking ──
   var observer;
   function initObserver(){
     if(observer){observer.disconnect();}
-    var activeContent=document.querySelector('.lang-content.active');
-    if(!activeContent)return;
-    var hs=activeContent.querySelectorAll('h2[id],h3[id]');
-    var navLinks=document.querySelectorAll('#toc-zh a, #toc-en a');
+    var hs=document.querySelectorAll('h2[id],h3[id]');
+    if(!hs.length)return;
     observer=new IntersectionObserver(function(entries){
       entries.forEach(function(entry){
         if(entry.isIntersecting){
-          navLinks.forEach(function(a){a.classList.remove('active');});
-          var visibleToc=document.querySelector('#toc-zh[style*="display"]:not([style*="display: none"]), #toc-en[style*="display"]:not([style*="display: none"])');
-          if(!visibleToc)visibleToc=document.getElementById(lang()==='zh'?'toc-zh':'toc-en');
-          var link=visibleToc.querySelector('a[href="#'+entry.target.id+'"]');
+          document.querySelectorAll('.toc-h2-wrap.active, .sidebar nav a.active').forEach(function(el){el.classList.remove('active');});
+          var link=document.querySelector('.toc-h2-wrap[data-target="#'+entry.target.id+'"]');
+          if(!link)link=document.querySelector('a[href="#'+entry.target.id+'"]');
           if(link)link.classList.add('active');
         }
       });
     },{rootMargin:'-80px 0px -70% 0px'});
     hs.forEach(function(h){observer.observe(h);});
   }
-  function lang(){return document.getElementById('content-zh').classList.contains('active')?'zh':'en';}
-  // Delay observer init slightly to let DOM settle
   setTimeout(initObserver,100);
-
-  // ── Mobile sidebar ──
   document.getElementById('hamburger').addEventListener('click',function(){
     document.getElementById('sidebar').classList.add('open');
     document.getElementById('sidebar-overlay').classList.add('open');
@@ -3433,8 +1858,7 @@ IBCLC 认证 + 数据驱动评测 = 暖奶器评测的最高公信力。受众�
     document.getElementById('sidebar').classList.remove('open');
     document.getElementById('sidebar-overlay').classList.remove('open');
   });
-  // Close sidebar on TOC link click (mobile)
-  document.querySelectorAll('#toc-zh a, #toc-en a').forEach(function(a){
+  document.querySelectorAll('.sidebar a').forEach(function(a){
     a.addEventListener('click',function(e){
       e.preventDefault();
       var target=document.getElementById(this.getAttribute('href').substring(1));
@@ -3444,6 +1868,11 @@ IBCLC 认证 + 数据驱动评测 = 暖奶器评测的最高公信力。受众�
     });
   });
 })();
+function toggleTOC(wrap){
+  wrap.classList.toggle('collapsed');
+  var list=wrap.nextElementSibling;
+  if(list&&list.classList.contains('toc-h3-list')){list.classList.toggle('collapsed');}
+}
 </script>
 
 </body>

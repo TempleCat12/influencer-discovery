@@ -29,6 +29,23 @@ body {
   letter-spacing: 0.05em; margin-bottom: 12px; padding-bottom: 8px;
   border-bottom: 2px solid var(--accent);
 }
+.toc-group { margin-bottom: 2px; }
+.toc-h2-wrap {
+  display: flex; align-items: center; cursor: pointer;
+  padding: 5px 10px; border-radius: 4px; border-left: 3px solid transparent;
+  transition: all 0.15s ease; user-select: none;
+}
+.toc-h2-wrap:hover { background: var(--accent-light); }
+.toc-h2-wrap .arrow {
+  font-size: 0.65rem; margin-right: 6px; transition: transform 0.2s ease;
+  flex-shrink: 0; color: var(--text-secondary);
+}
+.toc-h2-wrap.collapsed .arrow { transform: rotate(-90deg); }
+.toc-h2-wrap .toc-label { font-size: 0.82rem; color: var(--text-secondary); flex: 1; }
+.toc-h2-wrap.active { background: var(--accent-light); border-left-color: var(--accent); }
+.toc-h2-wrap.active .toc-label { color: var(--accent); font-weight: 600; }
+.toc-h3-list { overflow: hidden; transition: max-height 0.3s ease; }
+.toc-h3-list.collapsed { max-height: 0 !important; }
 .sidebar nav a {
   display: block; padding: 5px 10px; font-size: 0.82rem; color: var(--text-secondary);
   text-decoration: none; border-radius: 4px; margin-bottom: 2px;
@@ -88,8 +105,9 @@ a { color: var(--accent); text-decoration: none; }
 a:hover { text-decoration: underline; }
 code { background: var(--code-bg); padding: 2px 6px; border-radius: 4px; font-size: 0.9em; font-family: "SF Mono", "Fira Code", "Consolas", monospace; }
 blockquote { border-left: 4px solid var(--accent); padding: 10px 16px; margin: 14px 0; background: var(--accent-light); border-radius: 0 6px 6px 0; color: #555; }
-.lang-content { display: none; }
-.lang-content.active { display: block; }
+.lang-content { display: block; }
+.lang-content.bilingual { display: none; }
+.lang-content.bilingual.active { display: block; }
 /* ── Mobile ── */
 @media (max-width: 900px) {
   .sidebar { transform: translateX(-100%); transition: transform 0.25s ease; }
@@ -105,7 +123,6 @@ blockquote { border-left: 4px solid var(--accent); padding: 10px 16px; margin: 1
 }
 @media print {
   .sidebar, .hamburger, .sidebar-overlay, .toggle-bar { display: none; }
-  .lang-content { display: block !important; }
   .main-wrap { margin-left: 0; padding: 16px; max-width: 100%; }
   table { box-shadow: none; } thead { background: #333; }
 }
@@ -117,72 +134,152 @@ blockquote { border-left: 4px solid var(--accent); padding: 10px 16px; margin: 1
 <div class="sidebar-overlay" id="sidebar-overlay"></div>
 
 <aside class="sidebar" id="sidebar">
-  <div id="toc-zh">
-<h3>目 录</h3>
+  <div id="toc-zh"><h3>目 录</h3>
 <nav>
-  <a href="#sec-zh-0" class="toc-h2">📋 执行摘要</a>
-  <a href="#sec-zh-1" class="toc-h2">🔍 研究方法</a>
-  <a href="#sec-zh-2" class="toc-h3">搜索策略</a>
-  <a href="#sec-zh-3" class="toc-h3">数据质量说明</a>
-  <a href="#sec-zh-4" class="toc-h2">🔴 高置信度匹配：已确认婴儿监视器内容</a>
-  <a href="#sec-zh-5" class="toc-h3">达人 #1：Dadverb (Andrew Tiu)</a>
-  <a href="#sec-zh-6" class="toc-h3">达人 #2：Fathercraft (John Doht)</a>
-  <a href="#sec-zh-7" class="toc-h3">达人 #3：Baby to Child</a>
-  <a href="#sec-zh-8" class="toc-h2">🟡 中等置信度匹配：婴儿产品评测频道</a>
-  <a href="#sec-zh-9" class="toc-h3">达人 #4：Baby Product Reviews, Birth &amp;amp; Parenting …</a>
-  <a href="#sec-zh-10" class="toc-h3">达人 #5：The Baby Cubby</a>
-  <a href="#sec-zh-11" class="toc-h3">达人 #6：Dr.Spouse</a>
-  <a href="#sec-zh-12" class="toc-h3">达人 #7：The Confused Mom</a>
-  <a href="#sec-zh-13" class="toc-h3">达人 #8：The Innovative Momma</a>
-  <a href="#sec-zh-14" class="toc-h3">达人 #9：twonewparents</a>
-  <a href="#sec-zh-15" class="toc-h3">达人 #10：Mighty Kiddos</a>
-  <a href="#sec-zh-16" class="toc-h3">达人 #11：FourieFamCam</a>
-  <a href="#sec-zh-17" class="toc-h3">达人 #12：New Little Life</a>
-  <a href="#sec-zh-18" class="toc-h2">📊 汇总统计</a>
-  <a href="#sec-zh-19" class="toc-h3">第一梯队：必须联系</a>
-  <a href="#sec-zh-20" class="toc-h3">第二梯队：强力候选</a>
-  <a href="#sec-zh-21" class="toc-h3">第三梯队：待考量</a>
-  <a href="#sec-zh-22" class="toc-h2">🎯 达人组合推荐</a>
-  <a href="#sec-zh-23" class="toc-h3">建议合作方案</a>
-  <a href="#sec-zh-24" class="toc-h2">💡 领域观察与建议</a>
-  <a href="#sec-zh-25" class="toc-h3">品类洞察</a>
-  <a href="#sec-zh-26" class="toc-h3">搜索局限性</a>
-  <a href="#sec-zh-27" class="toc-h3">下一步行动</a>
-</nav>
+<a href="#sec-zh-0" class="toc-h2">📋 执行摘要</a>
+<div class="toc-group">
+  <div class="toc-h2-wrap" data-target="#sec-zh-1" onclick="toggleTOC(this)">
+    <span class="arrow">&#9660;</span>
+    <span class="toc-label">🔍 研究方法</span>
   </div>
-  <div id="toc-en" style="display:none">
-<h3>Contents</h3>
+  <div class="toc-h3-list" style="max-height:56px">
+    <a href="#sec-zh-2" class="toc-h3">搜索策略</a>
+    <a href="#sec-zh-3" class="toc-h3">数据质量说明</a>
+  </div>
+</div>
+<div class="toc-group">
+  <div class="toc-h2-wrap" data-target="#sec-zh-4" onclick="toggleTOC(this)">
+    <span class="arrow">&#9660;</span>
+    <span class="toc-label">🔴 高置信度匹配：已确认婴儿监视器内容</span>
+  </div>
+  <div class="toc-h3-list" style="max-height:84px">
+    <a href="#sec-zh-5" class="toc-h3">达人 #1：Dadverb (Andrew Tiu)</a>
+    <a href="#sec-zh-6" class="toc-h3">达人 #2：Fathercraft (John Doht)</a>
+    <a href="#sec-zh-7" class="toc-h3">达人 #3：Baby to Child</a>
+  </div>
+</div>
+<div class="toc-group">
+  <div class="toc-h2-wrap" data-target="#sec-zh-8" onclick="toggleTOC(this)">
+    <span class="arrow">&#9660;</span>
+    <span class="toc-label">🟡 中等置信度匹配：婴儿产品评测频道</span>
+  </div>
+  <div class="toc-h3-list" style="max-height:252px">
+    <a href="#sec-zh-9" class="toc-h3">达人 #4：Baby Product Reviews, Birth &amp;amp; Parenting …</a>
+    <a href="#sec-zh-10" class="toc-h3">达人 #5：The Baby Cubby</a>
+    <a href="#sec-zh-11" class="toc-h3">达人 #6：Dr.Spouse</a>
+    <a href="#sec-zh-12" class="toc-h3">达人 #7：The Confused Mom</a>
+    <a href="#sec-zh-13" class="toc-h3">达人 #8：The Innovative Momma</a>
+    <a href="#sec-zh-14" class="toc-h3">达人 #9：twonewparents</a>
+    <a href="#sec-zh-15" class="toc-h3">达人 #10：Mighty Kiddos</a>
+    <a href="#sec-zh-16" class="toc-h3">达人 #11：FourieFamCam</a>
+    <a href="#sec-zh-17" class="toc-h3">达人 #12：New Little Life</a>
+  </div>
+</div>
+<div class="toc-group">
+  <div class="toc-h2-wrap" data-target="#sec-zh-18" onclick="toggleTOC(this)">
+    <span class="arrow">&#9660;</span>
+    <span class="toc-label">📊 汇总统计</span>
+  </div>
+  <div class="toc-h3-list" style="max-height:84px">
+    <a href="#sec-zh-19" class="toc-h3">第一梯队：必须联系</a>
+    <a href="#sec-zh-20" class="toc-h3">第二梯队：强力候选</a>
+    <a href="#sec-zh-21" class="toc-h3">第三梯队：待考量</a>
+  </div>
+</div>
+<div class="toc-group">
+  <div class="toc-h2-wrap" data-target="#sec-zh-22" onclick="toggleTOC(this)">
+    <span class="arrow">&#9660;</span>
+    <span class="toc-label">🎯 达人组合推荐</span>
+  </div>
+  <div class="toc-h3-list" style="max-height:28px">
+    <a href="#sec-zh-23" class="toc-h3">建议合作方案</a>
+  </div>
+</div>
+<div class="toc-group">
+  <div class="toc-h2-wrap" data-target="#sec-zh-24" onclick="toggleTOC(this)">
+    <span class="arrow">&#9660;</span>
+    <span class="toc-label">💡 领域观察与建议</span>
+  </div>
+  <div class="toc-h3-list" style="max-height:84px">
+    <a href="#sec-zh-25" class="toc-h3">品类洞察</a>
+    <a href="#sec-zh-26" class="toc-h3">搜索局限性</a>
+    <a href="#sec-zh-27" class="toc-h3">下一步行动</a>
+  </div>
+</div>
+</nav></div>
+  <div id="toc-en" style="display:none"><h3>Contents</h3>
 <nav>
-  <a href="#sec-en-0" class="toc-h2">📋 Executive Summary</a>
-  <a href="#sec-en-1" class="toc-h2">🔍 Research Methodology</a>
-  <a href="#sec-en-2" class="toc-h3">Search Strategy</a>
-  <a href="#sec-en-3" class="toc-h3">Data Quality Notes</a>
-  <a href="#sec-en-4" class="toc-h2">🔴 High-Confidence Matches: Confirmed Baby Monitor Content</a>
-  <a href="#sec-en-5" class="toc-h3">Influencer #1: Dadverb (Andrew Tiu)</a>
-  <a href="#sec-en-6" class="toc-h3">Influencer #2: Fathercraft (John Doht)</a>
-  <a href="#sec-en-7" class="toc-h3">Influencer #3: Baby to Child</a>
-  <a href="#sec-en-8" class="toc-h2">🟡 Medium-Confidence Matches: Baby Product Review Channels</a>
-  <a href="#sec-en-9" class="toc-h3">Influencer #4: Baby Product Reviews, Birth &amp;amp; P…</a>
-  <a href="#sec-en-10" class="toc-h3">Influencer #5: The Baby Cubby</a>
-  <a href="#sec-en-11" class="toc-h3">Influencer #6: Dr.Spouse</a>
-  <a href="#sec-en-12" class="toc-h3">Influencer #7: The Confused Mom</a>
-  <a href="#sec-en-13" class="toc-h3">Influencer #8: The Innovative Momma</a>
-  <a href="#sec-en-14" class="toc-h3">Influencer #9: twonewparents</a>
-  <a href="#sec-en-15" class="toc-h3">Influencer #10: Mighty Kiddos</a>
-  <a href="#sec-en-16" class="toc-h3">Influencer #11: FourieFamCam</a>
-  <a href="#sec-en-17" class="toc-h3">Influencer #12: New Little Life</a>
-  <a href="#sec-en-18" class="toc-h2">📊 Summary Statistics</a>
-  <a href="#sec-en-19" class="toc-h3">Tier 1: Must Contact</a>
-  <a href="#sec-en-20" class="toc-h3">Tier 2: Strong Candidates</a>
-  <a href="#sec-en-21" class="toc-h3">Tier 3: To Evaluate</a>
-  <a href="#sec-en-22" class="toc-h2">🎯 Recommended Influencer Mix</a>
-  <a href="#sec-en-23" class="toc-h3">Suggested Collaboration Plan</a>
-  <a href="#sec-en-24" class="toc-h2">💡 Category Insights &amp;amp; Recommendations</a>
-  <a href="#sec-en-25" class="toc-h3">Category Observations</a>
-  <a href="#sec-en-26" class="toc-h3">Search Limitations</a>
-  <a href="#sec-en-27" class="toc-h3">Next Steps</a>
-</nav>
+<a href="#sec-en-0" class="toc-h2">📋 Executive Summary</a>
+<div class="toc-group">
+  <div class="toc-h2-wrap" data-target="#sec-en-1" onclick="toggleTOC(this)">
+    <span class="arrow">&#9660;</span>
+    <span class="toc-label">🔍 Research Methodology</span>
   </div>
+  <div class="toc-h3-list" style="max-height:56px">
+    <a href="#sec-en-2" class="toc-h3">Search Strategy</a>
+    <a href="#sec-en-3" class="toc-h3">Data Quality Notes</a>
+  </div>
+</div>
+<div class="toc-group">
+  <div class="toc-h2-wrap" data-target="#sec-en-4" onclick="toggleTOC(this)">
+    <span class="arrow">&#9660;</span>
+    <span class="toc-label">🔴 High-Confidence Matches: Confirmed Baby Monitor Content</span>
+  </div>
+  <div class="toc-h3-list" style="max-height:84px">
+    <a href="#sec-en-5" class="toc-h3">Influencer #1: Dadverb (Andrew Tiu)</a>
+    <a href="#sec-en-6" class="toc-h3">Influencer #2: Fathercraft (John Doht)</a>
+    <a href="#sec-en-7" class="toc-h3">Influencer #3: Baby to Child</a>
+  </div>
+</div>
+<div class="toc-group">
+  <div class="toc-h2-wrap" data-target="#sec-en-8" onclick="toggleTOC(this)">
+    <span class="arrow">&#9660;</span>
+    <span class="toc-label">🟡 Medium-Confidence Matches: Baby Product Review Channels</span>
+  </div>
+  <div class="toc-h3-list" style="max-height:252px">
+    <a href="#sec-en-9" class="toc-h3">Influencer #4: Baby Product Reviews, Birth &amp;amp; P…</a>
+    <a href="#sec-en-10" class="toc-h3">Influencer #5: The Baby Cubby</a>
+    <a href="#sec-en-11" class="toc-h3">Influencer #6: Dr.Spouse</a>
+    <a href="#sec-en-12" class="toc-h3">Influencer #7: The Confused Mom</a>
+    <a href="#sec-en-13" class="toc-h3">Influencer #8: The Innovative Momma</a>
+    <a href="#sec-en-14" class="toc-h3">Influencer #9: twonewparents</a>
+    <a href="#sec-en-15" class="toc-h3">Influencer #10: Mighty Kiddos</a>
+    <a href="#sec-en-16" class="toc-h3">Influencer #11: FourieFamCam</a>
+    <a href="#sec-en-17" class="toc-h3">Influencer #12: New Little Life</a>
+  </div>
+</div>
+<div class="toc-group">
+  <div class="toc-h2-wrap" data-target="#sec-en-18" onclick="toggleTOC(this)">
+    <span class="arrow">&#9660;</span>
+    <span class="toc-label">📊 Summary Statistics</span>
+  </div>
+  <div class="toc-h3-list" style="max-height:84px">
+    <a href="#sec-en-19" class="toc-h3">Tier 1: Must Contact</a>
+    <a href="#sec-en-20" class="toc-h3">Tier 2: Strong Candidates</a>
+    <a href="#sec-en-21" class="toc-h3">Tier 3: To Evaluate</a>
+  </div>
+</div>
+<div class="toc-group">
+  <div class="toc-h2-wrap" data-target="#sec-en-22" onclick="toggleTOC(this)">
+    <span class="arrow">&#9660;</span>
+    <span class="toc-label">🎯 Recommended Influencer Mix</span>
+  </div>
+  <div class="toc-h3-list" style="max-height:28px">
+    <a href="#sec-en-23" class="toc-h3">Suggested Collaboration Plan</a>
+  </div>
+</div>
+<div class="toc-group">
+  <div class="toc-h2-wrap" data-target="#sec-en-24" onclick="toggleTOC(this)">
+    <span class="arrow">&#9660;</span>
+    <span class="toc-label">💡 Category Insights &amp;amp; Recommendations</span>
+  </div>
+  <div class="toc-h3-list" style="max-height:84px">
+    <a href="#sec-en-25" class="toc-h3">Category Observations</a>
+    <a href="#sec-en-26" class="toc-h3">Search Limitations</a>
+    <a href="#sec-en-27" class="toc-h3">Next Steps</a>
+  </div>
+</div>
+</nav></div>
 </aside>
 
 <div class="main-wrap">
@@ -192,8 +289,7 @@ blockquote { border-left: 4px solid var(--accent); padding: 10px 16px; margin: 1
   <button class="toggle-btn" id="btn-en">English</button>
 </div>
 
-<div class="lang-content active" id="content-zh">
-<h1>Momcozy 婴儿监视器 YouTube 红人发现报告</h1>
+<div class="lang-content bilingual active" id="content-zh"><h1>Momcozy 婴儿监视器 YouTube 红人发现报告</h1>
 <p><strong>搜索日期：</strong> 2026-07-28<br />
 <strong>品牌：</strong> Momcozy<br />
 <strong>产品线：</strong> 婴儿监视器（BM01、BM03、BM04、非接触式智能监视器）<br />
@@ -1466,11 +1562,8 @@ blockquote { border-left: 4px solid var(--accent); padding: 10px 16px; margin: 1
 <li><strong>内容策略</strong>：建议制作强调"非 WiFi 安全连接"和"超长续航"卖点的评测视频，这是 Momcozy 监视器的核心差异化优势</li>
 </ol>
 <hr />
-<p><em>报告生成于 2026-07-28。所有指标均为基于公开数据的估算值，外联前建议通过平台工具进一步验证。</em></p>
-</div>
-
-<div class="lang-content" id="content-en">
-<h1>Momcozy Baby Monitor YouTube Influencer Discovery Report</h1>
+<p><em>报告生成于 2026-07-28。所有指标均为基于公开数据的估算值，外联前建议通过平台工具进一步验证。</em></p></div>
+<div class="lang-content bilingual" id="content-en"><h1>Momcozy Baby Monitor YouTube Influencer Discovery Report</h1>
 <p><strong>Search Date:</strong> 2026-07-28<br />
 <strong>Brand:</strong> Momcozy<br />
 <strong>Product Focus:</strong> Baby Monitors (BM01, BM03, BM04, Contact-Free Smart Monitor)<br />
@@ -2743,8 +2836,7 @@ blockquote { border-left: 4px solid var(--accent); padding: 10px 16px; margin: 1
 <li><strong>Content Strategy:</strong> Recommend review videos emphasizing "non-WiFi secure connection" and "ultra-long battery life" — Momcozy monitor's core competitive differentiators</li>
 </ol>
 <hr />
-<p><em>Report generated on 2026-07-28. All metrics are estimates based on publicly available data and should be verified through platform tools before outreach.</em></p>
-</div>
+<p><em>Report generated on 2026-07-28. All metrics are estimates based on publicly available data and should be verified through platform tools before outreach.</em></p></div>
 
 </div>
 
@@ -2754,44 +2846,33 @@ blockquote { border-left: 4px solid var(--accent); padding: 10px 16px; margin: 1
       be=document.getElementById('btn-en'),bz=document.getElementById('btn-zh'),
       ce=document.getElementById('content-en'),cz=document.getElementById('content-zh'),
       te=document.getElementById('toc-en'),tz=document.getElementById('toc-zh');
-
   function setLang(l){
-    if(l==='zh'){
-      bz.classList.add('active');be.classList.remove('active');
-      cz.classList.add('active');ce.classList.remove('active');
-      tz.style.display='';te.style.display='none';
-    } else {
-      be.classList.add('active');bz.classList.remove('active');
-      ce.classList.add('active');cz.classList.remove('active');
-      te.style.display='';tz.style.display='none';
-    }
+    if(l==='zh'){bz.classList.add('active');be.classList.remove('active');cz.classList.add('active');ce.classList.remove('active');tz.style.display='';te.style.display='none';}
+    else{be.classList.add('active');bz.classList.remove('active');ce.classList.add('active');cz.classList.remove('active');te.style.display='';tz.style.display='none';}
     try{localStorage.setItem(K,l);}catch(e){}
-    // Re-run active section tracking
     initObserver();
   }
-
   var s=null;try{s=localStorage.getItem(K);}catch(e){}
   var initial=(s==='zh'||s==='en')?s:(navigator.language&&navigator.language.startsWith('zh')?'zh':'en');
   setLang(initial);
-
   be.addEventListener('click',function(){setLang('en');});
   bz.addEventListener('click',function(){setLang('zh');});
-
-  // ── Active section tracking ──
   var observer;
   function initObserver(){
     if(observer){observer.disconnect();}
-    var activeContent=document.querySelector('.lang-content.active');
+    var activeContent=document.querySelector('.bilingual.active');
+    if(!activeContent)activeContent=document.querySelector('.lang-content.active');
     if(!activeContent)return;
     var hs=activeContent.querySelectorAll('h2[id],h3[id]');
-    var navLinks=document.querySelectorAll('#toc-zh a, #toc-en a');
     observer=new IntersectionObserver(function(entries){
       entries.forEach(function(entry){
         if(entry.isIntersecting){
-          navLinks.forEach(function(a){a.classList.remove('active');});
-          var visibleToc=document.querySelector('#toc-zh[style*="display"]:not([style*="display: none"]), #toc-en[style*="display"]:not([style*="display: none"])');
-          if(!visibleToc)visibleToc=document.getElementById(lang()==='zh'?'toc-zh':'toc-en');
-          var link=visibleToc.querySelector('a[href="#'+entry.target.id+'"]');
+          document.querySelectorAll('.toc-h2-wrap.active, .sidebar nav a.active').forEach(function(el){el.classList.remove('active');});
+          var visibleToc=document.getElementById('toc-zh');
+          if(visibleToc.style.display==='none')visibleToc=document.getElementById('toc-en');
+          if(!visibleToc)visibleToc=document.getElementById('sidebar');
+          var link=visibleToc.querySelector('.toc-h2-wrap[data-target="#'+entry.target.id+'"]');
+          if(!link)link=visibleToc.querySelector('a[href="#'+entry.target.id+'"]');
           if(link)link.classList.add('active');
         }
       });
@@ -2799,10 +2880,7 @@ blockquote { border-left: 4px solid var(--accent); padding: 10px 16px; margin: 1
     hs.forEach(function(h){observer.observe(h);});
   }
   function lang(){return document.getElementById('content-zh').classList.contains('active')?'zh':'en';}
-  // Delay observer init slightly to let DOM settle
   setTimeout(initObserver,100);
-
-  // ── Mobile sidebar ──
   document.getElementById('hamburger').addEventListener('click',function(){
     document.getElementById('sidebar').classList.add('open');
     document.getElementById('sidebar-overlay').classList.add('open');
@@ -2811,8 +2889,7 @@ blockquote { border-left: 4px solid var(--accent); padding: 10px 16px; margin: 1
     document.getElementById('sidebar').classList.remove('open');
     document.getElementById('sidebar-overlay').classList.remove('open');
   });
-  // Close sidebar on TOC link click (mobile)
-  document.querySelectorAll('#toc-zh a, #toc-en a').forEach(function(a){
+  document.querySelectorAll('.sidebar a').forEach(function(a){
     a.addEventListener('click',function(e){
       e.preventDefault();
       var target=document.getElementById(this.getAttribute('href').substring(1));
@@ -2822,6 +2899,11 @@ blockquote { border-left: 4px solid var(--accent); padding: 10px 16px; margin: 1
     });
   });
 })();
+function toggleTOC(wrap){
+  wrap.classList.toggle('collapsed');
+  var list=wrap.nextElementSibling;
+  if(list&&list.classList.contains('toc-h3-list')){list.classList.toggle('collapsed');}
+}
 </script>
 
 </body>

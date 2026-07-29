@@ -55,8 +55,7 @@ def build_prompt(data):
     md_path = f"memory/influencer/influencer-discovery/{today}-{slug}.md"
 
     full = f"{cn}\n\n{en}"
-    full += f"\n\nAfter your analysis, save the complete report as Markdown to {md_path}"
-    full += " with <!-- LANG:ZH --> between Chinese and English sections."
+    full += f"\n\nAfter your analysis, save the complete report in Chinese as Markdown to {md_path}"
     full += f" Then run: python3 memory/influencer/influencer-discovery/build_html.py {md_path}"
     return full
 

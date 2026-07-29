@@ -1,21 +1,20 @@
 #!/usr/bin/env python3
 """
-Universal bilingual HTML builder for influencer-discovery reports.
-Reads any MD file with `<!-- LANG:ZH -->` marker, outputs a styled
-bilingual HTML with:
+Universal HTML builder for influencer-discovery reports.
+Reads any MD file, outputs a styled HTML with:
   - Fixed left TOC sidebar (desktop), collapsible hamburger (mobile)
-  - Chinese/English language toggle (persists via localStorage)
   - Server-side generated TOC — always visible, no JS dependency
   - Active section highlighting via IntersectionObserver
+  - Bilingual toggle IF the MD contains both languages (<!-- LANG:ZH --> marker)
   - Responsive + print-ready
 
 Usage:
     python3 build_html.py <input_md_path> [--output <html_path>]
 """
-import markdown, re, os, sys
-from html.parser import HTMLParser
+import markdown, re, os, sys, json, time
+from datetime import datetime
 
-# ── CSS ─────────────────────────────────────────────────────
+# ── CSS (shared) ────────────────────────────────────────────
 CSS = r"""
 :root {
   --bg: #ffffff; --text: #1a1a2e; --text-secondary: #555;
@@ -41,6 +40,23 @@ body {
   letter-spacing: 0.05em; margin-bottom: 12px; padding-bottom: 8px;
   border-bottom: 2px solid var(--accent);
 }
+.toc-group { margin-bottom: 2px; }
+.toc-h2-wrap {
+  display: flex; align-items: center; cursor: pointer;
+  padding: 5px 10px; border-radius: 4px; border-left: 3px solid transparent;
+  transition: all 0.15s ease; user-select: none;
+}
+.toc-h2-wrap:hover { background: var(--accent-light); }
+.toc-h2-wrap .arrow {
+  font-size: 0.65rem; margin-right: 6px; transition: transform 0.2s ease;
+  flex-shrink: 0; color: var(--text-secondary);
+}
+.toc-h2-wrap.collapsed .arrow { transform: rotate(-90deg); }
+.toc-h2-wrap .toc-label { font-size: 0.82rem; color: var(--text-secondary); flex: 1; }
+.toc-h2-wrap.active { background: var(--accent-light); border-left-color: var(--accent); }
+.toc-h2-wrap.active .toc-label { color: var(--accent); font-weight: 600; }
+.toc-h3-list { overflow: hidden; transition: max-height 0.3s ease; }
+.toc-h3-list.collapsed { max-height: 0 !important; }
 .sidebar nav a {
   display: block; padding: 5px 10px; font-size: 0.82rem; color: var(--text-secondary);
   text-decoration: none; border-radius: 4px; margin-bottom: 2px;
@@ -100,8 +116,9 @@ a { color: var(--accent); text-decoration: none; }
 a:hover { text-decoration: underline; }
 code { background: var(--code-bg); padding: 2px 6px; border-radius: 4px; font-size: 0.9em; font-family: "SF Mono", "Fira Code", "Consolas", monospace; }
 blockquote { border-left: 4px solid var(--accent); padding: 10px 16px; margin: 14px 0; background: var(--accent-light); border-radius: 0 6px 6px 0; color: #555; }
-.lang-content { display: none; }
-.lang-content.active { display: block; }
+.lang-content { display: block; }
+.lang-content.bilingual { display: none; }
+.lang-content.bilingual.active { display: block; }
 /* ── Mobile ── */
 @media (max-width: 900px) {
   .sidebar { transform: translateX(-100%); transition: transform 0.25s ease; }
@@ -117,57 +134,45 @@ blockquote { border-left: 4px solid var(--accent); padding: 10px 16px; margin: 1
 }
 @media print {
   .sidebar, .hamburger, .sidebar-overlay, .toggle-bar { display: none; }
-  .lang-content { display: block !important; }
   .main-wrap { margin-left: 0; padding: 16px; max-width: 100%; }
   table { box-shadow: none; } thead { background: #333; }
 }
 """
 
-# ── JavaScript (toggle + mobile sidebar + active tracking) ──
-JS = r"""<script>
+# ── JS for bilingual mode ───────────────────────────────────
+JS_BILINGUAL = r"""<script>
 (function(){
   var K='inf-discovery-lang',
       be=document.getElementById('btn-en'),bz=document.getElementById('btn-zh'),
       ce=document.getElementById('content-en'),cz=document.getElementById('content-zh'),
       te=document.getElementById('toc-en'),tz=document.getElementById('toc-zh');
-
   function setLang(l){
-    if(l==='zh'){
-      bz.classList.add('active');be.classList.remove('active');
-      cz.classList.add('active');ce.classList.remove('active');
-      tz.style.display='';te.style.display='none';
-    } else {
-      be.classList.add('active');bz.classList.remove('active');
-      ce.classList.add('active');cz.classList.remove('active');
-      te.style.display='';tz.style.display='none';
-    }
+    if(l==='zh'){bz.classList.add('active');be.classList.remove('active');cz.classList.add('active');ce.classList.remove('active');tz.style.display='';te.style.display='none';}
+    else{be.classList.add('active');bz.classList.remove('active');ce.classList.add('active');cz.classList.remove('active');te.style.display='';tz.style.display='none';}
     try{localStorage.setItem(K,l);}catch(e){}
-    // Re-run active section tracking
     initObserver();
   }
-
   var s=null;try{s=localStorage.getItem(K);}catch(e){}
   var initial=(s==='zh'||s==='en')?s:(navigator.language&&navigator.language.startsWith('zh')?'zh':'en');
   setLang(initial);
-
   be.addEventListener('click',function(){setLang('en');});
   bz.addEventListener('click',function(){setLang('zh');});
-
-  // ── Active section tracking ──
   var observer;
   function initObserver(){
     if(observer){observer.disconnect();}
-    var activeContent=document.querySelector('.lang-content.active');
+    var activeContent=document.querySelector('.bilingual.active');
+    if(!activeContent)activeContent=document.querySelector('.lang-content.active');
     if(!activeContent)return;
     var hs=activeContent.querySelectorAll('h2[id],h3[id]');
-    var navLinks=document.querySelectorAll('#toc-zh a, #toc-en a');
     observer=new IntersectionObserver(function(entries){
       entries.forEach(function(entry){
         if(entry.isIntersecting){
-          navLinks.forEach(function(a){a.classList.remove('active');});
-          var visibleToc=document.querySelector('#toc-zh[style*="display"]:not([style*="display: none"]), #toc-en[style*="display"]:not([style*="display: none"])');
-          if(!visibleToc)visibleToc=document.getElementById(lang()==='zh'?'toc-zh':'toc-en');
-          var link=visibleToc.querySelector('a[href="#'+entry.target.id+'"]');
+          document.querySelectorAll('.toc-h2-wrap.active, .sidebar nav a.active').forEach(function(el){el.classList.remove('active');});
+          var visibleToc=document.getElementById('toc-zh');
+          if(visibleToc.style.display==='none')visibleToc=document.getElementById('toc-en');
+          if(!visibleToc)visibleToc=document.getElementById('sidebar');
+          var link=visibleToc.querySelector('.toc-h2-wrap[data-target="#'+entry.target.id+'"]');
+          if(!link)link=visibleToc.querySelector('a[href="#'+entry.target.id+'"]');
           if(link)link.classList.add('active');
         }
       });
@@ -175,10 +180,7 @@ JS = r"""<script>
     hs.forEach(function(h){observer.observe(h);});
   }
   function lang(){return document.getElementById('content-zh').classList.contains('active')?'zh':'en';}
-  // Delay observer init slightly to let DOM settle
   setTimeout(initObserver,100);
-
-  // ── Mobile sidebar ──
   document.getElementById('hamburger').addEventListener('click',function(){
     document.getElementById('sidebar').classList.add('open');
     document.getElementById('sidebar-overlay').classList.add('open');
@@ -187,8 +189,7 @@ JS = r"""<script>
     document.getElementById('sidebar').classList.remove('open');
     document.getElementById('sidebar-overlay').classList.remove('open');
   });
-  // Close sidebar on TOC link click (mobile)
-  document.querySelectorAll('#toc-zh a, #toc-en a').forEach(function(a){
+  document.querySelectorAll('.sidebar a').forEach(function(a){
     a.addEventListener('click',function(e){
       e.preventDefault();
       var target=document.getElementById(this.getAttribute('href').substring(1));
@@ -198,6 +199,57 @@ JS = r"""<script>
     });
   });
 })();
+function toggleTOC(wrap){
+  wrap.classList.toggle('collapsed');
+  var list=wrap.nextElementSibling;
+  if(list&&list.classList.contains('toc-h3-list')){list.classList.toggle('collapsed');}
+}
+</script>"""
+
+# ── JS for single-language mode ─────────────────────────────
+JS_SINGLE = r"""<script>
+(function(){
+  var observer;
+  function initObserver(){
+    if(observer){observer.disconnect();}
+    var hs=document.querySelectorAll('h2[id],h3[id]');
+    if(!hs.length)return;
+    observer=new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if(entry.isIntersecting){
+          document.querySelectorAll('.toc-h2-wrap.active, .sidebar nav a.active').forEach(function(el){el.classList.remove('active');});
+          var link=document.querySelector('.toc-h2-wrap[data-target="#'+entry.target.id+'"]');
+          if(!link)link=document.querySelector('a[href="#'+entry.target.id+'"]');
+          if(link)link.classList.add('active');
+        }
+      });
+    },{rootMargin:'-80px 0px -70% 0px'});
+    hs.forEach(function(h){observer.observe(h);});
+  }
+  setTimeout(initObserver,100);
+  document.getElementById('hamburger').addEventListener('click',function(){
+    document.getElementById('sidebar').classList.add('open');
+    document.getElementById('sidebar-overlay').classList.add('open');
+  });
+  document.getElementById('sidebar-overlay').addEventListener('click',function(){
+    document.getElementById('sidebar').classList.remove('open');
+    document.getElementById('sidebar-overlay').classList.remove('open');
+  });
+  document.querySelectorAll('.sidebar a').forEach(function(a){
+    a.addEventListener('click',function(e){
+      e.preventDefault();
+      var target=document.getElementById(this.getAttribute('href').substring(1));
+      if(target){target.scrollIntoView({behavior:'smooth',block:'start'});}
+      document.getElementById('sidebar').classList.remove('open');
+      document.getElementById('sidebar-overlay').classList.remove('open');
+    });
+  });
+})();
+function toggleTOC(wrap){
+  wrap.classList.toggle('collapsed');
+  var list=wrap.nextElementSibling;
+  if(list&&list.classList.contains('toc-h3-list')){list.classList.toggle('collapsed');}
+}
 </script>"""
 
 
@@ -207,10 +259,8 @@ def md2html(text):
 
 
 def build_toc(html_body, lang='zh'):
-    """Extract h2/h3 headings from HTML and build TOC nav + inject IDs."""
+    """Extract h2/h3 headings from HTML, build collapsible TOC + inject IDs."""
     toc_label = '目 录' if lang == 'zh' else 'Contents'
-
-    # Find all h2/h3 tags and assign IDs
     heading_pattern = re.compile(r'<(h[23])>(.*?)</\1>', re.DOTALL)
     counter = 0
     toc_items = []
@@ -218,29 +268,44 @@ def build_toc(html_body, lang='zh'):
     def replace_heading(m):
         nonlocal counter
         tag = m.group(1)
-        # Strip HTML tags from heading text for TOC label
         text = re.sub(r'<[^>]+>', '', m.group(2)).strip()
         id_ = f'sec-{lang}-{counter}'
         counter += 1
-
-        # Truncate long titles
         label = text
         if ('达人 #' in text or 'Influencer #' in text or 'WL-' in text) and len(text) > 50:
             label = text[:50] + '…'
-
-        cls = 'toc-h3' if tag == 'h3' else 'toc-h2'
-        toc_items.append((id_, label, cls))
+        toc_items.append((tag, id_, label))
         return f'<{tag} id="{id_}">{m.group(2)}</{tag}>'
 
     html_with_ids = heading_pattern.sub(replace_heading, html_body)
 
-    # Build TOC HTML
-    toc_html = f'<h3>{toc_label}</h3>\n<nav>\n'
-    for id_, label, cls in toc_items:
-        safe_label = label.replace('&', '&amp;').replace('<', '&lt;').replace('>', '&gt;')
-        toc_html += f'  <a href="#{id_}" class="{cls}">{safe_label}</a>\n'
-    toc_html += '</nav>'
+    groups = []
+    current_h2 = None
+    for tag, id_, label in toc_items:
+        if tag == 'h2':
+            current_h2 = (id_, label, [])
+            groups.append(current_h2)
+        elif tag == 'h3' and current_h2 is not None:
+            current_h2[2].append((id_, label))
 
+    toc_html = f'<h3>{toc_label}</h3>\n<nav>\n'
+    for gid, glabel, children in groups:
+        safe = glabel.replace('&', '&amp;').replace('<', '&lt;').replace('>', '&gt;')
+        if children:
+            toc_html += '<div class="toc-group">\n'
+            toc_html += f'  <div class="toc-h2-wrap" data-target="#{gid}" onclick="toggleTOC(this)">\n'
+            toc_html += f'    <span class="arrow">&#9660;</span>\n'
+            toc_html += f'    <span class="toc-label">{safe}</span>\n'
+            toc_html += '  </div>\n'
+            h = len(children) * 28
+            toc_html += f'  <div class="toc-h3-list" style="max-height:{h}px">\n'
+            for cid, clabel in children:
+                csafe = clabel.replace('&', '&amp;').replace('<', '&lt;').replace('>', '&gt;')
+                toc_html += f'    <a href="#{cid}" class="toc-h3">{csafe}</a>\n'
+            toc_html += '  </div>\n</div>\n'
+        else:
+            toc_html += f'<a href="#{gid}" class="toc-h2">{safe}</a>\n'
+    toc_html += '</nav>'
     return html_with_ids, toc_html
 
 
@@ -251,42 +316,39 @@ def build(input_md_path, output_html_path=None):
     with open(input_md_path, "r", encoding="utf-8") as f:
         md_text = f.read()
 
+    # Split by LANG:ZH marker (if present)
     parts = re.split(r'<!--\s*LANG:ZH\s*-->', md_text, maxsplit=1)
     if len(parts) == 2:
         md_zh = parts[0].strip()
         md_en = parts[1].strip()
+        # One side too short → not truly bilingual
+        if len(md_zh) < 200 or len(md_en) < 200:
+            md_zh = md_zh if len(md_zh) >= len(md_en) else md_en
+            md_en = ""
     else:
         md_zh = md_text.strip()
-        md_en = md_text.strip()
+        md_en = ""
 
-    # Fallback: if one side is too short (< 200 chars, basically just headers),
-    # use the longer content for both. This handles mis-placed LANG:ZH markers
-    # from claude -p mode where only one language is actually present.
-    if len(md_zh) < 200 or len(md_en) < 200:
-        longer = md_zh if len(md_zh) >= len(md_en) else md_en
-        md_zh = longer
-        md_en = longer
+    is_bilingual = bool(md_en and len(md_en) >= 200)
 
-    # Convert MD → HTML
+    # Convert
     raw_zh = md2html(md_zh)
-    raw_en = md2html(md_en)
-
-    # Build TOC + inject heading IDs
     html_zh, toc_zh = build_toc(raw_zh, 'zh')
-    html_en, toc_en = build_toc(raw_en, 'en')
-
-    # Extract title
     title_match = re.search(r'^#\s+(.+)$', md_zh, re.MULTILINE)
-    title_zh = title_match.group(1) if title_match else ""
-    title_en_match = re.search(r'^#\s+(.+)$', md_en, re.MULTILINE)
-    title_en = title_en_match.group(1) if title_en_match else title_zh
+    title = title_match.group(1) if title_match else ""
 
-    full = f"""<!DOCTYPE html>
+    if is_bilingual:
+        raw_en = md2html(md_en)
+        html_en, toc_en = build_toc(raw_en, 'en')
+        title_en_match = re.search(r'^#\s+(.+)$', md_en, re.MULTILINE)
+        title_en = title_en_match.group(1) if title_en_match else title
+
+        full = f"""<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>{title_zh} / {title_en}</title>
+<title>{title} / {title_en}</title>
 <style>{CSS}</style>
 </head>
 <body>
@@ -295,12 +357,8 @@ def build(input_md_path, output_html_path=None):
 <div class="sidebar-overlay" id="sidebar-overlay"></div>
 
 <aside class="sidebar" id="sidebar">
-  <div id="toc-zh">
-{toc_zh}
-  </div>
-  <div id="toc-en" style="display:none">
-{toc_en}
-  </div>
+  <div id="toc-zh">{toc_zh}</div>
+  <div id="toc-en" style="display:none">{toc_en}</div>
 </aside>
 
 <div class="main-wrap">
@@ -310,17 +368,36 @@ def build(input_md_path, output_html_path=None):
   <button class="toggle-btn" id="btn-en">English</button>
 </div>
 
-<div class="lang-content active" id="content-zh">
-{html_zh}
-</div>
-
-<div class="lang-content" id="content-en">
-{html_en}
-</div>
+<div class="lang-content bilingual active" id="content-zh">{html_zh}</div>
+<div class="lang-content bilingual" id="content-en">{html_en}</div>
 
 </div>
 
-{JS}
+{JS_BILINGUAL}
+
+</body>
+</html>"""
+    else:
+        full = f"""<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{title}</title>
+<style>{CSS}</style>
+</head>
+<body>
+
+<button class="hamburger" id="hamburger" aria-label="Menu">&#9776;</button>
+<div class="sidebar-overlay" id="sidebar-overlay"></div>
+
+<aside class="sidebar" id="sidebar">{toc_zh}</aside>
+
+<div class="main-wrap">
+<div class="lang-content active" id="content-zh">{html_zh}</div>
+</div>
+
+{JS_SINGLE}
 
 </body>
 </html>"""
@@ -334,8 +411,7 @@ def build(input_md_path, output_html_path=None):
 
 
 def _update_manifest(md_path, html_path, md_zh_text):
-    """Update reports.json with this report's metadata (for search.html history & server polling)."""
-    import json
+    """Update reports.json manifest."""
     manifest_path = os.path.join(os.path.dirname(os.path.abspath(md_path)), "reports.json")
     reports = []
     if os.path.exists(manifest_path):
@@ -347,7 +423,7 @@ def _update_manifest(md_path, html_path, md_zh_text):
 
     first_line = md_zh_text.strip().split("\n")[0].lstrip("#").strip()
     date_match = re.search(r"(\d{4}-\d{2}-\d{2})", os.path.basename(md_path))
-    date_str = date_match.group(1) if date_match else __import__("datetime").datetime.now().strftime("%Y-%m-%d")
+    date_str = date_match.group(1) if date_match else datetime.now().strftime("%Y-%m-%d")
 
     fname = os.path.basename(md_path)
     platform = "Multi"
@@ -387,12 +463,10 @@ if __name__ == "__main__":
     if len(sys.argv) < 2:
         print("Usage: python3 build_html.py <input_md> [--output <html_path>]")
         sys.exit(1)
-
     inp = sys.argv[1]
     out = None
     for i, a in enumerate(sys.argv):
         if a == "--output" and i + 1 < len(sys.argv):
             out = sys.argv[i + 1]
-
     path, size = build(inp, out)
     print(f"OK  {path}  ({size:,} bytes)")

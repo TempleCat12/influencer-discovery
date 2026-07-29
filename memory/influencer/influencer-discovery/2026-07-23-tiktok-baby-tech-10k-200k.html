@@ -29,6 +29,23 @@ body {
   letter-spacing: 0.05em; margin-bottom: 12px; padding-bottom: 8px;
   border-bottom: 2px solid var(--accent);
 }
+.toc-group { margin-bottom: 2px; }
+.toc-h2-wrap {
+  display: flex; align-items: center; cursor: pointer;
+  padding: 5px 10px; border-radius: 4px; border-left: 3px solid transparent;
+  transition: all 0.15s ease; user-select: none;
+}
+.toc-h2-wrap:hover { background: var(--accent-light); }
+.toc-h2-wrap .arrow {
+  font-size: 0.65rem; margin-right: 6px; transition: transform 0.2s ease;
+  flex-shrink: 0; color: var(--text-secondary);
+}
+.toc-h2-wrap.collapsed .arrow { transform: rotate(-90deg); }
+.toc-h2-wrap .toc-label { font-size: 0.82rem; color: var(--text-secondary); flex: 1; }
+.toc-h2-wrap.active { background: var(--accent-light); border-left-color: var(--accent); }
+.toc-h2-wrap.active .toc-label { color: var(--accent); font-weight: 600; }
+.toc-h3-list { overflow: hidden; transition: max-height 0.3s ease; }
+.toc-h3-list.collapsed { max-height: 0 !important; }
 .sidebar nav a {
   display: block; padding: 5px 10px; font-size: 0.82rem; color: var(--text-secondary);
   text-decoration: none; border-radius: 4px; margin-bottom: 2px;
@@ -88,8 +105,9 @@ a { color: var(--accent); text-decoration: none; }
 a:hover { text-decoration: underline; }
 code { background: var(--code-bg); padding: 2px 6px; border-radius: 4px; font-size: 0.9em; font-family: "SF Mono", "Fira Code", "Consolas", monospace; }
 blockquote { border-left: 4px solid var(--accent); padding: 10px 16px; margin: 14px 0; background: var(--accent-light); border-radius: 0 6px 6px 0; color: #555; }
-.lang-content { display: none; }
-.lang-content.active { display: block; }
+.lang-content { display: block; }
+.lang-content.bilingual { display: none; }
+.lang-content.bilingual.active { display: block; }
 /* ── Mobile ── */
 @media (max-width: 900px) {
   .sidebar { transform: translateX(-100%); transition: transform 0.25s ease; }
@@ -105,7 +123,6 @@ blockquote { border-left: 4px solid var(--accent); padding: 10px 16px; margin: 1
 }
 @media print {
   .sidebar, .hamburger, .sidebar-overlay, .toggle-bar { display: none; }
-  .lang-content { display: block !important; }
   .main-wrap { margin-left: 0; padding: 16px; max-width: 100%; }
   table { box-shadow: none; } thead { background: #333; }
 }
@@ -117,70 +134,129 @@ blockquote { border-left: 4px solid var(--accent); padding: 10px 16px; margin: 1
 <div class="sidebar-overlay" id="sidebar-overlay"></div>
 
 <aside class="sidebar" id="sidebar">
-  <div id="toc-zh">
-<h3>目 录</h3>
+  <div id="toc-zh"><h3>目 录</h3>
 <nav>
-  <a href="#sec-zh-0" class="toc-h2">第一步 — 搜索参数</a>
-  <a href="#sec-zh-1" class="toc-h2">第二步 — 搜索策略</a>
-  <a href="#sec-zh-2" class="toc-h2">第三步 — 初步筛选</a>
-  <a href="#sec-zh-3" class="toc-h3">筛选标准应用</a>
-  <a href="#sec-zh-4" class="toc-h3">红旗识别</a>
-  <a href="#sec-zh-5" class="toc-h2">第四步 — 达人画像</a>
-  <a href="#sec-zh-6" class="toc-h2">达人 #1：Kelsey Rose（@therealkelseyrose）</a>
-  <a href="#sec-zh-7" class="toc-h3">基本信息</a>
-  <a href="#sec-zh-8" class="toc-h3">指标</a>
-  <a href="#sec-zh-9" class="toc-h3">受众分析</a>
-  <a href="#sec-zh-10" class="toc-h3">品牌适配度评估</a>
-  <a href="#sec-zh-11" class="toc-h3">适配评分摘要</a>
-  <a href="#sec-zh-12" class="toc-h2">达人 #2：@positravelty</a>
-  <a href="#sec-zh-13" class="toc-h3">基本信息</a>
-  <a href="#sec-zh-14" class="toc-h3">指标</a>
-  <a href="#sec-zh-15" class="toc-h3">品牌适配度评估</a>
-  <a href="#sec-zh-16" class="toc-h3">适配评分摘要</a>
-  <a href="#sec-zh-17" class="toc-h2">达人 #3：Mallory（@malrob8）</a>
-  <a href="#sec-zh-18" class="toc-h3">基本信息</a>
-  <a href="#sec-zh-19" class="toc-h3">指标</a>
-  <a href="#sec-zh-20" class="toc-h3">适配评分摘要</a>
-  <a href="#sec-zh-21" class="toc-h2">达人 #4：@ciaradeanne（三娃妈妈）</a>
-  <a href="#sec-zh-22" class="toc-h3">基本信息</a>
-  <a href="#sec-zh-23" class="toc-h3">指标</a>
-  <a href="#sec-zh-24" class="toc-h3">适配评分摘要</a>
-  <a href="#sec-zh-25" class="toc-h2">达人 #5-7：Lemone8/TikTok 交叉发现的 Momcozy 暖奶器评测者</a>
-  <a href="#sec-zh-26" class="toc-h2">达人 #8：@krazykatladyyyy</a>
-  <a href="#sec-zh-27" class="toc-h3">基本信息</a>
-  <a href="#sec-zh-28" class="toc-h3">适配评分摘要</a>
-  <a href="#sec-zh-29" class="toc-h2">观察名单</a>
-  <a href="#sec-zh-30" class="toc-h2">第五步 — 汇总发现报告</a>
-  <a href="#sec-zh-31" class="toc-h2">汇总统计</a>
-  <a href="#sec-zh-32" class="toc-h2">顶级推荐</a>
-  <a href="#sec-zh-33" class="toc-h3">第一梯队：必须联系</a>
-  <a href="#sec-zh-34" class="toc-h3">第二梯队：强力候选</a>
-  <a href="#sec-zh-35" class="toc-h2">分产品推荐矩阵</a>
-  <a href="#sec-zh-36" class="toc-h2">第六步 — 发现洞察</a>
-  <a href="#sec-zh-37" class="toc-h3">领域观察</a>
-  <a href="#sec-zh-38" class="toc-h3">四平台对比（含本次 TikTok 搜索）</a>
-  <a href="#sec-zh-39" class="toc-h3">搜索优化建议</a>
-  <a href="#sec-zh-40" class="toc-h2">数据质量说明</a>
-</nav>
+<a href="#sec-zh-0" class="toc-h2">第一步 — 搜索参数</a>
+<a href="#sec-zh-1" class="toc-h2">第二步 — 搜索策略</a>
+<div class="toc-group">
+  <div class="toc-h2-wrap" data-target="#sec-zh-2" onclick="toggleTOC(this)">
+    <span class="arrow">&#9660;</span>
+    <span class="toc-label">第三步 — 初步筛选</span>
   </div>
-  <div id="toc-en" style="display:none">
-<h3>Contents</h3>
+  <div class="toc-h3-list" style="max-height:56px">
+    <a href="#sec-zh-3" class="toc-h3">筛选标准应用</a>
+    <a href="#sec-zh-4" class="toc-h3">红旗识别</a>
+  </div>
+</div>
+<a href="#sec-zh-5" class="toc-h2">第四步 — 达人画像</a>
+<div class="toc-group">
+  <div class="toc-h2-wrap" data-target="#sec-zh-6" onclick="toggleTOC(this)">
+    <span class="arrow">&#9660;</span>
+    <span class="toc-label">达人 #1：Kelsey Rose（@therealkelseyrose）</span>
+  </div>
+  <div class="toc-h3-list" style="max-height:140px">
+    <a href="#sec-zh-7" class="toc-h3">基本信息</a>
+    <a href="#sec-zh-8" class="toc-h3">指标</a>
+    <a href="#sec-zh-9" class="toc-h3">受众分析</a>
+    <a href="#sec-zh-10" class="toc-h3">品牌适配度评估</a>
+    <a href="#sec-zh-11" class="toc-h3">适配评分摘要</a>
+  </div>
+</div>
+<div class="toc-group">
+  <div class="toc-h2-wrap" data-target="#sec-zh-12" onclick="toggleTOC(this)">
+    <span class="arrow">&#9660;</span>
+    <span class="toc-label">达人 #2：@positravelty</span>
+  </div>
+  <div class="toc-h3-list" style="max-height:112px">
+    <a href="#sec-zh-13" class="toc-h3">基本信息</a>
+    <a href="#sec-zh-14" class="toc-h3">指标</a>
+    <a href="#sec-zh-15" class="toc-h3">品牌适配度评估</a>
+    <a href="#sec-zh-16" class="toc-h3">适配评分摘要</a>
+  </div>
+</div>
+<div class="toc-group">
+  <div class="toc-h2-wrap" data-target="#sec-zh-17" onclick="toggleTOC(this)">
+    <span class="arrow">&#9660;</span>
+    <span class="toc-label">达人 #3：Mallory（@malrob8）</span>
+  </div>
+  <div class="toc-h3-list" style="max-height:84px">
+    <a href="#sec-zh-18" class="toc-h3">基本信息</a>
+    <a href="#sec-zh-19" class="toc-h3">指标</a>
+    <a href="#sec-zh-20" class="toc-h3">适配评分摘要</a>
+  </div>
+</div>
+<div class="toc-group">
+  <div class="toc-h2-wrap" data-target="#sec-zh-21" onclick="toggleTOC(this)">
+    <span class="arrow">&#9660;</span>
+    <span class="toc-label">达人 #4：@ciaradeanne（三娃妈妈）</span>
+  </div>
+  <div class="toc-h3-list" style="max-height:84px">
+    <a href="#sec-zh-22" class="toc-h3">基本信息</a>
+    <a href="#sec-zh-23" class="toc-h3">指标</a>
+    <a href="#sec-zh-24" class="toc-h3">适配评分摘要</a>
+  </div>
+</div>
+<a href="#sec-zh-25" class="toc-h2">达人 #5-7：Lemone8/TikTok 交叉发现的 Momcozy 暖奶器评测者</a>
+<div class="toc-group">
+  <div class="toc-h2-wrap" data-target="#sec-zh-26" onclick="toggleTOC(this)">
+    <span class="arrow">&#9660;</span>
+    <span class="toc-label">达人 #8：@krazykatladyyyy</span>
+  </div>
+  <div class="toc-h3-list" style="max-height:56px">
+    <a href="#sec-zh-27" class="toc-h3">基本信息</a>
+    <a href="#sec-zh-28" class="toc-h3">适配评分摘要</a>
+  </div>
+</div>
+<a href="#sec-zh-29" class="toc-h2">观察名单</a>
+<a href="#sec-zh-30" class="toc-h2">第五步 — 汇总发现报告</a>
+<a href="#sec-zh-31" class="toc-h2">汇总统计</a>
+<div class="toc-group">
+  <div class="toc-h2-wrap" data-target="#sec-zh-32" onclick="toggleTOC(this)">
+    <span class="arrow">&#9660;</span>
+    <span class="toc-label">顶级推荐</span>
+  </div>
+  <div class="toc-h3-list" style="max-height:56px">
+    <a href="#sec-zh-33" class="toc-h3">第一梯队：必须联系</a>
+    <a href="#sec-zh-34" class="toc-h3">第二梯队：强力候选</a>
+  </div>
+</div>
+<a href="#sec-zh-35" class="toc-h2">分产品推荐矩阵</a>
+<div class="toc-group">
+  <div class="toc-h2-wrap" data-target="#sec-zh-36" onclick="toggleTOC(this)">
+    <span class="arrow">&#9660;</span>
+    <span class="toc-label">第六步 — 发现洞察</span>
+  </div>
+  <div class="toc-h3-list" style="max-height:84px">
+    <a href="#sec-zh-37" class="toc-h3">领域观察</a>
+    <a href="#sec-zh-38" class="toc-h3">四平台对比（含本次 TikTok 搜索）</a>
+    <a href="#sec-zh-39" class="toc-h3">搜索优化建议</a>
+  </div>
+</div>
+<a href="#sec-zh-40" class="toc-h2">数据质量说明</a>
+</nav></div>
+  <div id="toc-en" style="display:none"><h3>Contents</h3>
 <nav>
-  <a href="#sec-en-0" class="toc-h2">Step 1 — Discovery Parameters</a>
-  <a href="#sec-en-1" class="toc-h2">Step 2 — Search Strategy</a>
-  <a href="#sec-en-2" class="toc-h2">Step 3 — Initial Screening</a>
-  <a href="#sec-en-3" class="toc-h2">Step 4 — Influencer Profiles</a>
-  <a href="#sec-en-4" class="toc-h3">#1: Kelsey Rose (@therealkelseyrose)</a>
-  <a href="#sec-en-5" class="toc-h3">#2: @positravelty</a>
-  <a href="#sec-en-6" class="toc-h3">#3: Mallory (@malrob8)</a>
-  <a href="#sec-en-7" class="toc-h3">#4: @ciaradeanne</a>
-  <a href="#sec-en-8" class="toc-h3">#5-7: Lemon8 Cross-Discovery</a>
-  <a href="#sec-en-9" class="toc-h3">#8: @krazykatladyyyy</a>
-  <a href="#sec-en-10" class="toc-h3">Watch List</a>
-  <a href="#sec-en-11" class="toc-h2">Step 5 — Product-Specific Matrix</a>
-  <a href="#sec-en-12" class="toc-h2">Step 6 — Key Findings</a>
-</nav>
+<a href="#sec-en-0" class="toc-h2">Step 1 — Discovery Parameters</a>
+<a href="#sec-en-1" class="toc-h2">Step 2 — Search Strategy</a>
+<a href="#sec-en-2" class="toc-h2">Step 3 — Initial Screening</a>
+<div class="toc-group">
+  <div class="toc-h2-wrap" data-target="#sec-en-3" onclick="toggleTOC(this)">
+    <span class="arrow">&#9660;</span>
+    <span class="toc-label">Step 4 — Influencer Profiles</span>
   </div>
+  <div class="toc-h3-list" style="max-height:196px">
+    <a href="#sec-en-4" class="toc-h3">#1: Kelsey Rose (@therealkelseyrose)</a>
+    <a href="#sec-en-5" class="toc-h3">#2: @positravelty</a>
+    <a href="#sec-en-6" class="toc-h3">#3: Mallory (@malrob8)</a>
+    <a href="#sec-en-7" class="toc-h3">#4: @ciaradeanne</a>
+    <a href="#sec-en-8" class="toc-h3">#5-7: Lemon8 Cross-Discovery</a>
+    <a href="#sec-en-9" class="toc-h3">#8: @krazykatladyyyy</a>
+    <a href="#sec-en-10" class="toc-h3">Watch List</a>
+  </div>
+</div>
+<a href="#sec-en-11" class="toc-h2">Step 5 — Product-Specific Matrix</a>
+<a href="#sec-en-12" class="toc-h2">Step 6 — Key Findings</a>
+</nav></div>
 </aside>
 
 <div class="main-wrap">
@@ -190,8 +266,7 @@ blockquote { border-left: 4px solid var(--accent); padding: 10px 16px; margin: 1
   <button class="toggle-btn" id="btn-en">English</button>
 </div>
 
-<div class="lang-content active" id="content-zh">
-<h1>红人发现报告：TikTok 婴儿科技产品 · 10K-200K 粉丝 · 美国</h1>
+<div class="lang-content bilingual active" id="content-zh"><h1>红人发现报告：TikTok 婴儿科技产品 · 10K-200K 粉丝 · 美国</h1>
 <p><strong>搜索日期</strong>：2026-07-23<br />
 <strong>搜索标准</strong>：TikTok 平台，10,000–200,000 粉丝，互动率 &gt;4%，美国，拍摄过 baby car camera / baby monitor / portable milk warmer 相关内容</p>
 <hr />
@@ -1164,11 +1239,8 @@ blockquote { border-left: 4px solid var(--accent); padding: 10px 16px; margin: 1
 <p>⚠️ <strong>所有标注"待验证"或"(估)"的数据应在联系前通过 TikTok 个人页和达人分析平台验证。</strong></p>
 </blockquote>
 <hr />
-<p><em>报告按照 <a href="../SKILL.md">influencer-discovery SKILL.md</a> 工作流程生成。下一步 skill：<a href="../fit-scorer/SKILL.md">fit-scorer</a> 进行加权评分和最终排名。</em></p>
-</div>
-
-<div class="lang-content" id="content-en">
-<h1>Influencer Discovery: TikTok Baby Tech · 10K-200K · USA</h1>
+<p><em>报告按照 <a href="../SKILL.md">influencer-discovery SKILL.md</a> 工作流程生成。下一步 skill：<a href="../fit-scorer/SKILL.md">fit-scorer</a> 进行加权评分和最终排名。</em></p></div>
+<div class="lang-content bilingual" id="content-en"><h1>Influencer Discovery: TikTok Baby Tech · 10K-200K · USA</h1>
 <p><strong>Search Date</strong>: 2026-07-23<br />
 <strong>Search Criteria</strong>: TikTok, 10,000–200,000 followers, engagement &gt;4%, USA, baby car camera / baby monitor / portable milk warmer content</p>
 <hr />
@@ -1306,8 +1378,7 @@ blockquote { border-left: 4px solid var(--accent); padding: 10px 16px; margin: 1
 <li>Cross-platform comparison: YouTube (best for long-form car camera installs), TikTok (best for monitor viral reach), Instagram (best for warmer Reels)</li>
 </ul>
 <hr />
-<p><em>Report generated per <a href="../SKILL.md">influencer-discovery SKILL.md</a> workflow. Next skill: <a href="../fit-scorer/SKILL.md">fit-scorer</a>.</em></p>
-</div>
+<p><em>Report generated per <a href="../SKILL.md">influencer-discovery SKILL.md</a> workflow. Next skill: <a href="../fit-scorer/SKILL.md">fit-scorer</a>.</em></p></div>
 
 </div>
 
@@ -1317,44 +1388,33 @@ blockquote { border-left: 4px solid var(--accent); padding: 10px 16px; margin: 1
       be=document.getElementById('btn-en'),bz=document.getElementById('btn-zh'),
       ce=document.getElementById('content-en'),cz=document.getElementById('content-zh'),
       te=document.getElementById('toc-en'),tz=document.getElementById('toc-zh');
-
   function setLang(l){
-    if(l==='zh'){
-      bz.classList.add('active');be.classList.remove('active');
-      cz.classList.add('active');ce.classList.remove('active');
-      tz.style.display='';te.style.display='none';
-    } else {
-      be.classList.add('active');bz.classList.remove('active');
-      ce.classList.add('active');cz.classList.remove('active');
-      te.style.display='';tz.style.display='none';
-    }
+    if(l==='zh'){bz.classList.add('active');be.classList.remove('active');cz.classList.add('active');ce.classList.remove('active');tz.style.display='';te.style.display='none';}
+    else{be.classList.add('active');bz.classList.remove('active');ce.classList.add('active');cz.classList.remove('active');te.style.display='';tz.style.display='none';}
     try{localStorage.setItem(K,l);}catch(e){}
-    // Re-run active section tracking
     initObserver();
   }
-
   var s=null;try{s=localStorage.getItem(K);}catch(e){}
   var initial=(s==='zh'||s==='en')?s:(navigator.language&&navigator.language.startsWith('zh')?'zh':'en');
   setLang(initial);
-
   be.addEventListener('click',function(){setLang('en');});
   bz.addEventListener('click',function(){setLang('zh');});
-
-  // ── Active section tracking ──
   var observer;
   function initObserver(){
     if(observer){observer.disconnect();}
-    var activeContent=document.querySelector('.lang-content.active');
+    var activeContent=document.querySelector('.bilingual.active');
+    if(!activeContent)activeContent=document.querySelector('.lang-content.active');
     if(!activeContent)return;
     var hs=activeContent.querySelectorAll('h2[id],h3[id]');
-    var navLinks=document.querySelectorAll('#toc-zh a, #toc-en a');
     observer=new IntersectionObserver(function(entries){
       entries.forEach(function(entry){
         if(entry.isIntersecting){
-          navLinks.forEach(function(a){a.classList.remove('active');});
-          var visibleToc=document.querySelector('#toc-zh[style*="display"]:not([style*="display: none"]), #toc-en[style*="display"]:not([style*="display: none"])');
-          if(!visibleToc)visibleToc=document.getElementById(lang()==='zh'?'toc-zh':'toc-en');
-          var link=visibleToc.querySelector('a[href="#'+entry.target.id+'"]');
+          document.querySelectorAll('.toc-h2-wrap.active, .sidebar nav a.active').forEach(function(el){el.classList.remove('active');});
+          var visibleToc=document.getElementById('toc-zh');
+          if(visibleToc.style.display==='none')visibleToc=document.getElementById('toc-en');
+          if(!visibleToc)visibleToc=document.getElementById('sidebar');
+          var link=visibleToc.querySelector('.toc-h2-wrap[data-target="#'+entry.target.id+'"]');
+          if(!link)link=visibleToc.querySelector('a[href="#'+entry.target.id+'"]');
           if(link)link.classList.add('active');
         }
       });
@@ -1362,10 +1422,7 @@ blockquote { border-left: 4px solid var(--accent); padding: 10px 16px; margin: 1
     hs.forEach(function(h){observer.observe(h);});
   }
   function lang(){return document.getElementById('content-zh').classList.contains('active')?'zh':'en';}
-  // Delay observer init slightly to let DOM settle
   setTimeout(initObserver,100);
-
-  // ── Mobile sidebar ──
   document.getElementById('hamburger').addEventListener('click',function(){
     document.getElementById('sidebar').classList.add('open');
     document.getElementById('sidebar-overlay').classList.add('open');
@@ -1374,8 +1431,7 @@ blockquote { border-left: 4px solid var(--accent); padding: 10px 16px; margin: 1
     document.getElementById('sidebar').classList.remove('open');
     document.getElementById('sidebar-overlay').classList.remove('open');
   });
-  // Close sidebar on TOC link click (mobile)
-  document.querySelectorAll('#toc-zh a, #toc-en a').forEach(function(a){
+  document.querySelectorAll('.sidebar a').forEach(function(a){
     a.addEventListener('click',function(e){
       e.preventDefault();
       var target=document.getElementById(this.getAttribute('href').substring(1));
@@ -1385,6 +1441,11 @@ blockquote { border-left: 4px solid var(--accent); padding: 10px 16px; margin: 1
     });
   });
 })();
+function toggleTOC(wrap){
+  wrap.classList.toggle('collapsed');
+  var list=wrap.nextElementSibling;
+  if(list&&list.classList.contains('toc-h3-list')){list.classList.toggle('collapsed');}
+}
 </script>
 
 </body>

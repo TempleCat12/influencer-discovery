@@ -29,6 +29,23 @@ body {
   letter-spacing: 0.05em; margin-bottom: 12px; padding-bottom: 8px;
   border-bottom: 2px solid var(--accent);
 }
+.toc-group { margin-bottom: 2px; }
+.toc-h2-wrap {
+  display: flex; align-items: center; cursor: pointer;
+  padding: 5px 10px; border-radius: 4px; border-left: 3px solid transparent;
+  transition: all 0.15s ease; user-select: none;
+}
+.toc-h2-wrap:hover { background: var(--accent-light); }
+.toc-h2-wrap .arrow {
+  font-size: 0.65rem; margin-right: 6px; transition: transform 0.2s ease;
+  flex-shrink: 0; color: var(--text-secondary);
+}
+.toc-h2-wrap.collapsed .arrow { transform: rotate(-90deg); }
+.toc-h2-wrap .toc-label { font-size: 0.82rem; color: var(--text-secondary); flex: 1; }
+.toc-h2-wrap.active { background: var(--accent-light); border-left-color: var(--accent); }
+.toc-h2-wrap.active .toc-label { color: var(--accent); font-weight: 600; }
+.toc-h3-list { overflow: hidden; transition: max-height 0.3s ease; }
+.toc-h3-list.collapsed { max-height: 0 !important; }
 .sidebar nav a {
   display: block; padding: 5px 10px; font-size: 0.82rem; color: var(--text-secondary);
   text-decoration: none; border-radius: 4px; margin-bottom: 2px;
@@ -88,8 +105,9 @@ a { color: var(--accent); text-decoration: none; }
 a:hover { text-decoration: underline; }
 code { background: var(--code-bg); padding: 2px 6px; border-radius: 4px; font-size: 0.9em; font-family: "SF Mono", "Fira Code", "Consolas", monospace; }
 blockquote { border-left: 4px solid var(--accent); padding: 10px 16px; margin: 14px 0; background: var(--accent-light); border-radius: 0 6px 6px 0; color: #555; }
-.lang-content { display: none; }
-.lang-content.active { display: block; }
+.lang-content { display: block; }
+.lang-content.bilingual { display: none; }
+.lang-content.bilingual.active { display: block; }
 /* ── Mobile ── */
 @media (max-width: 900px) {
   .sidebar { transform: translateX(-100%); transition: transform 0.25s ease; }
@@ -105,7 +123,6 @@ blockquote { border-left: 4px solid var(--accent); padding: 10px 16px; margin: 1
 }
 @media print {
   .sidebar, .hamburger, .sidebar-overlay, .toggle-bar { display: none; }
-  .lang-content { display: block !important; }
   .main-wrap { margin-left: 0; padding: 16px; max-width: 100%; }
   table { box-shadow: none; } thead { background: #333; }
 }
@@ -117,52 +134,118 @@ blockquote { border-left: 4px solid var(--accent); padding: 10px 16px; margin: 1
 <div class="sidebar-overlay" id="sidebar-overlay"></div>
 
 <aside class="sidebar" id="sidebar">
-  <div id="toc-zh">
-<h3>目 录</h3>
+  <div id="toc-zh"><h3>目 录</h3>
 <nav>
-</nav>
-  </div>
-  <div id="toc-en" style="display:none">
-<h3>Contents</h3>
+</nav></div>
+  <div id="toc-en" style="display:none"><h3>Contents</h3>
 <nav>
-  <a href="#sec-en-0" class="toc-h2">📋 执行摘要</a>
-  <a href="#sec-en-1" class="toc-h3">研究方法说明</a>
-  <a href="#sec-en-2" class="toc-h2">🔴 高置信度匹配（已验证关键指标）</a>
-  <a href="#sec-en-3" class="toc-h3">YouTube</a>
-  <a href="#sec-en-4" class="toc-h3">Instagram / 多平台</a>
-  <a href="#sec-en-5" class="toc-h2">🟡 中等置信度线索（部分数据验证）</a>
-  <a href="#sec-en-6" class="toc-h3">YouTube</a>
-  <a href="#sec-en-7" class="toc-h3">Instagram / UGC / 多平台</a>
-  <a href="#sec-en-8" class="toc-h2">🟢 其他值得关注的线索</a>
-  <a href="#sec-en-9" class="toc-h2">📊 市场背景</a>
-  <a href="#sec-en-10" class="toc-h3">eufy 婴儿监视器产品线（2024-2025 市场定位）</a>
-  <a href="#sec-en-11" class="toc-h3">竞争格局（红人视角）</a>
-  <a href="#sec-en-12" class="toc-h3">内容趋势</a>
-  <a href="#sec-en-13" class="toc-h2">🎯 推荐优先级</a>
-  <a href="#sec-en-14" class="toc-h3">第一梯队（立即联系）</a>
-  <a href="#sec-en-15" class="toc-h3">第二梯队（重点洽谈）</a>
-  <a href="#sec-en-16" class="toc-h3">第三梯队（补充覆盖）</a>
-  <a href="#sec-en-17" class="toc-h2">🔧 后续行动建议</a>
-  <a href="#sec-en-18" class="toc-h2">📋 Executive Summary</a>
-  <a href="#sec-en-19" class="toc-h3">Methodology Note</a>
-  <a href="#sec-en-20" class="toc-h2">🔴 High-Confidence Matches (Key Metrics Verified)</a>
-  <a href="#sec-en-21" class="toc-h3">YouTube</a>
-  <a href="#sec-en-22" class="toc-h3">Instagram / Multi-Platform</a>
-  <a href="#sec-en-23" class="toc-h2">🟡 Medium-Confidence Leads (Partial Data Verification)</a>
-  <a href="#sec-en-24" class="toc-h3">YouTube</a>
-  <a href="#sec-en-25" class="toc-h3">Instagram / UGC / Multi-Platform</a>
-  <a href="#sec-en-26" class="toc-h2">📊 Market Context</a>
-  <a href="#sec-en-27" class="toc-h3">eufy Baby Monitor Product Line (2024-2025 Positioning)</a>
-  <a href="#sec-en-28" class="toc-h3">Competitive Landscape (Influencer Perspective)</a>
-  <a href="#sec-en-29" class="toc-h3">Content Trends</a>
-  <a href="#sec-en-30" class="toc-h2">🎯 Priority Ranking</a>
-  <a href="#sec-en-31" class="toc-h3">Tier 1 — Contact Immediately</a>
-  <a href="#sec-en-32" class="toc-h3">Tier 2 — Priority Outreach</a>
-  <a href="#sec-en-33" class="toc-h3">Tier 3 — Supplementary Coverage</a>
-  <a href="#sec-en-34" class="toc-h2">🔧 Recommended Next Steps</a>
-  <a href="#sec-en-35" class="toc-h2">📚 Sources</a>
-</nav>
+<div class="toc-group">
+  <div class="toc-h2-wrap" data-target="#sec-en-0" onclick="toggleTOC(this)">
+    <span class="arrow">&#9660;</span>
+    <span class="toc-label">📋 执行摘要</span>
   </div>
+  <div class="toc-h3-list" style="max-height:28px">
+    <a href="#sec-en-1" class="toc-h3">研究方法说明</a>
+  </div>
+</div>
+<div class="toc-group">
+  <div class="toc-h2-wrap" data-target="#sec-en-2" onclick="toggleTOC(this)">
+    <span class="arrow">&#9660;</span>
+    <span class="toc-label">🔴 高置信度匹配（已验证关键指标）</span>
+  </div>
+  <div class="toc-h3-list" style="max-height:56px">
+    <a href="#sec-en-3" class="toc-h3">YouTube</a>
+    <a href="#sec-en-4" class="toc-h3">Instagram / 多平台</a>
+  </div>
+</div>
+<div class="toc-group">
+  <div class="toc-h2-wrap" data-target="#sec-en-5" onclick="toggleTOC(this)">
+    <span class="arrow">&#9660;</span>
+    <span class="toc-label">🟡 中等置信度线索（部分数据验证）</span>
+  </div>
+  <div class="toc-h3-list" style="max-height:56px">
+    <a href="#sec-en-6" class="toc-h3">YouTube</a>
+    <a href="#sec-en-7" class="toc-h3">Instagram / UGC / 多平台</a>
+  </div>
+</div>
+<a href="#sec-en-8" class="toc-h2">🟢 其他值得关注的线索</a>
+<div class="toc-group">
+  <div class="toc-h2-wrap" data-target="#sec-en-9" onclick="toggleTOC(this)">
+    <span class="arrow">&#9660;</span>
+    <span class="toc-label">📊 市场背景</span>
+  </div>
+  <div class="toc-h3-list" style="max-height:84px">
+    <a href="#sec-en-10" class="toc-h3">eufy 婴儿监视器产品线（2024-2025 市场定位）</a>
+    <a href="#sec-en-11" class="toc-h3">竞争格局（红人视角）</a>
+    <a href="#sec-en-12" class="toc-h3">内容趋势</a>
+  </div>
+</div>
+<div class="toc-group">
+  <div class="toc-h2-wrap" data-target="#sec-en-13" onclick="toggleTOC(this)">
+    <span class="arrow">&#9660;</span>
+    <span class="toc-label">🎯 推荐优先级</span>
+  </div>
+  <div class="toc-h3-list" style="max-height:84px">
+    <a href="#sec-en-14" class="toc-h3">第一梯队（立即联系）</a>
+    <a href="#sec-en-15" class="toc-h3">第二梯队（重点洽谈）</a>
+    <a href="#sec-en-16" class="toc-h3">第三梯队（补充覆盖）</a>
+  </div>
+</div>
+<a href="#sec-en-17" class="toc-h2">🔧 后续行动建议</a>
+<div class="toc-group">
+  <div class="toc-h2-wrap" data-target="#sec-en-18" onclick="toggleTOC(this)">
+    <span class="arrow">&#9660;</span>
+    <span class="toc-label">📋 Executive Summary</span>
+  </div>
+  <div class="toc-h3-list" style="max-height:28px">
+    <a href="#sec-en-19" class="toc-h3">Methodology Note</a>
+  </div>
+</div>
+<div class="toc-group">
+  <div class="toc-h2-wrap" data-target="#sec-en-20" onclick="toggleTOC(this)">
+    <span class="arrow">&#9660;</span>
+    <span class="toc-label">🔴 High-Confidence Matches (Key Metrics Verified)</span>
+  </div>
+  <div class="toc-h3-list" style="max-height:56px">
+    <a href="#sec-en-21" class="toc-h3">YouTube</a>
+    <a href="#sec-en-22" class="toc-h3">Instagram / Multi-Platform</a>
+  </div>
+</div>
+<div class="toc-group">
+  <div class="toc-h2-wrap" data-target="#sec-en-23" onclick="toggleTOC(this)">
+    <span class="arrow">&#9660;</span>
+    <span class="toc-label">🟡 Medium-Confidence Leads (Partial Data Verification)</span>
+  </div>
+  <div class="toc-h3-list" style="max-height:56px">
+    <a href="#sec-en-24" class="toc-h3">YouTube</a>
+    <a href="#sec-en-25" class="toc-h3">Instagram / UGC / Multi-Platform</a>
+  </div>
+</div>
+<div class="toc-group">
+  <div class="toc-h2-wrap" data-target="#sec-en-26" onclick="toggleTOC(this)">
+    <span class="arrow">&#9660;</span>
+    <span class="toc-label">📊 Market Context</span>
+  </div>
+  <div class="toc-h3-list" style="max-height:84px">
+    <a href="#sec-en-27" class="toc-h3">eufy Baby Monitor Product Line (2024-2025 Positioning)</a>
+    <a href="#sec-en-28" class="toc-h3">Competitive Landscape (Influencer Perspective)</a>
+    <a href="#sec-en-29" class="toc-h3">Content Trends</a>
+  </div>
+</div>
+<div class="toc-group">
+  <div class="toc-h2-wrap" data-target="#sec-en-30" onclick="toggleTOC(this)">
+    <span class="arrow">&#9660;</span>
+    <span class="toc-label">🎯 Priority Ranking</span>
+  </div>
+  <div class="toc-h3-list" style="max-height:84px">
+    <a href="#sec-en-31" class="toc-h3">Tier 1 — Contact Immediately</a>
+    <a href="#sec-en-32" class="toc-h3">Tier 2 — Priority Outreach</a>
+    <a href="#sec-en-33" class="toc-h3">Tier 3 — Supplementary Coverage</a>
+  </div>
+</div>
+<a href="#sec-en-34" class="toc-h2">🔧 Recommended Next Steps</a>
+<a href="#sec-en-35" class="toc-h2">📚 Sources</a>
+</nav></div>
 </aside>
 
 <div class="main-wrap">
@@ -172,8 +255,7 @@ blockquote { border-left: 4px solid var(--accent); padding: 10px 16px; margin: 1
   <button class="toggle-btn" id="btn-en">English</button>
 </div>
 
-<div class="lang-content active" id="content-zh">
-<h1>eufy Baby Monitor Influencer Discovery Report</h1>
+<div class="lang-content bilingual active" id="content-zh"><h1>eufy Baby Monitor Influencer Discovery Report</h1>
 <p><strong>Date:</strong> 2026-07-28<br />
 <strong>Brand:</strong> eufy (Anker Innovations)<br />
 <strong>Product Focus:</strong> Baby Monitors (SpaceView, E21, S340, E110, Smart Sock)<br />
@@ -181,11 +263,8 @@ blockquote { border-left: 4px solid var(--accent); padding: 10px 16px; margin: 1
 <strong>Target Region:</strong> United States &amp; Canada<br />
 <strong>Target Follower Range:</strong> 5K – 200K<br />
 <strong>Target Engagement Rate:</strong> &gt; 4%</p>
-<hr />
-</div>
-
-<div class="lang-content" id="content-en">
-<h2 id="sec-en-0">📋 执行摘要</h2>
+<hr /></div>
+<div class="lang-content bilingual" id="content-en"><h2 id="sec-en-0">📋 执行摘要</h2>
 <p>本报告为 eufy 婴儿监视器产品线寻找 YouTube 和 Instagram 平台上符合条件的微型/中型红人。通过多轮网络搜索和交叉验证，共筛选出 <strong>14 位潜在候选人</strong>，其中 <strong>6 位为高置信度匹配</strong>（已验证关键指标），<strong>8 位为中等/待验证线索</strong>。</p>
 <h3 id="sec-en-1">研究方法说明</h3>
 <p>⚠️ <strong>重要声明：</strong> 传统的网页搜索引擎无法可靠地索引社交媒体平台的粉丝数、互动率等精确指标。这些数据存在于平台 API（YouTube Data API、Instagram Graph API）和专业红人营销数据库（Upfluence、AspireIQ、Grin、HypeAuditor 等）中。本报告中的指标基于公开可获取的信源（Playboard、HypeAuditor、法院文件、品牌合作页面等），部分数据需要进一步通过平台工具验证。</p>
@@ -1115,8 +1194,7 @@ blockquote { border-left: 4px solid var(--accent); padding: 10px 16px; margin: 1
 <li>wifibaby.net — Eufy E21 &amp; SpaceView reviews</li>
 </ul>
 <hr />
-<p><em>Report generated via multi-source web research. All unverified metrics are clearly marked as estimates. For precise, real-time data, use platform APIs or dedicated influencer marketing platforms.</em></p>
-</div>
+<p><em>Report generated via multi-source web research. All unverified metrics are clearly marked as estimates. For precise, real-time data, use platform APIs or dedicated influencer marketing platforms.</em></p></div>
 
 </div>
 
@@ -1126,44 +1204,33 @@ blockquote { border-left: 4px solid var(--accent); padding: 10px 16px; margin: 1
       be=document.getElementById('btn-en'),bz=document.getElementById('btn-zh'),
       ce=document.getElementById('content-en'),cz=document.getElementById('content-zh'),
       te=document.getElementById('toc-en'),tz=document.getElementById('toc-zh');
-
   function setLang(l){
-    if(l==='zh'){
-      bz.classList.add('active');be.classList.remove('active');
-      cz.classList.add('active');ce.classList.remove('active');
-      tz.style.display='';te.style.display='none';
-    } else {
-      be.classList.add('active');bz.classList.remove('active');
-      ce.classList.add('active');cz.classList.remove('active');
-      te.style.display='';tz.style.display='none';
-    }
+    if(l==='zh'){bz.classList.add('active');be.classList.remove('active');cz.classList.add('active');ce.classList.remove('active');tz.style.display='';te.style.display='none';}
+    else{be.classList.add('active');bz.classList.remove('active');ce.classList.add('active');cz.classList.remove('active');te.style.display='';tz.style.display='none';}
     try{localStorage.setItem(K,l);}catch(e){}
-    // Re-run active section tracking
     initObserver();
   }
-
   var s=null;try{s=localStorage.getItem(K);}catch(e){}
   var initial=(s==='zh'||s==='en')?s:(navigator.language&&navigator.language.startsWith('zh')?'zh':'en');
   setLang(initial);
-
   be.addEventListener('click',function(){setLang('en');});
   bz.addEventListener('click',function(){setLang('zh');});
-
-  // ── Active section tracking ──
   var observer;
   function initObserver(){
     if(observer){observer.disconnect();}
-    var activeContent=document.querySelector('.lang-content.active');
+    var activeContent=document.querySelector('.bilingual.active');
+    if(!activeContent)activeContent=document.querySelector('.lang-content.active');
     if(!activeContent)return;
     var hs=activeContent.querySelectorAll('h2[id],h3[id]');
-    var navLinks=document.querySelectorAll('#toc-zh a, #toc-en a');
     observer=new IntersectionObserver(function(entries){
       entries.forEach(function(entry){
         if(entry.isIntersecting){
-          navLinks.forEach(function(a){a.classList.remove('active');});
-          var visibleToc=document.querySelector('#toc-zh[style*="display"]:not([style*="display: none"]), #toc-en[style*="display"]:not([style*="display: none"])');
-          if(!visibleToc)visibleToc=document.getElementById(lang()==='zh'?'toc-zh':'toc-en');
-          var link=visibleToc.querySelector('a[href="#'+entry.target.id+'"]');
+          document.querySelectorAll('.toc-h2-wrap.active, .sidebar nav a.active').forEach(function(el){el.classList.remove('active');});
+          var visibleToc=document.getElementById('toc-zh');
+          if(visibleToc.style.display==='none')visibleToc=document.getElementById('toc-en');
+          if(!visibleToc)visibleToc=document.getElementById('sidebar');
+          var link=visibleToc.querySelector('.toc-h2-wrap[data-target="#'+entry.target.id+'"]');
+          if(!link)link=visibleToc.querySelector('a[href="#'+entry.target.id+'"]');
           if(link)link.classList.add('active');
         }
       });
@@ -1171,10 +1238,7 @@ blockquote { border-left: 4px solid var(--accent); padding: 10px 16px; margin: 1
     hs.forEach(function(h){observer.observe(h);});
   }
   function lang(){return document.getElementById('content-zh').classList.contains('active')?'zh':'en';}
-  // Delay observer init slightly to let DOM settle
   setTimeout(initObserver,100);
-
-  // ── Mobile sidebar ──
   document.getElementById('hamburger').addEventListener('click',function(){
     document.getElementById('sidebar').classList.add('open');
     document.getElementById('sidebar-overlay').classList.add('open');
@@ -1183,8 +1247,7 @@ blockquote { border-left: 4px solid var(--accent); padding: 10px 16px; margin: 1
     document.getElementById('sidebar').classList.remove('open');
     document.getElementById('sidebar-overlay').classList.remove('open');
   });
-  // Close sidebar on TOC link click (mobile)
-  document.querySelectorAll('#toc-zh a, #toc-en a').forEach(function(a){
+  document.querySelectorAll('.sidebar a').forEach(function(a){
     a.addEventListener('click',function(e){
       e.preventDefault();
       var target=document.getElementById(this.getAttribute('href').substring(1));
@@ -1194,6 +1257,11 @@ blockquote { border-left: 4px solid var(--accent); padding: 10px 16px; margin: 1
     });
   });
 })();
+function toggleTOC(wrap){
+  wrap.classList.toggle('collapsed');
+  var list=wrap.nextElementSibling;
+  if(list&&list.classList.contains('toc-h3-list')){list.classList.toggle('collapsed');}
+}
 </script>
 
 </body>
