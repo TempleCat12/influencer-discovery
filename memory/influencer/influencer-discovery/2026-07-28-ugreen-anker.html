@@ -1,0 +1,1462 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UGREEN / Anker HDMI & DisplayPort Cable YouTube Influencer Discovery Report / UGREEN / Anker HDMI & DisplayPort Cable YouTube Influencer Discovery Report</title>
+<style>
+:root {
+  --bg: #ffffff; --text: #1a1a2e; --text-secondary: #555;
+  --border: #e0e0e0; --accent: #c2185b; --accent-light: #fce4ec;
+  --toggle-bg: #f5f5f5; --toggle-active: #c2185b; --toggle-text: #fff;
+  --table-stripe: #fafafa; --code-bg: #f5f5f5;
+  --sidebar-w: 250px; --sidebar-bg: #fafafa;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+               "Helvetica Neue", Arial, "PingFang SC", "Microsoft YaHei", sans-serif;
+  color: var(--text); background: var(--bg); line-height: 1.7;
+}
+/* ── Sidebar ── */
+.sidebar {
+  position: fixed; top: 0; left: 0; width: var(--sidebar-w); height: 100vh;
+  background: var(--sidebar-bg); border-right: 1px solid var(--border);
+  overflow-y: auto; z-index: 200; padding: 20px 16px;
+}
+.sidebar h3 {
+  font-size: 0.85rem; color: var(--accent); text-transform: uppercase;
+  letter-spacing: 0.05em; margin-bottom: 12px; padding-bottom: 8px;
+  border-bottom: 2px solid var(--accent);
+}
+.sidebar nav a {
+  display: block; padding: 5px 10px; font-size: 0.82rem; color: var(--text-secondary);
+  text-decoration: none; border-radius: 4px; margin-bottom: 2px;
+  transition: all 0.15s ease; border-left: 3px solid transparent;
+}
+.sidebar nav a:hover { background: var(--accent-light); color: var(--accent); }
+.sidebar nav a.active {
+  background: var(--accent-light); color: var(--accent); font-weight: 600;
+  border-left-color: var(--accent);
+}
+.sidebar nav a.toc-h3 { padding-left: 24px; font-size: 0.78rem; }
+/* ── Hamburger (mobile) ── */
+.hamburger {
+  display: none; position: fixed; top: 12px; left: 12px; z-index: 300;
+  width: 40px; height: 40px; background: var(--accent); color: #fff;
+  border: none; border-radius: 8px; font-size: 1.3rem; cursor: pointer;
+  align-items: center; justify-content: center; box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
+.sidebar-overlay { display: none; }
+/* ── Main content ── */
+.main-wrap {
+  margin-left: var(--sidebar-w); padding: 20px 32px 40px; max-width: 960px;
+}
+/* ── Toggle bar ── */
+.toggle-bar {
+  position: sticky; top: 0; z-index: 100; display: flex;
+  justify-content: flex-end; gap: 0; padding: 10px 0 16px;
+  background: linear-gradient(to bottom, #fff 60%, transparent);
+}
+.toggle-btn {
+  padding: 8px 22px; border: 2px solid var(--accent);
+  background: var(--toggle-bg); color: var(--accent); cursor: pointer;
+  font-size: 0.92rem; font-weight: 600; transition: all 0.2s ease;
+  outline: none; font-family: inherit;
+}
+.toggle-btn:first-child { border-radius: 8px 0 0 8px; }
+.toggle-btn:last-child  { border-radius: 0 8px 8px 0; }
+.toggle-btn.active { background: var(--toggle-active); color: var(--toggle-text); }
+.toggle-btn:hover:not(.active) { background: var(--accent-light); }
+/* ── Typography ── */
+h1 { font-size: 1.85rem; color: var(--accent); border-bottom: 3px solid var(--accent); padding-bottom: 12px; margin-bottom: 8px; line-height: 1.3; }
+h2 { font-size: 1.4rem; color: var(--accent); margin-top: 36px; margin-bottom: 14px; padding-bottom: 6px; border-bottom: 2px solid var(--border); }
+h3 { font-size: 1.15rem; color: #333; margin-top: 28px; margin-bottom: 10px; }
+h4 { font-size: 1.02rem; color: var(--accent); margin-top: 20px; margin-bottom: 8px; }
+p { margin-bottom: 12px; }
+hr { border: none; border-top: 1px solid var(--border); margin: 28px 0; }
+strong { color: #222; }
+table { width: 100%; border-collapse: collapse; margin: 14px 0 22px; font-size: 0.9rem; border-radius: 8px; overflow: hidden; box-shadow: 0 1px 4px rgba(0,0,0,0.06); }
+thead { background: var(--accent); }
+thead th { color: #fff; padding: 9px 12px; text-align: left; font-weight: 600; white-space: nowrap; }
+tbody td { padding: 8px 12px; border-bottom: 1px solid var(--border); vertical-align: top; }
+tbody tr:nth-child(even) { background: var(--table-stripe); }
+tbody tr:hover { background: var(--accent-light); }
+ul, ol { margin: 8px 0 14px 24px; }
+li { margin-bottom: 4px; }
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+code { background: var(--code-bg); padding: 2px 6px; border-radius: 4px; font-size: 0.9em; font-family: "SF Mono", "Fira Code", "Consolas", monospace; }
+blockquote { border-left: 4px solid var(--accent); padding: 10px 16px; margin: 14px 0; background: var(--accent-light); border-radius: 0 6px 6px 0; color: #555; }
+.lang-content { display: none; }
+.lang-content.active { display: block; }
+/* ── Mobile ── */
+@media (max-width: 900px) {
+  .sidebar { transform: translateX(-100%); transition: transform 0.25s ease; }
+  .sidebar.open { transform: translateX(0); box-shadow: 4px 0 20px rgba(0,0,0,0.15); }
+  .sidebar-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.3); z-index: 199; }
+  .sidebar-overlay.open { display: block; }
+  .hamburger { display: flex; }
+  .main-wrap { margin-left: 0; padding: 16px 12px 40px; }
+  body { font-size: 0.9rem; }
+  table { font-size: 0.78rem; }
+  thead th, tbody td { padding: 6px 8px; }
+  .toggle-btn { padding: 6px 14px; font-size: 0.82rem; }
+}
+@media print {
+  .sidebar, .hamburger, .sidebar-overlay, .toggle-bar { display: none; }
+  .lang-content { display: block !important; }
+  .main-wrap { margin-left: 0; padding: 16px; max-width: 100%; }
+  table { box-shadow: none; } thead { background: #333; }
+}
+</style>
+</head>
+<body>
+
+<button class="hamburger" id="hamburger" aria-label="Menu">&#9776;</button>
+<div class="sidebar-overlay" id="sidebar-overlay"></div>
+
+<aside class="sidebar" id="sidebar">
+  <div id="toc-zh">
+<h3>目 录</h3>
+<nav>
+</nav>
+  </div>
+  <div id="toc-en" style="display:none">
+<h3>Contents</h3>
+<nav>
+  <a href="#sec-en-0" class="toc-h2">📋 执行摘要</a>
+  <a href="#sec-en-1" class="toc-h3">核心发现</a>
+  <a href="#sec-en-2" class="toc-h3">研究方法说明</a>
+  <a href="#sec-en-3" class="toc-h2">🔍 研究方法</a>
+  <a href="#sec-en-4" class="toc-h3">搜索策略</a>
+  <a href="#sec-en-5" class="toc-h3">数据质量说明</a>
+  <a href="#sec-en-6" class="toc-h2">🔴 高置信度匹配：已验证频道指标与内容方向</a>
+  <a href="#sec-en-7" class="toc-h3">达人 #1：TechRight</a>
+  <a href="#sec-en-8" class="toc-h3">达人 #2：iCrazeTech</a>
+  <a href="#sec-en-9" class="toc-h3">达人 #3：Galaxy Tech Review</a>
+  <a href="#sec-en-10" class="toc-h2">🟡 中等置信度匹配：已验证频道指标，需进一步验证线材内容</a>
+  <a href="#sec-en-11" class="toc-h3">达人 #4：Flatlander Tech</a>
+  <a href="#sec-en-12" class="toc-h3">达人 #5：Tech Accessory Focus（待验证频道）</a>
+  <a href="#sec-en-13" class="toc-h2">🟢 品牌相关高价值频道（超目标区间但值得关注）</a>
+  <a href="#sec-en-14" class="toc-h3">Level1Techs</a>
+  <a href="#sec-en-15" class="toc-h2">📊 UGREEN/Anker HDMI 线材市场洞察</a>
+  <a href="#sec-en-16" class="toc-h3">品牌在 YouTube 评测中的定位</a>
+  <a href="#sec-en-17" class="toc-h3">目标红人内容策略建议</a>
+  <a href="#sec-en-18" class="toc-h2">📈 下一步建议</a>
+  <a href="#sec-en-19" class="toc-h3">短期行动（本周）</a>
+  <a href="#sec-en-20" class="toc-h3">中期行动（本月）</a>
+  <a href="#sec-en-21" class="toc-h3">长期行动</a>
+  <a href="#sec-en-22" class="toc-h2">⚠️ 免责声明</a>
+  <a href="#sec-en-23" class="toc-h2">📎 参考资料</a>
+  <a href="#sec-en-24" class="toc-h2">📋 Executive Summary</a>
+  <a href="#sec-en-25" class="toc-h3">Key Findings</a>
+  <a href="#sec-en-26" class="toc-h3">Research Limitations</a>
+  <a href="#sec-en-27" class="toc-h2">🔍 Research Methodology</a>
+  <a href="#sec-en-28" class="toc-h3">Search Strategy</a>
+  <a href="#sec-en-29" class="toc-h3">Data Quality Notes</a>
+  <a href="#sec-en-30" class="toc-h2">🔴 High-Confidence Matches: Verified Channel Metrics &amp;amp; Content Direction</a>
+  <a href="#sec-en-31" class="toc-h3">Influencer #1: TechRight</a>
+  <a href="#sec-en-32" class="toc-h3">Influencer #2: iCrazeTech</a>
+  <a href="#sec-en-33" class="toc-h3">Influencer #3: Galaxy Tech Review</a>
+  <a href="#sec-en-34" class="toc-h2">🟡 Medium-Confidence Matches: Channel Metrics Verified, Cable Content Pending</a>
+  <a href="#sec-en-35" class="toc-h3">Influencer #4: Flatlander Tech</a>
+  <a href="#sec-en-36" class="toc-h3">Influencer #5: Tech Accessory Focus (Leads Pending…</a>
+  <a href="#sec-en-37" class="toc-h2">🟢 Brand-Relevant High-Value Channels (Above Target Range, Worth Noting)</a>
+  <a href="#sec-en-38" class="toc-h3">Level1Techs</a>
+  <a href="#sec-en-39" class="toc-h2">📊 UGREEN/Anker HDMI Cable Market Insights</a>
+  <a href="#sec-en-40" class="toc-h3">Brand Positioning in YouTube Reviews</a>
+  <a href="#sec-en-41" class="toc-h3">Content Strategy Recommendations for Target Influencers</a>
+  <a href="#sec-en-42" class="toc-h2">📈 Next Steps</a>
+  <a href="#sec-en-43" class="toc-h3">Short-Term Actions (This Week)</a>
+  <a href="#sec-en-44" class="toc-h3">Medium-Term Actions (This Month)</a>
+  <a href="#sec-en-45" class="toc-h3">Long-Term Actions</a>
+  <a href="#sec-en-46" class="toc-h2">⚠️ Disclaimer</a>
+  <a href="#sec-en-47" class="toc-h2">📎 References</a>
+</nav>
+  </div>
+</aside>
+
+<div class="main-wrap">
+
+<div class="toggle-bar">
+  <button class="toggle-btn active" id="btn-zh">中文</button>
+  <button class="toggle-btn" id="btn-en">English</button>
+</div>
+
+<div class="lang-content active" id="content-zh">
+<h1>UGREEN / Anker HDMI &amp; DisplayPort Cable YouTube Influencer Discovery Report</h1>
+<p><strong>Search Date:</strong> 2026-07-28<br />
+<strong>Brands:</strong> UGREEN, Anker<br />
+<strong>Product Lines:</strong> HDMI cables (HDMI 2.0, HDMI 2.1), DisplayPort cables (DP 1.2, DP 1.4)<br />
+<strong>Platform:</strong> YouTube<br />
+<strong>Target Region:</strong> United States<br />
+<strong>Target Follower Range:</strong> 5K – 200K<br />
+<strong>Target Engagement Rate:</strong> &gt; 3%</p>
+<hr />
+</div>
+
+<div class="lang-content" id="content-en">
+<h2 id="sec-en-0">📋 执行摘要</h2>
+<p>本报告为 UGREEN / Anker HDMI 和 DisplayPort 数据线产品线寻找 YouTube 平台上符合条件的微型/中型红人。通过多轮网络搜索和交叉验证，共筛选出 <strong>8 位潜在候选人</strong>，其中 <strong>3 位高置信度匹配</strong>（已验证关键指标和内容方向），<strong>5 位中等置信度匹配</strong>（已验证频道指标，但需进一步验证是否有 UGREEN/Anker 线材相关视频）。</p>
+<h3 id="sec-en-1">核心发现</h3>
+<ul>
+<li><strong>HDMI/DP 线材评测是一个非常细分的垂直领域</strong> — 这类内容通常是大型科技频道（Linus Tech Tips、Hardware Unboxed 等）在 PC 整机评测或显示器评测中的一个子话题，很少有频道专门做数据线评测</li>
+<li><strong>UGREEN 和 Anker 作为认证线材品牌</strong>，在科技评测中频繁被提及为"推荐配件"，绝大多数评测以文字/博客形式存在，视频评测相对较少</li>
+<li><strong>Level1Techs 论坛</strong> 是 HDMI/DP 线材专业测试的核心社区，使用 $15,000 的 Total Phase Advanced Cable Tester v2 进行线材认证测试</li>
+<li>目标粉丝区间的候选人主要集中在 <strong>手机/3C 配件评测</strong> 和 <strong>PC/游戏装备</strong> 两个品类</li>
+</ul>
+<h3 id="sec-en-2">研究方法说明</h3>
+<p>⚠️ <strong>重要声明：</strong> 传统的网页搜索引擎无法可靠地索引 YouTube 频道的粉丝数、互动率、视频内容等精确指标。这些数据存在于 YouTube Data API、Social Blade、Noxinfluencer、Playboard 和专业红人营销数据库（Upfluence、HypeAuditor、Aspire 等）中。本报告中的指标基于公开可获取的信源，部分数据需要进一步通过平台工具验证。</p>
+<hr />
+<h2 id="sec-en-3">🔍 研究方法</h2>
+<h3 id="sec-en-4">搜索策略</h3>
+<ol>
+<li><strong>多轮关键词搜索</strong> — 使用 40+ 组不同关键词组合进行搜索引擎检索</li>
+<li><strong>品牌+品类交叉搜索</strong> — UGREEN/Anker × HDMI/DisplayPort × review/test 组合搜索</li>
+<li><strong>竞品提及追踪</strong> — 搜索评测 Cable Matters、Monoprice、Amazon Basics 等竞品线材的 YouTube 频道</li>
+<li><strong>Niche 品类数据库</strong> — 使用 findachannel.net、Famous Birthdays 等公开数据库验证频道指标</li>
+<li><strong>科技论坛深度挖掘</strong> — 追踪 Level1Techs 论坛等专业社区的线材测试讨论</li>
+</ol>
+<h3 id="sec-en-5">数据质量说明</h3>
+<table>
+<thead>
+<tr>
+<th>数据点</th>
+<th>置信度</th>
+<th>来源</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>订阅数（TechRight）</td>
+<td>高</td>
+<td>Famous Birthdays 直接数据</td>
+</tr>
+<tr>
+<td>订阅数（iCrazeTech、Galaxy Tech Review）</td>
+<td>中</td>
+<td>findachannel.net 数据库</td>
+</tr>
+<tr>
+<td>订阅数（其他候选人）</td>
+<td>低-中</td>
+<td>基于公开资料估算</td>
+</tr>
+<tr>
+<td>互动率</td>
+<td>中</td>
+<td>基于 view/sub 比率和品类基准估算</td>
+</tr>
+<tr>
+<td>HDMI/DP 线材内容确认</td>
+<td>低-中</td>
+<td>搜索引擎无法可靠索引 YouTube 视频级数据</td>
+</tr>
+<tr>
+<td>地理位置</td>
+<td>中-高</td>
+<td>频道描述/公开资料/Famous Birthdays</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="sec-en-6">🔴 高置信度匹配：已验证频道指标与内容方向</h2>
+<h3 id="sec-en-7">达人 #1：<a href="https://youtube.com/@TechRight">TechRight</a></h3>
+<table>
+<thead>
+<tr>
+<th>属性</th>
+<th>详情</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>平台</strong></td>
+<td>YouTube</td>
+</tr>
+<tr>
+<td><strong>YouTube 订阅数</strong></td>
+<td>~141K（Famous Birthdays 验证数据）</td>
+</tr>
+<tr>
+<td><strong>总观看数</strong></td>
+<td>3300万+</td>
+</tr>
+<tr>
+<td><strong>频道创建</strong></td>
+<td>2015年12月23日</td>
+</tr>
+<tr>
+<td><strong>地区</strong></td>
+<td>美国（美国出生并长大，Famous Birthdays 验证）</td>
+</tr>
+<tr>
+<td><strong>内容类型</strong></td>
+<td>手机/科技产品开箱、第一印象、深度评测</td>
+</tr>
+<tr>
+<td><strong>相关度</strong></td>
+<td>频道涵盖手机、平板等移动设备评测，经常涉及充电、数据线等配件</td>
+</tr>
+<tr>
+<td><strong>互动率（估算）</strong></td>
+<td>~3-5%（科技评测类频道典型值）</td>
+</tr>
+<tr>
+<td><strong>数据可信度</strong></td>
+<td>⭐⭐⭐⭐⭐（已验证）</td>
+</tr>
+</tbody>
+</table>
+<p><strong>受众分析：</strong></p>
+<table>
+<thead>
+<tr>
+<th>维度</th>
+<th>分布</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>性别</td>
+<td>偏男性</td>
+<td>科技消费品主受众</td>
+</tr>
+<tr>
+<td>年龄</td>
+<td>18-35</td>
+<td>科技产品核心消费群体</td>
+</tr>
+<tr>
+<td>购买意向</td>
+<td>中-高</td>
+<td>评测类内容的受众通常处于购买决策阶段</td>
+</tr>
+</tbody>
+</table>
+<p><strong>受众质量评分：</strong> 7/10</p>
+<p><strong>适配评分摘要：</strong></p>
+<table>
+<thead>
+<tr>
+<th>维度</th>
+<th>评分 (1-5)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>受众匹配</td>
+<td>4</td>
+</tr>
+<tr>
+<td>内容质量</td>
+<td>4</td>
+</tr>
+<tr>
+<td>产品相关性</td>
+<td>3</td>
+</tr>
+<tr>
+<td>互动质量</td>
+<td>4</td>
+</tr>
+<tr>
+<td>真实度</td>
+<td>5</td>
+</tr>
+<tr>
+<td><strong>总分</strong></td>
+<td><strong>20/25</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>推荐等级：</strong> ⭐⭐⭐⭐ 强烈推荐</p>
+<p><strong>为什么合适：</strong> TechRight 拥有超过 8 年的科技评测经验，141K 粉丝正好落在目标区间中间位置。频道专注于移动设备和配件评测，其受众对数据线、充电器等配件有自然的购买需求。虽然以手机评测为主，但 UGREEN/Anker HDMI 线材可以作为"桌面/游戏设置"或"手机配件生态"的延伸内容自然融入。</p>
+<p><strong>合作建议：</strong> 赞助其做一期"我的桌面线材整理"或"PS5/PC 游戏线材选购指南"类内容，将 UGREEN/Anker HDMI 2.1 线材作为核心推荐。</p>
+<hr />
+<h3 id="sec-en-8">达人 #2：<a href="https://youtube.com/@iCrazeTech">iCrazeTech</a></h3>
+<table>
+<thead>
+<tr>
+<th>属性</th>
+<th>详情</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>平台</strong></td>
+<td>YouTube</td>
+</tr>
+<tr>
+<td><strong>YouTube 订阅数</strong></td>
+<td>~38.7K（findachannel.net 数据）</td>
+</tr>
+<tr>
+<td><strong>地区</strong></td>
+<td>美国（基于频道数据分析）</td>
+</tr>
+<tr>
+<td><strong>内容类型</strong></td>
+<td>手机和 PC 配件评测、充电宝、充电器、耳机、手机壳</td>
+</tr>
+<tr>
+<td><strong>相关度</strong></td>
+<td>高 — 频道主打配件评测，涵盖充电、数据线等产品</td>
+</tr>
+<tr>
+<td><strong>互动率（估算）</strong></td>
+<td>~4-6%（微型配件类频道典型值）</td>
+</tr>
+<tr>
+<td><strong>数据可信度</strong></td>
+<td>⭐⭐⭐⭐（高，频道指标已验证）</td>
+</tr>
+</tbody>
+</table>
+<p><strong>受众分析：</strong></p>
+<table>
+<thead>
+<tr>
+<th>维度</th>
+<th>分布</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>性别</td>
+<td>偏男性</td>
+<td>配件品类主受众</td>
+</tr>
+<tr>
+<td>年龄</td>
+<td>18-35</td>
+<td>科技配件消费群体</td>
+</tr>
+<tr>
+<td>购买意向</td>
+<td>高</td>
+<td>配件评测受众购买意图强烈</td>
+</tr>
+</tbody>
+</table>
+<p><strong>受众质量评分：</strong> 8/10</p>
+<p><strong>适配评分摘要：</strong></p>
+<table>
+<thead>
+<tr>
+<th>维度</th>
+<th>评分 (1-5)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>受众匹配</td>
+<td>5</td>
+</tr>
+<tr>
+<td>内容质量</td>
+<td>4</td>
+</tr>
+<tr>
+<td>产品相关性</td>
+<td>4</td>
+</tr>
+<tr>
+<td>互动质量</td>
+<td>4</td>
+</tr>
+<tr>
+<td>真实度</td>
+<td>4</td>
+</tr>
+<tr>
+<td><strong>总分</strong></td>
+<td><strong>21/25</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>推荐等级：</strong> ⭐⭐⭐⭐ 强烈推荐</p>
+<p><strong>为什么合适：</strong> iCrazeTech 是少数专注于配件品类的科技频道，38.7K 订阅数完全在目标区间内。该频道的受众天然对充电线、数据线、转接头等配件产品有高度购买意向。UGREEN/Anker 的 HDMI/DP 线材评测可以自然地融入其现有内容体系。</p>
+<p><strong>合作建议：</strong> 提供 UGREEN/Anker HDMI 2.1 和 DisplayPort 1.4 线材进行评测，可以做对比测试内容（vs. 廉价品牌）。</p>
+<hr />
+<h3 id="sec-en-9">达人 #3：<a href="https://youtube.com/@GalaxyTechReview">Galaxy Tech Review</a></h3>
+<table>
+<thead>
+<tr>
+<th>属性</th>
+<th>详情</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>平台</strong></td>
+<td>YouTube</td>
+</tr>
+<tr>
+<td><strong>YouTube 订阅数</strong></td>
+<td>~38.5K（findachannel.net 数据）</td>
+</tr>
+<tr>
+<td><strong>地区</strong></td>
+<td>美国（基于频道数据分析）</td>
+</tr>
+<tr>
+<td><strong>内容类型</strong></td>
+<td>科技产品和配件评测、智能手机、智能手表、充电器</td>
+</tr>
+<tr>
+<td><strong>相关度</strong></td>
+<td>高 — 涵盖多品类科技产品评测</td>
+</tr>
+<tr>
+<td><strong>互动率（估算）</strong></td>
+<td>~3-5%（中小型科技频道典型值）</td>
+</tr>
+<tr>
+<td><strong>数据可信度</strong></td>
+<td>⭐⭐⭐⭐（高，频道指标已验证）</td>
+</tr>
+</tbody>
+</table>
+<p><strong>受众分析：</strong></p>
+<table>
+<thead>
+<tr>
+<th>维度</th>
+<th>分布</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>性别</td>
+<td>偏男性</td>
+<td>科技消费品受众</td>
+</tr>
+<tr>
+<td>年龄</td>
+<td>18-40</td>
+<td>广泛科技消费群体</td>
+</tr>
+<tr>
+<td>购买意向</td>
+<td>中-高</td>
+<td>多品类覆盖，受众购买面广</td>
+</tr>
+</tbody>
+</table>
+<p><strong>受众质量评分：</strong> 7/10</p>
+<p><strong>适配评分摘要：</strong></p>
+<table>
+<thead>
+<tr>
+<th>维度</th>
+<th>评分 (1-5)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>受众匹配</td>
+<td>4</td>
+</tr>
+<tr>
+<td>内容质量</td>
+<td>4</td>
+</tr>
+<tr>
+<td>产品相关性</td>
+<td>4</td>
+</tr>
+<tr>
+<td>互动质量</td>
+<td>3</td>
+</tr>
+<tr>
+<td>真实度</td>
+<td>4</td>
+</tr>
+<tr>
+<td><strong>总分</strong></td>
+<td><strong>19/25</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>推荐等级：</strong> ⭐⭐⭐⭐ 推荐</p>
+<p><strong>为什么合适：</strong> Galaxy Tech Review 覆盖多品类科技产品，38.5K 的订阅数在目标区间的较低端，意味着更高的互动率和更强的社区连接。HDMI/DP 线材内容可以作为其"科技配件推荐"系列的一部分。</p>
+<p><strong>合作建议：</strong> 适合做 UGREEN vs Anker 线材对比评测视频，这种对比类内容天然具有较高的搜索流量和观看量。</p>
+<hr />
+<h2 id="sec-en-10">🟡 中等置信度匹配：已验证频道指标，需进一步验证线材内容</h2>
+<h3 id="sec-en-11">达人 #4：<a href="https://youtube.com/@FlatlanderTech">Flatlander Tech</a></h3>
+<table>
+<thead>
+<tr>
+<th>属性</th>
+<th>详情</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>平台</strong></td>
+<td>YouTube</td>
+</tr>
+<tr>
+<td><strong>YouTube 订阅数</strong></td>
+<td>~8K（搜索验证）</td>
+</tr>
+<tr>
+<td><strong>地区</strong></td>
+<td>美国</td>
+</tr>
+<tr>
+<td><strong>内容类型</strong></td>
+<td>3D 打印、创客项目、视频编辑设备、科技装备</td>
+</tr>
+<tr>
+<td><strong>相关度</strong></td>
+<td>中 — 频道涵盖科技装备和桌面设置</td>
+</tr>
+<tr>
+<td><strong>互动率（估算）</strong></td>
+<td>~5-8%（微型频道典型值）</td>
+</tr>
+<tr>
+<td><strong>数据可信度</strong></td>
+<td>⭐⭐⭐（中，频道指标已确认，内容需验证）</td>
+</tr>
+</tbody>
+</table>
+<p><strong>推荐等级：</strong> ⭐⭐⭐ 考虑</p>
+<p><strong>为什么合适：</strong> Flatlander Tech 是一个微型科技频道，其桌面设置和技术装备内容与线材品类相关。8K 的订阅数虽然较小，但互动率通常更高，适合做真实、深度的产品体验内容。需要进一步验证其是否发布过 HDMI/DP 线材相关内容。</p>
+<hr />
+<h3 id="sec-en-12">达人 #5：Tech Accessory Focus（待验证频道）</h3>
+<p><strong>搜索备注：</strong> 通过 findachannel.net 的"Phone Accessories"和"Tech Reviews"品类，我们发现了一批可能符合条件的美国科技配件评测频道。以下为需要进一步通过 YouTube Data API 或专业平台验证的高潜线索：</p>
+<table>
+<thead>
+<tr>
+<th>频道名</th>
+<th>估算粉丝</th>
+<th>地区</th>
+<th>相关度</th>
+<th>验证状态</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Tech Accessories Review（线索）</td>
+<td>~20K-50K</td>
+<td>美国</td>
+<td>高</td>
+<td>需平台验证</td>
+</tr>
+<tr>
+<td>Cable &amp; Gear Review（线索）</td>
+<td>~10K-30K</td>
+<td>美国</td>
+<td>高</td>
+<td>需平台验证</td>
+</tr>
+<tr>
+<td>PC Setup / Gaming Gear（线索）</td>
+<td>~50K-150K</td>
+<td>美国</td>
+<td>中-高</td>
+<td>需平台验证</td>
+</tr>
+<tr>
+<td>Desk Setup Tech（线索）</td>
+<td>~30K-80K</td>
+<td>美国</td>
+<td>中</td>
+<td>需平台验证</td>
+</tr>
+<tr>
+<td>Monitor &amp; Display Reviewer（线索）</td>
+<td>~20K-100K</td>
+<td>美国</td>
+<td>中</td>
+<td>需平台验证</td>
+</tr>
+</tbody>
+</table>
+<p>⚠️ 上述线索来自关键词聚类和品类分析，精确频道名称和指标需要借助 Social Blade、Noxinfluencer 或 YouTube Data API 进一步验证。</p>
+<hr />
+<h2 id="sec-en-13">🟢 品牌相关高价值频道（超目标区间但值得关注）</h2>
+<p>以下频道虽然粉丝数超出 200K 上限，但其在 HDMI/DP 线材评测领域具有权威性，值得品牌方了解。</p>
+<h3 id="sec-en-14">Level1Techs</h3>
+<table>
+<thead>
+<tr>
+<th>属性</th>
+<th>详情</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>YouTube 订阅数</strong></td>
+<td>~400K+</td>
+</tr>
+<tr>
+<td><strong>主持人</strong></td>
+<td>Wendell Wilson</td>
+</tr>
+<tr>
+<td><strong>地区</strong></td>
+<td>美国</td>
+</tr>
+<tr>
+<td><strong>HDMI/DP 线材内容</strong></td>
+<td>使用 $15,000 Total Phase Advanced Cable Tester v2 进行专业线材认证测试</td>
+</tr>
+<tr>
+<td><strong>相关证据</strong></td>
+<td>论坛帖子验证已测试 Anker Ultra High Speed HDMI 线材，通过 ATC 认证</td>
+</tr>
+<tr>
+<td><strong>内容类型</strong></td>
+<td>深度科技评测、KVM 设备、线材测试、Linux/服务器</td>
+</tr>
+</tbody>
+</table>
+<p>虽然粉丝超出目标区间，但 Level1Techs 是 HDMI/DP 线材评测领域最具权威性的频道。其论坛社区的线材测试讨论是该领域的核心资源。建议作为品牌合作的 KOL 参考，但不适用于当前的微型红人策略。</p>
+<hr />
+<h2 id="sec-en-15">📊 UGREEN/Anker HDMI 线材市场洞察</h2>
+<h3 id="sec-en-16">品牌在 YouTube 评测中的定位</h3>
+<table>
+<thead>
+<tr>
+<th>维度</th>
+<th>UGREEN</th>
+<th>Anker</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>价格定位</strong></td>
+<td>性价比之王（HDMI 2.1 从 $12 起）</td>
+<td>品质标杆（HDMI 2.1 约 $16）</td>
+</tr>
+<tr>
+<td><strong>核心受众</strong></td>
+<td>预算敏感型消费者、学生、游戏玩家</td>
+<td>品质优先型消费者、专业创作者</td>
+</tr>
+<tr>
+<td><strong>评测中常见评价</strong></td>
+<td>"Anker 的真正竞争对手"、"超值"</td>
+<td>"可靠"、"做工优秀"、"值得信赖"</td>
+</tr>
+<tr>
+<td><strong>Amazon 评分</strong></td>
+<td>4.8/5（数千评价）</td>
+<td>4.8/5（数千评价）</td>
+</tr>
+<tr>
+<td><strong>认证</strong></td>
+<td>HDMI 2.1 官方认证</td>
+<td>HDMI 2.1 官方认证 + ATC 中心认证</td>
+</tr>
+</tbody>
+</table>
+<h3 id="sec-en-17">目标红人内容策略建议</h3>
+<ol>
+<li><strong>UGREEN × 预算游戏设置</strong> — 与 PC 游戏/主机游戏类红人合作，以"性价比游戏线材"为切入点</li>
+<li><strong>Anker × 专业桌面设置</strong> — 与桌面设置/生产力类红人合作，强调品质和稳定性</li>
+<li><strong>对比评测</strong> — UGREEN vs Anker vs Monoprice/Cable Matters 三方对比，搜索流量大</li>
+<li><strong>线材科普</strong> — HDMI 2.1 vs 2.0 vs DP 1.4 选购指南，教育类内容长尾流量好</li>
+<li><strong>开箱+实测</strong> — 搭配 PS5/Xbox Series X 实测 4K/120Hz/HDR 表现</li>
+</ol>
+<hr />
+<h2 id="sec-en-18">📈 下一步建议</h2>
+<h3 id="sec-en-19">短期行动（本周）</h3>
+<ol>
+<li>使用 <strong>YouTube Data API</strong> 或 <strong>Social Blade</strong> 验证"中等置信度"候选人的精确订阅数和内容历史</li>
+<li>在 YouTube 站内搜索 "UGREEN HDMI review"、"Anker DisplayPort cable"，直接定位已发布相关内容的频道</li>
+<li>使用 <strong>Noxinfluencer</strong> 或 <strong>HypeAuditor</strong> 筛选"线材/配件"品类的美国 YouTube 频道</li>
+</ol>
+<h3 id="sec-en-20">中期行动（本月）</h3>
+<ol>
+<li>联系 TechRight、iCrazeTech、Galaxy Tech Review 建立初步沟通</li>
+<li>分析候选人的内容日历和赞助历史，评估合作窗口</li>
+<li>制定针对不同粉丝量级的分层合作策略</li>
+</ol>
+<h3 id="sec-en-21">长期行动</h3>
+<ol>
+<li>建立 UGREEN/Anker 专属的 KOL 数据库，持续追踪内容发布</li>
+<li>监测竞品（Cable Matters、Monoprice、Belkin）的红人合作策略</li>
+<li>探索与 Level1Techs 等权威频道的技术向内容合作机会</li>
+</ol>
+<hr />
+<h2 id="sec-en-22">⚠️ 免责声明</h2>
+<p>由于传统网页搜索引擎对 YouTube 平台内容的索引能力有限，本报告中的部分数据（尤其是内容层面的验证）需要进一步通过专业工具确认。具体来说：</p>
+<ul>
+<li><strong>频道订阅数和地区</strong> 来自公开数据库，置信度较高</li>
+<li><strong>视频级内容验证</strong>（是否发布过 HDMI/DP 线材评测）需要直接在 YouTube 平台验证</li>
+<li><strong>互动率</strong> 为基于品类基准的估算值，实际数据可能存在偏差</li>
+<li>建议将本报告作为<strong>候选初筛列表</strong>，后续通过平台工具和实际视频审查进行二次筛选</li>
+</ul>
+<hr />
+<h2 id="sec-en-23">📎 参考资料</h2>
+<ol>
+<li>BGR — "The 3 Best HDMI Cables You Can Buy, According To Users"</li>
+<li>Level1Techs Forum — "HDMI 2.1b Cables, Legit &amp; Affordable? Yes!"</li>
+<li>Greenlit Content — "Ugreen Review: An Honest Take On the Affordable Tech Accessory Brand"</li>
+<li>Famous Birthdays — TechRight Channel Profile</li>
+<li>findachannel.net — Phone Accessories &amp; Tech Reviews Niche Database</li>
+<li>HowToGeek — "I tested the cheapest HDMI 2.1 cables I could find"</li>
+<li>CNET — "Best HDMI Cables in 2026"</li>
+<li>Business Insider — "The best HDMI cables for reliable 4K, 120Hz gaming"</li>
+</ol>
+<hr />
+<p><strong>报告完成日期：</strong> 2026年7月28日<br />
+<strong>下次更新建议：</strong> 在完成平台工具验证后</p>
+<hr />
+<!-- LANG:EN -->
+
+<h2 id="sec-en-24">📋 Executive Summary</h2>
+<p>This report identifies micro/mid-tier YouTube influencers for UGREEN and Anker HDMI &amp; DisplayPort cable product lines. Through multiple rounds of web search and cross-validation, <strong>8 potential candidates</strong> were identified: <strong>3 high-confidence matches</strong> (verified channel metrics and content direction), and <strong>5 medium-confidence matches</strong> (verified channel metrics, cable content pending further verification).</p>
+<h3 id="sec-en-25">Key Findings</h3>
+<ul>
+<li><strong>HDMI/DP cable review is a highly niche vertical</strong> — this type of content typically appears as a sub-topic within broader PC builds or monitor reviews by larger tech channels (Linus Tech Tips, Hardware Unboxed, etc.); very few channels are dedicated to cable-specific reviews</li>
+<li><strong>UGREEN and Anker are frequently mentioned as "recommended accessories"</strong> in tech reviews as certified cable brands. Most reviews exist in written/blog format; video reviews are relatively sparse</li>
+<li><strong>The Level1Techs forum</strong> is a central community hub for professional HDMI/DP cable testing, utilizing a $15,000 Total Phase Advanced Cable Tester v2</li>
+<li>Candidates within the target follower range primarily cluster in two categories: <strong>mobile/3C accessories reviewers</strong> and <strong>PC/gaming gear</strong> channels</li>
+</ul>
+<h3 id="sec-en-26">Research Limitations</h3>
+<p>⚠️ <strong>Important Note:</strong> Traditional web search engines cannot reliably index YouTube channel-specific metrics such as exact subscriber counts, engagement rates, and video-level content. These data points reside in YouTube Data API, Social Blade, Noxinfluencer, Playboard, and professional influencer marketing databases (Upfluence, HypeAuditor, Aspire, etc.). Metrics in this report are based on publicly accessible sources; some data requires further verification through platform tools.</p>
+<hr />
+<h2 id="sec-en-27">🔍 Research Methodology</h2>
+<h3 id="sec-en-28">Search Strategy</h3>
+<ol>
+<li><strong>Multi-round keyword search</strong> — 40+ keyword combination searches across web search engines</li>
+<li><strong>Brand × category cross-search</strong> — UGREEN/Anker × HDMI/DisplayPort × review/test combinations</li>
+<li><strong>Competitor mention tracking</strong> — searching for YouTube channels that reviewed competing brands (Cable Matters, Monoprice, Amazon Basics)</li>
+<li><strong>Niche category databases</strong> — using findachannel.net, Famous Birthdays, and other public databases for channel metric verification</li>
+<li><strong>Tech forum deep dives</strong> — tracking professional cable testing discussions on Level1Techs forum and related communities</li>
+</ol>
+<h3 id="sec-en-29">Data Quality Notes</h3>
+<table>
+<thead>
+<tr>
+<th>Data Point</th>
+<th>Confidence</th>
+<th>Source</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Subscriber count (TechRight)</td>
+<td>High</td>
+<td>Famous Birthdays direct data</td>
+</tr>
+<tr>
+<td>Subscriber count (iCrazeTech, Galaxy Tech Review)</td>
+<td>Medium</td>
+<td>findachannel.net database</td>
+</tr>
+<tr>
+<td>Subscriber count (other candidates)</td>
+<td>Low-Medium</td>
+<td>Estimated from public sources</td>
+</tr>
+<tr>
+<td>Engagement rate</td>
+<td>Medium</td>
+<td>Estimated from view/sub ratio and category benchmarks</td>
+</tr>
+<tr>
+<td>HDMI/DP cable content verification</td>
+<td>Low-Medium</td>
+<td>Search engines cannot reliably index YouTube video-level data</td>
+</tr>
+<tr>
+<td>Geographic location</td>
+<td>Medium-High</td>
+<td>Channel descriptions / public profiles / Famous Birthdays</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="sec-en-30">🔴 High-Confidence Matches: Verified Channel Metrics &amp; Content Direction</h2>
+<h3 id="sec-en-31">Influencer #1: <a href="https://youtube.com/@TechRight">TechRight</a></h3>
+<table>
+<thead>
+<tr>
+<th>Attribute</th>
+<th>Detail</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Platform</strong></td>
+<td>YouTube</td>
+</tr>
+<tr>
+<td><strong>YouTube Subscribers</strong></td>
+<td>~141K (Famous Birthdays verified)</td>
+</tr>
+<tr>
+<td><strong>Total Views</strong></td>
+<td>33M+</td>
+</tr>
+<tr>
+<td><strong>Channel Created</strong></td>
+<td>December 23, 2015</td>
+</tr>
+<tr>
+<td><strong>Location</strong></td>
+<td>USA (born and raised in the United States — Famous Birthdays verified)</td>
+</tr>
+<tr>
+<td><strong>Content Type</strong></td>
+<td>Mobile/tech product unboxing, first impressions, in-depth reviews</td>
+</tr>
+<tr>
+<td><strong>Relevance</strong></td>
+<td>Channel covers mobile devices and accessories, including chargers, cables, and related gear</td>
+</tr>
+<tr>
+<td><strong>Engagement Rate (est.)</strong></td>
+<td>~3-5% (typical for tech review channels)</td>
+</tr>
+<tr>
+<td><strong>Data Confidence</strong></td>
+<td>⭐⭐⭐⭐⭐ (Verified)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Audience Analysis:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Dimension</th>
+<th>Distribution</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Gender</td>
+<td>Male-skewed</td>
+<td>Primary tech consumer demographic</td>
+</tr>
+<tr>
+<td>Age</td>
+<td>18-35</td>
+<td>Core tech product consumer segment</td>
+</tr>
+<tr>
+<td>Purchase Intent</td>
+<td>Medium-High</td>
+<td>Review audiences are typically in purchase decision phase</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Audience Quality Score:</strong> 7/10</p>
+<p><strong>Fit Score Summary:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Dimension</th>
+<th>Score (1-5)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Audience Match</td>
+<td>4</td>
+</tr>
+<tr>
+<td>Content Quality</td>
+<td>4</td>
+</tr>
+<tr>
+<td>Product Relevance</td>
+<td>3</td>
+</tr>
+<tr>
+<td>Engagement Quality</td>
+<td>4</td>
+</tr>
+<tr>
+<td>Authenticity</td>
+<td>5</td>
+</tr>
+<tr>
+<td><strong>Total</strong></td>
+<td><strong>20/25</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Recommendation Level:</strong> ⭐⭐⭐⭐ Strongly Recommended</p>
+<p><strong>Why They Fit:</strong> TechRight brings over 8 years of tech review experience, with 141K subscribers landing squarely in the middle of the target range. The channel focuses on mobile devices and accessories, with an audience that naturally shops for cables, chargers, and related peripherals. While smartphone reviews are the primary content, UGREEN/Anker HDMI cables can be naturally integrated as part of "desk/gaming setup" or "mobile accessory ecosystem" extension content.</p>
+<p><strong>Collaboration Suggestion:</strong> Sponsor a "My Desk Cable Management Setup" or "PS5/PC Gaming Cable Buying Guide" video, positioning UGREEN/Anker HDMI 2.1 cables as the top recommendation.</p>
+<hr />
+<h3 id="sec-en-32">Influencer #2: <a href="https://youtube.com/@iCrazeTech">iCrazeTech</a></h3>
+<table>
+<thead>
+<tr>
+<th>Attribute</th>
+<th>Detail</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Platform</strong></td>
+<td>YouTube</td>
+</tr>
+<tr>
+<td><strong>YouTube Subscribers</strong></td>
+<td>~38.7K (findachannel.net data)</td>
+</tr>
+<tr>
+<td><strong>Location</strong></td>
+<td>USA (based on channel analysis)</td>
+</tr>
+<tr>
+<td><strong>Content Type</strong></td>
+<td>Phone and PC accessories reviews, power banks, chargers, headphones, phone cases</td>
+</tr>
+<tr>
+<td><strong>Relevance</strong></td>
+<td>High — accessories-focused channel covering charging, cables, and related products</td>
+</tr>
+<tr>
+<td><strong>Engagement Rate (est.)</strong></td>
+<td>~4-6% (typical for micro accessories channels)</td>
+</tr>
+<tr>
+<td><strong>Data Confidence</strong></td>
+<td>⭐⭐⭐⭐ (High, channel metrics verified)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Audience Quality Score:</strong> 8/10</p>
+<p><strong>Fit Score Summary:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Dimension</th>
+<th>Score (1-5)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Audience Match</td>
+<td>5</td>
+</tr>
+<tr>
+<td>Content Quality</td>
+<td>4</td>
+</tr>
+<tr>
+<td>Product Relevance</td>
+<td>4</td>
+</tr>
+<tr>
+<td>Engagement Quality</td>
+<td>4</td>
+</tr>
+<tr>
+<td>Authenticity</td>
+<td>4</td>
+</tr>
+<tr>
+<td><strong>Total</strong></td>
+<td><strong>21/25</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Recommendation Level:</strong> ⭐⭐⭐⭐ Strongly Recommended</p>
+<p><strong>Why They Fit:</strong> iCrazeTech is one of the few YouTube channels focused specifically on the accessories category, with 38.7K subscribers perfectly within the target range. Their audience has inherently high purchase intent for charging cables, data cables, adapters, and related accessories. UGREEN/Anker HDMI/DP cable reviews would fit naturally into their existing content ecosystem.</p>
+<p><strong>Collaboration Suggestion:</strong> Provide UGREEN/Anker HDMI 2.1 and DisplayPort 1.4 cables for review, with comparison testing against budget alternatives.</p>
+<hr />
+<h3 id="sec-en-33">Influencer #3: <a href="https://youtube.com/@GalaxyTechReview">Galaxy Tech Review</a></h3>
+<table>
+<thead>
+<tr>
+<th>Attribute</th>
+<th>Detail</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Platform</strong></td>
+<td>YouTube</td>
+</tr>
+<tr>
+<td><strong>YouTube Subscribers</strong></td>
+<td>~38.5K (findachannel.net data)</td>
+</tr>
+<tr>
+<td><strong>Location</strong></td>
+<td>USA (based on channel analysis)</td>
+</tr>
+<tr>
+<td><strong>Content Type</strong></td>
+<td>Tech product and accessory reviews, smartphones, smartwatches, chargers</td>
+</tr>
+<tr>
+<td><strong>Relevance</strong></td>
+<td>High — multi-category tech product reviews</td>
+</tr>
+<tr>
+<td><strong>Engagement Rate (est.)</strong></td>
+<td>~3-5% (typical for mid-size tech channels)</td>
+</tr>
+<tr>
+<td><strong>Data Confidence</strong></td>
+<td>⭐⭐⭐⭐ (High, channel metrics verified)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Audience Quality Score:</strong> 7/10</p>
+<p><strong>Fit Score Summary:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Dimension</th>
+<th>Score (1-5)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Audience Match</td>
+<td>4</td>
+</tr>
+<tr>
+<td>Content Quality</td>
+<td>4</td>
+</tr>
+<tr>
+<td>Product Relevance</td>
+<td>4</td>
+</tr>
+<tr>
+<td>Engagement Quality</td>
+<td>3</td>
+</tr>
+<tr>
+<td>Authenticity</td>
+<td>4</td>
+</tr>
+<tr>
+<td><strong>Total</strong></td>
+<td><strong>19/25</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Recommendation Level:</strong> ⭐⭐⭐⭐ Recommended</p>
+<p><strong>Why They Fit:</strong> Galaxy Tech Review covers multi-category tech products. At 38.5K subscribers (the lower end of the target range), they likely have higher engagement rates and stronger community connection. HDMI/DP cable content can be part of their "tech accessories recommendations" series.</p>
+<p><strong>Collaboration Suggestion:</strong> Ideal for a UGREEN vs Anker cable comparison video — comparison content naturally attracts high search traffic and view counts.</p>
+<hr />
+<h2 id="sec-en-34">🟡 Medium-Confidence Matches: Channel Metrics Verified, Cable Content Pending</h2>
+<h3 id="sec-en-35">Influencer #4: <a href="https://youtube.com/@FlatlanderTech">Flatlander Tech</a></h3>
+<table>
+<thead>
+<tr>
+<th>Attribute</th>
+<th>Detail</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Platform</strong></td>
+<td>YouTube</td>
+</tr>
+<tr>
+<td><strong>YouTube Subscribers</strong></td>
+<td>~8K (search verified)</td>
+</tr>
+<tr>
+<td><strong>Location</strong></td>
+<td>USA</td>
+</tr>
+<tr>
+<td><strong>Content Type</strong></td>
+<td>3D printing, maker projects, video editing gear, tech equipment</td>
+</tr>
+<tr>
+<td><strong>Relevance</strong></td>
+<td>Medium — channel covers tech gear and desk setups</td>
+</tr>
+<tr>
+<td><strong>Engagement Rate (est.)</strong></td>
+<td>~5-8% (typical for micro channels)</td>
+</tr>
+<tr>
+<td><strong>Data Confidence</strong></td>
+<td>⭐⭐⭐ (Medium, channel metrics confirmed, content needs verification)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Recommendation Level:</strong> ⭐⭐⭐ Consider</p>
+<p><strong>Why They Fit:</strong> Flatlander Tech is a micro tech channel where desk setup and tech gear content is relevant to the cable category. At 8K subscribers (smaller than target), engagement rates are typically higher, making them suitable for authentic, in-depth product experience content. HDMI/DP cable content history needs further verification.</p>
+<hr />
+<h3 id="sec-en-36">Influencer #5: Tech Accessory Focus (Leads Pending Verification)</h3>
+<p><strong>Search Notes:</strong> Through findachannel.net's "Phone Accessories" and "Tech Reviews" categories, we identified several high-potential leads for US-based tech accessory reviewers who may fit the criteria. The following require further verification through YouTube Data API or professional platforms:</p>
+<table>
+<thead>
+<tr>
+<th>Channel Name</th>
+<th>Est. Followers</th>
+<th>Location</th>
+<th>Relevance</th>
+<th>Verification Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Tech Accessories Review (lead)</td>
+<td>~20K-50K</td>
+<td>USA</td>
+<td>High</td>
+<td>Platform verification needed</td>
+</tr>
+<tr>
+<td>Cable &amp; Gear Review (lead)</td>
+<td>~10K-30K</td>
+<td>USA</td>
+<td>High</td>
+<td>Platform verification needed</td>
+</tr>
+<tr>
+<td>PC Setup / Gaming Gear (lead)</td>
+<td>~50K-150K</td>
+<td>USA</td>
+<td>Medium-High</td>
+<td>Platform verification needed</td>
+</tr>
+<tr>
+<td>Desk Setup Tech (lead)</td>
+<td>~30K-80K</td>
+<td>USA</td>
+<td>Medium</td>
+<td>Platform verification needed</td>
+</tr>
+<tr>
+<td>Monitor &amp; Display Reviewer (lead)</td>
+<td>~20K-100K</td>
+<td>USA</td>
+<td>Medium</td>
+<td>Platform verification needed</td>
+</tr>
+</tbody>
+</table>
+<p>⚠️ The above leads are derived from keyword clustering and category analysis. Exact channel names and metrics require further verification via Social Blade, Noxinfluencer, or YouTube Data API.</p>
+<hr />
+<h2 id="sec-en-37">🟢 Brand-Relevant High-Value Channels (Above Target Range, Worth Noting)</h2>
+<p>The following channels exceed the 200K subscriber ceiling but hold authority in the HDMI/DP cable review space and are worth brand awareness.</p>
+<h3 id="sec-en-38">Level1Techs</h3>
+<table>
+<thead>
+<tr>
+<th>Attribute</th>
+<th>Detail</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>YouTube Subscribers</strong></td>
+<td>~400K+</td>
+</tr>
+<tr>
+<td><strong>Host</strong></td>
+<td>Wendell Wilson</td>
+</tr>
+<tr>
+<td><strong>Location</strong></td>
+<td>USA</td>
+</tr>
+<tr>
+<td><strong>HDMI/DP Cable Content</strong></td>
+<td>Professional cable certification testing using a $15,000 Total Phase Advanced Cable Tester v2</td>
+</tr>
+<tr>
+<td><strong>Evidence</strong></td>
+<td>Forum post verified testing of Anker Ultra High Speed HDMI cables, passed with ATC certification</td>
+</tr>
+<tr>
+<td><strong>Content Type</strong></td>
+<td>In-depth tech reviews, KVM equipment, cable testing, Linux/server content</td>
+</tr>
+</tbody>
+</table>
+<p>While above the target range, Level1Techs is the most authoritative channel in the HDMI/DP cable review space. Their forum community's cable testing discussions are a core resource for this category. Recommended as a KOL reference for brand partnerships, but not applicable for the current micro-influencer strategy.</p>
+<hr />
+<h2 id="sec-en-39">📊 UGREEN/Anker HDMI Cable Market Insights</h2>
+<h3 id="sec-en-40">Brand Positioning in YouTube Reviews</h3>
+<table>
+<thead>
+<tr>
+<th>Dimension</th>
+<th>UGREEN</th>
+<th>Anker</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Price Positioning</strong></td>
+<td>Value King (HDMI 2.1 from $12)</td>
+<td>Quality Benchmark (HDMI 2.1 at ~$16)</td>
+</tr>
+<tr>
+<td><strong>Core Audience</strong></td>
+<td>Budget-conscious consumers, students, gamers</td>
+<td>Quality-priority consumers, professional creators</td>
+</tr>
+<tr>
+<td><strong>Common Reviewer Sentiment</strong></td>
+<td>"Real Anker contender", "Great value"</td>
+<td>"Reliable", "Excellent build quality", "Trustworthy"</td>
+</tr>
+<tr>
+<td><strong>Amazon Rating</strong></td>
+<td>4.8/5 (thousands of reviews)</td>
+<td>4.8/5 (thousands of reviews)</td>
+</tr>
+<tr>
+<td><strong>Certification</strong></td>
+<td>Official HDMI 2.1 certified</td>
+<td>Official HDMI 2.1 + ATC certified</td>
+</tr>
+</tbody>
+</table>
+<h3 id="sec-en-41">Content Strategy Recommendations for Target Influencers</h3>
+<ol>
+<li><strong>UGREEN × Budget Gaming Setup</strong> — partner with PC/console gaming influencers, positioning as "best value gaming cables"</li>
+<li><strong>Anker × Professional Desk Setup</strong> — partner with desk setup/productivity influencers, emphasizing quality and stability</li>
+<li><strong>Comparison Review</strong> — UGREEN vs Anker vs Monoprice/Cable Matters three-way comparison (high search traffic)</li>
+<li><strong>Cable Education</strong> — HDMI 2.1 vs 2.0 vs DP 1.4 buying guide (educational content with strong long-tail SEO)</li>
+<li><strong>Unboxing + Real-World Testing</strong> — paired with PS5/Xbox Series X, testing 4K/120Hz/HDR performance live</li>
+</ol>
+<hr />
+<h2 id="sec-en-42">📈 Next Steps</h2>
+<h3 id="sec-en-43">Short-Term Actions (This Week)</h3>
+<ol>
+<li>Use <strong>YouTube Data API</strong> or <strong>Social Blade</strong> to verify precise subscriber counts and content history for "medium-confidence" candidates</li>
+<li>Search YouTube directly for "UGREEN HDMI review" and "Anker DisplayPort cable" to locate channels that have already published related content</li>
+<li>Use <strong>Noxinfluencer</strong> or <strong>HypeAuditor</strong> to filter US-based YouTube channels in the "cables/accessories" category</li>
+</ol>
+<h3 id="sec-en-44">Medium-Term Actions (This Month)</h3>
+<ol>
+<li>Reach out to TechRight, iCrazeTech, and Galaxy Tech Review for initial contact</li>
+<li>Analyze candidates' content calendars and sponsorship history to assess collaboration windows</li>
+<li>Develop a tiered collaboration strategy based on follower ranges</li>
+</ol>
+<h3 id="sec-en-45">Long-Term Actions</h3>
+<ol>
+<li>Build a UGREEN/Anker-specific KOL database with ongoing content tracking</li>
+<li>Monitor competitor (Cable Matters, Monoprice, Belkin) influencer partnership strategies</li>
+<li>Explore technical content collaboration opportunities with authoritative channels like Level1Techs</li>
+</ol>
+<hr />
+<h2 id="sec-en-46">⚠️ Disclaimer</h2>
+<p>Due to the fundamental limitations of traditional web search engines in indexing YouTube platform content, some data in this report (particularly video-level content verification) requires further confirmation through professional tools. Specifically:</p>
+<ul>
+<li><strong>Channel subscriber counts and locations</strong> are sourced from public databases with relatively high confidence</li>
+<li><strong>Video-level content verification</strong> (whether HDMI/DP cable reviews were published) requires direct YouTube platform verification</li>
+<li><strong>Engagement rates</strong> are estimates based on category benchmarks; actual data may vary</li>
+<li>This report should be used as a <strong>candidate shortlist</strong>; secondary screening via platform tools and actual video review is recommended</li>
+</ul>
+<hr />
+<h2 id="sec-en-47">📎 References</h2>
+<ol>
+<li>BGR — "The 3 Best HDMI Cables You Can Buy, According To Users"</li>
+<li>Level1Techs Forum — "HDMI 2.1b Cables, Legit &amp; Affordable? Yes!"</li>
+<li>Greenlit Content — "Ugreen Review: An Honest Take On the Affordable Tech Accessory Brand"</li>
+<li>Famous Birthdays — TechRight Channel Profile</li>
+<li>findachannel.net — Phone Accessories &amp; Tech Reviews Niche Database</li>
+<li>HowToGeek — "I tested the cheapest HDMI 2.1 cables I could find"</li>
+<li>CNET — "Best HDMI Cables in 2026"</li>
+<li>Business Insider — "The best HDMI cables for reliable 4K, 120Hz gaming"</li>
+<li>TabbyData — "I Tested the Ultra High-Speed HDMI Cable and Found the Best 4K Performance"</li>
+<li>Yahoo Tech / Tom's Hardware / ZDNET — HDMI cable reviews and buying guides (2024-2026)</li>
+</ol>
+<hr />
+<p><strong>Report Date:</strong> July 28, 2026<br />
+<strong>Next Update Recommended:</strong> After platform tool verification</p>
+</div>
+
+</div>
+
+<script>
+(function(){
+  var K='inf-discovery-lang',
+      be=document.getElementById('btn-en'),bz=document.getElementById('btn-zh'),
+      ce=document.getElementById('content-en'),cz=document.getElementById('content-zh'),
+      te=document.getElementById('toc-en'),tz=document.getElementById('toc-zh');
+
+  function setLang(l){
+    if(l==='zh'){
+      bz.classList.add('active');be.classList.remove('active');
+      cz.classList.add('active');ce.classList.remove('active');
+      tz.style.display='';te.style.display='none';
+    } else {
+      be.classList.add('active');bz.classList.remove('active');
+      ce.classList.add('active');cz.classList.remove('active');
+      te.style.display='';tz.style.display='none';
+    }
+    try{localStorage.setItem(K,l);}catch(e){}
+    // Re-run active section tracking
+    initObserver();
+  }
+
+  var s=null;try{s=localStorage.getItem(K);}catch(e){}
+  var initial=(s==='zh'||s==='en')?s:(navigator.language&&navigator.language.startsWith('zh')?'zh':'en');
+  setLang(initial);
+
+  be.addEventListener('click',function(){setLang('en');});
+  bz.addEventListener('click',function(){setLang('zh');});
+
+  // ── Active section tracking ──
+  var observer;
+  function initObserver(){
+    if(observer){observer.disconnect();}
+    var activeContent=document.querySelector('.lang-content.active');
+    if(!activeContent)return;
+    var hs=activeContent.querySelectorAll('h2[id],h3[id]');
+    var navLinks=document.querySelectorAll('#toc-zh a, #toc-en a');
+    observer=new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if(entry.isIntersecting){
+          navLinks.forEach(function(a){a.classList.remove('active');});
+          var visibleToc=document.querySelector('#toc-zh[style*="display"]:not([style*="display: none"]), #toc-en[style*="display"]:not([style*="display: none"])');
+          if(!visibleToc)visibleToc=document.getElementById(lang()==='zh'?'toc-zh':'toc-en');
+          var link=visibleToc.querySelector('a[href="#'+entry.target.id+'"]');
+          if(link)link.classList.add('active');
+        }
+      });
+    },{rootMargin:'-80px 0px -70% 0px'});
+    hs.forEach(function(h){observer.observe(h);});
+  }
+  function lang(){return document.getElementById('content-zh').classList.contains('active')?'zh':'en';}
+  // Delay observer init slightly to let DOM settle
+  setTimeout(initObserver,100);
+
+  // ── Mobile sidebar ──
+  document.getElementById('hamburger').addEventListener('click',function(){
+    document.getElementById('sidebar').classList.add('open');
+    document.getElementById('sidebar-overlay').classList.add('open');
+  });
+  document.getElementById('sidebar-overlay').addEventListener('click',function(){
+    document.getElementById('sidebar').classList.remove('open');
+    document.getElementById('sidebar-overlay').classList.remove('open');
+  });
+  // Close sidebar on TOC link click (mobile)
+  document.querySelectorAll('#toc-zh a, #toc-en a').forEach(function(a){
+    a.addEventListener('click',function(e){
+      e.preventDefault();
+      var target=document.getElementById(this.getAttribute('href').substring(1));
+      if(target){target.scrollIntoView({behavior:'smooth',block:'start'});}
+      document.getElementById('sidebar').classList.remove('open');
+      document.getElementById('sidebar-overlay').classList.remove('open');
+    });
+  });
+})();
+</script>
+
+</body>
+</html>

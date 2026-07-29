@@ -259,6 +259,14 @@ def build(input_md_path, output_html_path=None):
         md_zh = md_text.strip()
         md_en = md_text.strip()
 
+    # Fallback: if one side is too short (< 200 chars, basically just headers),
+    # use the longer content for both. This handles mis-placed LANG:ZH markers
+    # from claude -p mode where only one language is actually present.
+    if len(md_zh) < 200 or len(md_en) < 200:
+        longer = md_zh if len(md_zh) >= len(md_en) else md_en
+        md_zh = longer
+        md_en = longer
+
     # Convert MD → HTML
     raw_zh = md2html(md_zh)
     raw_en = md2html(md_en)

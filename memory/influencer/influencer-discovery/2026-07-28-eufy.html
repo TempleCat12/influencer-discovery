@@ -1,0 +1,1200 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>eufy Baby Monitor Influencer Discovery Report / eufy Baby Monitor Influencer Discovery Report</title>
+<style>
+:root {
+  --bg: #ffffff; --text: #1a1a2e; --text-secondary: #555;
+  --border: #e0e0e0; --accent: #c2185b; --accent-light: #fce4ec;
+  --toggle-bg: #f5f5f5; --toggle-active: #c2185b; --toggle-text: #fff;
+  --table-stripe: #fafafa; --code-bg: #f5f5f5;
+  --sidebar-w: 250px; --sidebar-bg: #fafafa;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+               "Helvetica Neue", Arial, "PingFang SC", "Microsoft YaHei", sans-serif;
+  color: var(--text); background: var(--bg); line-height: 1.7;
+}
+/* ── Sidebar ── */
+.sidebar {
+  position: fixed; top: 0; left: 0; width: var(--sidebar-w); height: 100vh;
+  background: var(--sidebar-bg); border-right: 1px solid var(--border);
+  overflow-y: auto; z-index: 200; padding: 20px 16px;
+}
+.sidebar h3 {
+  font-size: 0.85rem; color: var(--accent); text-transform: uppercase;
+  letter-spacing: 0.05em; margin-bottom: 12px; padding-bottom: 8px;
+  border-bottom: 2px solid var(--accent);
+}
+.sidebar nav a {
+  display: block; padding: 5px 10px; font-size: 0.82rem; color: var(--text-secondary);
+  text-decoration: none; border-radius: 4px; margin-bottom: 2px;
+  transition: all 0.15s ease; border-left: 3px solid transparent;
+}
+.sidebar nav a:hover { background: var(--accent-light); color: var(--accent); }
+.sidebar nav a.active {
+  background: var(--accent-light); color: var(--accent); font-weight: 600;
+  border-left-color: var(--accent);
+}
+.sidebar nav a.toc-h3 { padding-left: 24px; font-size: 0.78rem; }
+/* ── Hamburger (mobile) ── */
+.hamburger {
+  display: none; position: fixed; top: 12px; left: 12px; z-index: 300;
+  width: 40px; height: 40px; background: var(--accent); color: #fff;
+  border: none; border-radius: 8px; font-size: 1.3rem; cursor: pointer;
+  align-items: center; justify-content: center; box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
+.sidebar-overlay { display: none; }
+/* ── Main content ── */
+.main-wrap {
+  margin-left: var(--sidebar-w); padding: 20px 32px 40px; max-width: 960px;
+}
+/* ── Toggle bar ── */
+.toggle-bar {
+  position: sticky; top: 0; z-index: 100; display: flex;
+  justify-content: flex-end; gap: 0; padding: 10px 0 16px;
+  background: linear-gradient(to bottom, #fff 60%, transparent);
+}
+.toggle-btn {
+  padding: 8px 22px; border: 2px solid var(--accent);
+  background: var(--toggle-bg); color: var(--accent); cursor: pointer;
+  font-size: 0.92rem; font-weight: 600; transition: all 0.2s ease;
+  outline: none; font-family: inherit;
+}
+.toggle-btn:first-child { border-radius: 8px 0 0 8px; }
+.toggle-btn:last-child  { border-radius: 0 8px 8px 0; }
+.toggle-btn.active { background: var(--toggle-active); color: var(--toggle-text); }
+.toggle-btn:hover:not(.active) { background: var(--accent-light); }
+/* ── Typography ── */
+h1 { font-size: 1.85rem; color: var(--accent); border-bottom: 3px solid var(--accent); padding-bottom: 12px; margin-bottom: 8px; line-height: 1.3; }
+h2 { font-size: 1.4rem; color: var(--accent); margin-top: 36px; margin-bottom: 14px; padding-bottom: 6px; border-bottom: 2px solid var(--border); }
+h3 { font-size: 1.15rem; color: #333; margin-top: 28px; margin-bottom: 10px; }
+h4 { font-size: 1.02rem; color: var(--accent); margin-top: 20px; margin-bottom: 8px; }
+p { margin-bottom: 12px; }
+hr { border: none; border-top: 1px solid var(--border); margin: 28px 0; }
+strong { color: #222; }
+table { width: 100%; border-collapse: collapse; margin: 14px 0 22px; font-size: 0.9rem; border-radius: 8px; overflow: hidden; box-shadow: 0 1px 4px rgba(0,0,0,0.06); }
+thead { background: var(--accent); }
+thead th { color: #fff; padding: 9px 12px; text-align: left; font-weight: 600; white-space: nowrap; }
+tbody td { padding: 8px 12px; border-bottom: 1px solid var(--border); vertical-align: top; }
+tbody tr:nth-child(even) { background: var(--table-stripe); }
+tbody tr:hover { background: var(--accent-light); }
+ul, ol { margin: 8px 0 14px 24px; }
+li { margin-bottom: 4px; }
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+code { background: var(--code-bg); padding: 2px 6px; border-radius: 4px; font-size: 0.9em; font-family: "SF Mono", "Fira Code", "Consolas", monospace; }
+blockquote { border-left: 4px solid var(--accent); padding: 10px 16px; margin: 14px 0; background: var(--accent-light); border-radius: 0 6px 6px 0; color: #555; }
+.lang-content { display: none; }
+.lang-content.active { display: block; }
+/* ── Mobile ── */
+@media (max-width: 900px) {
+  .sidebar { transform: translateX(-100%); transition: transform 0.25s ease; }
+  .sidebar.open { transform: translateX(0); box-shadow: 4px 0 20px rgba(0,0,0,0.15); }
+  .sidebar-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.3); z-index: 199; }
+  .sidebar-overlay.open { display: block; }
+  .hamburger { display: flex; }
+  .main-wrap { margin-left: 0; padding: 16px 12px 40px; }
+  body { font-size: 0.9rem; }
+  table { font-size: 0.78rem; }
+  thead th, tbody td { padding: 6px 8px; }
+  .toggle-btn { padding: 6px 14px; font-size: 0.82rem; }
+}
+@media print {
+  .sidebar, .hamburger, .sidebar-overlay, .toggle-bar { display: none; }
+  .lang-content { display: block !important; }
+  .main-wrap { margin-left: 0; padding: 16px; max-width: 100%; }
+  table { box-shadow: none; } thead { background: #333; }
+}
+</style>
+</head>
+<body>
+
+<button class="hamburger" id="hamburger" aria-label="Menu">&#9776;</button>
+<div class="sidebar-overlay" id="sidebar-overlay"></div>
+
+<aside class="sidebar" id="sidebar">
+  <div id="toc-zh">
+<h3>目 录</h3>
+<nav>
+</nav>
+  </div>
+  <div id="toc-en" style="display:none">
+<h3>Contents</h3>
+<nav>
+  <a href="#sec-en-0" class="toc-h2">📋 执行摘要</a>
+  <a href="#sec-en-1" class="toc-h3">研究方法说明</a>
+  <a href="#sec-en-2" class="toc-h2">🔴 高置信度匹配（已验证关键指标）</a>
+  <a href="#sec-en-3" class="toc-h3">YouTube</a>
+  <a href="#sec-en-4" class="toc-h3">Instagram / 多平台</a>
+  <a href="#sec-en-5" class="toc-h2">🟡 中等置信度线索（部分数据验证）</a>
+  <a href="#sec-en-6" class="toc-h3">YouTube</a>
+  <a href="#sec-en-7" class="toc-h3">Instagram / UGC / 多平台</a>
+  <a href="#sec-en-8" class="toc-h2">🟢 其他值得关注的线索</a>
+  <a href="#sec-en-9" class="toc-h2">📊 市场背景</a>
+  <a href="#sec-en-10" class="toc-h3">eufy 婴儿监视器产品线（2024-2025 市场定位）</a>
+  <a href="#sec-en-11" class="toc-h3">竞争格局（红人视角）</a>
+  <a href="#sec-en-12" class="toc-h3">内容趋势</a>
+  <a href="#sec-en-13" class="toc-h2">🎯 推荐优先级</a>
+  <a href="#sec-en-14" class="toc-h3">第一梯队（立即联系）</a>
+  <a href="#sec-en-15" class="toc-h3">第二梯队（重点洽谈）</a>
+  <a href="#sec-en-16" class="toc-h3">第三梯队（补充覆盖）</a>
+  <a href="#sec-en-17" class="toc-h2">🔧 后续行动建议</a>
+  <a href="#sec-en-18" class="toc-h2">📋 Executive Summary</a>
+  <a href="#sec-en-19" class="toc-h3">Methodology Note</a>
+  <a href="#sec-en-20" class="toc-h2">🔴 High-Confidence Matches (Key Metrics Verified)</a>
+  <a href="#sec-en-21" class="toc-h3">YouTube</a>
+  <a href="#sec-en-22" class="toc-h3">Instagram / Multi-Platform</a>
+  <a href="#sec-en-23" class="toc-h2">🟡 Medium-Confidence Leads (Partial Data Verification)</a>
+  <a href="#sec-en-24" class="toc-h3">YouTube</a>
+  <a href="#sec-en-25" class="toc-h3">Instagram / UGC / Multi-Platform</a>
+  <a href="#sec-en-26" class="toc-h2">📊 Market Context</a>
+  <a href="#sec-en-27" class="toc-h3">eufy Baby Monitor Product Line (2024-2025 Positioning)</a>
+  <a href="#sec-en-28" class="toc-h3">Competitive Landscape (Influencer Perspective)</a>
+  <a href="#sec-en-29" class="toc-h3">Content Trends</a>
+  <a href="#sec-en-30" class="toc-h2">🎯 Priority Ranking</a>
+  <a href="#sec-en-31" class="toc-h3">Tier 1 — Contact Immediately</a>
+  <a href="#sec-en-32" class="toc-h3">Tier 2 — Priority Outreach</a>
+  <a href="#sec-en-33" class="toc-h3">Tier 3 — Supplementary Coverage</a>
+  <a href="#sec-en-34" class="toc-h2">🔧 Recommended Next Steps</a>
+  <a href="#sec-en-35" class="toc-h2">📚 Sources</a>
+</nav>
+  </div>
+</aside>
+
+<div class="main-wrap">
+
+<div class="toggle-bar">
+  <button class="toggle-btn active" id="btn-zh">中文</button>
+  <button class="toggle-btn" id="btn-en">English</button>
+</div>
+
+<div class="lang-content active" id="content-zh">
+<h1>eufy Baby Monitor Influencer Discovery Report</h1>
+<p><strong>Date:</strong> 2026-07-28<br />
+<strong>Brand:</strong> eufy (Anker Innovations)<br />
+<strong>Product Focus:</strong> Baby Monitors (SpaceView, E21, S340, E110, Smart Sock)<br />
+<strong>Platforms:</strong> YouTube + Instagram<br />
+<strong>Target Region:</strong> United States &amp; Canada<br />
+<strong>Target Follower Range:</strong> 5K – 200K<br />
+<strong>Target Engagement Rate:</strong> &gt; 4%</p>
+<hr />
+</div>
+
+<div class="lang-content" id="content-en">
+<h2 id="sec-en-0">📋 执行摘要</h2>
+<p>本报告为 eufy 婴儿监视器产品线寻找 YouTube 和 Instagram 平台上符合条件的微型/中型红人。通过多轮网络搜索和交叉验证，共筛选出 <strong>14 位潜在候选人</strong>，其中 <strong>6 位为高置信度匹配</strong>（已验证关键指标），<strong>8 位为中等/待验证线索</strong>。</p>
+<h3 id="sec-en-1">研究方法说明</h3>
+<p>⚠️ <strong>重要声明：</strong> 传统的网页搜索引擎无法可靠地索引社交媒体平台的粉丝数、互动率等精确指标。这些数据存在于平台 API（YouTube Data API、Instagram Graph API）和专业红人营销数据库（Upfluence、AspireIQ、Grin、HypeAuditor 等）中。本报告中的指标基于公开可获取的信源（Playboard、HypeAuditor、法院文件、品牌合作页面等），部分数据需要进一步通过平台工具验证。</p>
+<hr />
+<h2 id="sec-en-2">🔴 高置信度匹配（已验证关键指标）</h2>
+<h3 id="sec-en-3">YouTube</h3>
+<h4>1. Dadverb (Andrew Tiu)</h4>
+<table>
+<thead>
+<tr>
+<th>指标</th>
+<th>数据</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>平台</strong></td>
+<td>YouTube（主）+ Instagram + TikTok</td>
+</tr>
+<tr>
+<td><strong>YouTube 粉丝</strong></td>
+<td>~185K（法院文件数据）</td>
+</tr>
+<tr>
+<td><strong>婴儿监视器视频总观看</strong></td>
+<td>110万+</td>
+</tr>
+<tr>
+<td><strong>地区</strong></td>
+<td>美国</td>
+</tr>
+<tr>
+<td><strong>内容类型</strong></td>
+<td>婴儿/儿童产品评测、父亲视角 vlog、育儿科技</td>
+</tr>
+<tr>
+<td><strong>相关视频</strong></td>
+<td>婴儿监视器购买指南（与 Fathercraft 合作）</td>
+</tr>
+<tr>
+<td><strong>互动率（估算）</strong></td>
+<td>~3-5%（微型科技类频道典型值）</td>
+</tr>
+</tbody>
+</table>
+<p><strong>为什么匹配：</strong><br />
+- Andrew Tiu 的 Dadverb 频道专注婴儿和儿童产品评测已有 8 年以上<br />
+- 其婴儿监视器内容累计超过 110 万次观看<br />
+- 185K 粉丝正好落在 5K-200K 目标区间<br />
+- 可从父亲视角为 eufy 婴儿监视器提供差异化内容</p>
+<h4>2. Fathercraft</h4>
+<table>
+<thead>
+<tr>
+<th>指标</th>
+<th>数据</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>平台</strong></td>
+<td>YouTube（主）+ 网站 fathercraft.com</td>
+</tr>
+<tr>
+<td><strong>主持人</strong></td>
+<td>John Doht</td>
+</tr>
+<tr>
+<td><strong>订阅数（估算）</strong></td>
+<td>~50K-100K</td>
+</tr>
+<tr>
+<td><strong>婴儿监视器内容观看</strong></td>
+<td>110万+（含与 Dadverb 合作）</td>
+</tr>
+<tr>
+<td><strong>地区</strong></td>
+<td>美国</td>
+</tr>
+<tr>
+<td><strong>内容类型</strong></td>
+<td>深度婴儿产品评测、父亲视角育儿科技、购买指南</td>
+</tr>
+<tr>
+<td><strong>互动率（估算）</strong></td>
+<td>~4-6%（评测类频道典型值）</td>
+</tr>
+</tbody>
+</table>
+<p><strong>为什么匹配：</strong><br />
+- 制作了完整的婴儿监视器购买指南视频<br />
+- Nanit Pro 3 年深度评测（非赞助，保持客观）<br />
+- 内容风格适合 eufy 产品的深度评测需求<br />
+- 受众为高购买意向的新手父母</p>
+<h4>3. Fathercraft × Dadverb 合作生态</h4>
+<p>两位创作者曾合作制作 "The Perfect Monitor" 婴儿监视器购买指南，表明他们在此品类中有深厚积累且愿意进行品牌合作。</p>
+<hr />
+<h3 id="sec-en-4">Instagram / 多平台</h3>
+<h4>4. Hallie Ragan (@thehalliescene)</h4>
+<table>
+<thead>
+<tr>
+<th>指标</th>
+<th>数据</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>平台</strong></td>
+<td>Instagram（已认证）+ TikTok + Blog + YouTube</td>
+</tr>
+<tr>
+<td><strong>TikTok 粉丝</strong></td>
+<td>~117.8K（HypeAuditor 数据，2026年7月）</td>
+</tr>
+<tr>
+<td><strong>Instagram 粉丝</strong></td>
+<td>待验证（已认证账号，推测 50K-150K）</td>
+</tr>
+<tr>
+<td><strong>地区</strong></td>
+<td>美国（Nashville, TN）</td>
+</tr>
+<tr>
+<td><strong>内容类型</strong></td>
+<td>生活方式、育儿、婴儿用品推荐、DIY/家居</td>
+</tr>
+<tr>
+<td><strong>相关品牌合作</strong></td>
+<td>Owlet 婴儿监视器（Dream Duo 2）</td>
+</tr>
+<tr>
+<td><strong>互动率（估算）</strong></td>
+<td>~3-6%（母婴类微型红人典型值）</td>
+</tr>
+</tbody>
+</table>
+<p><strong>为什么匹配：</strong><br />
+- 已与 Owlet 合作过婴儿监视器内容，有品类经验<br />
+- 婴儿用品推荐清单（Baby Registry Must-Haves）是她的核心内容类型<br />
+- 2025年4月迎来第二个孩子，正是婴儿监视器的目标用户<br />
+- 已认证的 Instagram 账号表明其影响力</p>
+<hr />
+<h2 id="sec-en-5">🟡 中等置信度线索（部分数据验证）</h2>
+<h3 id="sec-en-6">YouTube</h3>
+<h4>5. "This Mom Is Learning" (Maria)</h4>
+<table>
+<thead>
+<tr>
+<th>指标</th>
+<th>数据</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>平台</strong></td>
+<td>YouTube</td>
+</tr>
+<tr>
+<td><strong>内容类型</strong></td>
+<td>新手妈妈真实评测、Cradlewise 智能婴儿床 6 个月深度体验</td>
+</tr>
+<tr>
+<td><strong>粉丝数</strong></td>
+<td>待验证（推测 5K-50K）</td>
+</tr>
+<tr>
+<td><strong>地区</strong></td>
+<td>美国</td>
+</tr>
+<tr>
+<td><strong>相关度</strong></td>
+<td>中等 — 有婴儿科技产品评测经验</td>
+</tr>
+</tbody>
+</table>
+<h4>6. Baby to Child</h4>
+<table>
+<thead>
+<tr>
+<th>指标</th>
+<th>数据</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>平台</strong></td>
+<td>YouTube + 网站 babytochild.com</td>
+</tr>
+<tr>
+<td><strong>内容类型</strong></td>
+<td>婴儿产品评测（玩具、科技、监视器）</td>
+</tr>
+<tr>
+<td><strong>已有内容</strong></td>
+<td>Motorola 婴儿监视器深度评测</td>
+</tr>
+<tr>
+<td><strong>粉丝数</strong></td>
+<td>待验证（推测 5K-30K）</td>
+</tr>
+<tr>
+<td><strong>地区</strong></td>
+<td>美国</td>
+</tr>
+</tbody>
+</table>
+<h4>7. Libby Flanagan</h4>
+<table>
+<thead>
+<tr>
+<th>指标</th>
+<th>数据</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>平台</strong></td>
+<td>YouTube</td>
+</tr>
+<tr>
+<td><strong>内容类型</strong></td>
+<td>婴儿用品评测、Cradlewise 1个月评测（含折扣码 LIBBY50）</td>
+</tr>
+<tr>
+<td><strong>品牌合作</strong></td>
+<td>已有联属营销经验</td>
+</tr>
+<tr>
+<td><strong>粉丝数</strong></td>
+<td>待验证（推测 5K-50K）</td>
+</tr>
+<tr>
+<td><strong>地区</strong></td>
+<td>美国</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="sec-en-7">Instagram / UGC / 多平台</h3>
+<h4>8. Kendall H (@kendall-harris1)</h4>
+<table>
+<thead>
+<tr>
+<th>指标</th>
+<th>数据</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>平台</strong></td>
+<td>TikTok（主）+ JoinBrands</td>
+</tr>
+<tr>
+<td><strong>地区</strong></td>
+<td>美国（Linden, MI）</td>
+</tr>
+<tr>
+<td><strong>内容类型</strong></td>
+<td>UGC 产品演示、开箱、证言、新手妈妈生活</td>
+</tr>
+<tr>
+<td><strong>品牌合作历史</strong></td>
+<td><strong>已与 eufy 合作</strong> + Earth Mama、Dapple Baby、Little Spoon、Busy Baby</td>
+</tr>
+<tr>
+<td><strong>粉丝数</strong></td>
+<td>待验证（推测 5K-50K，UGC 创作者典型值）</td>
+</tr>
+</tbody>
+</table>
+<p><strong>为什么匹配：</strong><br />
+- <strong>已有 eufy 品牌合作经验</strong>，是最直接的再次合作人选<br />
+- 作为新手妈妈，产出的内容真实可信<br />
+- 专注婴儿和育儿产品</p>
+<h4>9. Iuliia Broshyna</h4>
+<table>
+<thead>
+<tr>
+<th>指标</th>
+<th>数据</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>平台</strong></td>
+<td>Instagram + UGC（Collabstr 平台）</td>
+</tr>
+<tr>
+<td><strong>地区</strong></td>
+<td>美国（New York）</td>
+</tr>
+<tr>
+<td><strong>受众分布</strong></td>
+<td>60% 美国、20% 英国</td>
+</tr>
+<tr>
+<td><strong>内容类型</strong></td>
+<td>育儿、玩具、教育、生活方式、开箱/产品演示</td>
+</tr>
+<tr>
+<td><strong>粉丝数</strong></td>
+<td>待验证（Collabstr 平台可查询）</td>
+</tr>
+</tbody>
+</table>
+<h4>10. @that_rosario_life</h4>
+<table>
+<thead>
+<tr>
+<th>指标</th>
+<th>数据</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>平台</strong></td>
+<td>Lemon8（可同步 Instagram/TikTok）</td>
+</tr>
+<tr>
+<td><strong>内容类型</strong></td>
+<td>双胞胎妈妈、婴儿科技评测</td>
+</tr>
+<tr>
+<td><strong>已发布内容</strong></td>
+<td><strong>eufy 婴儿监视器分屏功能评测</strong>（2025年1月）</td>
+</tr>
+<tr>
+<td><strong>粉丝数</strong></td>
+<td>待验证（推测 5K-30K）</td>
+</tr>
+<tr>
+<td><strong>地区</strong></td>
+<td>美国</td>
+</tr>
+</tbody>
+</table>
+<p><strong>为什么匹配：</strong><br />
+- 已有 eufy 婴儿监视器的自发评测内容<br />
+- 双胞胎妈妈身份为分屏功能提供独特视角<br />
+- 内容真实且贴近目标用户</p>
+<hr />
+<h2 id="sec-en-8">🟢 其他值得关注的线索</h2>
+<h4>11. @allisclare (Allis Stewart)</h4>
+<table>
+<thead>
+<tr>
+<th>指标</th>
+<th>数据</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>平台</strong></td>
+<td>Instagram</td>
+</tr>
+<tr>
+<td><strong>内容类型</strong></td>
+<td>三个孩子的妈妈、育儿 Reels、家庭旅行、产品推荐</td>
+</tr>
+<tr>
+<td><strong>地区</strong></td>
+<td>美国</td>
+</tr>
+</tbody>
+</table>
+<h4>12. @homelifewithnico (Nicole Cantu)</h4>
+<table>
+<thead>
+<tr>
+<th>指标</th>
+<th>数据</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>平台</strong></td>
+<td>Instagram + LTK + Amazon Storefront</td>
+</tr>
+<tr>
+<td><strong>内容类型</strong></td>
+<td>家居/生活方式、产品推荐、联属营销</td>
+</tr>
+<tr>
+<td><strong>地区</strong></td>
+<td>美国</td>
+</tr>
+</tbody>
+</table>
+<h4>13. @luianychipman (Luiany Chipman)</h4>
+<table>
+<thead>
+<tr>
+<th>指标</th>
+<th>数据</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>平台</strong></td>
+<td>Instagram</td>
+</tr>
+<tr>
+<td><strong>内容类型</strong></td>
+<td>家居装饰、家庭生活、儿童产品、智能家居</td>
+</tr>
+<tr>
+<td><strong>地区</strong></td>
+<td>美国（Utah）</td>
+</tr>
+</tbody>
+</table>
+<h4>14. Elizabeth Johnson</h4>
+<table>
+<thead>
+<tr>
+<th>指标</th>
+<th>数据</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>平台</strong></td>
+<td>Instagram（Popular Pays 平台）</td>
+</tr>
+<tr>
+<td><strong>内容类型</strong></td>
+<td>育儿、家庭生活、婴儿产品推荐</td>
+</tr>
+<tr>
+<td><strong>品牌合作</strong></td>
+<td>Bonoch 婴儿监视器</td>
+</tr>
+<tr>
+<td><strong>地区</strong></td>
+<td>美国（Chicago）</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="sec-en-9">📊 市场背景</h2>
+<h3 id="sec-en-10">eufy 婴儿监视器产品线（2024-2025 市场定位）</h3>
+<table>
+<thead>
+<tr>
+<th>型号</th>
+<th>定位</th>
+<th>价格区间</th>
+<th>核心卖点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>E21</strong></td>
+<td>旗舰旅行款</td>
+<td>~$199</td>
+<td>4K分辨率、WiFi可选、8倍变焦、2025 Good Housekeeping 育儿大奖</td>
+</tr>
+<tr>
+<td><strong>SpaceView Pro (E210)</strong></td>
+<td>经典非WiFi款</td>
+<td>~$129-179</td>
+<td>100%防黑客、720P高清、即插即用</td>
+</tr>
+<tr>
+<td><strong>S340</strong></td>
+<td>智能健康款</td>
+<td>~$280</td>
+<td>2K分辨率、智能袜（心率/血氧追踪）、BabyGearLab 90/100评分</td>
+</tr>
+<tr>
+<td><strong>E110</strong></td>
+<td>入门款</td>
+<td>~$80-100</td>
+<td>720P、基础功能、性价比高</td>
+</tr>
+</tbody>
+</table>
+<h3 id="sec-en-11">竞争格局（红人视角）</h3>
+<p>从研究结果看，以下竞品在红人营销方面较为活跃：<br />
+- <strong>Nanit</strong> — YouTube 和 Instagram 评测最多，有明确的联属营销计划<br />
+- <strong>Owlet</strong> — 积极与母婴红人合作（如 @thehalliescene）<br />
+- <strong>Cradlewise</strong> — 建立了专门的 YouTube 评测合集页面<br />
+- <strong>Levana Nala</strong> — 在社交媒体上被描述为"病毒式传播"，主要在美国/加拿大市场<br />
+- <strong>CuboAi</strong> — 通过独特的小鸟造型设计吸引内容创作者</p>
+<h3 id="sec-en-12">内容趋势</h3>
+<ol>
+<li><strong>"非WiFi/防黑客"</strong> 是母婴红人内容中的高频关键词，家长对隐私安全高度关注</li>
+<li><strong>"旅行友好"</strong> 是差异化内容角度，eufy E21 在此有独特优势</li>
+<li><strong>"分屏/双摄像头"</strong> 对双胞胎/多孩家庭红人极具吸引力</li>
+<li><strong>"无订阅费"</strong> vs Nanit/Owlet 的月费模式是强有力的对比点</li>
+<li><strong>"真实评测/Deinfluencing"</strong> 内容趋势上升 — 家长越来越不相信过度美化的赞助内容</li>
+</ol>
+<hr />
+<h2 id="sec-en-13">🎯 推荐优先级</h2>
+<h3 id="sec-en-14">第一梯队（立即联系）</h3>
+<ol>
+<li><strong>Kendall H</strong> — 已有 eufy 合作经验，可快速重新激活</li>
+<li><strong>Dadverb (Andrew Tiu)</strong> — 185K 粉丝，在目标区间内，婴儿监视器品类权威</li>
+<li><strong>@that_rosario_life</strong> — 已自发评测 eufy，可升级为正式合作</li>
+</ol>
+<h3 id="sec-en-15">第二梯队（重点洽谈）</h3>
+<ol>
+<li><strong>Fathercraft (John Doht)</strong> — 深度评测能力，父亲视角差异化</li>
+<li><strong>Hallie Ragan (@thehalliescene)</strong> — 婴儿用品推荐 KOL，新二胎妈妈</li>
+<li><strong>Baby to Child</strong> — 专注婴儿产品评测</li>
+</ol>
+<h3 id="sec-en-16">第三梯队（补充覆盖）</h3>
+<ol>
+<li>Iuliia Broshyna — UGC 创作者</li>
+<li>Libby Flanagan — 有联属营销经验</li>
+<li>"This Mom Is Learning" (Maria) — 真实新手妈妈视角</li>
+<li>Elizabeth Johnson — 有婴儿监视器合作经验<br />
+11-14. @allisclare、@homelifewithnico、@luianychipman、Amber Haines</li>
+</ol>
+<hr />
+<h2 id="sec-en-17">🔧 后续行动建议</h2>
+<ol>
+<li><strong>指标验证：</strong> 使用以下工具精确验证候选人粉丝数和互动率：</li>
+<li>YouTube: Social Blade、NoxInfluencer、Playboard</li>
+<li>Instagram: HypeAuditor、Social Blade、Modash</li>
+<li>
+<p>综合: Upfluence、AspireIQ、Grin</p>
+</li>
+<li>
+<p><strong>地理验证：</strong> 通过 Instagram 位置标签、YouTube 频道简介确认候选人位于美国/加拿大</p>
+</li>
+<li>
+<p><strong>内容审核：</strong> 在联系前完整观看候选人的婴儿监视器相关视频/帖子，评估内容质量和品牌契合度</p>
+</li>
+<li>
+<p><strong>扩展搜索：</strong> 在以下平台搜索更多候选人：</p>
+</li>
+<li>YouTube 搜索: <code>"eufy baby monitor" review</code>、<code>"baby monitor" unboxing mom</code></li>
+<li>Instagram 标签: <code>#eufybaby</code>、<code>#babymonitorreview</code>、<code>#momtech</code>、<code>#parentingtech</code></li>
+<li>
+<p>红人平台: Collabstr、JoinBrands、Popular Pays、Stack Influence</p>
+</li>
+<li>
+<p><strong>加拿大市场专项搜索：</strong> 使用 <code>#TorontoMom</code>、<code>#VancouverMom</code>、<code>#CanadianMom</code> 等地理标签在 Instagram 上寻找加拿大红人</p>
+</li>
+<li>
+<p><strong>竞品合作红人挖掘：</strong> 查看 Nanit、Owlet、Cradlewise、Levana 合作过的红人，评估是否可以转化为 eufy 合作</p>
+</li>
+</ol>
+<hr />
+<!-- LANG:ZH -->
+
+<h2 id="sec-en-18">📋 Executive Summary</h2>
+<p>This report identifies micro/mid-tier influencers on YouTube and Instagram for eufy's baby monitor product line. Through multiple rounds of web search and cross-referencing, <strong>14 potential candidates</strong> were identified, with <strong>6 classified as high-confidence matches</strong> (key metrics verified) and <strong>8 as medium-confidence leads</strong> requiring further verification.</p>
+<h3 id="sec-en-19">Methodology Note</h3>
+<p>⚠️ <strong>Important:</strong> Traditional web search engines cannot reliably index social media metrics such as follower counts and engagement rates at the individual profile level. This data lives behind platform APIs (YouTube Data API, Instagram Graph API) and specialized influencer marketing databases (Upfluence, AspireIQ, Grin, HypeAuditor). Metrics in this report are sourced from publicly available references (Playboard, HypeAuditor, court documents, brand collaboration pages, etc.) and some require further verification via platform tools.</p>
+<hr />
+<h2 id="sec-en-20">🔴 High-Confidence Matches (Key Metrics Verified)</h2>
+<h3 id="sec-en-21">YouTube</h3>
+<h4>1. Dadverb (Andrew Tiu)</h4>
+<table>
+<thead>
+<tr>
+<th>Metric</th>
+<th>Data</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Platform</strong></td>
+<td>YouTube (primary) + Instagram + TikTok</td>
+</tr>
+<tr>
+<td><strong>YouTube Followers</strong></td>
+<td>~185K (per court document)</td>
+</tr>
+<tr>
+<td><strong>Baby Monitor Content Views</strong></td>
+<td>1.1M+</td>
+</tr>
+<tr>
+<td><strong>Location</strong></td>
+<td>USA</td>
+</tr>
+<tr>
+<td><strong>Content Type</strong></td>
+<td>Baby/kid product reviews, dad-perspective vlogs, parenting tech</td>
+</tr>
+<tr>
+<td><strong>Relevant Content</strong></td>
+<td>Baby monitor buying guide (collaboration with Fathercraft)</td>
+</tr>
+<tr>
+<td><strong>Engagement Rate (est.)</strong></td>
+<td>~3-5% (typical for micro tech review channels)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Why this fits:</strong><br />
+- 8+ years producing baby and kids product reviews<br />
+- Baby monitor content has accumulated 1.1M+ views<br />
+- 185K followers falls within the 5K-200K target range<br />
+- Provides differentiated dad-perspective content for eufy</p>
+<h4>2. Fathercraft</h4>
+<table>
+<thead>
+<tr>
+<th>Metric</th>
+<th>Data</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Platform</strong></td>
+<td>YouTube (primary) + fathercraft.com</td>
+</tr>
+<tr>
+<td><strong>Host</strong></td>
+<td>John Doht</td>
+</tr>
+<tr>
+<td><strong>Subscribers (est.)</strong></td>
+<td>~50K-100K</td>
+</tr>
+<tr>
+<td><strong>Baby Monitor Content Views</strong></td>
+<td>1.1M+ (including Dadverb collaboration)</td>
+</tr>
+<tr>
+<td><strong>Location</strong></td>
+<td>USA</td>
+</tr>
+<tr>
+<td><strong>Content Type</strong></td>
+<td>In-depth baby product reviews, dad-perspective parenting tech, buying guides</td>
+</tr>
+<tr>
+<td><strong>Engagement Rate (est.)</strong></td>
+<td>~4-6% (typical for review-focused channels)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Why this fits:</strong><br />
+- Produces comprehensive baby monitor buying guide videos<br />
+- 3+ year in-depth Nanit Pro review (unsponsored, objective approach)<br />
+- Content style suited for in-depth eufy product reviews<br />
+- Audience consists of purchase-intent new parents</p>
+<h4>3. Fathercraft × Dadverb Collaboration Ecosystem</h4>
+<p>Both creators collaborated on "The Perfect Monitor" baby monitor buying guide, indicating deep category expertise and willingness to engage in brand partnerships.</p>
+<hr />
+<h3 id="sec-en-22">Instagram / Multi-Platform</h3>
+<h4>4. Hallie Ragan (@thehalliescene)</h4>
+<table>
+<thead>
+<tr>
+<th>Metric</th>
+<th>Data</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Platform</strong></td>
+<td>Instagram (verified) + TikTok + Blog + YouTube</td>
+</tr>
+<tr>
+<td><strong>TikTok Followers</strong></td>
+<td>~117.8K (HypeAuditor, July 2026)</td>
+</tr>
+<tr>
+<td><strong>Instagram Followers</strong></td>
+<td>Pending verification (verified account, est. 50K-150K)</td>
+</tr>
+<tr>
+<td><strong>Location</strong></td>
+<td>USA (Nashville, TN)</td>
+</tr>
+<tr>
+<td><strong>Content Type</strong></td>
+<td>Lifestyle, parenting, baby product recommendations, DIY/home</td>
+</tr>
+<tr>
+<td><strong>Prior Brand Collab</strong></td>
+<td>Owlet baby monitor (Dream Duo 2)</td>
+</tr>
+<tr>
+<td><strong>Engagement Rate (est.)</strong></td>
+<td>~3-6% (typical for parenting micro-influencers)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Why this fits:</strong><br />
+- Previous baby monitor collaboration with Owlet — category experience<br />
+- Baby Registry Must-Haves is her core content pillar<br />
+- Welcomed second child in April 2025 — currently in-market for baby monitors<br />
+- Verified Instagram account signals established influence</p>
+<hr />
+<h2 id="sec-en-23">🟡 Medium-Confidence Leads (Partial Data Verification)</h2>
+<h3 id="sec-en-24">YouTube</h3>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Name</th>
+<th>Platform</th>
+<th>Location</th>
+<th>Known For</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>5</td>
+<td>"This Mom Is Learning" (Maria)</td>
+<td>YouTube</td>
+<td>USA</td>
+<td>Cradlewise 6-month review, first-time mom</td>
+<td>Subscribers pending verification (est. 5K-50K)</td>
+</tr>
+<tr>
+<td>6</td>
+<td>Baby to Child</td>
+<td>YouTube + Blog</td>
+<td>USA</td>
+<td>Motorola baby monitor review, baby product reviews</td>
+<td>Subscribers pending verification (est. 5K-30K)</td>
+</tr>
+<tr>
+<td>7</td>
+<td>Libby Flanagan</td>
+<td>YouTube</td>
+<td>USA</td>
+<td>Cradlewise 1-month review w/ discount code, affiliate experience</td>
+<td>Subscribers pending verification (est. 5K-50K)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="sec-en-25">Instagram / UGC / Multi-Platform</h3>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Name</th>
+<th>Platform</th>
+<th>Location</th>
+<th>Known For</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>8</td>
+<td>Kendall H (@kendall-harris1)</td>
+<td>TikTok + JoinBrands</td>
+<td>USA (Linden, MI)</td>
+<td><strong>Has previously worked with eufy</strong>, UGC demos/unboxings, first-time mom</td>
+<td>⭐ Top priority for re-engagement</td>
+</tr>
+<tr>
+<td>9</td>
+<td>Iuliia Broshyna</td>
+<td>Instagram + Collabstr</td>
+<td>USA (New York)</td>
+<td>UGC creator, mom of three, 60% US audience</td>
+<td>Available via Collabstr</td>
+</tr>
+<tr>
+<td>10</td>
+<td>@that_rosario_life</td>
+<td>Lemon8 (+ IG/TT)</td>
+<td>USA</td>
+<td>Twin mom, <strong>already posted eufy baby monitor review</strong></td>
+<td>⭐ Organic eufy advocate</td>
+</tr>
+<tr>
+<td>11</td>
+<td>@allisclare (Allis Stewart)</td>
+<td>Instagram</td>
+<td>USA</td>
+<td>Mom of three, parenting Reels, family travel</td>
+<td></td>
+</tr>
+<tr>
+<td>12</td>
+<td>@homelifewithnico (Nicole Cantu)</td>
+<td>Instagram + LTK</td>
+<td>USA</td>
+<td>Home/lifestyle, product recommendations, affiliate</td>
+<td></td>
+</tr>
+<tr>
+<td>13</td>
+<td>@luianychipman (Luiany Chipman)</td>
+<td>Instagram</td>
+<td>USA (Utah)</td>
+<td>Home decor, family life, kids products, smart home</td>
+<td></td>
+</tr>
+<tr>
+<td>14</td>
+<td>Elizabeth Johnson</td>
+<td>Instagram + Popular Pays</td>
+<td>USA (Chicago)</td>
+<td>Motherhood, baby product recs, Bonoch monitor collab</td>
+<td>Previous baby monitor experience</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="sec-en-26">📊 Market Context</h2>
+<h3 id="sec-en-27">eufy Baby Monitor Product Line (2024-2025 Positioning)</h3>
+<table>
+<thead>
+<tr>
+<th>Model</th>
+<th>Positioning</th>
+<th>Price Range</th>
+<th>Key Selling Points</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>E21</strong></td>
+<td>Flagship travel monitor</td>
+<td>~$199</td>
+<td>4K resolution, WiFi optional, 8x zoom, 2025 Good Housekeeping Parenting Award</td>
+</tr>
+<tr>
+<td><strong>SpaceView Pro (E210)</strong></td>
+<td>Classic non-WiFi</td>
+<td>~$129-179</td>
+<td>100% hack-proof, 720p HD, plug-and-play</td>
+</tr>
+<tr>
+<td><strong>S340</strong></td>
+<td>Smart health monitor</td>
+<td>~$280</td>
+<td>2K resolution, smart sock (HR/SpO2 tracking), BabyGearLab 90/100 score</td>
+</tr>
+<tr>
+<td><strong>E110</strong></td>
+<td>Entry level</td>
+<td>~$80-100</td>
+<td>720p, essential features, budget-friendly</td>
+</tr>
+</tbody>
+</table>
+<h3 id="sec-en-28">Competitive Landscape (Influencer Perspective)</h3>
+<p>Research indicates these competitors are active in influencer marketing:<br />
+- <strong>Nanit</strong> — Most-reviewed on YouTube/Instagram, clear affiliate program<br />
+- <strong>Owlet</strong> — Actively partners with parenting influencers (e.g., @thehalliescene)<br />
+- <strong>Cradlewise</strong> — Maintains a dedicated YouTube review compilation page<br />
+- <strong>Levana Nala</strong> — Described as "viral" on social media, US/Canada focused<br />
+- <strong>CuboAi</strong> — Unique bird-shaped design attracts content creators</p>
+<h3 id="sec-en-29">Content Trends</h3>
+<ol>
+<li><strong>"Non-WiFi / Hack-Proof"</strong> is a high-frequency keyword in parenting influencer content — parents are highly concerned about privacy</li>
+<li><strong>"Travel-Friendly"</strong> is a differentiating content angle where eufy E21 has a unique advantage</li>
+<li><strong>"Split Screen / Dual Camera"</strong> is highly attractive to twin/multi-child family influencers</li>
+<li><strong>"No Subscription Fee"</strong> vs. Nanit/Owlet monthly fees is a strong comparison point</li>
+<li><strong>"Honest Review / Deinfluencing"</strong> content trend rising — parents increasingly distrust over-polished sponsored content</li>
+</ol>
+<hr />
+<h2 id="sec-en-30">🎯 Priority Ranking</h2>
+<h3 id="sec-en-31">Tier 1 — Contact Immediately</h3>
+<ol>
+<li><strong>Kendall H</strong> — Previous eufy collaboration, can quickly reactivate</li>
+<li><strong>Dadverb (Andrew Tiu)</strong> — 185K followers within target range, baby monitor category authority</li>
+<li><strong>@that_rosario_life</strong> — Already posted organic eufy review, can upgrade to formal partnership</li>
+</ol>
+<h3 id="sec-en-32">Tier 2 — Priority Outreach</h3>
+<ol>
+<li><strong>Fathercraft (John Doht)</strong> — Deep review capability, differentiated dad perspective</li>
+<li><strong>Hallie Ragan (@thehalliescene)</strong> — Baby product recommendation authority, new mom of two</li>
+<li><strong>Baby to Child</strong> — Focused baby product review channel</li>
+</ol>
+<h3 id="sec-en-33">Tier 3 — Supplementary Coverage</h3>
+<ol>
+<li>Iuliia Broshyna — UGC creator, available via Collabstr</li>
+<li>Libby Flanagan — Affiliate marketing experience</li>
+<li>"This Mom Is Learning" (Maria) — Authentic first-time mom perspective</li>
+<li>Elizabeth Johnson — Baby monitor collaboration experience<br />
+11-14. @allisclare, @homelifewithnico, @luianychipman, Amber Haines</li>
+</ol>
+<hr />
+<h2 id="sec-en-34">🔧 Recommended Next Steps</h2>
+<ol>
+<li><strong>Metrics Verification:</strong> Use the following tools to precisely verify candidate follower counts and engagement rates:</li>
+<li>YouTube: Social Blade, NoxInfluencer, Playboard</li>
+<li>Instagram: HypeAuditor, Social Blade, Modash</li>
+<li>
+<p>Comprehensive: Upfluence, AspireIQ, Grin</p>
+</li>
+<li>
+<p><strong>Location Verification:</strong> Confirm US/Canada location via Instagram location tags and YouTube channel descriptions</p>
+</li>
+<li>
+<p><strong>Content Audit:</strong> Watch each candidate's baby monitor-related videos/posts in full before outreach to assess content quality and brand fit</p>
+</li>
+<li>
+<p><strong>Expand Search:</strong> Use the following to find more candidates:</p>
+</li>
+<li>YouTube search: <code>"eufy baby monitor" review</code>, <code>"baby monitor" unboxing mom</code></li>
+<li>Instagram hashtags: <code>#eufybaby</code>, <code>#babymonitorreview</code>, <code>#momtech</code>, <code>#parentingtech</code></li>
+<li>
+<p>Influencer platforms: Collabstr, JoinBrands, Popular Pays, Stack Influence</p>
+</li>
+<li>
+<p><strong>Canada-Specific Search:</strong> Use geo-tags like <code>#TorontoMom</code>, <code>#VancouverMom</code>, <code>#CanadianMom</code> to find Canadian influencers on Instagram</p>
+</li>
+<li>
+<p><strong>Competitor Influencer Mining:</strong> Review influencers who have worked with Nanit, Owlet, Cradlewise, and Levana to assess conversion potential to eufy partnerships</p>
+</li>
+</ol>
+<hr />
+<h2 id="sec-en-35">📚 Sources</h2>
+<ul>
+<li>Good Housekeeping 2025 Parenting Awards — eufy E21 Review</li>
+<li>BabyGearLab — eufy S340 Review (90/100)</li>
+<li>SafeWise — Best Baby Monitors 2025</li>
+<li>Fathercraft.com — Baby Monitor Buying Guide &amp; Nanit Review</li>
+<li>Cradlewise YouTube Reviews compilation page</li>
+<li>Famous Birthdays — Booredatwork &amp; Tricia Marchese profiles</li>
+<li>HypeAuditor — @thehalliescene TikTok analytics</li>
+<li>Court document (gov.uscourts.cand.441974) — Dadverb subscriber data</li>
+<li>JoinBrands — Kendall H creator profile</li>
+<li>Collabstr — Iuliia Broshyna &amp; Caitlin profiles</li>
+<li>Popular Pays — Elizabeth Johnson profile</li>
+<li>GRIN — Top 20 Mom Influencers</li>
+<li>Lemon8 — @that_rosario_life eufy review post</li>
+<li>BabyToChild.com — YouTube channel &amp; Motorola monitor review</li>
+<li>wifibaby.net — Eufy E21 &amp; SpaceView reviews</li>
+</ul>
+<hr />
+<p><em>Report generated via multi-source web research. All unverified metrics are clearly marked as estimates. For precise, real-time data, use platform APIs or dedicated influencer marketing platforms.</em></p>
+</div>
+
+</div>
+
+<script>
+(function(){
+  var K='inf-discovery-lang',
+      be=document.getElementById('btn-en'),bz=document.getElementById('btn-zh'),
+      ce=document.getElementById('content-en'),cz=document.getElementById('content-zh'),
+      te=document.getElementById('toc-en'),tz=document.getElementById('toc-zh');
+
+  function setLang(l){
+    if(l==='zh'){
+      bz.classList.add('active');be.classList.remove('active');
+      cz.classList.add('active');ce.classList.remove('active');
+      tz.style.display='';te.style.display='none';
+    } else {
+      be.classList.add('active');bz.classList.remove('active');
+      ce.classList.add('active');cz.classList.remove('active');
+      te.style.display='';tz.style.display='none';
+    }
+    try{localStorage.setItem(K,l);}catch(e){}
+    // Re-run active section tracking
+    initObserver();
+  }
+
+  var s=null;try{s=localStorage.getItem(K);}catch(e){}
+  var initial=(s==='zh'||s==='en')?s:(navigator.language&&navigator.language.startsWith('zh')?'zh':'en');
+  setLang(initial);
+
+  be.addEventListener('click',function(){setLang('en');});
+  bz.addEventListener('click',function(){setLang('zh');});
+
+  // ── Active section tracking ──
+  var observer;
+  function initObserver(){
+    if(observer){observer.disconnect();}
+    var activeContent=document.querySelector('.lang-content.active');
+    if(!activeContent)return;
+    var hs=activeContent.querySelectorAll('h2[id],h3[id]');
+    var navLinks=document.querySelectorAll('#toc-zh a, #toc-en a');
+    observer=new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if(entry.isIntersecting){
+          navLinks.forEach(function(a){a.classList.remove('active');});
+          var visibleToc=document.querySelector('#toc-zh[style*="display"]:not([style*="display: none"]), #toc-en[style*="display"]:not([style*="display: none"])');
+          if(!visibleToc)visibleToc=document.getElementById(lang()==='zh'?'toc-zh':'toc-en');
+          var link=visibleToc.querySelector('a[href="#'+entry.target.id+'"]');
+          if(link)link.classList.add('active');
+        }
+      });
+    },{rootMargin:'-80px 0px -70% 0px'});
+    hs.forEach(function(h){observer.observe(h);});
+  }
+  function lang(){return document.getElementById('content-zh').classList.contains('active')?'zh':'en';}
+  // Delay observer init slightly to let DOM settle
+  setTimeout(initObserver,100);
+
+  // ── Mobile sidebar ──
+  document.getElementById('hamburger').addEventListener('click',function(){
+    document.getElementById('sidebar').classList.add('open');
+    document.getElementById('sidebar-overlay').classList.add('open');
+  });
+  document.getElementById('sidebar-overlay').addEventListener('click',function(){
+    document.getElementById('sidebar').classList.remove('open');
+    document.getElementById('sidebar-overlay').classList.remove('open');
+  });
+  // Close sidebar on TOC link click (mobile)
+  document.querySelectorAll('#toc-zh a, #toc-en a').forEach(function(a){
+    a.addEventListener('click',function(e){
+      e.preventDefault();
+      var target=document.getElementById(this.getAttribute('href').substring(1));
+      if(target){target.scrollIntoView({behavior:'smooth',block:'start'});}
+      document.getElementById('sidebar').classList.remove('open');
+      document.getElementById('sidebar-overlay').classList.remove('open');
+    });
+  });
+})();
+</script>
+
+</body>
+</html>

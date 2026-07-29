@@ -1,0 +1,2828 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Momcozy 婴儿监视器 YouTube 红人发现报告 / Momcozy Baby Monitor YouTube Influencer Discovery Report</title>
+<style>
+:root {
+  --bg: #ffffff; --text: #1a1a2e; --text-secondary: #555;
+  --border: #e0e0e0; --accent: #c2185b; --accent-light: #fce4ec;
+  --toggle-bg: #f5f5f5; --toggle-active: #c2185b; --toggle-text: #fff;
+  --table-stripe: #fafafa; --code-bg: #f5f5f5;
+  --sidebar-w: 250px; --sidebar-bg: #fafafa;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+               "Helvetica Neue", Arial, "PingFang SC", "Microsoft YaHei", sans-serif;
+  color: var(--text); background: var(--bg); line-height: 1.7;
+}
+/* ── Sidebar ── */
+.sidebar {
+  position: fixed; top: 0; left: 0; width: var(--sidebar-w); height: 100vh;
+  background: var(--sidebar-bg); border-right: 1px solid var(--border);
+  overflow-y: auto; z-index: 200; padding: 20px 16px;
+}
+.sidebar h3 {
+  font-size: 0.85rem; color: var(--accent); text-transform: uppercase;
+  letter-spacing: 0.05em; margin-bottom: 12px; padding-bottom: 8px;
+  border-bottom: 2px solid var(--accent);
+}
+.sidebar nav a {
+  display: block; padding: 5px 10px; font-size: 0.82rem; color: var(--text-secondary);
+  text-decoration: none; border-radius: 4px; margin-bottom: 2px;
+  transition: all 0.15s ease; border-left: 3px solid transparent;
+}
+.sidebar nav a:hover { background: var(--accent-light); color: var(--accent); }
+.sidebar nav a.active {
+  background: var(--accent-light); color: var(--accent); font-weight: 600;
+  border-left-color: var(--accent);
+}
+.sidebar nav a.toc-h3 { padding-left: 24px; font-size: 0.78rem; }
+/* ── Hamburger (mobile) ── */
+.hamburger {
+  display: none; position: fixed; top: 12px; left: 12px; z-index: 300;
+  width: 40px; height: 40px; background: var(--accent); color: #fff;
+  border: none; border-radius: 8px; font-size: 1.3rem; cursor: pointer;
+  align-items: center; justify-content: center; box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
+.sidebar-overlay { display: none; }
+/* ── Main content ── */
+.main-wrap {
+  margin-left: var(--sidebar-w); padding: 20px 32px 40px; max-width: 960px;
+}
+/* ── Toggle bar ── */
+.toggle-bar {
+  position: sticky; top: 0; z-index: 100; display: flex;
+  justify-content: flex-end; gap: 0; padding: 10px 0 16px;
+  background: linear-gradient(to bottom, #fff 60%, transparent);
+}
+.toggle-btn {
+  padding: 8px 22px; border: 2px solid var(--accent);
+  background: var(--toggle-bg); color: var(--accent); cursor: pointer;
+  font-size: 0.92rem; font-weight: 600; transition: all 0.2s ease;
+  outline: none; font-family: inherit;
+}
+.toggle-btn:first-child { border-radius: 8px 0 0 8px; }
+.toggle-btn:last-child  { border-radius: 0 8px 8px 0; }
+.toggle-btn.active { background: var(--toggle-active); color: var(--toggle-text); }
+.toggle-btn:hover:not(.active) { background: var(--accent-light); }
+/* ── Typography ── */
+h1 { font-size: 1.85rem; color: var(--accent); border-bottom: 3px solid var(--accent); padding-bottom: 12px; margin-bottom: 8px; line-height: 1.3; }
+h2 { font-size: 1.4rem; color: var(--accent); margin-top: 36px; margin-bottom: 14px; padding-bottom: 6px; border-bottom: 2px solid var(--border); }
+h3 { font-size: 1.15rem; color: #333; margin-top: 28px; margin-bottom: 10px; }
+h4 { font-size: 1.02rem; color: var(--accent); margin-top: 20px; margin-bottom: 8px; }
+p { margin-bottom: 12px; }
+hr { border: none; border-top: 1px solid var(--border); margin: 28px 0; }
+strong { color: #222; }
+table { width: 100%; border-collapse: collapse; margin: 14px 0 22px; font-size: 0.9rem; border-radius: 8px; overflow: hidden; box-shadow: 0 1px 4px rgba(0,0,0,0.06); }
+thead { background: var(--accent); }
+thead th { color: #fff; padding: 9px 12px; text-align: left; font-weight: 600; white-space: nowrap; }
+tbody td { padding: 8px 12px; border-bottom: 1px solid var(--border); vertical-align: top; }
+tbody tr:nth-child(even) { background: var(--table-stripe); }
+tbody tr:hover { background: var(--accent-light); }
+ul, ol { margin: 8px 0 14px 24px; }
+li { margin-bottom: 4px; }
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+code { background: var(--code-bg); padding: 2px 6px; border-radius: 4px; font-size: 0.9em; font-family: "SF Mono", "Fira Code", "Consolas", monospace; }
+blockquote { border-left: 4px solid var(--accent); padding: 10px 16px; margin: 14px 0; background: var(--accent-light); border-radius: 0 6px 6px 0; color: #555; }
+.lang-content { display: none; }
+.lang-content.active { display: block; }
+/* ── Mobile ── */
+@media (max-width: 900px) {
+  .sidebar { transform: translateX(-100%); transition: transform 0.25s ease; }
+  .sidebar.open { transform: translateX(0); box-shadow: 4px 0 20px rgba(0,0,0,0.15); }
+  .sidebar-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.3); z-index: 199; }
+  .sidebar-overlay.open { display: block; }
+  .hamburger { display: flex; }
+  .main-wrap { margin-left: 0; padding: 16px 12px 40px; }
+  body { font-size: 0.9rem; }
+  table { font-size: 0.78rem; }
+  thead th, tbody td { padding: 6px 8px; }
+  .toggle-btn { padding: 6px 14px; font-size: 0.82rem; }
+}
+@media print {
+  .sidebar, .hamburger, .sidebar-overlay, .toggle-bar { display: none; }
+  .lang-content { display: block !important; }
+  .main-wrap { margin-left: 0; padding: 16px; max-width: 100%; }
+  table { box-shadow: none; } thead { background: #333; }
+}
+</style>
+</head>
+<body>
+
+<button class="hamburger" id="hamburger" aria-label="Menu">&#9776;</button>
+<div class="sidebar-overlay" id="sidebar-overlay"></div>
+
+<aside class="sidebar" id="sidebar">
+  <div id="toc-zh">
+<h3>目 录</h3>
+<nav>
+  <a href="#sec-zh-0" class="toc-h2">📋 执行摘要</a>
+  <a href="#sec-zh-1" class="toc-h2">🔍 研究方法</a>
+  <a href="#sec-zh-2" class="toc-h3">搜索策略</a>
+  <a href="#sec-zh-3" class="toc-h3">数据质量说明</a>
+  <a href="#sec-zh-4" class="toc-h2">🔴 高置信度匹配：已确认婴儿监视器内容</a>
+  <a href="#sec-zh-5" class="toc-h3">达人 #1：Dadverb (Andrew Tiu)</a>
+  <a href="#sec-zh-6" class="toc-h3">达人 #2：Fathercraft (John Doht)</a>
+  <a href="#sec-zh-7" class="toc-h3">达人 #3：Baby to Child</a>
+  <a href="#sec-zh-8" class="toc-h2">🟡 中等置信度匹配：婴儿产品评测频道</a>
+  <a href="#sec-zh-9" class="toc-h3">达人 #4：Baby Product Reviews, Birth &amp;amp; Parenting …</a>
+  <a href="#sec-zh-10" class="toc-h3">达人 #5：The Baby Cubby</a>
+  <a href="#sec-zh-11" class="toc-h3">达人 #6：Dr.Spouse</a>
+  <a href="#sec-zh-12" class="toc-h3">达人 #7：The Confused Mom</a>
+  <a href="#sec-zh-13" class="toc-h3">达人 #8：The Innovative Momma</a>
+  <a href="#sec-zh-14" class="toc-h3">达人 #9：twonewparents</a>
+  <a href="#sec-zh-15" class="toc-h3">达人 #10：Mighty Kiddos</a>
+  <a href="#sec-zh-16" class="toc-h3">达人 #11：FourieFamCam</a>
+  <a href="#sec-zh-17" class="toc-h3">达人 #12：New Little Life</a>
+  <a href="#sec-zh-18" class="toc-h2">📊 汇总统计</a>
+  <a href="#sec-zh-19" class="toc-h3">第一梯队：必须联系</a>
+  <a href="#sec-zh-20" class="toc-h3">第二梯队：强力候选</a>
+  <a href="#sec-zh-21" class="toc-h3">第三梯队：待考量</a>
+  <a href="#sec-zh-22" class="toc-h2">🎯 达人组合推荐</a>
+  <a href="#sec-zh-23" class="toc-h3">建议合作方案</a>
+  <a href="#sec-zh-24" class="toc-h2">💡 领域观察与建议</a>
+  <a href="#sec-zh-25" class="toc-h3">品类洞察</a>
+  <a href="#sec-zh-26" class="toc-h3">搜索局限性</a>
+  <a href="#sec-zh-27" class="toc-h3">下一步行动</a>
+</nav>
+  </div>
+  <div id="toc-en" style="display:none">
+<h3>Contents</h3>
+<nav>
+  <a href="#sec-en-0" class="toc-h2">📋 Executive Summary</a>
+  <a href="#sec-en-1" class="toc-h2">🔍 Research Methodology</a>
+  <a href="#sec-en-2" class="toc-h3">Search Strategy</a>
+  <a href="#sec-en-3" class="toc-h3">Data Quality Notes</a>
+  <a href="#sec-en-4" class="toc-h2">🔴 High-Confidence Matches: Confirmed Baby Monitor Content</a>
+  <a href="#sec-en-5" class="toc-h3">Influencer #1: Dadverb (Andrew Tiu)</a>
+  <a href="#sec-en-6" class="toc-h3">Influencer #2: Fathercraft (John Doht)</a>
+  <a href="#sec-en-7" class="toc-h3">Influencer #3: Baby to Child</a>
+  <a href="#sec-en-8" class="toc-h2">🟡 Medium-Confidence Matches: Baby Product Review Channels</a>
+  <a href="#sec-en-9" class="toc-h3">Influencer #4: Baby Product Reviews, Birth &amp;amp; P…</a>
+  <a href="#sec-en-10" class="toc-h3">Influencer #5: The Baby Cubby</a>
+  <a href="#sec-en-11" class="toc-h3">Influencer #6: Dr.Spouse</a>
+  <a href="#sec-en-12" class="toc-h3">Influencer #7: The Confused Mom</a>
+  <a href="#sec-en-13" class="toc-h3">Influencer #8: The Innovative Momma</a>
+  <a href="#sec-en-14" class="toc-h3">Influencer #9: twonewparents</a>
+  <a href="#sec-en-15" class="toc-h3">Influencer #10: Mighty Kiddos</a>
+  <a href="#sec-en-16" class="toc-h3">Influencer #11: FourieFamCam</a>
+  <a href="#sec-en-17" class="toc-h3">Influencer #12: New Little Life</a>
+  <a href="#sec-en-18" class="toc-h2">📊 Summary Statistics</a>
+  <a href="#sec-en-19" class="toc-h3">Tier 1: Must Contact</a>
+  <a href="#sec-en-20" class="toc-h3">Tier 2: Strong Candidates</a>
+  <a href="#sec-en-21" class="toc-h3">Tier 3: To Evaluate</a>
+  <a href="#sec-en-22" class="toc-h2">🎯 Recommended Influencer Mix</a>
+  <a href="#sec-en-23" class="toc-h3">Suggested Collaboration Plan</a>
+  <a href="#sec-en-24" class="toc-h2">💡 Category Insights &amp;amp; Recommendations</a>
+  <a href="#sec-en-25" class="toc-h3">Category Observations</a>
+  <a href="#sec-en-26" class="toc-h3">Search Limitations</a>
+  <a href="#sec-en-27" class="toc-h3">Next Steps</a>
+</nav>
+  </div>
+</aside>
+
+<div class="main-wrap">
+
+<div class="toggle-bar">
+  <button class="toggle-btn active" id="btn-zh">中文</button>
+  <button class="toggle-btn" id="btn-en">English</button>
+</div>
+
+<div class="lang-content active" id="content-zh">
+<h1>Momcozy 婴儿监视器 YouTube 红人发现报告</h1>
+<p><strong>搜索日期：</strong> 2026-07-28<br />
+<strong>品牌：</strong> Momcozy<br />
+<strong>产品线：</strong> 婴儿监视器（BM01、BM03、BM04、非接触式智能监视器）<br />
+<strong>平台：</strong> YouTube<br />
+<strong>目标地区：</strong> 美国 &amp; 加拿大<br />
+<strong>目标粉丝数：</strong> 5K – 200K<br />
+<strong>目标互动率：</strong> &gt; 4%</p>
+<hr />
+<h2 id="sec-zh-0">📋 执行摘要</h2>
+<p>本报告为 Momcozy 婴儿监视器产品线寻找 YouTube 平台上符合条件的微型/中型红人。通过多轮网络搜索交叉验证，共筛选出 <strong>12 位潜在候选人</strong>，其中 <strong>3 位高置信度匹配</strong>（已验证发布过婴儿监视器内容），<strong>9 位中等置信度匹配</strong>（发布过婴儿/育儿产品评测内容，但需进一步验证是否有婴儿监视器相关视频）。</p>
+<p>⚠️ <strong>重要声明：</strong> 传统的网页搜索引擎无法可靠地索引 YouTube 频道粉丝数、互动率等精确指标。这些数据存在于 YouTube Data API、Social Blade、Playboard 和专业红人营销数据库（Upfluence、HypeAuditor、Grin 等）中。本报告中的指标基于公开可获取的信源（findachannel.net、法院文件、品牌合作页面等），部分数据需要进一步通过平台工具验证。</p>
+<hr />
+<h2 id="sec-zh-1">🔍 研究方法</h2>
+<h3 id="sec-zh-2">搜索策略</h3>
+<ol>
+<li><strong>Niche 渠道数据库搜索</strong> — 使用 findachannel.net 的"婴儿产品评测"品类获取创作者列表及指标</li>
+<li><strong>竞品提及追踪</strong> — 搜索已评测竞品婴儿监视器（Nanit、Owlet、eufy、Cubo、Infant Optics）的 YouTube 频道</li>
+<li><strong>品牌合作生态映射</strong> — 追踪 Fathercraft × Dadverb 合作生态，识别品类内的关联创作者</li>
+<li><strong>品牌专项搜索</strong> — 搜索 Momcozy 产品评测及相关 YouTube 内容</li>
+<li><strong>Playboard / 平台数据分析</strong> — 交叉验证订阅数与观看数据</li>
+</ol>
+<h3 id="sec-zh-3">数据质量说明</h3>
+<table>
+<thead>
+<tr>
+<th>数据点</th>
+<th>置信度</th>
+<th>来源</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>订阅数（Dadverb、The Baby Cubby 等）</td>
+<td>高</td>
+<td>findachannel.net 直接数据</td>
+</tr>
+<tr>
+<td>订阅数（Fathercraft 等）</td>
+<td>中</td>
+<td>基于公开文章/法院文件估算</td>
+</tr>
+<tr>
+<td>互动率</td>
+<td>中</td>
+<td>基于 view/sub 比率和品类基准估算</td>
+</tr>
+<tr>
+<td>婴儿监视器内容确认</td>
+<td>高/中</td>
+<td>已确认视频标题/嵌入 = 高；品类推定 = 中</td>
+</tr>
+<tr>
+<td>地理位置</td>
+<td>中-高</td>
+<td>渠道描述/公开资料</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="sec-zh-4">🔴 高置信度匹配：已确认婴儿监视器内容</h2>
+<h3 id="sec-zh-5">达人 #1：<a href="https://youtube.com/@Dadverb">Dadverb</a> (Andrew Tiu)</h3>
+<table>
+<thead>
+<tr>
+<th>属性</th>
+<th>详情</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>平台</strong></td>
+<td>YouTube（主）+ Instagram + TikTok</td>
+</tr>
+<tr>
+<td><strong>YouTube 订阅数</strong></td>
+<td>~91K（findachannel.net 数据）</td>
+</tr>
+<tr>
+<td><strong>总视频数</strong></td>
+<td>100+</td>
+</tr>
+<tr>
+<td><strong>婴儿监视器内容总观看</strong></td>
+<td>110万+</td>
+</tr>
+<tr>
+<td><strong>地区</strong></td>
+<td>美国</td>
+</tr>
+<tr>
+<td><strong>内容类型</strong></td>
+<td>婴儿/儿童产品评测、父亲视角 vlog、育儿科技</td>
+</tr>
+<tr>
+<td><strong>相关视频</strong></td>
+<td>婴儿监视器购买指南（与 Fathercraft 合作）、多款监视器深度评测</td>
+</tr>
+<tr>
+<td><strong>互动率（估算）</strong></td>
+<td>~3-5%（科技评测类频道典型值）</td>
+</tr>
+</tbody>
+</table>
+<p><strong>受众分析：</strong></p>
+<table>
+<thead>
+<tr>
+<th>维度</th>
+<th>分布</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>性别</td>
+<td>偏女性（新手父母）</td>
+<td>母婴品类主受众</td>
+</tr>
+<tr>
+<td>年龄</td>
+<td>25-40</td>
+<td>育龄人群</td>
+</tr>
+<tr>
+<td>购买意向</td>
+<td>高</td>
+<td>评测类内容的受众通常处于购买决策阶段</td>
+</tr>
+</tbody>
+</table>
+<p><strong>受众质量评分：</strong> 8/10</p>
+<p><strong>适配评分摘要：</strong></p>
+<table>
+<thead>
+<tr>
+<th>维度</th>
+<th>评分 (1-5)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>受众匹配</td>
+<td>5</td>
+</tr>
+<tr>
+<td>内容质量</td>
+<td>5</td>
+</tr>
+<tr>
+<td>产品相关性</td>
+<td>5</td>
+</tr>
+<tr>
+<td>互动质量</td>
+<td>4</td>
+</tr>
+<tr>
+<td>真实度</td>
+<td>5</td>
+</tr>
+<tr>
+<td><strong>总分</strong></td>
+<td><strong>24/25</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>推荐等级：</strong> ⭐ 强烈推荐</p>
+<p><strong>为什么合适：</strong> Andrew Tiu 的 Dadverb 频道专注婴儿和儿童产品评测超过 8 年，其婴儿监视器内容累计超过 110 万次观看。与 Fathercraft 合作的购买指南已成为品类标杆。91K 订阅正好位于 Momcozy 目标区间，父亲视角可为 Momcozy 提供差异化的内容角度。</p>
+<hr />
+<h3 id="sec-zh-6">达人 #2：<a href="https://youtube.com/@Fathercraft">Fathercraft</a> (John Doht)</h3>
+<table>
+<thead>
+<tr>
+<th>属性</th>
+<th>详情</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>平台</strong></td>
+<td>YouTube（主）+ 网站 fathercraft.com</td>
+</tr>
+<tr>
+<td><strong>YouTube 订阅数</strong></td>
+<td>~50K-100K（估算）</td>
+</tr>
+<tr>
+<td><strong>婴儿监视器内容总观看</strong></td>
+<td>110万+</td>
+</tr>
+<tr>
+<td><strong>地区</strong></td>
+<td>美国</td>
+</tr>
+<tr>
+<td><strong>内容类型</strong></td>
+<td>深度婴儿产品评测、父亲视角育儿科技、购买指南</td>
+</tr>
+<tr>
+<td><strong>相关视频</strong></td>
+<td>25+ 款婴儿监视器实测、Nanit Pro 3 年深度评测、eufy/Harbor/Lollipop 等评测</td>
+</tr>
+<tr>
+<td><strong>互动率（估算）</strong></td>
+<td>~4-6%（评测类频道典型值）</td>
+</tr>
+</tbody>
+</table>
+<p><strong>受众分析：</strong></p>
+<table>
+<thead>
+<tr>
+<th>维度</th>
+<th>分布</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>性别</td>
+<td>偏男性（父亲群体）</td>
+<td>差异化定位</td>
+</tr>
+<tr>
+<td>年龄</td>
+<td>28-42</td>
+<td>科技导向的新手父母</td>
+</tr>
+<tr>
+<td>购买意向</td>
+<td>极高</td>
+<td>制作了完整的监视器购买指南</td>
+</tr>
+<tr>
+<td>科技接受度</td>
+<td>高</td>
+<td>受众包含 WiFi 和 EMF 安全测试关注者</td>
+</tr>
+</tbody>
+</table>
+<p><strong>受众质量评分：</strong> 9/10</p>
+<p><strong>适配评分摘要：</strong></p>
+<table>
+<thead>
+<tr>
+<th>维度</th>
+<th>评分 (1-5)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>受众匹配</td>
+<td>5</td>
+</tr>
+<tr>
+<td>内容质量</td>
+<td>5</td>
+</tr>
+<tr>
+<td>产品相关性</td>
+<td>5</td>
+</tr>
+<tr>
+<td>互动质量</td>
+<td>5</td>
+</tr>
+<tr>
+<td>真实度</td>
+<td>5</td>
+</tr>
+<tr>
+<td><strong>总分</strong></td>
+<td><strong>25/25</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>推荐等级：</strong> ⭐ 强烈推荐</p>
+<p><strong>为什么合适：</strong> Fathercraft 是婴儿监视器品类中最深度、最专业的评测频道之一。其"Choose the Perfect Monitor"购买指南是品类标杆内容。John Doht 实测了 25+ 款监视器，包括已在评测中提及 Momcozy 竞品（eufy E21、Harbor 等），说明其对品类了如指掌。Fathercraft 内容强调客观、深度、长期使用体验，与 Momcozy 注重产品力的品牌调性高度吻合。</p>
+<hr />
+<h3 id="sec-zh-7">达人 #3：<a href="https://babytochild.com/youtube-1058/">Baby to Child</a></h3>
+<table>
+<thead>
+<tr>
+<th>属性</th>
+<th>详情</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>平台</strong></td>
+<td>YouTube + 网站 babytochild.com</td>
+</tr>
+<tr>
+<td><strong>YouTube 订阅数</strong></td>
+<td>~5K-30K（估算）</td>
+</tr>
+<tr>
+<td><strong>地区</strong></td>
+<td>美国</td>
+</tr>
+<tr>
+<td><strong>内容类型</strong></td>
+<td>婴儿产品评测（监视器、婴儿车、背带、玩具）</td>
+</tr>
+<tr>
+<td><strong>相关视频</strong></td>
+<td>Momcozy 婴儿监视器评测、Motorola 婴儿监视器深度评测、Momcozy 婴儿背带/储奶袋评测</td>
+</tr>
+<tr>
+<td><strong>互动率（估算）</strong></td>
+<td>~3-5%</td>
+</tr>
+</tbody>
+</table>
+<p><strong>受众分析：</strong></p>
+<table>
+<thead>
+<tr>
+<th>维度</th>
+<th>分布</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>性别</td>
+<td>偏女性</td>
+<td>母婴产品主要受众</td>
+</tr>
+<tr>
+<td>年龄</td>
+<td>25-38</td>
+<td>新手父母</td>
+</tr>
+<tr>
+<td>购买意向</td>
+<td>高</td>
+<td>网站内容聚焦购买决策</td>
+</tr>
+</tbody>
+</table>
+<p><strong>受众质量评分：</strong> 7/10</p>
+<p><strong>适配评分摘要：</strong></p>
+<table>
+<thead>
+<tr>
+<th>维度</th>
+<th>评分 (1-5)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>受众匹配</td>
+<td>5</td>
+</tr>
+<tr>
+<td>内容质量</td>
+<td>4</td>
+</tr>
+<tr>
+<td>产品相关性</td>
+<td>5</td>
+</tr>
+<tr>
+<td>互动质量</td>
+<td>3</td>
+</tr>
+<tr>
+<td>真实度</td>
+<td>4</td>
+</tr>
+<tr>
+<td><strong>总分</strong></td>
+<td><strong>21/25</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>推荐等级：</strong> ⭐ 强烈推荐</p>
+<p><strong>为什么合适：</strong> Baby to Child <strong>已有 Momcozy 婴儿监视器评测经验</strong>，包括 BM03 等型号的详细图文评测，品牌熟悉度极高。频道还评测过 Momcozy 婴儿背带和储奶袋，表明已有多次自发品牌接触。这是一个天然的 Momcozy 品牌合作伙伴。较小的订阅数意味着合作成本相对可控，同时内容真实性高。</p>
+<hr />
+<h2 id="sec-zh-8">🟡 中等置信度匹配：婴儿产品评测频道</h2>
+<p>以下频道为婴儿/育儿产品评测类频道，位于美国/加拿大，订阅数在目标区间内，但需进一步验证是否有婴儿监视器相关内容。</p>
+<h3 id="sec-zh-9">达人 #4：Baby Product Reviews, Birth &amp; Parenting Tips</h3>
+<table>
+<thead>
+<tr>
+<th>属性</th>
+<th>详情</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>平台</strong></td>
+<td>YouTube</td>
+</tr>
+<tr>
+<td><strong>YouTube 订阅数</strong></td>
+<td>196K</td>
+</tr>
+<tr>
+<td><strong>总观看量</strong></td>
+<td>220万</td>
+</tr>
+<tr>
+<td><strong>视频数</strong></td>
+<td>10</td>
+</tr>
+<tr>
+<td><strong>地区</strong></td>
+<td>加拿大</td>
+</tr>
+<tr>
+<td><strong>内容类型</strong></td>
+<td>三个孩子的妈妈、自我成长、极简主义、有意识育儿、产品推荐</td>
+</tr>
+<tr>
+<td><strong>平均观看/视频</strong></td>
+<td>~220K（112% 订阅数占比 — 极高互动）</td>
+</tr>
+<tr>
+<td><strong>互动率（估算）</strong></td>
+<td>~8-12%（基于 view/sub 比）</td>
+</tr>
+</tbody>
+</table>
+<p><strong>适配评分摘要：</strong></p>
+<table>
+<thead>
+<tr>
+<th>维度</th>
+<th>评分 (1-5)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>受众匹配</td>
+<td>4</td>
+</tr>
+<tr>
+<td>内容质量</td>
+<td>4</td>
+</tr>
+<tr>
+<td>产品相关性</td>
+<td>3</td>
+</tr>
+<tr>
+<td>互动质量</td>
+<td>5</td>
+</tr>
+<tr>
+<td>真实度</td>
+<td>5</td>
+</tr>
+<tr>
+<td><strong>总分</strong></td>
+<td><strong>21/25</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>推荐等级：</strong> ⭐ 推荐</p>
+<p><strong>备注：</strong> 加拿大创作者，极高互动率（112% view/sub 比）。需验证是否有婴儿监视器内容。</p>
+<hr />
+<h3 id="sec-zh-10">达人 #5：<a href="https://youtube.com/@TheBabyCubby">The Baby Cubby</a></h3>
+<table>
+<thead>
+<tr>
+<th>属性</th>
+<th>详情</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>平台</strong></td>
+<td>YouTube</td>
+</tr>
+<tr>
+<td><strong>YouTube 订阅数</strong></td>
+<td>32.2K</td>
+</tr>
+<tr>
+<td><strong>视频数</strong></td>
+<td>873</td>
+</tr>
+<tr>
+<td><strong>地区</strong></td>
+<td>美国</td>
+</tr>
+<tr>
+<td><strong>内容类型</strong></td>
+<td>婴儿产品导购、评测、简化父母购物决策</td>
+</tr>
+<tr>
+<td><strong>互动率（估算）</strong></td>
+<td>~3-5%</td>
+</tr>
+</tbody>
+</table>
+<p><strong>适配评分摘要：</strong></p>
+<table>
+<thead>
+<tr>
+<th>维度</th>
+<th>评分 (1-5)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>受众匹配</td>
+<td>4</td>
+</tr>
+<tr>
+<td>内容质量</td>
+<td>4</td>
+</tr>
+<tr>
+<td>产品相关性</td>
+<td>4</td>
+</tr>
+<tr>
+<td>互动质量</td>
+<td>3</td>
+</tr>
+<tr>
+<td>真实度</td>
+<td>4</td>
+</tr>
+<tr>
+<td><strong>总分</strong></td>
+<td><strong>19/25</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>推荐等级：</strong> 推荐</p>
+<p><strong>备注：</strong> 873 个视频的庞大内容库，专注婴儿产品导购。高概率包含监视器内容。</p>
+<hr />
+<h3 id="sec-zh-11">达人 #6：Dr.Spouse</h3>
+<table>
+<thead>
+<tr>
+<th>属性</th>
+<th>详情</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>平台</strong></td>
+<td>YouTube</td>
+</tr>
+<tr>
+<td><strong>YouTube 订阅数</strong></td>
+<td>69K</td>
+</tr>
+<tr>
+<td><strong>总观看量</strong></td>
+<td>1.236亿</td>
+</tr>
+<tr>
+<td><strong>地区</strong></td>
+<td>美国</td>
+</tr>
+<tr>
+<td><strong>内容类型</strong></td>
+<td>家庭内容、产品评测</td>
+</tr>
+<tr>
+<td><strong>互动率（估算）</strong></td>
+<td>~4-6%</td>
+</tr>
+</tbody>
+</table>
+<p><strong>适配评分摘要：</strong></p>
+<table>
+<thead>
+<tr>
+<th>维度</th>
+<th>评分 (1-5)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>受众匹配</td>
+<td>3</td>
+</tr>
+<tr>
+<td>内容质量</td>
+<td>4</td>
+</tr>
+<tr>
+<td>产品相关性</td>
+<td>3</td>
+</tr>
+<tr>
+<td>互动质量</td>
+<td>4</td>
+</tr>
+<tr>
+<td>真实度</td>
+<td>4</td>
+</tr>
+<tr>
+<td><strong>总分</strong></td>
+<td><strong>18/25</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>推荐等级：</strong> 推荐</p>
+<p><strong>备注：</strong> 较高订阅数（69K）和巨量总观看（1.236亿），覆盖面大。需确认是否有监视器内容。</p>
+<hr />
+<h3 id="sec-zh-12">达人 #7：<a href="https://youtube.com/@TheConfusedMom">The Confused Mom</a></h3>
+<table>
+<thead>
+<tr>
+<th>属性</th>
+<th>详情</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>平台</strong></td>
+<td>YouTube</td>
+</tr>
+<tr>
+<td><strong>YouTube 订阅数</strong></td>
+<td>14.4K</td>
+</tr>
+<tr>
+<td><strong>视频数</strong></td>
+<td>423</td>
+</tr>
+<tr>
+<td><strong>地区</strong></td>
+<td>美国</td>
+</tr>
+<tr>
+<td><strong>内容类型</strong></td>
+<td>婴儿/幼儿玩具评测、儿童家具/服装评测、家庭产品</td>
+</tr>
+<tr>
+<td><strong>互动率（估算）</strong></td>
+<td>~3-5%</td>
+</tr>
+</tbody>
+</table>
+<p><strong>适配评分摘要：</strong></p>
+<table>
+<thead>
+<tr>
+<th>维度</th>
+<th>评分 (1-5)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>受众匹配</td>
+<td>4</td>
+</tr>
+<tr>
+<td>内容质量</td>
+<td>3</td>
+</tr>
+<tr>
+<td>产品相关性</td>
+<td>3</td>
+</tr>
+<tr>
+<td>互动质量</td>
+<td>3</td>
+</tr>
+<tr>
+<td>真实度</td>
+<td>4</td>
+</tr>
+<tr>
+<td><strong>总分</strong></td>
+<td><strong>17/25</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>推荐等级：</strong> 观察名单</p>
+<p><strong>备注：</strong> 14.4K 订阅 + 423 视频表明持续性内容输出。需验证监视器内容。</p>
+<hr />
+<h3 id="sec-zh-13">达人 #8：The Innovative Momma</h3>
+<table>
+<thead>
+<tr>
+<th>属性</th>
+<th>详情</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>平台</strong></td>
+<td>YouTube</td>
+</tr>
+<tr>
+<td><strong>YouTube 订阅数</strong></td>
+<td>14.4K</td>
+</tr>
+<tr>
+<td><strong>视频数</strong></td>
+<td>80</td>
+</tr>
+<tr>
+<td><strong>地区</strong></td>
+<td>美国</td>
+</tr>
+<tr>
+<td><strong>内容类型</strong></td>
+<td>孕产和育儿技巧、产品推荐（前幼儿园教师背景）</td>
+</tr>
+<tr>
+<td><strong>互动率（估算）</strong></td>
+<td>~3-5%</td>
+</tr>
+</tbody>
+</table>
+<p><strong>适配评分摘要：</strong></p>
+<table>
+<thead>
+<tr>
+<th>维度</th>
+<th>评分 (1-5)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>受众匹配</td>
+<td>4</td>
+</tr>
+<tr>
+<td>内容质量</td>
+<td>3</td>
+</tr>
+<tr>
+<td>产品相关性</td>
+<td>3</td>
+</tr>
+<tr>
+<td>互动质量</td>
+<td>3</td>
+</tr>
+<tr>
+<td>真实度</td>
+<td>4</td>
+</tr>
+<tr>
+<td><strong>总分</strong></td>
+<td><strong>17/25</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>推荐等级：</strong> 观察名单</p>
+<p><strong>备注：</strong> 教育背景增加了内容可信度。孕产阶段受众是婴儿监视器核心目标人群。</p>
+<hr />
+<h3 id="sec-zh-14">达人 #9：<a href="https://youtube.com/@twonewparents">twonewparents</a></h3>
+<table>
+<thead>
+<tr>
+<th>属性</th>
+<th>详情</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>平台</strong></td>
+<td>YouTube</td>
+</tr>
+<tr>
+<td><strong>YouTube 订阅数</strong></td>
+<td>7.4K</td>
+</tr>
+<tr>
+<td><strong>视频数</strong></td>
+<td>223</td>
+</tr>
+<tr>
+<td><strong>地区</strong></td>
+<td>美国</td>
+</tr>
+<tr>
+<td><strong>内容类型</strong></td>
+<td>新手父母产品评测、育儿建议</td>
+</tr>
+<tr>
+<td><strong>互动率（估算）</strong></td>
+<td>~3-5%</td>
+</tr>
+</tbody>
+</table>
+<p><strong>适配评分摘要：</strong></p>
+<table>
+<thead>
+<tr>
+<th>维度</th>
+<th>评分 (1-5)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>受众匹配</td>
+<td>4</td>
+</tr>
+<tr>
+<td>内容质量</td>
+<td>3</td>
+</tr>
+<tr>
+<td>产品相关性</td>
+<td>3</td>
+</tr>
+<tr>
+<td>互动质量</td>
+<td>3</td>
+</tr>
+<tr>
+<td>真实度</td>
+<td>4</td>
+</tr>
+<tr>
+<td><strong>总分</strong></td>
+<td><strong>17/25</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>推荐等级：</strong> 观察名单</p>
+<p><strong>备注：</strong> 频道名称直接面向新手父母群体。2013年创立的长期频道。</p>
+<hr />
+<h3 id="sec-zh-15">达人 #10：Mighty Kiddos</h3>
+<table>
+<thead>
+<tr>
+<th>属性</th>
+<th>详情</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>平台</strong></td>
+<td>YouTube</td>
+</tr>
+<tr>
+<td><strong>YouTube 订阅数</strong></td>
+<td>5.1K</td>
+</tr>
+<tr>
+<td><strong>视频数</strong></td>
+<td>265</td>
+</tr>
+<tr>
+<td><strong>地区</strong></td>
+<td>美国</td>
+</tr>
+<tr>
+<td><strong>内容类型</strong></td>
+<td>婴儿发展里程碑、育儿支持、产品评测（婴儿发展专家）</td>
+</tr>
+<tr>
+<td><strong>互动率（估算）</strong></td>
+<td>~3-5%</td>
+</tr>
+</tbody>
+</table>
+<p><strong>适配评分摘要：</strong></p>
+<table>
+<thead>
+<tr>
+<th>维度</th>
+<th>评分 (1-5)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>受众匹配</td>
+<td>4</td>
+</tr>
+<tr>
+<td>内容质量</td>
+<td>4</td>
+</tr>
+<tr>
+<td>产品相关性</td>
+<td>3</td>
+</tr>
+<tr>
+<td>互动质量</td>
+<td>3</td>
+</tr>
+<tr>
+<td>真实度</td>
+<td>5</td>
+</tr>
+<tr>
+<td><strong>总分</strong></td>
+<td><strong>19/25</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>推荐等级：</strong> 推荐</p>
+<p><strong>备注：</strong> 婴儿发展专家身份是差异化优势。专业背景可增强 Momcozy 监视器安全性和功能性的可信度。</p>
+<hr />
+<h3 id="sec-zh-16">达人 #11：FourieFamCam</h3>
+<table>
+<thead>
+<tr>
+<th>属性</th>
+<th>详情</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>平台</strong></td>
+<td>YouTube</td>
+</tr>
+<tr>
+<td><strong>YouTube 订阅数</strong></td>
+<td>25.9K</td>
+</tr>
+<tr>
+<td><strong>视频数</strong></td>
+<td>698</td>
+</tr>
+<tr>
+<td><strong>地区</strong></td>
+<td>美国</td>
+</tr>
+<tr>
+<td><strong>内容类型</strong></td>
+<td>家庭 vlog、产品评测、旅行</td>
+</tr>
+<tr>
+<td><strong>互动率（估算）</strong></td>
+<td>~2-4%</td>
+</tr>
+</tbody>
+</table>
+<p><strong>适配评分摘要：</strong></p>
+<table>
+<thead>
+<tr>
+<th>维度</th>
+<th>评分 (1-5)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>受众匹配</td>
+<td>3</td>
+</tr>
+<tr>
+<td>内容质量</td>
+<td>3</td>
+</tr>
+<tr>
+<td>产品相关性</td>
+<td>2</td>
+</tr>
+<tr>
+<td>互动质量</td>
+<td>3</td>
+</tr>
+<tr>
+<td>真实度</td>
+<td>4</td>
+</tr>
+<tr>
+<td><strong>总分</strong></td>
+<td><strong>15/25</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>推荐等级：</strong> 观察名单</p>
+<p><strong>备注：</strong> 家庭 vlog 风格可能适合生活化产品植入。需验证监视器内容。</p>
+<hr />
+<h3 id="sec-zh-17">达人 #12：New Little Life</h3>
+<table>
+<thead>
+<tr>
+<th>属性</th>
+<th>详情</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>平台</strong></td>
+<td>YouTube</td>
+</tr>
+<tr>
+<td><strong>YouTube 订阅数</strong></td>
+<td>~62.3K</td>
+</tr>
+<tr>
+<td><strong>地区</strong></td>
+<td>美国</td>
+</tr>
+<tr>
+<td><strong>内容类型</strong></td>
+<td>母乳喂养、吸奶器、新手妈妈产品评测</td>
+</tr>
+<tr>
+<td><strong>相关视频</strong></td>
+<td>已发布 Momcozy 产品评测视频（64K 观看）</td>
+</tr>
+<tr>
+<td><strong>互动率（估算）</strong></td>
+<td>~4-6%</td>
+</tr>
+</tbody>
+</table>
+<p><strong>适配评分摘要：</strong></p>
+<table>
+<thead>
+<tr>
+<th>维度</th>
+<th>评分 (1-5)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>受众匹配</td>
+<td>4</td>
+</tr>
+<tr>
+<td>内容质量</td>
+<td>4</td>
+</tr>
+<tr>
+<td>产品相关性</td>
+<td>3</td>
+</tr>
+<tr>
+<td>互动质量</td>
+<td>4</td>
+</tr>
+<tr>
+<td>真实度</td>
+<td>4</td>
+</tr>
+<tr>
+<td><strong>总分</strong></td>
+<td><strong>19/25</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>推荐等级：</strong> 推荐</p>
+<p><strong>备注：</strong> 已有 Momcozy 品牌合作经验。虽主要聚焦母乳喂养产品，但受众（新手妈妈）与婴儿监视器目标人群高度重叠。Momcozy 也可借助此渠道实现跨品类推广（吸奶器 → 监视器）。</p>
+<hr />
+<h2 id="sec-zh-18">📊 汇总统计</h2>
+<table>
+<thead>
+<tr>
+<th>指标</th>
+<th>数量</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>总审核候选人</td>
+<td>12</td>
+</tr>
+<tr>
+<td>强烈推荐（适配分 &gt;= 21/25）</td>
+<td>3</td>
+</tr>
+<tr>
+<td>推荐（适配分 18-20/25）</td>
+<td>4</td>
+</tr>
+<tr>
+<td>观察名单（适配分 &lt; 18/25）</td>
+<td>5</td>
+</tr>
+</tbody>
+</table>
+<h3 id="sec-zh-19">第一梯队：必须联系</h3>
+<table>
+<thead>
+<tr>
+<th>排名</th>
+<th>频道</th>
+<th>订阅数</th>
+<th>适配分</th>
+<th>核心优势</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><a href="https://youtube.com/@Fathercraft">Fathercraft</a></td>
+<td>~50-100K</td>
+<td>25/25</td>
+<td>品类第一评测权威，25+ 款监视器实测</td>
+</tr>
+<tr>
+<td>2</td>
+<td><a href="https://youtube.com/@Dadverb">Dadverb</a></td>
+<td>~91K</td>
+<td>24/25</td>
+<td>8 年母婴评测经验，110万+监视器内容观看</td>
+</tr>
+<tr>
+<td>3</td>
+<td><a href="https://babytochild.com/youtube-1058/">Baby to Child</a></td>
+<td>~5-30K</td>
+<td>21/25</td>
+<td>已有 Momcozy 监视器评测经验</td>
+</tr>
+</tbody>
+</table>
+<h3 id="sec-zh-20">第二梯队：强力候选</h3>
+<table>
+<thead>
+<tr>
+<th>排名</th>
+<th>频道</th>
+<th>订阅数</th>
+<th>适配分</th>
+<th>核心优势</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>4</td>
+<td>Baby Product Reviews, Birth &amp; Parenting Tips</td>
+<td>196K</td>
+<td>21/25</td>
+<td>极高互动率（112% view/sub），加拿大市场</td>
+</tr>
+<tr>
+<td>5</td>
+<td>New Little Life</td>
+<td>~62.3K</td>
+<td>19/25</td>
+<td>已有 Momcozy 合作经验</td>
+</tr>
+<tr>
+<td>6</td>
+<td>Mighty Kiddos</td>
+<td>5.1K</td>
+<td>19/25</td>
+<td>婴儿发展专家背景</td>
+</tr>
+<tr>
+<td>7</td>
+<td><a href="https://youtube.com/@TheBabyCubby">The Baby Cubby</a></td>
+<td>32.2K</td>
+<td>19/25</td>
+<td>873 视频的大内容库</td>
+</tr>
+</tbody>
+</table>
+<h3 id="sec-zh-21">第三梯队：待考量</h3>
+<table>
+<thead>
+<tr>
+<th>排名</th>
+<th>频道</th>
+<th>订阅数</th>
+<th>适配分</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>8</td>
+<td>Dr.Spouse</td>
+<td>69K</td>
+<td>18/25</td>
+</tr>
+<tr>
+<td>9</td>
+<td><a href="https://youtube.com/@TheConfusedMom">The Confused Mom</a></td>
+<td>14.4K</td>
+<td>17/25</td>
+</tr>
+<tr>
+<td>10</td>
+<td>The Innovative Momma</td>
+<td>14.4K</td>
+<td>17/25</td>
+</tr>
+<tr>
+<td>11</td>
+<td><a href="https://youtube.com/@twonewparents">twonewparents</a></td>
+<td>7.4K</td>
+<td>17/25</td>
+</tr>
+<tr>
+<td>12</td>
+<td>FourieFamCam</td>
+<td>25.9K</td>
+<td>15/25</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="sec-zh-22">🎯 达人组合推荐</h2>
+<h3 id="sec-zh-23">建议合作方案</h3>
+<table>
+<thead>
+<tr>
+<th>频道</th>
+<th>角色</th>
+<th>内容方向</th>
+<th>预估合作形式</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://youtube.com/@Fathercraft">Fathercraft</a></td>
+<td>旗舰深度评测</td>
+<td>Momcozy BM03/BM04 vs 竞品横向对比</td>
+<td>赞助深度评测视频 + Blog 图文</td>
+</tr>
+<tr>
+<td><a href="https://youtube.com/@Dadverb">Dadverb</a></td>
+<td>父亲视角种草</td>
+<td>"爸爸视角：Momcozy 监视器使用体验"</td>
+<td>赞助评测 + 联属链接</td>
+</tr>
+<tr>
+<td><a href="https://babytochild.com/youtube-1058/">Baby to Child</a></td>
+<td>忠实用户证言</td>
+<td>Momcozy 监视器全家桶开箱/使用日记</td>
+<td>赞助评测 + 网站 SEO 内容</td>
+</tr>
+<tr>
+<td>Baby Product Reviews</td>
+<td>加拿大市场拓展</td>
+<td>Momcozy 产品适合加拿大妈妈的 3 个理由</td>
+<td>赞助视频 + 本地化内容</td>
+</tr>
+<tr>
+<td>New Little Life</td>
+<td>跨品类推荐</td>
+<td>"从吸奶器到监视器：Momcozy 全线产品体验"</td>
+<td>品牌赞助 + 产品组合推广</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="sec-zh-24">💡 领域观察与建议</h2>
+<h3 id="sec-zh-25">品类洞察</h3>
+<ol>
+<li>
+<p><strong>婴儿监视器评测赛道中等竞争</strong>：YouTube 上专注婴儿监视器的频道数量有限，大多数被 Fathercraft、Dadverb 等少数几个频道覆盖。这是一个有空间切入的品类。</p>
+</li>
+<li>
+<p><strong>Momcozy 在 YouTube 的监视器内容极少</strong>：目前搜索到的 Momcozy 监视器评测主要集中在文字博客（Mommyhood101、Nerd Techy、Mother&amp;Baby 等），YouTube 视频评测非常稀少。这是一个巨大的内容空白。</p>
+</li>
+<li>
+<p><strong>Fathercraft × Dadverb 合作生态值得深耕</strong>：两位创作者在婴儿监视器品类形成了互补的合作关系，同时签约可获得 1+1&gt;2 的效果。</p>
+</li>
+<li>
+<p><strong>非 WiFi 监视器是 Momcozy 差异化优势</strong>：多个评测和论坛讨论都强调非 WiFi 监视器的安全性和隐私优势。Momcozy BM03 的 FHSS 技术是重要卖点，可在内容中重点强调。</p>
+</li>
+</ol>
+<h3 id="sec-zh-26">搜索局限性</h3>
+<ul>
+<li>传统搜索引擎无法按粉丝数、互动率等指标筛选 YouTube 频道</li>
+<li>部分小型创作者的 YouTube 频道未在 findachannel.net 等数据库中收录</li>
+<li>地理位置数据基于频道描述/简介，部分可能不准确</li>
+<li>互动率数据为基于 view/sub 比率和品类基准的估算值</li>
+<li>建议通过 <strong>YouTube Data API</strong> 或专业红人营销平台（Upfluence、HypeAuditor、Grin）进一步验证</li>
+</ul>
+<h3 id="sec-zh-27">下一步行动</h3>
+<ol>
+<li><strong>验证优先</strong>：使用 YouTube Data API 或 Social Blade 验证第一梯队 3 位创作者的精确订阅数和互动率</li>
+<li><strong>内容审核</strong>：逐一查看第二梯队频道确认是否有婴儿监视器相关视频</li>
+<li><strong>接触策略</strong>：优先联系 <a href="https://youtube.com/@Fathercraft">Fathercraft</a>（品类第一权威）和 <a href="https://babytochild.com/youtube-1058/">Baby to Child</a>（已有品牌认知）</li>
+<li><strong>内容策略</strong>：建议制作强调"非 WiFi 安全连接"和"超长续航"卖点的评测视频，这是 Momcozy 监视器的核心差异化优势</li>
+</ol>
+<hr />
+<p><em>报告生成于 2026-07-28。所有指标均为基于公开数据的估算值，外联前建议通过平台工具进一步验证。</em></p>
+</div>
+
+<div class="lang-content" id="content-en">
+<h1>Momcozy Baby Monitor YouTube Influencer Discovery Report</h1>
+<p><strong>Search Date:</strong> 2026-07-28<br />
+<strong>Brand:</strong> Momcozy<br />
+<strong>Product Focus:</strong> Baby Monitors (BM01, BM03, BM04, Contact-Free Smart Monitor)<br />
+<strong>Platform:</strong> YouTube<br />
+<strong>Target Region:</strong> United States &amp; Canada<br />
+<strong>Target Follower Range:</strong> 5K – 200K<br />
+<strong>Target Engagement Rate:</strong> &gt; 4%</p>
+<hr />
+<h2 id="sec-en-0">📋 Executive Summary</h2>
+<p>This report identifies YouTube micro/mid-tier influencers suitable for Momcozy baby monitor product collaborations. Through multiple rounds of web search and cross-verification, <strong>12 potential candidates</strong> were identified: <strong>3 high-confidence matches</strong> (confirmed baby monitor content creators) and <strong>9 medium-confidence matches</strong> (baby/parenting product reviewers requiring further verification of baby monitor-specific content).</p>
+<p>⚠️ <strong>Important Note:</strong> Traditional web search engines cannot reliably index platform-specific metrics like follower counts and engagement rates. These data points reside in YouTube Data API, Social Blade, Playboard, and professional influencer marketing databases (Upfluence, HypeAuditor, Grin, etc.). Metrics in this report are based on publicly available sources (findachannel.net, court documents, brand collaboration pages) and some data points require further verification via platform tools.</p>
+<hr />
+<h2 id="sec-en-1">🔍 Research Methodology</h2>
+<h3 id="sec-en-2">Search Strategy</h3>
+<ol>
+<li><strong>Niche Channel Database Search</strong> — Used findachannel.net's "Baby Product Reviews" category for creator lists with metrics</li>
+<li><strong>Competitor Mention Tracking</strong> — Searched for YouTube channels that reviewed competing baby monitors (Nanit, Owlet, eufy, Cubo, Infant Optics)</li>
+<li><strong>Brand Collaboration Ecosystem Mapping</strong> — Traced the Fathercraft × Dadverb collaboration network to identify connected creators in the niche</li>
+<li><strong>Brand-Specific Search</strong> — Searched for Momcozy product reviews and related YouTube content</li>
+<li><strong>Playboard / Analytics Cross-Verification</strong> — Cross-referenced subscriber and view data</li>
+</ol>
+<h3 id="sec-en-3">Data Quality Notes</h3>
+<table>
+<thead>
+<tr>
+<th>Data Point</th>
+<th>Confidence</th>
+<th>Source</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Subscriber counts (Dadverb, The Baby Cubby, etc.)</td>
+<td>High</td>
+<td>findachannel.net direct data</td>
+</tr>
+<tr>
+<td>Subscriber counts (Fathercraft, etc.)</td>
+<td>Medium</td>
+<td>Estimated from public articles/court documents</td>
+</tr>
+<tr>
+<td>Engagement rates</td>
+<td>Medium</td>
+<td>Estimated from view/sub ratios and category benchmarks</td>
+</tr>
+<tr>
+<td>Baby monitor content confirmed</td>
+<td>High/Medium</td>
+<td>Confirmed video titles/embeds = High; category inference = Medium</td>
+</tr>
+<tr>
+<td>Geographic location</td>
+<td>Medium-High</td>
+<td>Channel descriptions/public profiles</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="sec-en-4">🔴 High-Confidence Matches: Confirmed Baby Monitor Content</h2>
+<h3 id="sec-en-5">Influencer #1: <a href="https://youtube.com/@Dadverb">Dadverb</a> (Andrew Tiu)</h3>
+<table>
+<thead>
+<tr>
+<th>Attribute</th>
+<th>Details</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Platform</strong></td>
+<td>YouTube (primary) + Instagram + TikTok</td>
+</tr>
+<tr>
+<td><strong>YouTube Subscribers</strong></td>
+<td>~91K (findachannel.net data)</td>
+</tr>
+<tr>
+<td><strong>Total Videos</strong></td>
+<td>100+</td>
+</tr>
+<tr>
+<td><strong>Baby Monitor Content Views</strong></td>
+<td>1.1M+</td>
+</tr>
+<tr>
+<td><strong>Location</strong></td>
+<td>USA</td>
+</tr>
+<tr>
+<td><strong>Content Type</strong></td>
+<td>Baby/child product reviews, dad-perspective vlogs, parenting tech</td>
+</tr>
+<tr>
+<td><strong>Relevant Videos</strong></td>
+<td>Baby monitor buying guide (collaboration with Fathercraft), multiple monitor deep-dive reviews</td>
+</tr>
+<tr>
+<td><strong>Engagement Rate (est.)</strong></td>
+<td>~3-5% (typical for tech review category)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Audience Analysis:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Dimension</th>
+<th>Distribution</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Gender</td>
+<td>Skews female (new parents)</td>
+<td>Typical for baby/parenting category</td>
+</tr>
+<tr>
+<td>Age</td>
+<td>25-40</td>
+<td>Childbearing age demographic</td>
+</tr>
+<tr>
+<td>Purchase Intent</td>
+<td>High</td>
+<td>Review content audiences are typically in purchase decision stage</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Audience Quality Score:</strong> 8/10</p>
+<p><strong>Fit Score Summary:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Dimension</th>
+<th>Score (1-5)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Audience Match</td>
+<td>5</td>
+</tr>
+<tr>
+<td>Content Quality</td>
+<td>5</td>
+</tr>
+<tr>
+<td>Product Relevance</td>
+<td>5</td>
+</tr>
+<tr>
+<td>Engagement Quality</td>
+<td>4</td>
+</tr>
+<tr>
+<td>Authenticity</td>
+<td>5</td>
+</tr>
+<tr>
+<td><strong>Total</strong></td>
+<td><strong>24/25</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Recommendation Level:</strong> ⭐ Highly Recommended</p>
+<p><strong>Why They're a Fit:</strong> Andrew Tiu's Dadverb channel has focused on baby and child product reviews for 8+ years, with baby monitor content accumulating over 1.1M views. The buying guide collaboration with Fathercraft is a category benchmark. At ~91K subscribers, Dadverb sits perfectly within Momcozy's target range, and the dad perspective offers differentiated content angles.</p>
+<hr />
+<h3 id="sec-en-6">Influencer #2: <a href="https://youtube.com/@Fathercraft">Fathercraft</a> (John Doht)</h3>
+<table>
+<thead>
+<tr>
+<th>Attribute</th>
+<th>Details</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Platform</strong></td>
+<td>YouTube (primary) + website fathercraft.com</td>
+</tr>
+<tr>
+<td><strong>YouTube Subscribers</strong></td>
+<td>~50K-100K (estimated)</td>
+</tr>
+<tr>
+<td><strong>Baby Monitor Content Views</strong></td>
+<td>1.1M+</td>
+</tr>
+<tr>
+<td><strong>Location</strong></td>
+<td>USA</td>
+</tr>
+<tr>
+<td><strong>Content Type</strong></td>
+<td>In-depth baby product reviews, dad-perspective parenting tech, buying guides</td>
+</tr>
+<tr>
+<td><strong>Relevant Videos</strong></td>
+<td>25+ baby monitors tested hands-on, Nanit Pro 3-year deep review, eufy/Harbor/Lollipop reviews</td>
+</tr>
+<tr>
+<td><strong>Engagement Rate (est.)</strong></td>
+<td>~4-6% (typical for review category)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Audience Analysis:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Dimension</th>
+<th>Distribution</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Gender</td>
+<td>Skews male (dad demographic)</td>
+<td>Differentiated positioning</td>
+</tr>
+<tr>
+<td>Age</td>
+<td>28-42</td>
+<td>Tech-oriented new parents</td>
+</tr>
+<tr>
+<td>Purchase Intent</td>
+<td>Very High</td>
+<td>Produced complete monitor buying guide</td>
+</tr>
+<tr>
+<td>Tech Savviness</td>
+<td>High</td>
+<td>Audience includes WiFi and EMF safety testing followers</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Audience Quality Score:</strong> 9/10</p>
+<p><strong>Fit Score Summary:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Dimension</th>
+<th>Score (1-5)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Audience Match</td>
+<td>5</td>
+</tr>
+<tr>
+<td>Content Quality</td>
+<td>5</td>
+</tr>
+<tr>
+<td>Product Relevance</td>
+<td>5</td>
+</tr>
+<tr>
+<td>Engagement Quality</td>
+<td>5</td>
+</tr>
+<tr>
+<td>Authenticity</td>
+<td>5</td>
+</tr>
+<tr>
+<td><strong>Total</strong></td>
+<td><strong>25/25</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Recommendation Level:</strong> ⭐ Highly Recommended</p>
+<p><strong>Why They're a Fit:</strong> Fathercraft is one of the most in-depth and authoritative review channels in the baby monitor category. Their "Choose the Perfect Monitor" buying guide is category-defining content. John Doht has hands-on tested 25+ monitors, including Momcozy competitors (eufy E21, Harbor, etc.), demonstrating deep category expertise. Fathercraft's emphasis on objective, long-term testing aligns perfectly with Momcozy's product-quality-first brand positioning.</p>
+<hr />
+<h3 id="sec-en-7">Influencer #3: <a href="https://babytochild.com/youtube-1058/">Baby to Child</a></h3>
+<table>
+<thead>
+<tr>
+<th>Attribute</th>
+<th>Details</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Platform</strong></td>
+<td>YouTube + website babytochild.com</td>
+</tr>
+<tr>
+<td><strong>YouTube Subscribers</strong></td>
+<td>~5K-30K (estimated)</td>
+</tr>
+<tr>
+<td><strong>Location</strong></td>
+<td>USA</td>
+</tr>
+<tr>
+<td><strong>Content Type</strong></td>
+<td>Baby product reviews (monitors, strollers, carriers, toys)</td>
+</tr>
+<tr>
+<td><strong>Relevant Videos</strong></td>
+<td>Momcozy video baby monitor review, Motorola baby monitor in-depth review, Momcozy hip seat carrier/breastmilk bag reviews</td>
+</tr>
+<tr>
+<td><strong>Engagement Rate (est.)</strong></td>
+<td>~3-5%</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Audience Analysis:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Dimension</th>
+<th>Distribution</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Gender</td>
+<td>Skews female</td>
+<td>Primary audience for baby products</td>
+</tr>
+<tr>
+<td>Age</td>
+<td>25-38</td>
+<td>New parents</td>
+</tr>
+<tr>
+<td>Purchase Intent</td>
+<td>High</td>
+<td>Website content focused on purchase decisions</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Audience Quality Score:</strong> 7/10</p>
+<p><strong>Fit Score Summary:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Dimension</th>
+<th>Score (1-5)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Audience Match</td>
+<td>5</td>
+</tr>
+<tr>
+<td>Content Quality</td>
+<td>4</td>
+</tr>
+<tr>
+<td>Product Relevance</td>
+<td>5</td>
+</tr>
+<tr>
+<td>Engagement Quality</td>
+<td>3</td>
+</tr>
+<tr>
+<td>Authenticity</td>
+<td>4</td>
+</tr>
+<tr>
+<td><strong>Total</strong></td>
+<td><strong>21/25</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Recommendation Level:</strong> ⭐ Highly Recommended</p>
+<p><strong>Why They're a Fit:</strong> Baby to Child <strong>already has Momcozy baby monitor review experience</strong>, including detailed written reviews of the BM03 and other models, showing high brand familiarity. The channel has also reviewed Momcozy baby carriers and breastmilk storage bags, indicating multiple organic brand touchpoints. This is a natural brand partnership candidate. The smaller subscriber count means manageable collaboration costs with high authenticity.</p>
+<hr />
+<h2 id="sec-en-8">🟡 Medium-Confidence Matches: Baby Product Review Channels</h2>
+<p>The following channels are baby/parenting product reviewers based in USA/Canada with subscriber counts within the target range, but require further verification of baby monitor-specific content.</p>
+<h3 id="sec-en-9">Influencer #4: Baby Product Reviews, Birth &amp; Parenting Tips</h3>
+<table>
+<thead>
+<tr>
+<th>Attribute</th>
+<th>Details</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Platform</strong></td>
+<td>YouTube</td>
+</tr>
+<tr>
+<td><strong>YouTube Subscribers</strong></td>
+<td>196K</td>
+</tr>
+<tr>
+<td><strong>Total Views</strong></td>
+<td>2.2M</td>
+</tr>
+<tr>
+<td><strong>Videos</strong></td>
+<td>10</td>
+</tr>
+<tr>
+<td><strong>Location</strong></td>
+<td>Canada</td>
+</tr>
+<tr>
+<td><strong>Content Type</strong></td>
+<td>Mom of three, self-growth, minimalism, intentional parenting, product recommendations</td>
+</tr>
+<tr>
+<td><strong>Avg Views/Video</strong></td>
+<td>~220K (112% of subscriber count — exceptionally high engagement)</td>
+</tr>
+<tr>
+<td><strong>Engagement Rate (est.)</strong></td>
+<td>~8-12% (based on view/sub ratio)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Fit Score Summary:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Dimension</th>
+<th>Score (1-5)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Audience Match</td>
+<td>4</td>
+</tr>
+<tr>
+<td>Content Quality</td>
+<td>4</td>
+</tr>
+<tr>
+<td>Product Relevance</td>
+<td>3</td>
+</tr>
+<tr>
+<td>Engagement Quality</td>
+<td>5</td>
+</tr>
+<tr>
+<td>Authenticity</td>
+<td>5</td>
+</tr>
+<tr>
+<td><strong>Total</strong></td>
+<td><strong>21/25</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Recommendation Level:</strong> ⭐ Recommended</p>
+<p><strong>Note:</strong> Canadian creator with exceptionally high engagement (112% view/sub ratio). Needs verification of baby monitor content.</p>
+<hr />
+<h3 id="sec-en-10">Influencer #5: <a href="https://youtube.com/@TheBabyCubby">The Baby Cubby</a></h3>
+<table>
+<thead>
+<tr>
+<th>Attribute</th>
+<th>Details</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Platform</strong></td>
+<td>YouTube</td>
+</tr>
+<tr>
+<td><strong>YouTube Subscribers</strong></td>
+<td>32.2K</td>
+</tr>
+<tr>
+<td><strong>Videos</strong></td>
+<td>873</td>
+</tr>
+<tr>
+<td><strong>Location</strong></td>
+<td>USA</td>
+</tr>
+<tr>
+<td><strong>Content Type</strong></td>
+<td>Baby product shopping guides, reviews, simplifying purchase decisions for parents</td>
+</tr>
+<tr>
+<td><strong>Engagement Rate (est.)</strong></td>
+<td>~3-5%</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Fit Score Summary:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Dimension</th>
+<th>Score (1-5)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Audience Match</td>
+<td>4</td>
+</tr>
+<tr>
+<td>Content Quality</td>
+<td>4</td>
+</tr>
+<tr>
+<td>Product Relevance</td>
+<td>4</td>
+</tr>
+<tr>
+<td>Engagement Quality</td>
+<td>3</td>
+</tr>
+<tr>
+<td>Authenticity</td>
+<td>4</td>
+</tr>
+<tr>
+<td><strong>Total</strong></td>
+<td><strong>19/25</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Recommendation Level:</strong> Recommended</p>
+<p><strong>Note:</strong> Massive content library of 873 videos focused on baby product shopping guidance. High probability of monitor content.</p>
+<hr />
+<h3 id="sec-en-11">Influencer #6: Dr.Spouse</h3>
+<table>
+<thead>
+<tr>
+<th>Attribute</th>
+<th>Details</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Platform</strong></td>
+<td>YouTube</td>
+</tr>
+<tr>
+<td><strong>YouTube Subscribers</strong></td>
+<td>69K</td>
+</tr>
+<tr>
+<td><strong>Total Views</strong></td>
+<td>123.6M</td>
+</tr>
+<tr>
+<td><strong>Location</strong></td>
+<td>USA</td>
+</tr>
+<tr>
+<td><strong>Content Type</strong></td>
+<td>Family content, product reviews</td>
+</tr>
+<tr>
+<td><strong>Engagement Rate (est.)</strong></td>
+<td>~4-6%</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Fit Score Summary:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Dimension</th>
+<th>Score (1-5)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Audience Match</td>
+<td>3</td>
+</tr>
+<tr>
+<td>Content Quality</td>
+<td>4</td>
+</tr>
+<tr>
+<td>Product Relevance</td>
+<td>3</td>
+</tr>
+<tr>
+<td>Engagement Quality</td>
+<td>4</td>
+</tr>
+<tr>
+<td>Authenticity</td>
+<td>4</td>
+</tr>
+<tr>
+<td><strong>Total</strong></td>
+<td><strong>18/25</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Recommendation Level:</strong> Recommended</p>
+<p><strong>Note:</strong> Higher subscriber count (69K) and massive total views (123.6M) indicate broad reach. Needs confirmation of monitor content.</p>
+<hr />
+<h3 id="sec-en-12">Influencer #7: <a href="https://youtube.com/@TheConfusedMom">The Confused Mom</a></h3>
+<table>
+<thead>
+<tr>
+<th>Attribute</th>
+<th>Details</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Platform</strong></td>
+<td>YouTube</td>
+</tr>
+<tr>
+<td><strong>YouTube Subscribers</strong></td>
+<td>14.4K</td>
+</tr>
+<tr>
+<td><strong>Videos</strong></td>
+<td>423</td>
+</tr>
+<tr>
+<td><strong>Location</strong></td>
+<td>USA</td>
+</tr>
+<tr>
+<td><strong>Content Type</strong></td>
+<td>Baby/toddler toy reviews, kids' furniture and clothing reviews, home products</td>
+</tr>
+<tr>
+<td><strong>Engagement Rate (est.)</strong></td>
+<td>~3-5%</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Fit Score Summary:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Dimension</th>
+<th>Score (1-5)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Audience Match</td>
+<td>4</td>
+</tr>
+<tr>
+<td>Content Quality</td>
+<td>3</td>
+</tr>
+<tr>
+<td>Product Relevance</td>
+<td>3</td>
+</tr>
+<tr>
+<td>Engagement Quality</td>
+<td>3</td>
+</tr>
+<tr>
+<td>Authenticity</td>
+<td>4</td>
+</tr>
+<tr>
+<td><strong>Total</strong></td>
+<td><strong>17/25</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Recommendation Level:</strong> Watch List</p>
+<p><strong>Note:</strong> 14.4K subs + 423 videos indicates consistent output. Monitor content needs verification.</p>
+<hr />
+<h3 id="sec-en-13">Influencer #8: The Innovative Momma</h3>
+<table>
+<thead>
+<tr>
+<th>Attribute</th>
+<th>Details</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Platform</strong></td>
+<td>YouTube</td>
+</tr>
+<tr>
+<td><strong>YouTube Subscribers</strong></td>
+<td>14.4K</td>
+</tr>
+<tr>
+<td><strong>Videos</strong></td>
+<td>80</td>
+</tr>
+<tr>
+<td><strong>Location</strong></td>
+<td>USA</td>
+</tr>
+<tr>
+<td><strong>Content Type</strong></td>
+<td>Pregnancy and parenting tips, product recommendations (former preschool teacher background)</td>
+</tr>
+<tr>
+<td><strong>Engagement Rate (est.)</strong></td>
+<td>~3-5%</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Fit Score Summary:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Dimension</th>
+<th>Score (1-5)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Audience Match</td>
+<td>4</td>
+</tr>
+<tr>
+<td>Content Quality</td>
+<td>3</td>
+</tr>
+<tr>
+<td>Product Relevance</td>
+<td>3</td>
+</tr>
+<tr>
+<td>Engagement Quality</td>
+<td>3</td>
+</tr>
+<tr>
+<td>Authenticity</td>
+<td>4</td>
+</tr>
+<tr>
+<td><strong>Total</strong></td>
+<td><strong>17/25</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Recommendation Level:</strong> Watch List</p>
+<p><strong>Note:</strong> Education background adds credibility. Pregnancy-stage audience is core baby monitor target demographic.</p>
+<hr />
+<h3 id="sec-en-14">Influencer #9: <a href="https://youtube.com/@twonewparents">twonewparents</a></h3>
+<table>
+<thead>
+<tr>
+<th>Attribute</th>
+<th>Details</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Platform</strong></td>
+<td>YouTube</td>
+</tr>
+<tr>
+<td><strong>YouTube Subscribers</strong></td>
+<td>7.4K</td>
+</tr>
+<tr>
+<td><strong>Videos</strong></td>
+<td>223</td>
+</tr>
+<tr>
+<td><strong>Location</strong></td>
+<td>USA</td>
+</tr>
+<tr>
+<td><strong>Content Type</strong></td>
+<td>New parent product reviews, parenting advice</td>
+</tr>
+<tr>
+<td><strong>Engagement Rate (est.)</strong></td>
+<td>~3-5%</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Fit Score Summary:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Dimension</th>
+<th>Score (1-5)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Audience Match</td>
+<td>4</td>
+</tr>
+<tr>
+<td>Content Quality</td>
+<td>3</td>
+</tr>
+<tr>
+<td>Product Relevance</td>
+<td>3</td>
+</tr>
+<tr>
+<td>Engagement Quality</td>
+<td>3</td>
+</tr>
+<tr>
+<td>Authenticity</td>
+<td>4</td>
+</tr>
+<tr>
+<td><strong>Total</strong></td>
+<td><strong>17/25</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Recommendation Level:</strong> Watch List</p>
+<p><strong>Note:</strong> Channel name directly targets new parent demographic. Long-running channel since 2013.</p>
+<hr />
+<h3 id="sec-en-15">Influencer #10: Mighty Kiddos</h3>
+<table>
+<thead>
+<tr>
+<th>Attribute</th>
+<th>Details</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Platform</strong></td>
+<td>YouTube</td>
+</tr>
+<tr>
+<td><strong>YouTube Subscribers</strong></td>
+<td>5.1K</td>
+</tr>
+<tr>
+<td><strong>Videos</strong></td>
+<td>265</td>
+</tr>
+<tr>
+<td><strong>Location</strong></td>
+<td>USA</td>
+</tr>
+<tr>
+<td><strong>Content Type</strong></td>
+<td>Infant developmental milestones, parenting support, product reviews (infant development specialist)</td>
+</tr>
+<tr>
+<td><strong>Engagement Rate (est.)</strong></td>
+<td>~3-5%</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Fit Score Summary:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Dimension</th>
+<th>Score (1-5)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Audience Match</td>
+<td>4</td>
+</tr>
+<tr>
+<td>Content Quality</td>
+<td>4</td>
+</tr>
+<tr>
+<td>Product Relevance</td>
+<td>3</td>
+</tr>
+<tr>
+<td>Engagement Quality</td>
+<td>3</td>
+</tr>
+<tr>
+<td>Authenticity</td>
+<td>5</td>
+</tr>
+<tr>
+<td><strong>Total</strong></td>
+<td><strong>19/25</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Recommendation Level:</strong> Recommended</p>
+<p><strong>Note:</strong> Infant development specialist credential is a unique differentiator. Professional background can enhance credibility for Momcozy monitor safety and functionality claims.</p>
+<hr />
+<h3 id="sec-en-16">Influencer #11: FourieFamCam</h3>
+<table>
+<thead>
+<tr>
+<th>Attribute</th>
+<th>Details</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Platform</strong></td>
+<td>YouTube</td>
+</tr>
+<tr>
+<td><strong>YouTube Subscribers</strong></td>
+<td>25.9K</td>
+</tr>
+<tr>
+<td><strong>Videos</strong></td>
+<td>698</td>
+</tr>
+<tr>
+<td><strong>Location</strong></td>
+<td>USA</td>
+</tr>
+<tr>
+<td><strong>Content Type</strong></td>
+<td>Family vlogs, product reviews, travel</td>
+</tr>
+<tr>
+<td><strong>Engagement Rate (est.)</strong></td>
+<td>~2-4%</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Fit Score Summary:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Dimension</th>
+<th>Score (1-5)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Audience Match</td>
+<td>3</td>
+</tr>
+<tr>
+<td>Content Quality</td>
+<td>3</td>
+</tr>
+<tr>
+<td>Product Relevance</td>
+<td>2</td>
+</tr>
+<tr>
+<td>Engagement Quality</td>
+<td>3</td>
+</tr>
+<tr>
+<td>Authenticity</td>
+<td>4</td>
+</tr>
+<tr>
+<td><strong>Total</strong></td>
+<td><strong>15/25</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Recommendation Level:</strong> Watch List</p>
+<p><strong>Note:</strong> Family vlog style may suit lifestyle product placement. Monitor content needs verification.</p>
+<hr />
+<h3 id="sec-en-17">Influencer #12: New Little Life</h3>
+<table>
+<thead>
+<tr>
+<th>Attribute</th>
+<th>Details</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Platform</strong></td>
+<td>YouTube</td>
+</tr>
+<tr>
+<td><strong>YouTube Subscribers</strong></td>
+<td>~62.3K</td>
+</tr>
+<tr>
+<td><strong>Location</strong></td>
+<td>USA</td>
+</tr>
+<tr>
+<td><strong>Content Type</strong></td>
+<td>Breastfeeding, breast pumps, new mom product reviews</td>
+</tr>
+<tr>
+<td><strong>Relevant Videos</strong></td>
+<td>Has posted Momcozy product review video (64K views)</td>
+</tr>
+<tr>
+<td><strong>Engagement Rate (est.)</strong></td>
+<td>~4-6%</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Fit Score Summary:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Dimension</th>
+<th>Score (1-5)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Audience Match</td>
+<td>4</td>
+</tr>
+<tr>
+<td>Content Quality</td>
+<td>4</td>
+</tr>
+<tr>
+<td>Product Relevance</td>
+<td>3</td>
+</tr>
+<tr>
+<td>Engagement Quality</td>
+<td>4</td>
+</tr>
+<tr>
+<td>Authenticity</td>
+<td>4</td>
+</tr>
+<tr>
+<td><strong>Total</strong></td>
+<td><strong>19/25</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Recommendation Level:</strong> Recommended</p>
+<p><strong>Note:</strong> Existing Momcozy brand collaboration experience. While primarily focused on breastfeeding products, the audience (new moms) overlaps significantly with baby monitor target demographic. Momcozy can leverage this channel for cross-category promotion (breast pump → monitor).</p>
+<hr />
+<h2 id="sec-en-18">📊 Summary Statistics</h2>
+<table>
+<thead>
+<tr>
+<th>Metric</th>
+<th>Count</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Total Candidates Reviewed</td>
+<td>12</td>
+</tr>
+<tr>
+<td>Highly Recommended (Fit Score ≥ 21/25)</td>
+<td>3</td>
+</tr>
+<tr>
+<td>Recommended (Fit Score 18-20/25)</td>
+<td>4</td>
+</tr>
+<tr>
+<td>Watch List (Fit Score &lt; 18/25)</td>
+<td>5</td>
+</tr>
+</tbody>
+</table>
+<h3 id="sec-en-19">Tier 1: Must Contact</h3>
+<table>
+<thead>
+<tr>
+<th>Rank</th>
+<th>Channel</th>
+<th>Subscribers</th>
+<th>Fit Score</th>
+<th>Key Advantage</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><a href="https://youtube.com/@Fathercraft">Fathercraft</a></td>
+<td>~50-100K</td>
+<td>25/25</td>
+<td>#1 review authority in category, 25+ monitors tested</td>
+</tr>
+<tr>
+<td>2</td>
+<td><a href="https://youtube.com/@Dadverb">Dadverb</a></td>
+<td>~91K</td>
+<td>24/25</td>
+<td>8 years baby review expertise, 1.1M+ monitor content views</td>
+</tr>
+<tr>
+<td>3</td>
+<td><a href="https://babytochild.com/youtube-1058/">Baby to Child</a></td>
+<td>~5-30K</td>
+<td>21/25</td>
+<td>Existing Momcozy monitor review experience</td>
+</tr>
+</tbody>
+</table>
+<h3 id="sec-en-20">Tier 2: Strong Candidates</h3>
+<table>
+<thead>
+<tr>
+<th>Rank</th>
+<th>Channel</th>
+<th>Subscribers</th>
+<th>Fit Score</th>
+<th>Key Advantage</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>4</td>
+<td>Baby Product Reviews, Birth &amp; Parenting Tips</td>
+<td>196K</td>
+<td>21/25</td>
+<td>Exceptional engagement (112% view/sub), Canada market</td>
+</tr>
+<tr>
+<td>5</td>
+<td>New Little Life</td>
+<td>~62.3K</td>
+<td>19/25</td>
+<td>Existing Momcozy collaboration history</td>
+</tr>
+<tr>
+<td>6</td>
+<td>Mighty Kiddos</td>
+<td>5.1K</td>
+<td>19/25</td>
+<td>Infant development specialist credential</td>
+</tr>
+<tr>
+<td>7</td>
+<td><a href="https://youtube.com/@TheBabyCubby">The Baby Cubby</a></td>
+<td>32.2K</td>
+<td>19/25</td>
+<td>873-video content library</td>
+</tr>
+</tbody>
+</table>
+<h3 id="sec-en-21">Tier 3: To Evaluate</h3>
+<table>
+<thead>
+<tr>
+<th>Rank</th>
+<th>Channel</th>
+<th>Subscribers</th>
+<th>Fit Score</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>8</td>
+<td>Dr.Spouse</td>
+<td>69K</td>
+<td>18/25</td>
+</tr>
+<tr>
+<td>9</td>
+<td><a href="https://youtube.com/@TheConfusedMom">The Confused Mom</a></td>
+<td>14.4K</td>
+<td>17/25</td>
+</tr>
+<tr>
+<td>10</td>
+<td>The Innovative Momma</td>
+<td>14.4K</td>
+<td>17/25</td>
+</tr>
+<tr>
+<td>11</td>
+<td><a href="https://youtube.com/@twonewparents">twonewparents</a></td>
+<td>7.4K</td>
+<td>17/25</td>
+</tr>
+<tr>
+<td>12</td>
+<td>FourieFamCam</td>
+<td>25.9K</td>
+<td>15/25</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="sec-en-22">🎯 Recommended Influencer Mix</h2>
+<h3 id="sec-en-23">Suggested Collaboration Plan</h3>
+<table>
+<thead>
+<tr>
+<th>Channel</th>
+<th>Role</th>
+<th>Content Angle</th>
+<th>Estimated Format</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://youtube.com/@Fathercraft">Fathercraft</a></td>
+<td>Flagship deep review</td>
+<td>Momcozy BM03/BM04 vs. competitors head-to-head</td>
+<td>Sponsored in-depth review video + blog post</td>
+</tr>
+<tr>
+<td><a href="https://youtube.com/@Dadverb">Dadverb</a></td>
+<td>Dad-perspective feature</td>
+<td>"Dad's Take: Living with Momcozy Baby Monitor"</td>
+<td>Sponsored review + affiliate link</td>
+</tr>
+<tr>
+<td><a href="https://babytochild.com/youtube-1058/">Baby to Child</a></td>
+<td>Loyal user testimonial</td>
+<td>Momcozy monitor full lineup unboxing/usage diary</td>
+<td>Sponsored review + website SEO content</td>
+</tr>
+<tr>
+<td>Baby Product Reviews</td>
+<td>Canada market expansion</td>
+<td>"3 Reasons Momcozy Monitors Work for Canadian Moms"</td>
+<td>Sponsored video + localized content</td>
+</tr>
+<tr>
+<td>New Little Life</td>
+<td>Cross-category promotion</td>
+<td>"From Breast Pump to Monitor: Full Momcozy Ecosystem"</td>
+<td>Brand sponsorship + product bundle promo</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="sec-en-24">💡 Category Insights &amp; Recommendations</h2>
+<h3 id="sec-en-25">Category Observations</h3>
+<ol>
+<li>
+<p><strong>Moderate Competition in Baby Monitor Review Space:</strong> The number of YouTube channels focused specifically on baby monitors is limited, with most coverage concentrated among a few channels like Fathercraft and Dadverb. There is room for new entrants.</p>
+</li>
+<li>
+<p><strong>Momcozy Monitor Content on YouTube is Very Sparse:</strong> Currently, Momcozy baby monitor reviews are predominantly found in written blog format (Mommyhood101, Nerd Techy, Mother&amp;Baby, etc.), with very few YouTube video reviews. This represents a significant content gap to fill.</p>
+</li>
+<li>
+<p><strong>Fathercraft × Dadverb Collaboration Ecosystem Worth Investing In:</strong> The two creators have formed a complementary partnership in the baby monitor category. Simultaneous engagement can yield 1+1&gt;2 effects.</p>
+</li>
+<li>
+<p><strong>Non-WiFi is Momcozy's Key Differentiator:</strong> Multiple reviews and forum discussions emphasize the security and privacy advantages of non-WiFi monitors. Momcozy BM03's FHSS technology is a compelling selling point to highlight in content.</p>
+</li>
+</ol>
+<h3 id="sec-en-26">Search Limitations</h3>
+<ul>
+<li>Traditional search engines cannot filter YouTube channels by follower count, engagement rate, or other platform-specific metrics</li>
+<li>Some smaller creators' YouTube channels may not be indexed in databases like findachannel.net</li>
+<li>Geographic location data is based on channel descriptions/profiles and may not be entirely accurate</li>
+<li>Engagement rate data is estimated from view/sub ratios and category benchmarks</li>
+<li>Recommend further verification via <strong>YouTube Data API</strong> or professional influencer marketing platforms (Upfluence, HypeAuditor, Grin)</li>
+</ul>
+<h3 id="sec-en-27">Next Steps</h3>
+<ol>
+<li><strong>Verify First:</strong> Use YouTube Data API or Social Blade to verify exact subscriber counts and engagement rates for Tier 1's 3 creators</li>
+<li><strong>Content Audit:</strong> Review Tier 2 channel video libraries to confirm baby monitor-specific content</li>
+<li><strong>Outreach Priority:</strong> Contact <a href="https://youtube.com/@Fathercraft">Fathercraft</a> (#1 category authority) and <a href="https://babytochild.com/youtube-1058/">Baby to Child</a> (existing brand awareness) first</li>
+<li><strong>Content Strategy:</strong> Recommend review videos emphasizing "non-WiFi secure connection" and "ultra-long battery life" — Momcozy monitor's core competitive differentiators</li>
+</ol>
+<hr />
+<p><em>Report generated on 2026-07-28. All metrics are estimates based on publicly available data and should be verified through platform tools before outreach.</em></p>
+</div>
+
+</div>
+
+<script>
+(function(){
+  var K='inf-discovery-lang',
+      be=document.getElementById('btn-en'),bz=document.getElementById('btn-zh'),
+      ce=document.getElementById('content-en'),cz=document.getElementById('content-zh'),
+      te=document.getElementById('toc-en'),tz=document.getElementById('toc-zh');
+
+  function setLang(l){
+    if(l==='zh'){
+      bz.classList.add('active');be.classList.remove('active');
+      cz.classList.add('active');ce.classList.remove('active');
+      tz.style.display='';te.style.display='none';
+    } else {
+      be.classList.add('active');bz.classList.remove('active');
+      ce.classList.add('active');cz.classList.remove('active');
+      te.style.display='';tz.style.display='none';
+    }
+    try{localStorage.setItem(K,l);}catch(e){}
+    // Re-run active section tracking
+    initObserver();
+  }
+
+  var s=null;try{s=localStorage.getItem(K);}catch(e){}
+  var initial=(s==='zh'||s==='en')?s:(navigator.language&&navigator.language.startsWith('zh')?'zh':'en');
+  setLang(initial);
+
+  be.addEventListener('click',function(){setLang('en');});
+  bz.addEventListener('click',function(){setLang('zh');});
+
+  // ── Active section tracking ──
+  var observer;
+  function initObserver(){
+    if(observer){observer.disconnect();}
+    var activeContent=document.querySelector('.lang-content.active');
+    if(!activeContent)return;
+    var hs=activeContent.querySelectorAll('h2[id],h3[id]');
+    var navLinks=document.querySelectorAll('#toc-zh a, #toc-en a');
+    observer=new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if(entry.isIntersecting){
+          navLinks.forEach(function(a){a.classList.remove('active');});
+          var visibleToc=document.querySelector('#toc-zh[style*="display"]:not([style*="display: none"]), #toc-en[style*="display"]:not([style*="display: none"])');
+          if(!visibleToc)visibleToc=document.getElementById(lang()==='zh'?'toc-zh':'toc-en');
+          var link=visibleToc.querySelector('a[href="#'+entry.target.id+'"]');
+          if(link)link.classList.add('active');
+        }
+      });
+    },{rootMargin:'-80px 0px -70% 0px'});
+    hs.forEach(function(h){observer.observe(h);});
+  }
+  function lang(){return document.getElementById('content-zh').classList.contains('active')?'zh':'en';}
+  // Delay observer init slightly to let DOM settle
+  setTimeout(initObserver,100);
+
+  // ── Mobile sidebar ──
+  document.getElementById('hamburger').addEventListener('click',function(){
+    document.getElementById('sidebar').classList.add('open');
+    document.getElementById('sidebar-overlay').classList.add('open');
+  });
+  document.getElementById('sidebar-overlay').addEventListener('click',function(){
+    document.getElementById('sidebar').classList.remove('open');
+    document.getElementById('sidebar-overlay').classList.remove('open');
+  });
+  // Close sidebar on TOC link click (mobile)
+  document.querySelectorAll('#toc-zh a, #toc-en a').forEach(function(a){
+    a.addEventListener('click',function(e){
+      e.preventDefault();
+      var target=document.getElementById(this.getAttribute('href').substring(1));
+      if(target){target.scrollIntoView({behavior:'smooth',block:'start'});}
+      document.getElementById('sidebar').classList.remove('open');
+      document.getElementById('sidebar-overlay').classList.remove('open');
+    });
+  });
+})();
+</script>
+
+</body>
+</html>
